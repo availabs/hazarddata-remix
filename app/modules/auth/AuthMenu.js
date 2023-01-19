@@ -1,6 +1,6 @@
 import React from "react"
 import { useTheme, Dropdown } from '~/modules/avl-components/src'
-import { Link } from '@remix-run/react'
+import { Link, useFetcher } from '@remix-run/react'
 
 const UserMenu = ({user}) => {
     // const theme = useTheme()
@@ -40,9 +40,21 @@ export const Item = (to, icon, span, condition) => (
 export default ({ user, items=[] }) => {
    
     const theme = useTheme()
+    const fetcher = useFetcher();
+    const logout = (e) => {
+        console.log('onclick logout',e)
+        fetcher.submit(
+            {},
+            { 
+                method: "post", 
+                action: "/logout" 
+            }
+        );
+    }
+
     return (
         <div className="h-full w-full">
-            {!user.authLevel ?
+            {!user ?
                 <Link className={`${theme.topnav({}).navitemTop}`} to="/login">Login</Link> :
                 <Dropdown control={<UserMenu user={user}/>} className={`hover:bg-blue-500 group `} >
                     <div className='p-1 bg-blue-500'>
@@ -55,7 +67,7 @@ export default ({ user, items=[] }) => {
                             )}
                         <div className='border-t border-blue-400'> 
                             <form action="/logout" method="post">
-                                <button type="submit"  className='px-6 py-2 bg-blue-500 text-white hover:text-blue-100'>
+                                <button type="submit"  onClick={logout} className='px-6 py-2 bg-blue-500 text-white hover:text-blue-100'>
                                     <div className='hover:translate-x-2 transition duration-100 ease-out hover:ease-in'>
                                         <i className={`fad fa-sign-out-alt pb-2`} />
                                         <span className='pl-2'>Logout</span>
