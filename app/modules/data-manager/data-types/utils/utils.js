@@ -38,7 +38,7 @@ export const createNewDataSource = async (rtPfx, source, type) => {
     return newSrcMeta;
 };
 
-export const submitViewMeta = async({rtPfx, etlContextId, userId, sourceName, src, metadata = {}}) => {
+export const submitViewMeta = async({rtPfx, etlContextId, userId, sourceName, src, metadata = {}, newVersion = 1}) => {
     const url = new URL(`${rtPfx}/createNewDamaView`);
     url.searchParams.append("etl_context_id", etlContextId);
     url.searchParams.append("user_id", userId);
@@ -46,7 +46,7 @@ export const submitViewMeta = async({rtPfx, etlContextId, userId, sourceName, sr
     const viewMetadata = {
         source_id: src.source_id,
         data_source_name: sourceName,
-        version: 1,
+        version: newVersion,
         metadata
     };
 

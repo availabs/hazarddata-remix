@@ -10,14 +10,14 @@ import {
     checkApiResponse, formatDate, newETL, getSrcViews, createNewDataSource, submitViewMeta
 } from "../utils/utils";
 
-const CallServer = async ({rtPfx, source,  etlContextId, userId}) => {
+const CallServer = async ({rtPfx, source, etlContextId, userId, newVersion}) => {
     const { name: sourceName, display_name: sourceDisplayName } = source;
 
-    const src = await createNewDataSource(rtPfx, source, "ncei_storm_events");
-    console.log('calling server?', etlContextId)
+    const src = source.source_id ? source : await createNewDataSource(rtPfx, source, "ncei_storm_events");
+    console.log('calling server?', etlContextId);
     const view = await submitViewMeta(
         {
-            rtPfx, etlContextId, userId, sourceName, src
+            rtPfx, etlContextId, userId, sourceName, src, newVersion
         })
 
     const url = new URL(
@@ -33,12 +33,13 @@ const CallServer = async ({rtPfx, source,  etlContextId, userId}) => {
     await checkApiResponse(stgLyrDataRes);
 
     console.log('res', await stgLyrDataRes.json())
-    //history.push(`/datasources/source/${src.source_id}`);
+    history.push(`/datasources/source/${src.source_id}`);
 }
 
-const Create = ({ source, user }) => {
+const Create = ({ source, user, newVersion }) => {
     const [etlContextId, setEtlContextId] = React.useState();
 
+    console.log('src', source)
     const rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
 
     React.useEffect(() => {
@@ -54,7 +55,7 @@ const Create = ({ source, user }) => {
             <button
                 className={`align-right`}
                 onClick={() =>
-                    CallServer({rtPfx, source, etlContextId, user:user.id})}>
+                    CallServer({rtPfx, source, etlContextId, user:user.id, newVersion})}>
                 Add New Source
             </button>
         </div>

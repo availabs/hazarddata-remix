@@ -1,5 +1,5 @@
 import Overview from "./Overview";
-import Metadata from "./Metadata";
+import AddView from "./AddView";
 
 const Pages = {
   overview: {
@@ -7,10 +7,10 @@ const Pages = {
     path: "",
     component: Overview,
   },
-  meta: {
-    name: "Metadata",
-    path: "/meta",
-    component: Metadata,
+  add_view: {
+    name: 'Add View',
+    path: '/add_view',
+    component: AddView
   },
 };
 

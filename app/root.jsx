@@ -19,6 +19,7 @@ import {
 import styles from "./styles/app.css"
 import avl_theme from "./theme"
 
+import { API_HOST } from './config';
 export function links() {
   return [{ rel: "stylesheet", href: styles }]
 }
@@ -38,7 +39,7 @@ export default function App() {
       </head>
       <body className='bg-gray-100'>
           <ThemeContext.Provider value={avl_theme}>
-            <FalcorProvider falcor={ falcorGraph('https://graph.availabs.org') }>
+            <FalcorProvider falcor={ falcorGraph(API_HOST) }>
               <Outlet />
             </FalcorProvider>
           </ThemeContext.Provider>
