@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 
 import Create from './create'
 import {useFalcor} from "~/modules/avl-falcor";
-// import {BarGraph} from "../../../../modules/avl-graph/src/index";
 import {pgEnv} from "~/modules/data-manager/attributes";
 import get from "lodash.get";
 import {DataTypes} from "~/modules/data-manager/data-types";
@@ -12,18 +11,50 @@ const Table = ({source}) => {
     return <div> Table View </div>
 }
 
-const AddView = ({source, views, user}) => {
-    console.log(source);
-    const CreateComp = React.useMemo(() =>
-            get(DataTypes, `[${source.type}].sourceCreate.component`, () => <div/>)
-        , [DataTypes, source.type]);
+const Views = ({source, views, user}) => {
+    console.log(views);
+   return (
+       <div>
+           <div className="py-4 sm:py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 border-b-2">
+               {
+                   ['view_id', 'version', 'last_updated']
+                       .map(key => (
+                           <dt className="text-sm font-medium text-gray-600">
+                               {key}
+                           </dt>
+                       ))
+               }
+           </div>
+           <div className="border-t border-gray-200 px-4 py-5 sm:p-0 overflow-auto h-[700px]">
+               <dl className="sm:divide-y sm:divide-gray-200">
 
-    return <CreateComp source={source} existingSource={source} user={user}/>
+                   {
+                       views
+                           .map((view, i) => (
+
+                                   <div key={i} className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                       {
+                                           ['view_id', 'version', 'last_updated']
+                                               .map(key => (
+                                                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 ">
+                                                       {view[key]}
+                                                   </dd>
+                                               ))
+                                       }
+                                   </div>
+
+                               )
+                           )}
+
+               </dl>
+           </div>
+       </div>
+   )
 }
 
 const RenderVersions = (domain, value, onchange) => (
     <select
-        className={`w-1/2 pl-3 pr-4 py-3 bg-white mr-2 flex items-center text-sm`}
+        className={`w-40 pr-4 py-3 bg-white mr-2 flex items-center text-sm`}
         value={value}
         onChange={(e) => onchange(e.target.value)
         }
@@ -51,38 +82,45 @@ const Metadata = ({source, views}) => {
 
     return (
         <>
-            <div key={'versionSelector'} className={'flex flex-row items-center'}>
-                <label>Version</label>
+            <div key={'versionSelector'} className={'flex flex-row items-center py-4 sm:py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'}>
+                <label>Current Version: </label>
                 { RenderVersions(views, activeView, setActiveView) }
-                { compareMode ? RenderVersions(views, compareView, setCompareView) : null }
                 <button
-                    className={'align-right border-2 border-gray-100 p-2 hover:bg-gray-100'}
+                    className={`${compareMode ? `bg-red-50 hover:bg-red-400` : `bg-blue-100 hover:bg-blue-600`}
+                     hover:text-white align-right border-2 border-gray-100 p-2 hover:bg-gray-100`}
                     disabled={views.length === 1}
                     onClick={() => setCompareMode(!compareMode)}
                 >
                     {compareMode ? `Discard` : `Compare`}
                 </button>
             </div>
+            <div key={'compareVersionSelector'} className={'flex flex-row items-center py-4 sm:py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'}>
+                { compareMode ? <label>Compare with Version: </label> : null }
+                { compareMode ? RenderVersions(views, compareView, setCompareView) : null }
+            </div>
             <div className="overflow-hidden">
-                <div className="py-4 sm:py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt className="text-sm font-medium text-gray-600">
+                <div className={'flex flex-row items-center py-4 sm:py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'}>
+                    <dt className="text-gray-600">
                         Total Number of Rows
                     </dt>
                     <dt className="text-sm text-gray-900">
                         {get(metadataActiveView, ['numRows', 'value'])}
+                        {` (${views.find(v => v.view_id.toString() === activeView.toString()).version})`}
                     </dt>
 
                     {
                         compareMode ? (
                             <dt className="text-sm text-gray-900">
                                 {get(metadataCompareView, ['numRows', 'value'])}
+                                {` (${views.find(v => v.view_id.toString() === compareView.toString()).version})`}
                             </dt>
                         ) : null
                     }
+
                 </div>
             </div>
 
-            <div className="text-medium font-large text-gray-600 mt-5">
+            <div className={'flex flex-row items-center py-4 sm:py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 text-lg font-md'}>
                 Number of Rows/Events by Year
             </div>
 
@@ -131,23 +169,8 @@ const Metadata = ({source, views}) => {
                         </dl>
                     </div>
                 </div>
-                {/*<BarGraph
-              data={eventsByYear}
-              keys={['num_events']}
-              indexBy={'year'}
-              axisBottom={d => d}
-              // axisLeft={{format: fnum}}
-              // indexFormat={fnum}
-              // valueFormat={fnum}
-              // hoverComp={{
-              //   // HoverComp: HoverComp,
-              //   // valueFormat: fnum
-              // }}
-              groupMode={'grouped'}
-              // colors={colors}
-          />*/}
             </div>
-            <div className="text-medium font-large text-gray-600 mt-5">
+            <div className={'flex flex-row items-center py-4 sm:py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 text-lg font-md'}>
                 Number of Rows/Events by Type
             </div>
             <div>
@@ -208,11 +231,11 @@ const NceiStormEventsConfig = {
         path: '/table',
         component: Table
     },
-    // add_view: {
-    //   name: 'Add View',
-    //   path: '/add_view',
-    //   component: AddView
-    // },
+    views: {
+      name: 'Views',
+      path: '/views',
+      component: Views
+    },
     sourceCreate: {
         name: 'Create',
         component: Create

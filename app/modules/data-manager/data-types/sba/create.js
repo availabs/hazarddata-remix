@@ -1,25 +1,20 @@
 import React from 'react'
 import {DAMA_HOST} from "~/config";
 import { pgEnv} from '~/modules/data-manager/attributes'
-import {
-    checkApiResponse, formatDate, newETL, getSrcViews, createNewDataSource, submitViewMeta
-} from "../utils/utils";
+import {checkApiResponse, formatDate, newETL, getSrcViews, createNewDataSource, submitViewMeta} from "../utils/utils";
 
-const CallServer = async ({rtPfx, source, etlContextId, userId, newVersion}) => {
+const CallServer = async ({rtPfx, source, etlContextId, userId, table, newVersion}) => {
     const { name: sourceName, display_name: sourceDisplayName } = source;
 
-    const src = source.source_id ? source : await createNewDataSource(rtPfx, source, "ncei_storm_events");
-    console.log('calling server?', etlContextId);
-    const view = await submitViewMeta(
-        {
-            rtPfx, etlContextId, userId, sourceName, src, newVersion
-        })
+    const src = source.source_id ? source : await createNewDataSource(rtPfx, source, table);
+    console.log('src?', src)
+    const view = await submitViewMeta({rtPfx, etlContextId, userId, sourceName, src, newVersion})
 
     const url = new URL(
-        `${rtPfx}/staged-geospatial-dataset/loadNCEI`
+        `${rtPfx}/staged-geospatial-dataset/sbaLoader`
     );
     url.searchParams.append("etl_context_id", etlContextId);
-    url.searchParams.append("table_name", 'details');
+    url.searchParams.append("table", table);
     url.searchParams.append("src_id", src.source_id);
     url.searchParams.append("view_id", view.view_id);
 
@@ -27,14 +22,14 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, newVersion}) => 
 
     await checkApiResponse(stgLyrDataRes);
 
-    console.log('res', await stgLyrDataRes.json())
+    console.log('res', stgLyrDataRes.body)
     history.push(`/datasources/source/${src.source_id}`);
 }
 
 const Create = ({ source, user, newVersion }) => {
+    console.log('comes here')
     const [etlContextId, setEtlContextId] = React.useState();
 
-    console.log('src', source)
     const rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
 
     React.useEffect(() => {
@@ -47,12 +42,9 @@ const Create = ({ source, user, newVersion }) => {
 
     return (
         <div className='w-full'>
-            <button
-                className={`align-right`}
-                onClick={() =>
-                    CallServer({rtPfx, source, etlContextId, userId:user.id, newVersion})}>
-                Add New Source
-            </button>
+            <button onClick={() => CallServer({
+                rtPfx, source, etlContextId, userId: user.id, table: 'sba_disaster_loan_data_new', newVersion
+            })}> Add New Source</button>
         </div>
     )
 }
