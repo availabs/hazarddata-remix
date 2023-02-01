@@ -26,6 +26,8 @@ export const ViewAttributes = {
   "start_date": "start_date",
   "end_date": "end_date",
   "last_updated": "last_updated",
+  "_created_timestamp": "_created_timestamp",
+  "_modified_timestamp": "_modified_timestamp",
   "statistics": "statistics",
 }
 

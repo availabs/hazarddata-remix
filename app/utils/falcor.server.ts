@@ -1,4 +1,5 @@
 import { falcorGraph } from '~/modules/avl-falcor/falcorGraph'
+import {API_HOST} from "../config"
 let falcor
 declare global {
   var __falcor
@@ -8,7 +9,7 @@ declare global {
 // so it doesn't make unneccary duplicate requets
 if (!global.__falcor) {
 	console.log('new falcor')
-global.__falcor = falcorGraph('https://graph.availabs.org');
+global.__falcor = falcorGraph(API_HOST);
 }
 falcor = global.__falcor;
 

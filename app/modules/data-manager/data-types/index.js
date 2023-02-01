@@ -25,7 +25,8 @@ const DataTypes = {
   usda_crop_insurance_cause_of_loss,
   sba_disaster_loan_data_new,
   nri,
-  per_basis_swd,
+  // per_basis_swd,
+  per_basis: per_basis_swd,
   hlr
 };
 

@@ -21,16 +21,19 @@ export async function loader ({ params, request }) {
     [
       "dama", pgEnv, "sources","byId",sourceId,
       "attributes",Object.values(SourceAttributes)
+    ],
+      [
+      "dama", pgEnv, "sources", "byId", sourceId, 'meta'
     ]
   )
   
-  const falcorCache = falcor.getCache()    
+  const falcorCache = falcor.getCache();
 
   return {
     views:  Object.values(
         get(
           falcorCache,
-          ["dama", pgEnv, "sources","byId",sourceId,"views","byIndex",],
+          ["dama", pgEnv, "sources","byId", sourceId,"views","byIndex",],
           {}
         )
       )
@@ -48,19 +51,26 @@ export async function loader ({ params, request }) {
         ["dama", pgEnv,'sources','byId', sourceId],
         {'attributes': {}}
       )['attributes']
-    ) 
+    ),
+      meta:
+      get(
+        falcorCache,
+        ["dama", pgEnv,'sources', "byId", sourceId, 'meta', 'value'],
+        {}
+      )
+
   }
 }
 
 
 export default function Dama() {
-    const {views,source} = useLoaderData()
+    const {views,source,meta} = useLoaderData()
     const {sourceId, page} = useParams()
     const [ pages, setPages ] = useState(Pages)
     const user = {email: 'test@test.com', id: 1}
 
     React.useEffect(() => {
-      console.log('useEffect', source.type, source)
+
       if(DataTypes[source.type] ){
         let typePages = Object.keys(DataTypes[source.type]).reduce((a,c)=>{
           if(DataTypes[source.type][c].path) {
@@ -97,7 +107,7 @@ export default function Dama() {
           themeOptions={{size:'inline'}}
         />
         <div className='w-full p-4 bg-white shadow mb-4'>
-          <Page source={source} views={views} user={user} />
+          <Page source={source} views={views} user={user} meta={meta}/>
         </div>
       </div>  
     )

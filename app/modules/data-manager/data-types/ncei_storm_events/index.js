@@ -11,47 +11,6 @@ const Table = ({source}) => {
     return <div> Table View </div>
 }
 
-const Views = ({source, views, user}) => {
-    console.log(views);
-   return (
-       <div>
-           <div className="py-4 sm:py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 border-b-2">
-               {
-                   ['view_id', 'version', 'last_updated']
-                       .map(key => (
-                           <dt className="text-sm font-medium text-gray-600">
-                               {key}
-                           </dt>
-                       ))
-               }
-           </div>
-           <div className="border-t border-gray-200 px-4 py-5 sm:p-0 overflow-auto h-[700px]">
-               <dl className="sm:divide-y sm:divide-gray-200">
-
-                   {
-                       views
-                           .map((view, i) => (
-
-                                   <div key={i} className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                       {
-                                           ['view_id', 'version', 'last_updated']
-                                               .map(key => (
-                                                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 ">
-                                                       {view[key]}
-                                                   </dd>
-                                               ))
-                                       }
-                                   </div>
-
-                               )
-                           )}
-
-               </dl>
-           </div>
-       </div>
-   )
-}
-
 const RenderVersions = (domain, value, onchange) => (
     <select
         className={`w-40 pr-4 py-3 bg-white mr-2 flex items-center text-sm`}
@@ -64,7 +23,7 @@ const RenderVersions = (domain, value, onchange) => (
         ))}
     </select>
 )
-const Metadata = ({source, views}) => {
+const Stats = ({source, views}) => {
     const {falcor, falcorCache} = useFalcor();
     const [activeView, setActiveView] = useState(views[0].view_id);
     const [compareView, setCompareView] = useState(views[0].view_id);
@@ -76,7 +35,7 @@ const Metadata = ({source, views}) => {
 
     const metadataActiveView = get(falcorCache, ['ncei_storm_events', pgEnv, 'source', source.source_id, 'view', activeView]);
     const metadataCompareView = get(falcorCache, ['ncei_storm_events', pgEnv, 'source', source.source_id, 'view', compareView]);
-    if (!metadataActiveView || metadataActiveView.length === 0) return <div> Metadata Not Available </div>
+    if (!metadataActiveView || metadataActiveView.length === 0) return <div> Stats Not Available </div>
 
     // const eventsByYear = get(metadataActiveView, ['eventsByYear', 'value'], [])
 
@@ -221,20 +180,15 @@ const Metadata = ({source, views}) => {
 }
 
 const NceiStormEventsConfig = {
-    meta: {
-        name: "Metadata",
-        path: "/meta",
-        component: Metadata,
+    stats: {
+        name: "Stats",
+        path: "/stats",
+        component: Stats,
     },
     table: {
         name: 'Table',
         path: '/table',
         component: Table
-    },
-    views: {
-      name: 'Views',
-      path: '/views',
-      component: Views
     },
     sourceCreate: {
         name: 'Create',
