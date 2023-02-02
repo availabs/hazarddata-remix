@@ -1,39 +1,48 @@
 import React, { useEffect, /*useMemo,*/ useState } from 'react';
 import { Input, Button } from '~/modules/avl-components/src'
 import get from 'lodash.get'
+import { useFetcher } from '@remix-run/react'
 import { SourceAttributes, pgEnv } from '~/modules/data-manager/attributes'
 
 
 const Edit = ({startValue, attr, sourceId, cancel=()=>{}}) => {
   const [value, setValue] = useState('')
-  
+  const fetcher = useFetcher()
+
   useEffect(() => {
     setValue(startValue)
   },[startValue])
 
-  const save = (attr, value) => {
+  const save = async (attr, value) => {
+    console.log('this is save')
     if(sourceId) {
-      /*falcor.set({
-          paths: [
-            ['dama',pgEnv,'sources','byId',sourceId,'attributes', attr ]
-          ],
-          jsonGraph: {
-            dama:{
-              [pgEnv] : {
-                sources: {
-                  byId:{
-                    [sourceId] : {
-                        attributes : {[attr]: value}
-                    }
-                  }
-                }
-              }
-            }
-          }
-      }).then(d => {
-        console.log('set run', d)
-        cancel()
-      })*/
+      await fetcher.submit(
+          {"test": "some data"},
+          { 
+          method: "post", 
+          action: `/source/${sourceId}` 
+          })
+      // falcor.set({
+      //     paths: [
+      //       ['dama',pgEnv,'sources','byId',sourceId,'attributes', attr ]
+      //     ],
+      //     jsonGraph: {
+      //       dama:{
+      //         [pgEnv] : {
+      //           sources: {
+      //             byId:{
+      //               [sourceId] : {
+      //                   attributes : {[attr]: value}
+      //               }
+      //             }
+      //           }
+      //         }
+      //       }
+      //     }
+      // }).then(d => {
+      //   console.log('set run', d)
+      //   cancel()
+      // })
     }
   }
 
