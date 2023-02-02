@@ -8,9 +8,9 @@ export const action = async ({
   return logout(request);
  };
 
-export const loader = async ({request}) => {
-  const pathname = new URL(request.url).pathname
-  // console.log('logout loader', pathname)
+// export const loader = async ({request}) => {
+//   const pathname = new URL(request.url).pathname
+//   // console.log('logout loader', pathname)
   
-  return logout(request);
-};
+//   return logout(request);
+// };

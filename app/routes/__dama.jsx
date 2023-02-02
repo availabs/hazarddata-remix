@@ -34,7 +34,7 @@ export default function Index() {
         </div>
         <div className='max-w-5xl mx-auto'>
           <div className='w-full border-b p-2'>breadcrumbs</div>
-          <Outlet />
+          <Outlet context={{user}}/>
         </div>
       </div>
     </div>
