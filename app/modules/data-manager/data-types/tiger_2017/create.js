@@ -1,4 +1,5 @@
 import React from 'react'
+// import { redirect } from '@remix-run/node';
 import {DAMA_HOST} from "~/config";
 import { pgEnv} from '~/modules/data-manager/attributes'
 import {checkApiResponse, formatDate, newETL, getSrcViews, createNewDataSource, submitViewMeta} from "../utils/utils";
@@ -23,7 +24,7 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, tigerTable, newV
     await checkApiResponse(stgLyrDataRes);
 
     console.log('res', stgLyrDataRes.body)
-    history.push(`/datasources/source/${src.source_id}`);
+    // redirect(`/datasources/source/${src.source_id}`);
 }
 
 const RenderTigerTables= ({value, setValue, domain}) => {
