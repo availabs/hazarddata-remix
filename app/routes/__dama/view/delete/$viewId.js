@@ -21,7 +21,10 @@ export async function loader({params, request}) {
 const DeleteButton = ({text, viewId}) => (
     <button
         className={'bg-red-50 hover:bg-red-400 hover:text-white p-2'}
-        onClick={() => deleteView(`${DAMA_HOST}/dama-admin/${pgEnv}`, viewId)}
+        onClick={() => {
+            // deleteView(`${DAMA_HOST}/dama-admin/${pgEnv}`, viewId)
+
+        }
     >
         {text}
     </button>
