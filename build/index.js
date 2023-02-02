@@ -144,11 +144,11 @@ var require_buildQueryObject = __commonJS({
   "app/modules/avl-falcor/falcor-http-datasource/src/buildQueryObject.js"(exports, module2) {
     "use strict";
     module2.exports = function(url, method, queryData) {
-      var qData = [], keys, data2 = { url }, isQueryParamUrl = url.indexOf("?") !== -1, startUrl = isQueryParamUrl ? "&" : "?";
+      var qData = [], keys, data = { url }, isQueryParamUrl = url.indexOf("?") !== -1, startUrl = isQueryParamUrl ? "&" : "?";
       return typeof queryData == "string" ? qData.push(queryData) : (keys = Object.keys(queryData), keys.forEach(function(k) {
         var value = typeof queryData[k] == "object" ? JSON.stringify(queryData[k]) : queryData[k];
         qData.push(k + "=" + encodeURIComponent(value));
-      })), method === "GET" ? data2.url += startUrl + qData.join("&") : data2.data = qData.join("&"), data2;
+      })), method === "GET" ? data.url += startUrl + qData.join("&") : data.data = qData.join("&"), data;
     };
   }
 });
@@ -3717,7 +3717,7 @@ var import_jsx_dev_runtime30 = require("react/jsx-dev-runtime"), FalcorContext =
 };
 
 // app/styles/app.css
-var app_default = "/build/_assets/app-NRNYUNMN.css";
+var app_default = "/build/_assets/app-DJ6DHYNP.css";
 
 // app/theme.js
 var ppdaf = () => {
@@ -4143,7 +4143,7 @@ var ppdaf = () => {
 // app/config.js
 var API_HOST = "https://graph.availabs.org/";
 var CLIENT_HOST = "transportny.org", DAMA_HOST = "https://dama-dev.availabs.org";
-CLIENT_HOST = "localhost:3000";
+API_HOST = "http://localhost:4444", CLIENT_HOST = "localhost:3000", DAMA_HOST = "http://localhost:3369";
 
 // app/root.jsx
 var import_jsx_dev_runtime31 = require("react/jsx-dev-runtime");
@@ -4336,12 +4336,16 @@ function Index() {
 // app/routes/__auth/logout.js
 var logout_exports = {};
 __export(logout_exports, {
-  action: () => action
+  action: () => action,
+  loader: () => loader2
 });
 var import_node2 = require("@remix-run/node");
 var action = async ({
   request
-}) => logout(request);
+}) => logout(request), loader2 = async ({ request }) => {
+  let pathname = new URL(request.url).pathname;
+  return logout(request);
+};
 
 // app/routes/__auth/login.js
 var login_exports = {};
@@ -4351,7 +4355,7 @@ __export(login_exports, {
 });
 var import_react36 = require("react"), import_react37 = require("@remix-run/react"), import_node3 = require("@remix-run/node");
 var import_jsx_dev_runtime33 = require("react/jsx-dev-runtime"), AUTH_HOST = "https://availauth.availabs.org", PROJECT_NAME = "NPMRDS";
-var badRequest = (data2) => (0, import_node3.json)(data2, { status: 400 }), action2 = async ({
+var badRequest = (data) => (0, import_node3.json)(data, { status: 400 }), action2 = async ({
   request
 }) => {
   let form = await request.formData(), email = form.get("email"), password = form.get("password"), redirectTo = form.get("redirectTo") || "/";
@@ -4572,7 +4576,7 @@ function LoginComp() {
 var dama_exports = {};
 __export(dama_exports, {
   default: () => Index2,
-  loader: () => loader2
+  loader: () => loader3
 });
 var import_react40 = require("@remix-run/react");
 
@@ -4601,11 +4605,7 @@ var import_react39 = require("@remix-run/react"), import_jsx_dev_runtime34 = req
       lineNumber: 19,
       columnNumber: 17
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime34.jsxDEV)("div", { className: "text-xs font-medium -mt-1 tracking-widest text-left text-gray-500 group-hover:text-gray-200", children: [
-      user.groups[0] ? user.groups[0] : "",
-      " ",
-      user.authLevel
-    ] }, void 0, !0, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime34.jsxDEV)("div", { className: "text-xs font-medium -mt-1 tracking-widest text-left text-gray-500 group-hover:text-gray-200", children: user.groups[0] ? user.groups[0] : "" }, void 0, !1, {
       fileName: "app/modules/auth/AuthMenu.js",
       lineNumber: 20,
       columnNumber: 17
@@ -4713,7 +4713,7 @@ var import_react39 = require("@remix-run/react"), import_jsx_dev_runtime34 = req
 
 // app/routes/__dama.jsx
 var import_jsx_dev_runtime35 = require("react/jsx-dev-runtime");
-async function loader2({ request }) {
+async function loader3({ request }) {
   return await checkAuth(request);
 }
 function Index2() {
@@ -4763,7 +4763,7 @@ function Index2() {
         lineNumber: 36,
         columnNumber: 11
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime35.jsxDEV)(import_react40.Outlet, { context: { user } }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime35.jsxDEV)(import_react40.Outlet, {}, void 0, !1, {
         fileName: "app/routes/__dama.jsx",
         lineNumber: 37,
         columnNumber: 11
@@ -4784,14 +4784,13 @@ function Index2() {
   }, this);
 }
 
-// app/routes/__dama/source/$sourceId.($page).($viewId).js
-var sourceId_page_viewId_exports = {};
-__export(sourceId_page_viewId_exports, {
-  action: () => action3,
+// app/routes/__dama/source/$sourceId.($page).js
+var sourceId_page_exports = {};
+__export(sourceId_page_exports, {
   default: () => Dama,
-  loader: () => loader3
+  loader: () => loader4
 });
-var import_react77 = __toESM(require("react"));
+var import_react76 = __toESM(require("react"));
 
 // app/utils/falcor.server.ts
 var falcor2;
@@ -4828,7 +4827,7 @@ var SourceAttributes = {
   _created_timestamp: "_created_timestamp",
   _modified_timestamp: "_modified_timestamp",
   statistics: "statistics"
-}, getAttributes = (data2) => Object.entries(data2).reduce((out, attr) => {
+}, getAttributes = (data) => Object.entries(data).reduce((out, attr) => {
   let [k, v] = attr;
   return typeof v.value < "u" ? out[k] = v.value : out[k] = v, out;
 }, {});
@@ -4836,41 +4835,34 @@ var pgEnv = "hazmit_dama";
 
 // app/modules/data-manager/data-types/default/Overview.js
 var import_react41 = __toESM(require("react"));
-var import_lodash10 = __toESM(require("lodash.get")), import_react42 = require("@remix-run/react");
+var import_lodash10 = __toESM(require("lodash.get"));
 var import_jsx_dev_runtime36 = require("react/jsx-dev-runtime"), Edit = ({ startValue, attr, sourceId, cancel = () => {
 } }) => {
-  let [value, setValue] = (0, import_react41.useState)(""), fetcher = (0, import_react42.useFetcher)();
+  let [value, setValue] = (0, import_react41.useState)("");
   (0, import_react41.useEffect)(() => {
     setValue(startValue);
   }, [startValue]);
-  let save = async (attr2, value2) => {
-    console.log("this is save"), sourceId && await fetcher.submit(
-      { test: "some data" },
-      {
-        method: "post",
-        action: `/source/${sourceId}`
-      }
-    );
+  let save = (attr2, value2) => {
   };
   return /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("div", { className: "w-full flex", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)(input_default, { className: "flex-1 px-2 shadow bg-blue-100 focus:ring-blue-700 focus:border-blue-500  border-gray-300 rounded-none rounded-l-md", value, onChange: (e) => setValue(e) }, void 0, !1, {
       fileName: "app/modules/data-manager/data-types/default/Overview.js",
-      lineNumber: 51,
+      lineNumber: 42,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)(Button, { themeOptions: { size: "sm", color: "primary" }, onClick: (e) => save(attr, value), children: " Save " }, void 0, !1, {
       fileName: "app/modules/data-manager/data-types/default/Overview.js",
-      lineNumber: 52,
+      lineNumber: 43,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)(Button, { themeOptions: { size: "sm", color: "cancel" }, onClick: (e) => cancel(), children: " Cancel " }, void 0, !1, {
       fileName: "app/modules/data-manager/data-types/default/Overview.js",
-      lineNumber: 53,
+      lineNumber: 44,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/modules/data-manager/data-types/default/Overview.js",
-    lineNumber: 50,
+    lineNumber: 41,
     columnNumber: 5
   }, this);
 }, OverviewEdit = ({ source, views, user }) => {
@@ -4889,27 +4881,27 @@ var import_jsx_dev_runtime36 = require("react/jsx-dev-runtime"), Edit = ({ start
         !1,
         {
           fileName: "app/modules/data-manager/data-types/default/Overview.js",
-          lineNumber: 66,
+          lineNumber: 57,
           columnNumber: 13
         },
         this
       ) : (0, import_lodash10.default)(source, "description", !1) || "No Description" }, void 0, !1, {
         fileName: "app/modules/data-manager/data-types/default/Overview.js",
-        lineNumber: 64,
+        lineNumber: 55,
         columnNumber: 9
       }, this),
       user.authLevel > 5 ? /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("div", { className: "hidden group-hover:block text-blue-500 cursor-pointer", onClick: (e) => setEditing("description"), children: /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("i", { className: "fad fa-pencil absolute -ml-12  p-2 hover:bg-blue-500 rounded focus:bg-blue-700 hover:text-white " }, void 0, !1, {
         fileName: "app/modules/data-manager/data-types/default/Overview.js",
-        lineNumber: 75,
+        lineNumber: 66,
         columnNumber: 13
       }, this) }, void 0, !1, {
         fileName: "app/modules/data-manager/data-types/default/Overview.js",
-        lineNumber: 74,
+        lineNumber: 65,
         columnNumber: 9
       }, this) : ""
     ] }, void 0, !0, {
       fileName: "app/modules/data-manager/data-types/default/Overview.js",
-      lineNumber: 63,
+      lineNumber: 54,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("div", { className: "border-t border-gray-200 px-4 py-5 sm:p-0", children: /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: [
@@ -4919,7 +4911,7 @@ var import_jsx_dev_runtime36 = require("react/jsx-dev-runtime"), Edit = ({ start
           /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("div", { className: "flex-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("dt", { className: "text-sm font-medium text-gray-500 py-5", children: attr }, void 0, !1, {
               fileName: "app/modules/data-manager/data-types/default/Overview.js",
-              lineNumber: 87,
+              lineNumber: 78,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2", children: editing === attr ? /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("div", { className: "pt-3 pr-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)(
@@ -4934,89 +4926,89 @@ var import_jsx_dev_runtime36 = require("react/jsx-dev-runtime"), Edit = ({ start
               !1,
               {
                 fileName: "app/modules/data-manager/data-types/default/Overview.js",
-                lineNumber: 91,
+                lineNumber: 82,
                 columnNumber: 27
               },
               this
             ) }, void 0, !1, {
               fileName: "app/modules/data-manager/data-types/default/Overview.js",
-              lineNumber: 90,
+              lineNumber: 81,
               columnNumber: 25
             }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("div", { className: "py-5 px-2", children: val }, void 0, !1, {
               fileName: "app/modules/data-manager/data-types/default/Overview.js",
-              lineNumber: 98,
+              lineNumber: 89,
               columnNumber: 25
             }, this) }, void 0, !1, {
               fileName: "app/modules/data-manager/data-types/default/Overview.js",
-              lineNumber: 88,
+              lineNumber: 79,
               columnNumber: 21
             }, this)
           ] }, void 0, !0, {
             fileName: "app/modules/data-manager/data-types/default/Overview.js",
-            lineNumber: 86,
+            lineNumber: 77,
             columnNumber: 19
           }, this),
           user.authLevel > 5 ? /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("div", { className: "hidden group-hover:block text-blue-500 cursor-pointer", onClick: (e) => setEditing(editing === attr ? null : attr), children: /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("i", { className: "fad fa-pencil absolute -ml-12 mt-3 p-2.5 rounded hover:bg-blue-500 hover:text-white " }, void 0, !1, {
             fileName: "app/modules/data-manager/data-types/default/Overview.js",
-            lineNumber: 104,
+            lineNumber: 95,
             columnNumber: 21
           }, this) }, void 0, !1, {
             fileName: "app/modules/data-manager/data-types/default/Overview.js",
-            lineNumber: 103,
+            lineNumber: 94,
             columnNumber: 19
           }, this) : ""
         ] }, i, !0, {
           fileName: "app/modules/data-manager/data-types/default/Overview.js",
-          lineNumber: 85,
+          lineNumber: 76,
           columnNumber: 17
         }, this);
       }),
       /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("div", { className: "py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("dt", { className: "text-sm font-medium text-gray-500", children: "Versions" }, void 0, !1, {
           fileName: "app/modules/data-manager/data-types/default/Overview.js",
-          lineNumber: 111,
+          lineNumber: 102,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("ul", { className: "border border-gray-200 rounded-md divide-y divide-gray-200", children: /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("select", { className: "pl-3 pr-4 py-3 w-full bg-white mr-2 flex items-center justify-between text-sm", children: views.map((v, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("option", { className: "ml-2  truncate", children: v.version }, i, !1, {
           fileName: "app/modules/data-manager/data-types/default/Overview.js",
-          lineNumber: 117,
+          lineNumber: 108,
           columnNumber: 25
         }, this)) }, void 0, !1, {
           fileName: "app/modules/data-manager/data-types/default/Overview.js",
-          lineNumber: 114,
+          lineNumber: 105,
           columnNumber: 17
         }, this) }, void 0, !1, {
           fileName: "app/modules/data-manager/data-types/default/Overview.js",
-          lineNumber: 113,
+          lineNumber: 104,
           columnNumber: 15
         }, this) }, void 0, !1, {
           fileName: "app/modules/data-manager/data-types/default/Overview.js",
-          lineNumber: 112,
+          lineNumber: 103,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/modules/data-manager/data-types/default/Overview.js",
-        lineNumber: 110,
+        lineNumber: 101,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/modules/data-manager/data-types/default/Overview.js",
-      lineNumber: 79,
+      lineNumber: 70,
       columnNumber: 9
     }, this) }, void 0, !1, {
       fileName: "app/modules/data-manager/data-types/default/Overview.js",
-      lineNumber: 78,
+      lineNumber: 69,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/modules/data-manager/data-types/default/Overview.js",
-    lineNumber: 62,
+    lineNumber: 53,
     columnNumber: 5
   }, this);
 }, Overview_default = OverviewEdit;
 
 // app/modules/data-manager/data-types/default/Metadata.js
-var import_react43 = require("react"), import_lodash11 = require("lodash.get"), import_jsx_dev_runtime37 = require("react/jsx-dev-runtime"), Metadata = ({ source, meta: meta2 }) => (console.log("meta", meta2), !meta2 || Object.keys(meta2).length === 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime37.jsxDEV)("div", { children: " Metadata Not Available " }, void 0, !1, {
+var import_react42 = require("react"), import_lodash11 = require("lodash.get"), import_jsx_dev_runtime37 = require("react/jsx-dev-runtime"), Metadata = ({ source, meta: meta2 }) => (console.log("meta", meta2), !meta2 || Object.keys(meta2).length === 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime37.jsxDEV)("div", { children: " Metadata Not Available " }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/default/Metadata.js",
   lineNumber: 8,
   columnNumber: 55
@@ -5072,9 +5064,9 @@ var import_react43 = require("react"), import_lodash11 = require("lodash.get"), 
 }, this)), Metadata_default = Metadata;
 
 // app/modules/data-manager/data-types/default/AddView.js
-var import_react44 = __toESM(require("react")), import_lodash12 = __toESM(require("lodash.get"));
+var import_react43 = __toESM(require("react")), import_lodash12 = __toESM(require("lodash.get"));
 var import_jsx_dev_runtime38 = require("react/jsx-dev-runtime"), AddView = ({ source, views, user }) => {
-  let newVersion = Math.max(...views.map((v) => parseInt(v.version))) + 1, sourceTypeToFileNameMapping = source.type.substring(0, 3) === "tl_" ? "tiger_2017" : source.type, CreateComp = import_react44.default.useMemo(
+  let newVersion = Math.max(...views.map((v) => parseInt(v.version))) + 1, sourceTypeToFileNameMapping = source.type.substring(0, 3) === "tl_" ? "tiger_2017" : source.type, CreateComp = import_react43.default.useMemo(
     () => (0, import_lodash12.default)(DataTypes, `[${sourceTypeToFileNameMapping}].sourceCreate.component`, () => /* @__PURE__ */ (0, import_jsx_dev_runtime38.jsxDEV)("div", {}, void 0, !1, {
       fileName: "app/modules/data-manager/data-types/default/AddView.js",
       lineNumber: 9,
@@ -5173,8 +5165,8 @@ var checkApiResponse = async (res) => {
 };
 
 // app/modules/data-manager/data-types/default/Views.js
-var import_react45 = require("@remix-run/react"), import_jsx_dev_runtime39 = require("react/jsx-dev-runtime"), DeleteButton = ({ text, viewId }) => /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(
-  import_react45.Link,
+var import_react44 = require("@remix-run/react"), import_jsx_dev_runtime39 = require("react/jsx-dev-runtime"), DeleteButton = ({ text, viewId }) => /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(
+  import_react44.Link,
   {
     className: "bg-red-50 hover:bg-red-400 hover:text-white p-2",
     to: `/view/delete/${viewId}`,
@@ -5259,33 +5251,33 @@ var Pages = {
 }, default_default = Pages;
 
 // app/modules/data-manager/data-types/freight_atlas_shapefile/index.js
-var import_react55 = __toESM(require("react"));
+var import_react54 = __toESM(require("react"));
 var import_lodash18 = __toESM(require("lodash.get"));
 
 // app/modules/data-manager/data-types/freight_atlas_shapefile/FreightAtlasLayer.js
-var import_react52 = __toESM(require("react"));
+var import_react51 = __toESM(require("react"));
 
 // app/modules/avl-map/src/avl-map.js
-var import_react49 = __toESM(require("react")), import_maplibre_gl = __toESM(require("maplibre-gl")), import_lodash14 = __toESM(require("lodash.get"));
+var import_react48 = __toESM(require("react")), import_maplibre_gl = __toESM(require("maplibre-gl")), import_lodash14 = __toESM(require("lodash.get"));
 
 // app/modules/avl-map/src/components/utils.js
-var import_react46 = __toESM(require("react")), getRect = (ref) => {
+var import_react45 = __toESM(require("react")), getRect = (ref) => {
   let node = ref && ref.current;
   return node ? node.getBoundingClientRect() : { width: 0, height: 0 };
 }, useSetSize2 = (ref, callback) => {
-  let [size, setSize] = import_react46.default.useState({ width: 0, height: 0, x: 0, y: 0 }), doSetSize = import_react46.default.useCallback(() => {
+  let [size, setSize] = import_react45.default.useState({ width: 0, height: 0, x: 0, y: 0 }), doSetSize = import_react45.default.useCallback(() => {
     let rect = getRect(ref), { width, height, x, y } = rect;
     (width !== size.width || height !== size.height) && (typeof callback == "function" && callback({ width, height, x, y }), setSize({ width, height, x, y }));
   }, [ref, size, callback]);
-  return import_react46.default.useEffect(() => (window.addEventListener("resize", doSetSize), () => {
+  return import_react45.default.useEffect(() => (window.addEventListener("resize", doSetSize), () => {
     window.removeEventListener("resize", doSetSize);
-  }), [doSetSize]), import_react46.default.useEffect(() => {
+  }), [doSetSize]), import_react45.default.useEffect(() => {
     doSetSize();
   }), size;
 }, hasValue2 = (value) => value == null || typeof value == "string" && !value.length ? !1 : Array.isArray(value) ? value.reduce((a, c) => a || hasValue2(c), !1) : typeof value == "number" && isNaN(value) ? !1 : typeof value == "object" ? Object.values(value).reduce((a, c) => a || hasValue2(c), !1) : !0;
 
 // app/modules/avl-map/src/components/HoverCompContainer.js
-var import_react47 = __toESM(require("react")), import_jsx_dev_runtime40 = require("react/jsx-dev-runtime"), Icon = ({
+var import_react46 = __toESM(require("react")), import_jsx_dev_runtime40 = require("react/jsx-dev-runtime"), Icon = ({
   onClick,
   cursor = "cursor-pointer",
   className = "",
@@ -5353,7 +5345,7 @@ var import_react47 = __toESM(require("react")), import_jsx_dev_runtime40 = requi
   },
   this
 ), PinnedHoverComp = ({ children, remove, id: id2, project, lngLat, width }) => {
-  let pos = project(lngLat), orientation = import_react47.default.useRef(pos.x < width * 0.5 ? "right" : "left"), style = import_react47.default.useMemo(() => ({
+  let pos = project(lngLat), orientation = import_react46.default.useRef(pos.x < width * 0.5 ? "right" : "left"), style = import_react46.default.useMemo(() => ({
     top: "50%",
     transform: getTransform(pos, orientation.current)
   }), [pos]);
@@ -5445,14 +5437,14 @@ var import_react47 = __toESM(require("react")), import_jsx_dev_runtime40 = requi
 };
 
 // app/modules/avl-map/src/components/InfoBoxContainer.js
-var import_react48 = __toESM(require("react")), import_lodash13 = __toESM(require("lodash.get")), import_jsx_dev_runtime41 = require("react/jsx-dev-runtime"), InfoBoxContainer = ({
+var import_react47 = __toESM(require("react")), import_lodash13 = __toESM(require("lodash.get")), import_jsx_dev_runtime41 = require("react/jsx-dev-runtime"), InfoBoxContainer = ({
   activeLayers,
   width = 320,
   padding = 8,
   MapActions,
   ...props
 }) => {
-  let [infoBoxLayers, infoBoxWidth] = import_react48.default.useMemo(() => activeLayers.reduce(
+  let [infoBoxLayers, infoBoxWidth] = import_react47.default.useMemo(() => activeLayers.reduce(
     (a, c) => {
       let shownInfoBoxes = c.infoBoxes.filter(({ show = !0 }) => {
         let bool = show;
@@ -5541,7 +5533,7 @@ var import_react48 = __toESM(require("react")), import_lodash13 = __toESM(requir
 }, this);
 
 // app/modules/avl-map/src/avl-map.js
-var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 = require("react"), DefaultStyles = [
+var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react49 = require("react"), DefaultStyles = [
   { name: "Dark", style: "mapbox://styles/am3081/ckm85o7hq6d8817nr0y6ute5v" },
   { name: "Light", style: "mapbox://styles/am3081/ckm86j4bw11tj18o5zf8y9pou" },
   {
@@ -5588,8 +5580,8 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
   prevLayerStates: {},
   layerStates: {},
   prevLayerProps: {}
-}, Reducer = (state, action6) => {
-  let { type, ...payload } = action6;
+}, Reducer = (state, action5) => {
+  let { type, ...payload } = action5;
   switch (type) {
     case "init-layer":
       return {
@@ -5640,9 +5632,9 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
         }
       };
     case "hover-layer-move": {
-      let { data: data2, layer, HoverComp: HoverComp2, pinnable, sortOrder, ...rest } = payload;
+      let { data, layer, HoverComp: HoverComp2, pinnable, sortOrder, ...rest } = payload;
       return state.hoverData.data.set(layer.id, {
-        data: data2,
+        data,
         HoverComp: HoverComp2,
         layer,
         pinnable,
@@ -5768,12 +5760,12 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
     navigationControl = "bottom-right",
     falcor: falcor3 = () => {
     }
-  } = props, [state, dispatch] = import_react49.default.useReducer(Reducer, InitialState), updateHover = import_react49.default.useCallback((hoverData2) => {
+  } = props, [state, dispatch] = import_react48.default.useReducer(Reducer, InitialState), updateHover = import_react48.default.useCallback((hoverData2) => {
     dispatch(hoverData2);
-  }, []), projectLngLat = import_react49.default.useCallback(
+  }, []), projectLngLat = import_react48.default.useCallback(
     (lngLat) => state.map.project(lngLat),
     [state.map]
-  ), updateFilter = import_react49.default.useCallback(
+  ), updateFilter = import_react48.default.useCallback(
     (layer, filterName, value) => {
       if (!(0, import_lodash14.default)(layer, ["filters", filterName], null))
         return;
@@ -5793,14 +5785,14 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
       });
     },
     [state.map, falcor3, layerProps]
-  ), fetchData = import_react49.default.useCallback(
+  ), fetchData = import_react48.default.useCallback(
     (layer) => {
       dispatch({ type: "loading-start", layerId: layer.id }), Promise.resolve(layer.fetchData(falcor3)).then(() => layer.render(state.map, falcor3)).then(() => {
         dispatch({ type: "loading-stop", layerId: layer.id });
       });
     },
     [state.map, falcor3]
-  ), updateLegend = import_react49.default.useCallback(
+  ), updateLegend = import_react48.default.useCallback(
     (layer, update) => {
       !(0, import_lodash14.default)(layer, "legend", null) || (layer.legend = {
         ...layer.legend,
@@ -5808,12 +5800,12 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
       }, layer.render(state.map, falcor3), dispatch({ type: "update-state" }));
     },
     [state.map, falcor3]
-  ), addDynamicLayer = import_react49.default.useCallback((layer) => {
+  ), addDynamicLayer = import_react48.default.useCallback((layer) => {
     layer.isDynamic = !0, dispatch({
       type: "add-dynamic-layer",
       layer
     });
-  }, []), removeDynamicLayer = import_react49.default.useCallback(
+  }, []), removeDynamicLayer = import_react48.default.useCallback(
     (layer) => {
       layer._onRemove(state.map), dispatch({
         type: "remove-dynamic-layer",
@@ -5821,12 +5813,12 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
       });
     },
     [state.map]
-  ), toggleVisibility = import_react49.default.useCallback(
+  ), toggleVisibility = import_react48.default.useCallback(
     (layer) => {
       layer.toggleVisibility(state.map), dispatch({ type: "update-state" });
     },
     [state.map]
-  ), addLayer = import_react49.default.useCallback(
+  ), addLayer = import_react48.default.useCallback(
     (layer) => {
       layer._onAdd(state.map, falcor3, updateHover), dispatch({
         type: "activate-layer",
@@ -5834,7 +5826,7 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
       });
     },
     [state.map, falcor3, updateHover]
-  ), removeLayer = import_react49.default.useCallback(
+  ), removeLayer = import_react48.default.useCallback(
     (layer) => {
       layer._onRemove(state.map), dispatch({
         type: "deactivate-layer",
@@ -5842,35 +5834,35 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
       });
     },
     [state.map]
-  ), setSidebarTab = import_react49.default.useCallback((sidebarTabIndex) => {
+  ), setSidebarTab = import_react48.default.useCallback((sidebarTabIndex) => {
     dispatch({
       type: "switch-tab",
       sidebarTabIndex
     });
-  }, []), showModal = import_react49.default.useCallback((layerId, modalKey) => {
+  }, []), showModal = import_react48.default.useCallback((layerId, modalKey) => {
     dispatch({
       type: "show-modal",
       layerId,
       modalKey
     });
-  }, []), closeModal = import_react49.default.useCallback((layerId, modalKey) => {
+  }, []), closeModal = import_react48.default.useCallback((layerId, modalKey) => {
     dispatch({
       type: "close-modal",
       layerId,
       modalKey
     });
-  }, []), bringModalToFront = import_react49.default.useCallback((layerId, modalKey) => {
+  }, []), bringModalToFront = import_react48.default.useCallback((layerId, modalKey) => {
     dispatch({
       type: "bring-modal-to-front",
       layerId,
       modalKey
     });
-  }, []), removePinnedHoverComp = import_react49.default.useCallback((id3) => {
+  }, []), removePinnedHoverComp = import_react48.default.useCallback((id3) => {
     dispatch({
       type: "remove-pinned",
       id: id3
     });
-  }, []), addPinnedHoverComp = import_react49.default.useCallback(
+  }, []), addPinnedHoverComp = import_react48.default.useCallback(
     ({ lngLat, hoverData: hoverData2 }) => {
       if (hoverData2.pinnable) {
         let marker = new import_maplibre_gl.default.Marker().setLngLat(lngLat).addTo(state.map);
@@ -5882,13 +5874,13 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
       }
     },
     [state.map]
-  ), saveMapAsImage = import_react49.default.useCallback(
+  ), saveMapAsImage = import_react48.default.useCallback(
     (fileName = "map.png") => {
       let canvas = state.map.getCanvas(), a = document.createElement("a");
       a.download = fileName, a.href = canvas.toDataURL(), a.click();
     },
     [state.map]
-  ), setMapStyle = import_react49.default.useCallback(
+  ), setMapStyle = import_react48.default.useCallback(
     (styleIndex) => {
       state.map.once("style.load", (e) => {
         state.activeLayers.slice().reverse().reduce((promise, layer) => promise.then(
@@ -5902,7 +5894,7 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
       });
     },
     [state.map, state.mapStyles, state.activeLayers, updateHover, falcor3]
-  ), MapActions = import_react49.default.useMemo(
+  ), MapActions = import_react48.default.useMemo(
     () => ({
       toggleVisibility,
       addLayer,
@@ -5939,8 +5931,8 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
       addPinnedHoverComp,
       projectLngLat
     ]
-  ), MapOptions = import_react49.default.useRef({ ...DefaultMapOptions, ...mapOptions }), id2 = import_react49.default.useRef(props.id || getUniqueId());
-  import_react49.default.useEffect(() => {
+  ), MapOptions = import_react48.default.useRef({ ...DefaultMapOptions, ...mapOptions }), id2 = import_react48.default.useRef(props.id || getUniqueId());
+  import_react48.default.useEffect(() => {
     if (!accessToken)
       return;
     import_maplibre_gl.default.accessToken = accessToken;
@@ -5967,7 +5959,7 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
     }), map.once("load", (e) => {
       dispatch({ type: "map-loaded", map, mapStyles, styleIndex });
     }), () => map.remove();
-  }, [accessToken, navigationControl]), import_react49.default.useEffect(() => {
+  }, [accessToken, navigationControl]), import_react48.default.useEffect(() => {
     !state.map || [...layers, ...state.dynamicLayers].filter(({ id: id3 }) => !state.initializedLayers.includes(id3)).reverse().reduce((promise, layer) => {
       dispatch({ type: "init-layer", layer }), layer.dispatchStateUpdate = (layer2, newState) => {
         dispatch({
@@ -5980,8 +5972,8 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
         layer.filters[filterName].onChange = (v) => updateFilter(layer, filterName, v);
       return layer.toolbar.forEach((tool) => {
         typeof tool.action == "function" && (tool.actionFunc = tool.action.bind(layer));
-      }), layer.mapActions.forEach((action6) => {
-        action6.actionFunc = action6.action.bind(layer);
+      }), layer.mapActions.forEach((action5) => {
+        action5.actionFunc = action5.action.bind(layer);
       }), promise.then(() => layer._init(state.map, falcor3, MapActions)).then(() => {
         layer.setActive && layer.fetchData(falcor3).then(() => layer._onAdd(state.map, falcor3, updateHover)).then(() => dispatch({ type: "activate-layer", layer }));
       });
@@ -5997,7 +5989,7 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
     state.initializedLayers,
     layerProps
   ]);
-  let pinHoverComp = import_react49.default.useCallback(
+  let pinHoverComp = import_react48.default.useCallback(
     ({ lngLat }) => {
       if (state.hoverData.pinnable) {
         let marker = new import_maplibre_gl.default.Marker().setLngLat(lngLat).addTo(state.map);
@@ -6010,24 +6002,24 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
     },
     [state.map, state.hoverData.pinnable]
   ), hovering = Boolean(state.hoverData.data.size);
-  import_react49.default.useEffect(() => {
+  import_react48.default.useEffect(() => {
     if (!!hovering)
       return state.map.on("click", pinHoverComp), () => state.map.off("click", pinHoverComp);
   }, [state.map, pinHoverComp, hovering]);
-  let loadingLayers = import_react49.default.useMemo(() => [...layers, ...state.dynamicLayers].filter(
+  let loadingLayers = import_react48.default.useMemo(() => [...layers, ...state.dynamicLayers].filter(
     (layer) => Boolean(state.layersLoading[layer.id])
-  ), [layers, state.dynamicLayers, state.layersLoading]), { HoverComps, ...hoverData } = import_react49.default.useMemo(() => {
+  ), [layers, state.dynamicLayers, state.layersLoading]), { HoverComps, ...hoverData } = import_react48.default.useMemo(() => {
     let HoverComps2 = [...state.hoverData.data.values()].sort(
       (a, b) => a.sortOrder - b.sortOrder
     );
     return { ...state.hoverData, show: Boolean(HoverComps2.length), HoverComps: HoverComps2 };
-  }, [state.hoverData]), inactiveLayers = import_react49.default.useMemo(() => [...layers, ...state.dynamicLayers].filter((layer) => !state.initializedLayers.includes(layer.id) || !state.activeLayers.includes(layer)), [
+  }, [state.hoverData]), inactiveLayers = import_react48.default.useMemo(() => [...layers, ...state.dynamicLayers].filter((layer) => !state.initializedLayers.includes(layer.id) || !state.activeLayers.includes(layer)), [
     layers,
     state.dynamicLayers,
     state.initializedLayers,
     state.activeLayers
   ]);
-  import_react49.default.useEffect(() => {
+  import_react48.default.useEffect(() => {
     let needsFetch = [], needsRender = [];
     state.activeLayers.forEach((layer) => {
       layer.props = (0, import_lodash14.default)(layerProps, layer.id, {});
@@ -6058,8 +6050,8 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
     falcor3,
     fetchData
   ]);
-  let ref = import_react49.default.useRef(null), size = useSetSize2(ref), AllMapActions = import_react49.default.useMemo(() => ({ ...MapActions, setMapStyle }), [MapActions, setMapStyle]), getRect2 = import_react49.default.useCallback(() => ref.current ? ref.current.getBoundingClientRect() : { width: 0, height: 0 }, []), { width, height } = getRect2();
-  return import_react49.default.useEffect(() => {
+  let ref = import_react48.default.useRef(null), size = useSetSize2(ref), AllMapActions = import_react48.default.useMemo(() => ({ ...MapActions, setMapStyle }), [MapActions, setMapStyle]), getRect2 = import_react48.default.useCallback(() => ref.current ? ref.current.getBoundingClientRect() : { width: 0, height: 0 }, []), { width, height } = getRect2();
+  return import_react48.default.useEffect(() => {
     state.map && state.map.resize();
   }, [width, height, state.map]), /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)("div", { ref, className: "w-full h-full relative focus:outline-none", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)("div", { id: id2.current, className: "w-full h-full relative" }, void 0, !1, {
@@ -6123,7 +6115,7 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
       `,
         children: [
           state.pinnedHoverComps.map(
-            ({ HoverComps: HoverComps2, data: data2, id: id3, ...hoverData2 }) => /* @__PURE__ */ (0, import_react50.createElement)(
+            ({ HoverComps: HoverComps2, data, id: id3, ...hoverData2 }) => /* @__PURE__ */ (0, import_react49.createElement)(
               PinnedHoverComp,
               {
                 ...hoverData2,
@@ -6133,11 +6125,11 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
                 key: id3,
                 id: id3
               },
-              HoverComps2.map(({ HoverComp: HoverComp2, data: data3, layer }, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)(
+              HoverComps2.map(({ HoverComp: HoverComp2, data: data2, layer }, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)(
                 HoverComp2,
                 {
                   layer,
-                  data: data3,
+                  data: data2,
                   activeLayers: state.activeLayers,
                   layersLoading: state.layersLoading,
                   loadingLayers,
@@ -6158,11 +6150,11 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
               ))
             )
           ),
-          Boolean(state.hoverData.data.size) ? /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)(HoverCompContainer, { ...hoverData, ...size, project: projectLngLat, children: HoverComps.map(({ HoverComp: HoverComp2, data: data2, layer }, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)(
+          Boolean(state.hoverData.data.size) ? /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)(HoverCompContainer, { ...hoverData, ...size, project: projectLngLat, children: HoverComps.map(({ HoverComp: HoverComp2, data, layer }, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)(
             HoverComp2,
             {
               layer,
-              data: data2,
+              data,
               activeLayers: state.activeLayers,
               layersLoading: state.layersLoading,
               loadingLayers,
@@ -6207,8 +6199,8 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react50 
 var import_maplibre_gl2 = __toESM(require("maplibre-gl"));
 
 // app/modules/avl-map/src/components/DefaultHoverComp.js
-var import_react51 = require("react"), import_jsx_dev_runtime43 = require("react/jsx-dev-runtime"), DefaultHoverComp = ({ data: data2, layer }) => {
-  let groups = data2.reduce((a, c, i) => {
+var import_react50 = require("react"), import_jsx_dev_runtime43 = require("react/jsx-dev-runtime"), DefaultHoverComp = ({ data, layer }) => {
+  let groups = data.reduce((a, c, i) => {
     (i === 0 || c.length === 1) && a.push([]);
     let ii = a.length - 1;
     return a[ii].push(c), a;
@@ -6364,8 +6356,8 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
       }), hoverFeatures([...featuresMap.values()]), hoveredFeatures.forEach((value) => {
         mapboxMap.setFeatureState(value, { hover: !1 });
       });
-      let data2 = callback(layerId, features, lngLat, point);
-      hasValue2(data2) && updateHover({
+      let data = callback(layerId, features, lngLat, point);
+      hasValue2(data) && updateHover({
         pos: [point.x, point.y],
         type: "hover-layer-move",
         HoverComp: HoverComp2,
@@ -6373,7 +6365,7 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
         pinnable,
         sortOrder,
         lngLat,
-        data: data2
+        data
       });
     }, mouseleave = (layerId, e) => {
       this.hoverLeave(mapboxMap, layerId), updateHover({
@@ -6441,8 +6433,8 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
   }
   _onRemove(mapboxMap) {
     for (; this.callbacks.length; ) {
-      let { action: action6, layerId, callback, element } = this.callbacks.pop();
-      element ? element.removeEventListener(action6, callback) : layerId ? this.mapboxMap.off(action6, layerId, callback) : this.mapboxMap.off(action6, callback);
+      let { action: action5, layerId, callback, element } = this.callbacks.pop();
+      element ? element.removeEventListener(action5, callback) : layerId ? this.mapboxMap.off(action5, layerId, callback) : this.mapboxMap.off(action5, callback);
     }
     this.layers.forEach(({ id: id2 }) => {
       this.mapboxMap.removeLayer(id2);
@@ -6478,12 +6470,12 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
 };
 
 // app/modules/data-manager/data-types/freight_atlas_shapefile/FreightAtlasLayer.js
-var import_lodash16 = __toESM(require("lodash.get")), import_jsx_dev_runtime44 = require("react/jsx-dev-runtime"), HoverComp = ({ data: data2, layer }) => {
-  let { falcor: falcor3, falcorCache } = useFalcor(), { layerName, version } = layer, id2 = import_react52.default.useMemo(() => (0, import_lodash16.default)(data2, "[0]", null), [data2]), attributes = import_react52.default.useMemo(
+var import_lodash16 = __toESM(require("lodash.get")), import_jsx_dev_runtime44 = require("react/jsx-dev-runtime"), HoverComp = ({ data, layer }) => {
+  let { falcor: falcor3, falcorCache } = useFalcor(), { layerName, version } = layer, id2 = import_react51.default.useMemo(() => (0, import_lodash16.default)(data, "[0]", null), [data]), attributes = import_react51.default.useMemo(
     () => (0, import_lodash16.default)(layer.source, "metadata", []).map((d) => d.name).filter((d) => !["wkb_geometry", "objectid", "objectid_1"].includes(d)),
     [layer.source]
   );
-  import_react52.default.useEffect(() => {
+  import_react51.default.useEffect(() => {
     falcor3.get(
       [
         "nysdot-freight-atlas",
@@ -6496,7 +6488,7 @@ var import_lodash16 = __toESM(require("lodash.get")), import_jsx_dev_runtime44 =
       ]
     );
   }, [id2, layerName, version, attributes, falcor3]);
-  let AttrInfo = import_react52.default.useMemo(() => (0, import_lodash16.default)(falcorCache, [
+  let AttrInfo = import_react51.default.useMemo(() => (0, import_lodash16.default)(falcorCache, [
     "nysdot-freight-atlas",
     layerName,
     "byVersion",
@@ -6602,26 +6594,26 @@ var import_lodash16 = __toESM(require("lodash.get")), import_jsx_dev_runtime44 =
 }, FreightAtlasFactory = (options = {}) => new FreightAtlasLayer(options), FreightAtlasLayer_default = FreightAtlasFactory;
 
 // app/modules/data-manager/components/SymbologyControls.js
-var import_react53 = __toESM(require("react"));
+var import_react52 = __toESM(require("react"));
 var import_lodash17 = __toESM(require("lodash.get")), import_jsx_dev_runtime45 = require("react/jsx-dev-runtime"), SymbologyControls = ({ layer, onChange }) => {
-  let [symbology, setSymbology] = (0, import_react53.useState)((0, import_lodash17.default)(layer.views, `[${layer.activeView}]metadata.tiles.symbology`, []));
-  (0, import_react53.useEffect)(() => {
+  let [symbology, setSymbology] = (0, import_react52.useState)((0, import_lodash17.default)(layer.views, `[${layer.activeView}]metadata.tiles.symbology`, []));
+  (0, import_react52.useEffect)(() => {
     onChange(symbology);
   }, [symbology]);
-  let mapBoxLayer = import_react53.default.useMemo(
+  let mapBoxLayer = import_react52.default.useMemo(
     () => (0, import_lodash17.default)(layer.views, `[${layer.activeView}]metadata.tiles.layers[0]`, {}),
     [layer.views, layer.activeView]
-  ), data_table = (0, import_react53.useMemo)(
+  ), data_table = (0, import_react52.useMemo)(
     () => (0, import_lodash17.default)(layer.views, `[${layer.activeView}].data_table`, ""),
     [layer.views, layer.activeView]
-  ), layerName = (0, import_react53.useMemo)(
+  ), layerName = (0, import_react52.useMemo)(
     () => (0, import_lodash17.default)(data_table.split("."), "[1]", "").slice(0, -6),
     [data_table]
-  ), version = (0, import_react53.useMemo)(
+  ), version = (0, import_react52.useMemo)(
     () => (0, import_lodash17.default)(data_table.split("."), "[1]", "").slice(-4),
     [data_table]
   );
-  return import_react53.default.useMemo(() => /* @__PURE__ */ (0, import_jsx_dev_runtime45.jsxDEV)("div", { className: "border-t border-gray-300 h-full w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime45.jsxDEV)(
+  return import_react52.default.useMemo(() => /* @__PURE__ */ (0, import_jsx_dev_runtime45.jsxDEV)("div", { className: "border-t border-gray-300 h-full w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime45.jsxDEV)(
     SymbologyControl,
     {
       layerType: mapBoxLayer.type,
@@ -6707,7 +6699,7 @@ var import_lodash17 = __toESM(require("lodash.get")), import_jsx_dev_runtime45 =
   version,
   setSymbology
 }) => {
-  let lineColorIndex = (0, import_react53.useMemo)(() => getStyleIndex(symbology, paintAttribute), [symbology]), [lineColor, setLineColor] = (0, import_react53.useState)({
+  let lineColorIndex = (0, import_react52.useMemo)(() => getStyleIndex(symbology, paintAttribute), [symbology]), [lineColor, setLineColor] = (0, import_react52.useState)({
     paint: paintAttribute,
     type: (0, import_lodash17.default)(symbology, `[${lineColorIndex}].type`, "simple"),
     value: (0, import_lodash17.default)(symbology, `[${lineColorIndex}].value`, defaultData),
@@ -6750,7 +6742,7 @@ var import_lodash17 = __toESM(require("lodash.get")), import_jsx_dev_runtime45 =
     columnNumber: 3
   }, this);
 }, ColorControl = ({ symbology, onChange }) => {
-  let renderControl = import_react53.default.useMemo(() => {
+  let renderControl = import_react52.default.useMemo(() => {
     switch (symbology.type) {
       case "simple":
         return /* @__PURE__ */ (0, import_jsx_dev_runtime45.jsxDEV)(
@@ -6946,7 +6938,7 @@ var import_lodash17 = __toESM(require("lodash.get")), import_jsx_dev_runtime45 =
 }, this), getStyleIndex = (symbologoy, paint) => symbologoy.reduce((out, current, i) => (current.paint === paint && (out = i), out), -1);
 
 // app/modules/data-manager/data-types/freight_atlas_shapefile/create.js
-var import_react54 = require("react"), import_jsx_dev_runtime46 = require("react/jsx-dev-runtime"), Create = () => /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("div", { children: " Add New Source" }, void 0, !1, {
+var import_react53 = require("react"), import_jsx_dev_runtime46 = require("react/jsx-dev-runtime"), Create = () => /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("div", { children: " Add New Source" }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/freight_atlas_shapefile/create.js",
   lineNumber: 7,
   columnNumber: 7
@@ -6982,7 +6974,7 @@ var import_jsx_dev_runtime47 = require("react/jsx-dev-runtime"), Map2 = ({ layer
         style: "mapbox://styles/am3081/ckm85o7hq6d8817nr0y6ute5v"
       }
     ]
-  }, map_layers = (0, import_react55.useMemo)(() => layers.map((l) => FreightAtlasLayer_default(l)), []);
+  }, map_layers = (0, import_react54.useMemo)(() => layers.map((l) => FreightAtlasLayer_default(l)), []);
   return /* @__PURE__ */ (0, import_jsx_dev_runtime47.jsxDEV)("div", { className: "w-full h-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime47.jsxDEV)(
     AvlMap,
     {
@@ -7011,10 +7003,10 @@ var import_jsx_dev_runtime47 = require("react/jsx-dev-runtime"), Map2 = ({ layer
   }, this);
 }, Edit2 = ({ startValue, attr, viewId, parentData, cancel = () => {
 } }) => {
-  let { falcor: falcor3 } = useFalcor(), [value, setValue] = (0, import_react55.useState)(""), inputEl = (0, import_react55.useRef)(null);
-  (0, import_react55.useEffect)(() => {
+  let { falcor: falcor3 } = useFalcor(), [value, setValue] = (0, import_react54.useState)(""), inputEl = (0, import_react54.useRef)(null);
+  (0, import_react54.useEffect)(() => {
     setValue(startValue), inputEl.current.focus();
-  }, [startValue]), (0, import_react55.useEffect)(() => {
+  }, [startValue]), (0, import_react54.useEffect)(() => {
     inputEl.current.style.height = "inherit", inputEl.current.style.height = `${inputEl.current.scrollHeight}px`;
   }, [value]);
   let save = async (attr2, value2) => {
@@ -7084,7 +7076,7 @@ var import_jsx_dev_runtime47 = require("react/jsx-dev-runtime"), Map2 = ({ layer
     columnNumber: 5
   }, this);
 }, MapPage = ({ source, views, user }) => {
-  let { falcor: falcor3 } = useFalcor(), [activeView] = (0, import_react55.useState)(0), [mapData] = (0, import_react55.useState)((0, import_lodash18.default)(views, `[${activeView}].metadata.tiles`, {})), [editing, setEditing] = import_react55.default.useState(null), viewId = import_react55.default.useMemo(() => (0, import_lodash18.default)(views, `[${activeView}].id`, null), [views, activeView]), layer = import_react55.default.useMemo(() => ({
+  let { falcor: falcor3 } = useFalcor(), [activeView] = (0, import_react54.useState)(0), [mapData] = (0, import_react54.useState)((0, import_lodash18.default)(views, `[${activeView}].metadata.tiles`, {})), [editing, setEditing] = import_react54.default.useState(null), viewId = import_react54.default.useMemo(() => (0, import_lodash18.default)(views, `[${activeView}].id`, null), [views, activeView]), layer = import_react54.default.useMemo(() => ({
     name: source.name,
     source,
     views,
@@ -7241,7 +7233,7 @@ var import_jsx_dev_runtime47 = require("react/jsx-dev-runtime"), Map2 = ({ layer
 }, freight_atlas_shapefile_default = FreightAtlashShapefileConfig;
 
 // app/modules/data-manager/data-types/npmrdsTravelTime/index.js
-var import_react56 = require("react");
+var import_react55 = require("react");
 var import_jsx_dev_runtime48 = require("react/jsx-dev-runtime"), availableStats = [
   "total_tmcs",
   "total_miles",
@@ -7252,7 +7244,7 @@ var import_jsx_dev_runtime48 = require("react/jsx-dev-runtime"), availableStats 
   "var_pct_epochs_reporting",
   "stddev_pct_epochs_reporting"
 ], Stats = ({ source }) => {
-  let [state, setState] = (0, import_react56.useState)("ny"), [stat, setStat] = (0, import_react56.useState)("total_tmcs"), availableStates = Object.keys(source.statistics).sort(), selectedStats = source.statistics[state], lineData = (0, import_react56.useMemo)(() => {
+  let [state, setState] = (0, import_react55.useState)("ny"), [stat, setStat] = (0, import_react55.useState)("total_tmcs"), availableStates = Object.keys(source.statistics).sort(), selectedStats = source.statistics[state], lineData = (0, import_react55.useMemo)(() => {
     let d = {}, yrmos = Object.keys(selectedStats).sort();
     for (let yrmo of yrmos) {
       let frcs = Object.keys(selectedStats[yrmo]);
@@ -7332,10 +7324,10 @@ var import_jsx_dev_runtime48 = require("react/jsx-dev-runtime"), availableStats 
 }, npmrdsTravelTime_default = NpmrdsTravelTimeConfig;
 
 // app/modules/data-manager/data-types/ncei_storm_events/index.js
-var import_react58 = require("react");
+var import_react57 = require("react");
 
 // app/modules/data-manager/data-types/ncei_storm_events/create.js
-var import_react57 = __toESM(require("react"));
+var import_react56 = __toESM(require("react"));
 var import_jsx_dev_runtime49 = require("react/jsx-dev-runtime"), CallServer = async ({ rtPfx, source, etlContextId, userId, newVersion }) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "ncei_storm_events");
   console.log("calling server?", etlContextId);
@@ -7355,10 +7347,10 @@ var import_jsx_dev_runtime49 = require("react/jsx-dev-runtime"), CallServer = as
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), console.log("res", await stgLyrDataRes.json()), history.push(`/datasources/source/${src.source_id}`);
 }, Create2 = ({ source, user, newVersion }) => {
-  let [etlContextId, setEtlContextId] = import_react57.default.useState();
+  let [etlContextId, setEtlContextId] = import_react56.default.useState();
   console.log("src", source);
   let rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return import_react57.default.useEffect(() => {
+  return import_react56.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
       setEtlContextId(etl);
@@ -7413,8 +7405,8 @@ var import_jsx_dev_runtime50 = require("react/jsx-dev-runtime"), Table2 = ({ sou
   },
   this
 ), Stats2 = ({ source, views }) => {
-  let { falcor: falcor3, falcorCache } = useFalcor(), [activeView, setActiveView] = (0, import_react58.useState)(views[0].view_id), [compareView, setCompareView] = (0, import_react58.useState)(views[0].view_id), [compareMode, setCompareMode] = (0, import_react58.useState)(void 0);
-  (0, import_react58.useEffect)(() => {
+  let { falcor: falcor3, falcorCache } = useFalcor(), [activeView, setActiveView] = (0, import_react57.useState)(views[0].view_id), [compareView, setCompareView] = (0, import_react57.useState)(views[0].view_id), [compareMode, setCompareMode] = (0, import_react57.useState)(void 0);
+  (0, import_react57.useEffect)(() => {
     falcor3.get(["ncei_storm_events", pgEnv, "source", source.source_id, "view", [activeView, compareView], ["numRows", "eventsByYear", "eventsByType"]]);
   }, [activeView, compareView]);
   let metadataActiveView = (0, import_lodash19.default)(falcorCache, ["ncei_storm_events", pgEnv, "source", source.source_id, "view", activeView]), metadataCompareView = (0, import_lodash19.default)(falcorCache, ["ncei_storm_events", pgEnv, "source", source.source_id, "view", compareView]);
@@ -7657,10 +7649,10 @@ var import_jsx_dev_runtime50 = require("react/jsx-dev-runtime"), Table2 = ({ sou
 }, ncei_storm_events_default = NceiStormEventsConfig;
 
 // app/modules/data-manager/data-types/ncei_storm_events_enhanced/index.js
-var import_react60 = require("react");
+var import_react59 = require("react");
 
 // app/modules/data-manager/data-types/ncei_storm_events_enhanced/create.js
-var import_react59 = __toESM(require("react")), import_lodash20 = __toESM(require("lodash.get"));
+var import_react58 = __toESM(require("react")), import_lodash20 = __toESM(require("lodash.get"));
 var import_jsx_dev_runtime51 = require("react/jsx-dev-runtime"), CallServer2 = async ({ rtPfx, source, etlContextId, userId, viewNCEI = {}, viewZTC = {}, viewCousubs = {}, viewTract = {} }, newVersion) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "ncei_storm_events_enhanced");
   console.log("calling server?", etlContextId, src);
@@ -7754,8 +7746,8 @@ var import_jsx_dev_runtime51 = require("react/jsx-dev-runtime"), CallServer2 = a
   lineNumber: 49,
   columnNumber: 9
 }, this), Create3 = ({ source, user, newVersion }) => {
-  let [etlContextId, setEtlContextId] = import_react59.default.useState(), [viewZTC, setViewZTC] = import_react59.default.useState(), [viewCousubs, setViewCousubs] = import_react59.default.useState(), [viewTract, setViewTract] = import_react59.default.useState(), [viewNCEI, setViewNCEI] = import_react59.default.useState(), [versionsZTC, setVersionsZTC] = import_react59.default.useState({ sources: [], views: [] }), [versionsCousubs, setVersionsCousubs] = import_react59.default.useState({ sources: [], views: [] }), [versionsTract, setVersionsTract] = import_react59.default.useState({ sources: [], views: [] }), [versionsNCEI, setVersionsNCEI] = import_react59.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return import_react59.default.useEffect(() => {
+  let [etlContextId, setEtlContextId] = import_react58.default.useState(), [viewZTC, setViewZTC] = import_react58.default.useState(), [viewCousubs, setViewCousubs] = import_react58.default.useState(), [viewTract, setViewTract] = import_react58.default.useState(), [viewNCEI, setViewNCEI] = import_react58.default.useState(), [versionsZTC, setVersionsZTC] = import_react58.default.useState({ sources: [], views: [] }), [versionsCousubs, setVersionsCousubs] = import_react58.default.useState({ sources: [], views: [] }), [versionsTract, setVersionsTract] = import_react58.default.useState({ sources: [], views: [] }), [versionsNCEI, setVersionsNCEI] = import_react58.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return import_react58.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
       setEtlContextId(etl), await getSrcViews({ rtPfx, setVersions: setVersionsZTC, etlContextId: etl, type: "zone_to_county" }), await getSrcViews({ rtPfx, setVersions: setVersionsCousubs, etlContextId: etl, type: "tl_cousub" }), await getSrcViews({ rtPfx, setVersions: setVersionsTract, etlContextId: etl, type: "tl_tract" }), await getSrcViews({ rtPfx, setVersions: setVersionsNCEI, etlContextId: etl, type: "ncei_storm_events" });
@@ -7823,8 +7815,8 @@ var import_lodash21 = __toESM(require("lodash.get")), import_jsx_dev_runtime52 =
   },
   this
 ), Stats3 = ({ source, views }) => {
-  let { falcor: falcor3, falcorCache } = useFalcor(), [activeView, setActiveView] = (0, import_react60.useState)(views[0].view_id), [compareView, setCompareView] = (0, import_react60.useState)(views[0].view_id), [compareMode, setCompareMode] = (0, import_react60.useState)(void 0);
-  (0, import_react60.useEffect)(() => {
+  let { falcor: falcor3, falcorCache } = useFalcor(), [activeView, setActiveView] = (0, import_react59.useState)(views[0].view_id), [compareView, setCompareView] = (0, import_react59.useState)(views[0].view_id), [compareMode, setCompareMode] = (0, import_react59.useState)(void 0);
+  (0, import_react59.useEffect)(() => {
     falcor3.get(
       ["dama", pgEnv, "sources", "byId", source.source_id, "views", "invalidate"],
       ["ncei_storm_events_enhanced", pgEnv, "source", source.source_id, "view", [activeView, compareView], ["numRows", "eventsByYear", "eventsByType"]]
@@ -8114,10 +8106,10 @@ var import_lodash21 = __toESM(require("lodash.get")), import_jsx_dev_runtime52 =
 }, ncei_storm_events_enhanced_default = NceiStormEventsConfig2;
 
 // app/modules/data-manager/data-types/zone_to_county/index.js
-var import_react62 = require("react");
+var import_react61 = require("react");
 
 // app/modules/data-manager/data-types/zone_to_county/create.js
-var import_react61 = __toESM(require("react"));
+var import_react60 = __toESM(require("react"));
 var import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), CallServer3 = async ({ rtPfx, source, etlContextId, userId, newVersion }) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "zone_to_county");
   console.log("src?", src);
@@ -8128,8 +8120,8 @@ var import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), CallServer3 = a
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), history.push(`/datasources/source/${src.source_id}`);
 }, Create4 = ({ source, user, newVersion }) => {
-  let [etlContextId, setEtlContextId] = import_react61.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return import_react61.default.useEffect(() => {
+  let [etlContextId, setEtlContextId] = import_react60.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return import_react60.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
       setEtlContextId(etl);
@@ -8179,10 +8171,10 @@ var import_jsx_dev_runtime54 = require("react/jsx-dev-runtime"), Table4 = ({ sou
 }, zone_to_county_default = ZoneToCountyConfig;
 
 // app/modules/data-manager/data-types/tiger_2017/index.js
-var import_react64 = require("react"), import_lodash22 = require("lodash.get");
+var import_react63 = require("react"), import_lodash22 = require("lodash.get");
 
 // app/modules/data-manager/data-types/tiger_2017/create.js
-var import_react63 = __toESM(require("react"));
+var import_react62 = __toESM(require("react"));
 var import_jsx_dev_runtime55 = require("react/jsx-dev-runtime"), CallServer4 = async ({ rtPfx, source, etlContextId, userId, tigerTable, newVersion }) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, `tl_${tigerTable.toLowerCase()}`);
   console.log("src?", src);
@@ -8256,8 +8248,8 @@ var import_jsx_dev_runtime55 = require("react/jsx-dev-runtime"), CallServer4 = a
   lineNumber: 32,
   columnNumber: 9
 }, this), Create5 = ({ source, user, newVersion }) => {
-  let [etlContextId, setEtlContextId] = import_react63.default.useState(), [tigerTable, setTigerTable] = import_react63.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return console.log("comes here"), import_react63.default.useEffect(() => {
+  let [etlContextId, setEtlContextId] = import_react62.default.useState(), [tigerTable, setTigerTable] = import_react62.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return console.log("comes here"), import_react62.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
       setEtlContextId(etl);
@@ -8322,10 +8314,10 @@ var import_jsx_dev_runtime56 = require("react/jsx-dev-runtime"), Table5 = ({ sou
 }, tiger_2017_default = tiger2017Config;
 
 // app/modules/data-manager/data-types/open_fema_data/index.js
-var import_react66 = require("react");
+var import_react65 = require("react");
 
 // app/modules/data-manager/data-types/open_fema_data/create.js
-var import_react65 = __toESM(require("react"));
+var import_react64 = __toESM(require("react"));
 var import_jsx_dev_runtime57 = require("react/jsx-dev-runtime"), datasets = [
   "disaster_declarations_summaries_v2",
   "fema_web_disaster_declarations_v1",
@@ -8413,8 +8405,8 @@ var import_jsx_dev_runtime57 = require("react/jsx-dev-runtime"), datasets = [
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), history.push(`/datasources/source/${src.source_id}`);
 }, Create6 = ({ source, user, newVersion }) => {
-  let [etlContextId, setEtlContextId] = import_react65.default.useState(), [table, setTable] = import_react65.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return import_react65.default.useEffect(() => {
+  let [etlContextId, setEtlContextId] = import_react64.default.useState(), [table, setTable] = import_react64.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return import_react64.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
       setEtlContextId(etl);
@@ -8468,10 +8460,10 @@ var import_jsx_dev_runtime58 = require("react/jsx-dev-runtime"), Table6 = ({ sou
 }, open_fema_data_default = FreightAtlashShapefileConfig2;
 
 // app/modules/data-manager/data-types/usda/index.js
-var import_react68 = require("react");
+var import_react67 = require("react");
 
 // app/modules/data-manager/data-types/usda/create.js
-var import_react67 = __toESM(require("react"));
+var import_react66 = __toESM(require("react"));
 var import_jsx_dev_runtime59 = require("react/jsx-dev-runtime"), CallServer6 = async ({ rtPfx, source, etlContextId, userId, table, newVersion }) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, table);
   console.log("src?", src);
@@ -8482,8 +8474,8 @@ var import_jsx_dev_runtime59 = require("react/jsx-dev-runtime"), CallServer6 = a
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), history.push(`/datasources/source/${src.source_id}`);
 }, Create7 = ({ source, user, newVersion }) => {
-  let [etlContextId, setEtlContextId] = import_react67.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return import_react67.default.useEffect(() => {
+  let [etlContextId, setEtlContextId] = import_react66.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return import_react66.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
       setEtlContextId(etl);
@@ -8534,10 +8526,10 @@ var import_jsx_dev_runtime60 = require("react/jsx-dev-runtime"), Table7 = ({ sou
 }, usda_default = FreightAtlashShapefileConfig3;
 
 // app/modules/data-manager/data-types/sba/index.js
-var import_react70 = require("react");
+var import_react69 = require("react");
 
 // app/modules/data-manager/data-types/sba/create.js
-var import_react69 = __toESM(require("react"));
+var import_react68 = __toESM(require("react"));
 var import_jsx_dev_runtime61 = require("react/jsx-dev-runtime"), CallServer7 = async ({ rtPfx, source, etlContextId, userId, table, newVersion }) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, table);
   console.log("src?", src);
@@ -8549,8 +8541,8 @@ var import_jsx_dev_runtime61 = require("react/jsx-dev-runtime"), CallServer7 = a
   await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), history.push(`/datasources/source/${src.source_id}`);
 }, Create8 = ({ source, user, newVersion }) => {
   console.log("comes here");
-  let [etlContextId, setEtlContextId] = import_react69.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return import_react69.default.useEffect(() => {
+  let [etlContextId, setEtlContextId] = import_react68.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return import_react68.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
       setEtlContextId(etl);
@@ -8601,10 +8593,10 @@ var import_jsx_dev_runtime62 = require("react/jsx-dev-runtime"), Table8 = ({ sou
 }, sba_default = FreightAtlashShapefileConfig4;
 
 // app/modules/data-manager/data-types/nri/index.js
-var import_react72 = require("react");
+var import_react71 = require("react");
 
 // app/modules/data-manager/data-types/nri/create.js
-var import_react71 = __toESM(require("react"));
+var import_react70 = __toESM(require("react"));
 var import_jsx_dev_runtime63 = require("react/jsx-dev-runtime"), CallServer8 = async ({ rtPfx, source, etlContextId, userId, table, newVersion }) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, table);
   console.log("src?", src);
@@ -8615,8 +8607,8 @@ var import_jsx_dev_runtime63 = require("react/jsx-dev-runtime"), CallServer8 = a
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), history.push(`/datasources/source/${src.source_id}`);
 }, Create9 = ({ source, user, newVersion }) => {
-  let [etlContextId, setEtlContextId] = import_react71.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return import_react71.default.useEffect(() => {
+  let [etlContextId, setEtlContextId] = import_react70.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return import_react70.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
       setEtlContextId(etl);
@@ -8667,10 +8659,10 @@ var import_jsx_dev_runtime64 = require("react/jsx-dev-runtime"), Table9 = ({ sou
 }, nri_default = FreightAtlashShapefileConfig5;
 
 // app/modules/data-manager/data-types/per_basis_swd/index.js
-var import_react74 = require("react");
+var import_react73 = require("react");
 
 // app/modules/data-manager/data-types/per_basis_swd/create.js
-var import_react73 = __toESM(require("react")), import_lodash23 = __toESM(require("lodash.get"));
+var import_react72 = __toESM(require("react")), import_lodash23 = __toESM(require("lodash.get"));
 var import_jsx_dev_runtime65 = require("react/jsx-dev-runtime"), CallServer9 = async ({ rtPfx, source, etlContextId, userId, viewNCEI = {}, viewNRI = {} }, newVersion) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "per_basis");
   console.log("calling server?", etlContextId, src);
@@ -8762,8 +8754,8 @@ var import_jsx_dev_runtime65 = require("react/jsx-dev-runtime"), CallServer9 = a
   lineNumber: 42,
   columnNumber: 9
 }, this), Create10 = ({ source, user, newVersion }) => {
-  let [etlContextId, setEtlContextId] = import_react73.default.useState(), [viewNCEI, setViewNCEI] = import_react73.default.useState(), [viewNRI, setViewNRI] = import_react73.default.useState(), [versionsNCEI, setVersionsNCEI] = import_react73.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react73.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return import_react73.default.useEffect(() => {
+  let [etlContextId, setEtlContextId] = import_react72.default.useState(), [viewNCEI, setViewNCEI] = import_react72.default.useState(), [viewNRI, setViewNRI] = import_react72.default.useState(), [versionsNCEI, setVersionsNCEI] = import_react72.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react72.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return import_react72.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
       setEtlContextId(etl), await getSrcViews({ rtPfx, setVersions: setVersionsNCEI, etlContextId: etl, type: "ncei_storm_events_enhanced" }), await getSrcViews({ rtPfx, setVersions: setVersionsNRI, etlContextId: etl, type: "nri" });
@@ -8831,8 +8823,8 @@ var import_lodash24 = __toESM(require("lodash.get")), import_jsx_dev_runtime66 =
   },
   this
 ), fnum = (number) => parseInt(number).toLocaleString(), Stats4 = ({ source, views }) => {
-  let { falcor: falcor3, falcorCache } = useFalcor(), [activeView, setActiveView] = (0, import_react74.useState)(views[0].view_id), [compareView, setCompareView] = (0, import_react74.useState)(views[0].view_id), [compareMode, setCompareMode] = (0, import_react74.useState)(void 0);
-  (0, import_react74.useEffect)(() => {
+  let { falcor: falcor3, falcorCache } = useFalcor(), [activeView, setActiveView] = (0, import_react73.useState)(views[0].view_id), [compareView, setCompareView] = (0, import_react73.useState)(views[0].view_id), [compareMode, setCompareMode] = (0, import_react73.useState)(void 0);
+  (0, import_react73.useEffect)(() => {
     falcor3.get(
       ["per_basis", pgEnv, "source", source.source_id, "view", [activeView, compareView], "stats"]
     );
@@ -9161,10 +9153,10 @@ var import_lodash24 = __toESM(require("lodash.get")), import_jsx_dev_runtime66 =
 }, per_basis_swd_default = NceiStormEventsConfig3;
 
 // app/modules/data-manager/data-types/hlr/index.js
-var import_react76 = require("react");
+var import_react75 = require("react");
 
 // app/modules/data-manager/data-types/hlr/create.js
-var import_react75 = __toESM(require("react"));
+var import_react74 = __toESM(require("react"));
 var import_lodash25 = __toESM(require("lodash.get"));
 var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = async ({ rtPfx, source, etlContextId, userId, newVersion, viewPB = {}, viewNRI = {}, viewState = {}, viewCounty = {}, viewNCEI = {} }) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "hlr");
@@ -9260,8 +9252,8 @@ var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = 
   lineNumber: 51,
   columnNumber: 9
 }, this), Create11 = ({ source, user, newVersion }) => {
-  let [etlContextId, setEtlContextId] = import_react75.default.useState(), [viewPB, setViewPB] = import_react75.default.useState(), [viewNRI, setViewNRI] = import_react75.default.useState(), [viewState, setViewState] = import_react75.default.useState(), [viewCounty, setViewCounty] = import_react75.default.useState(), [viewNCEI, setViewNCEI] = import_react75.default.useState(), [versionsPB, setVersionsPB] = import_react75.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react75.default.useState({ sources: [], views: [] }), [versionsState, setVersionsState] = import_react75.default.useState({ sources: [], views: [] }), [versionsCounty, setVersionsCounty] = import_react75.default.useState({ sources: [], views: [] }), [versionsNCEI, setVersionsNCEI] = import_react75.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return import_react75.default.useEffect(() => {
+  let [etlContextId, setEtlContextId] = import_react74.default.useState(), [viewPB, setViewPB] = import_react74.default.useState(), [viewNRI, setViewNRI] = import_react74.default.useState(), [viewState, setViewState] = import_react74.default.useState(), [viewCounty, setViewCounty] = import_react74.default.useState(), [viewNCEI, setViewNCEI] = import_react74.default.useState(), [versionsPB, setVersionsPB] = import_react74.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react74.default.useState({ sources: [], views: [] }), [versionsState, setVersionsState] = import_react74.default.useState({ sources: [], views: [] }), [versionsCounty, setVersionsCounty] = import_react74.default.useState({ sources: [], views: [] }), [versionsNCEI, setVersionsNCEI] = import_react74.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return import_react74.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
       setEtlContextId(etl), await getSrcViews({ rtPfx, setVersions: setVersionsPB, etlContextId: etl, type: "per_basis" }), await getSrcViews({ rtPfx, setVersions: setVersionsNRI, etlContextId: etl, type: "nri" }), await getSrcViews({ rtPfx, setVersions: setVersionsState, etlContextId: etl, type: "tl_state" }), await getSrcViews({ rtPfx, setVersions: setVersionsCounty, etlContextId: etl, type: "tl_county" }), await getSrcViews({ rtPfx, setVersions: setVersionsNCEI, etlContextId: etl, type: "ncei_storm_events_enhanced" });
@@ -9335,8 +9327,8 @@ var import_lodash26 = __toESM(require("lodash.get")), import_jsx_dev_runtime68 =
   },
   this
 ), fnum2 = (number) => parseInt(number).toLocaleString(), Stats5 = ({ source, views }) => {
-  let { falcor: falcor3, falcorCache } = useFalcor(), [activeView, setActiveView] = (0, import_react76.useState)(views[0].view_id), [compareView, setCompareView] = (0, import_react76.useState)(views[0].view_id), [compareMode, setCompareMode] = (0, import_react76.useState)(void 0);
-  (0, import_react76.useEffect)(() => {
+  let { falcor: falcor3, falcorCache } = useFalcor(), [activeView, setActiveView] = (0, import_react75.useState)(views[0].view_id), [compareView, setCompareView] = (0, import_react75.useState)(views[0].view_id), [compareMode, setCompareMode] = (0, import_react75.useState)(void 0);
+  (0, import_react75.useEffect)(() => {
     falcor3.get(
       ["dama", pgEnv, "sources", "byId", source.source_id, "views", "invalidate"],
       ["hlr", pgEnv, "source", source.source_id, "view", [activeView, compareView], "eal"]
@@ -9586,10 +9578,10 @@ var DataTypes = {
   hlr: hlr_default
 };
 
-// app/routes/__dama/source/$sourceId.($page).($viewId).js
-var import_react78 = require("@remix-run/react"), import_lodash27 = __toESM(require("lodash.get")), import_jsx_dev_runtime69 = require("react/jsx-dev-runtime");
-async function loader3({ params, request }) {
-  let { sourceId } = params, lengthPath = ["dama", pgEnv, "sources", "byId", sourceId, "views", "length"], resp = await falcor2.get(lengthPath), data2 = await falcor2.get(
+// app/routes/__dama/source/$sourceId.($page).js
+var import_react77 = require("@remix-run/react"), import_lodash27 = __toESM(require("lodash.get")), import_jsx_dev_runtime69 = require("react/jsx-dev-runtime");
+async function loader4({ params, request }) {
+  let { sourceId } = params, lengthPath = ["dama", pgEnv, "sources", "byId", sourceId, "views", "length"], resp = await falcor2.get(lengthPath), data = await falcor2.get(
     [
       "dama",
       pgEnv,
@@ -9650,20 +9642,19 @@ async function loader3({ params, request }) {
     )
   };
 }
-var action3 = async ({ request, params }) => (console.log("I am gonna action", data, "params", params), null);
 function Dama() {
-  let { views, source, meta: meta2 } = (0, import_react78.useLoaderData)(), { sourceId, page: page2 } = (0, import_react78.useParams)(), [pages, setPages] = (0, import_react77.useState)(default_default), { user } = (0, import_react78.useOutletContext)();
-  import_react77.default.useEffect(() => {
+  let { views, source, meta: meta2 } = (0, import_react77.useLoaderData)(), { sourceId, page: page2 } = (0, import_react77.useParams)(), [pages, setPages] = (0, import_react76.useState)(default_default), user = { email: "test@test.com", id: 1 };
+  import_react76.default.useEffect(() => {
     if (DataTypes[source.type]) {
       let typePages = Object.keys(DataTypes[source.type]).reduce((a, c) => (DataTypes[source.type][c].path && (a[c] = DataTypes[source.type][c]), a), {}), allPages = { ...default_default, ...typePages };
       setPages(allPages);
     }
   }, [source.type]);
-  let Page = (0, import_react77.useMemo)(() => page2 ? (0, import_lodash27.default)(pages, `[${page2}].component`, default_default.overview.component) : default_default.overview.component, [page2, pages]);
+  let Page = (0, import_react76.useMemo)(() => page2 ? (0, import_lodash27.default)(pages, `[${page2}].component`, default_default.overview.component) : default_default.overview.component, [page2, pages]);
   return /* @__PURE__ */ (0, import_jsx_dev_runtime69.jsxDEV)("div", { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime69.jsxDEV)("div", { className: "text-xl font-medium overflow-hidden p-2 border-b ", children: source.display_name || source.name }, void 0, !1, {
-      fileName: "app/routes/__dama/source/$sourceId.($page).($viewId).js",
-      lineNumber: 106,
+      fileName: "app/routes/__dama/source/$sourceId.($page).js",
+      lineNumber: 96,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime69.jsxDEV)(
@@ -9678,24 +9669,24 @@ function Dama() {
       void 0,
       !1,
       {
-        fileName: "app/routes/__dama/source/$sourceId.($page).($viewId).js",
-        lineNumber: 109,
+        fileName: "app/routes/__dama/source/$sourceId.($page).js",
+        lineNumber: 99,
         columnNumber: 9
       },
       this
     ),
     /* @__PURE__ */ (0, import_jsx_dev_runtime69.jsxDEV)("div", { className: "w-full p-4 bg-white shadow mb-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime69.jsxDEV)(Page, { source, views, user, meta: meta2 }, void 0, !1, {
-      fileName: "app/routes/__dama/source/$sourceId.($page).($viewId).js",
-      lineNumber: 120,
+      fileName: "app/routes/__dama/source/$sourceId.($page).js",
+      lineNumber: 110,
       columnNumber: 11
     }, this) }, void 0, !1, {
-      fileName: "app/routes/__dama/source/$sourceId.($page).($viewId).js",
-      lineNumber: 119,
+      fileName: "app/routes/__dama/source/$sourceId.($page).js",
+      lineNumber: 109,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
-    fileName: "app/routes/__dama/source/$sourceId.($page).($viewId).js",
-    lineNumber: 105,
+    fileName: "app/routes/__dama/source/$sourceId.($page).js",
+    lineNumber: 95,
     columnNumber: 7
   }, this);
 }
@@ -9704,20 +9695,20 @@ function Dama() {
 var sourceId_exports = {};
 __export(sourceId_exports, {
   default: () => Popup,
-  loader: () => loader4
+  loader: () => loader5
 });
-var import_react79 = require("react");
-var import_react80 = require("@remix-run/react"), import_lodash28 = __toESM(require("lodash.get"));
+var import_react78 = require("react");
+var import_react79 = require("@remix-run/react"), import_lodash28 = __toESM(require("lodash.get"));
 var import_jsx_dev_runtime70 = require("react/jsx-dev-runtime");
-async function loader4({ params, request }) {
-  let { sourceId } = params, data2 = await falcor2.get(
+async function loader5({ params, request }) {
+  let { sourceId } = params, data = await falcor2.get(
     ["dama", pgEnv, "sources", "byId", sourceId, "dependents"],
     ["dama", pgEnv, "sources", "byId", sourceId, "attributes", ["display_name"]]
   );
   return {
     sourceId,
-    dependents: (0, import_lodash28.default)(data2, ["json", "dama", pgEnv, "sources", "byId", sourceId, "dependents"], []),
-    display_name: (0, import_lodash28.default)(data2, ["json", "dama", pgEnv, "sources", "byId", sourceId, "attributes", "display_name"], "")
+    dependents: (0, import_lodash28.default)(data, ["json", "dama", pgEnv, "sources", "byId", sourceId, "dependents"], []),
+    display_name: (0, import_lodash28.default)(data, ["json", "dama", pgEnv, "sources", "byId", sourceId, "attributes", "display_name"], "")
   };
 }
 var DeleteButton2 = ({ text, sourceId }) => /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)(
@@ -9735,7 +9726,7 @@ var DeleteButton2 = ({ text, sourceId }) => /* @__PURE__ */ (0, import_jsx_dev_r
     columnNumber: 5
   },
   this
-), LoadDependentViews = (data2, sourceId) => /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)(import_jsx_dev_runtime70.Fragment, { children: [
+), LoadDependentViews = (data, sourceId) => /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)(import_jsx_dev_runtime70.Fragment, { children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)("div", { className: "pb-4 flex justify-between", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)("label", { children: "The Source has following dependents:" }, void 0, !1, {
       fileName: "app/routes/__dama/source/delete/$sourceId.js",
@@ -9762,7 +9753,7 @@ var DeleteButton2 = ({ text, sourceId }) => /* @__PURE__ */ (0, import_jsx_dev_r
       lineNumber: 40,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)("div", { className: "border-t border-gray-200 px-4 py-5 sm:p-0 overflow-auto h-[700px]", children: /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: data2.map(
+    /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)("div", { className: "border-t border-gray-200 px-4 py-5 sm:p-0 overflow-auto h-[700px]", children: /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: data.map(
       (view, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)("div", { className: "py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6", children: ["view_id", "_created_timestamp", "_modified_timestamp"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 ", children: view[key] }, void 0, !1, {
         fileName: "app/routes/__dama/source/delete/$sourceId.js",
         lineNumber: 61,
@@ -9807,7 +9798,7 @@ var DeleteButton2 = ({ text, sourceId }) => /* @__PURE__ */ (0, import_jsx_dev_r
   columnNumber: 9
 }, this);
 function Popup() {
-  let { sourceId, dependents, display_name } = (0, import_react80.useLoaderData)();
+  let { sourceId, dependents, display_name } = (0, import_react79.useLoaderData)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)("div", { className: "w-full p-4 bg-white my-1 block border shadow", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)("div", { className: "pb-4 font-bold", children: [
       "Delete ",
@@ -9833,18 +9824,18 @@ function Popup() {
 var viewId_exports = {};
 __export(viewId_exports, {
   default: () => Popup2,
-  loader: () => loader5
+  loader: () => loader6
 });
-var import_react81 = require("react");
-var import_react82 = require("@remix-run/react"), import_lodash29 = __toESM(require("lodash.get"));
+var import_react80 = require("react");
+var import_react81 = require("@remix-run/react"), import_lodash29 = __toESM(require("lodash.get"));
 var import_jsx_dev_runtime71 = require("react/jsx-dev-runtime");
-async function loader5({ params, request }) {
-  let { viewId } = params, data2 = await falcor2.get(
+async function loader6({ params, request }) {
+  let { viewId } = params, data = await falcor2.get(
     ["dama", pgEnv, "views", "byId", viewId, "dependents"]
   );
   return {
     viewId,
-    dependents: (0, import_lodash29.default)(data2, ["json", "dama", pgEnv, "views", "byId", viewId, "dependents"], [])
+    dependents: (0, import_lodash29.default)(data, ["json", "dama", pgEnv, "views", "byId", viewId, "dependents"], [])
   };
 }
 var DeleteButton3 = ({ text, viewId }) => /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(
@@ -9862,7 +9853,7 @@ var DeleteButton3 = ({ text, viewId }) => /* @__PURE__ */ (0, import_jsx_dev_run
     columnNumber: 5
   },
   this
-), LoadDependentViews2 = (data2, viewId) => /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_jsx_dev_runtime71.Fragment, { children: [
+), LoadDependentViews2 = (data, viewId) => /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_jsx_dev_runtime71.Fragment, { children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "pb-4 flex justify-between", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("label", { children: "The View has following dependents:" }, void 0, !1, {
       fileName: "app/routes/__dama/view/delete/$viewId.js",
@@ -9889,7 +9880,7 @@ var DeleteButton3 = ({ text, viewId }) => /* @__PURE__ */ (0, import_jsx_dev_run
       lineNumber: 38,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "border-t border-gray-200 px-4 py-5 sm:p-0 overflow-auto h-[700px]", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: data2.map(
+    /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "border-t border-gray-200 px-4 py-5 sm:p-0 overflow-auto h-[700px]", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: data.map(
       (view, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6", children: ["view_id", "_created_timestamp", "_modified_timestamp"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 ", children: view[key] }, void 0, !1, {
         fileName: "app/routes/__dama/view/delete/$viewId.js",
         lineNumber: 59,
@@ -9934,7 +9925,7 @@ var DeleteButton3 = ({ text, viewId }) => /* @__PURE__ */ (0, import_jsx_dev_run
   columnNumber: 9
 }, this);
 function Popup2() {
-  let { viewId, dependents } = (0, import_react82.useLoaderData)();
+  let { viewId, dependents } = (0, import_react81.useLoaderData)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "w-full p-4 bg-white my-1 block border shadow", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "pb-4 font-bold", children: [
       "Delete ",
@@ -9961,13 +9952,13 @@ var create_exports = {};
 __export(create_exports, {
   default: () => sourceCreate
 });
-var import_react83 = require("react");
+var import_react82 = require("react");
 var import_lodash30 = __toESM(require("lodash.get"));
 var import_jsx_dev_runtime72 = require("react/jsx-dev-runtime");
 function sourceCreate() {
-  let [source, setSource] = (0, import_react83.useState)(
+  let [source, setSource] = (0, import_react82.useState)(
     Object.keys(SourceAttributes).filter((d) => !["source_id", "metadata", "statistics"].includes(d)).reduce((out, current) => (out[current] = "", out), {})
-  ), CreateComp = (0, import_react83.useMemo)(
+  ), CreateComp = (0, import_react82.useMemo)(
     () => (0, import_lodash30.default)(DataTypes, `[${source.type}].sourceCreate.component`, () => /* @__PURE__ */ (0, import_jsx_dev_runtime72.jsxDEV)("div", {}, void 0, !1, {
       fileName: "app/routes/__dama/source/create.js",
       lineNumber: 27,
@@ -10113,11 +10104,11 @@ var index_cat_exports = {};
 __export(index_cat_exports, {
   ErrorBoundary: () => ErrorBoundary,
   default: () => Dama2,
-  loader: () => loader6
+  loader: () => loader7
 });
-var import_react84 = require("react");
-var import_react85 = require("@remix-run/react"), import_lodash31 = __toESM(require("lodash.get")), import_jsx_dev_runtime73 = require("react/jsx-dev-runtime");
-async function loader6({ request }) {
+var import_react83 = require("react");
+var import_react84 = require("@remix-run/react"), import_lodash31 = __toESM(require("lodash.get")), import_jsx_dev_runtime73 = require("react/jsx-dev-runtime");
+async function loader7({ request }) {
   let lengthPath = ["dama", pgEnv, "sources", "length"], resp = await falcor2.get(lengthPath), sourceData = await falcor2.get([
     "dama",
     pgEnv,
@@ -10130,7 +10121,7 @@ async function loader6({ request }) {
   return Object.values((0, import_lodash31.default)(falcorCache, ["dama", pgEnv, "sources", "byIndex"], {})).map((v) => getAttributes((0, import_lodash31.default)(falcorCache, v.value, { attributes: {} }).attributes));
 }
 function Dama2() {
-  let [layerSearch, setLayerSearch] = (0, import_react84.useState)(""), sources = (0, import_react85.useLoaderData)();
+  let [layerSearch, setLayerSearch] = (0, import_react83.useState)(""), sources = (0, import_react84.useLoaderData)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { className: "py-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(
       "input",
@@ -10172,7 +10163,7 @@ function Dama2() {
   }, this);
 }
 var SourceThumb = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { className: "w-full p-4 bg-white my-1 hover:bg-blue-50 block border shadow flex", children: [
-  /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(import_react85.Link, { to: `/source/${source.source_id}`, className: "text-xl font-medium w-full block", children: /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("span", { children: source.name }, void 0, !1, {
+  /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(import_react84.Link, { to: `/source/${source.source_id}`, className: "text-xl font-medium w-full block", children: /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("span", { children: source.name }, void 0, !1, {
     fileName: "app/routes/__dama/index.(cat).js",
     lineNumber: 56,
     columnNumber: 17
@@ -10182,7 +10173,7 @@ var SourceThumb = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime73.j
     columnNumber: 13
   }, this),
   /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { children: ((0, import_lodash31.default)(source, "categories", []) || []).map((cat) => cat.map((s, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(
-    import_react85.Link,
+    import_react84.Link,
     {
       to: `/cat/${i > 0 ? cat[i - 1] + "/" : ""}${s}`,
       className: "text-xs p-1 px-2 bg-blue-200 text-blue-600 mr-2",
@@ -10201,18 +10192,18 @@ var SourceThumb = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime73.j
     lineNumber: 58,
     columnNumber: 13
   }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(import_react85.Link, { to: `/source/${source.source_id}`, className: "py-2 block", children: source.description }, void 0, !1, {
+  /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(import_react84.Link, { to: `/source/${source.source_id}`, className: "py-2 block", children: source.description }, void 0, !1, {
     fileName: "app/routes/__dama/index.(cat).js",
     lineNumber: 66,
     columnNumber: 13
   }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(import_react85.Link, { to: `/source/${source.source_id}`, className: "py-2 block", children: source._created_timestamp }, void 0, !1, {
+  /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(import_react84.Link, { to: `/source/${source.source_id}`, className: "py-2 block", children: source._created_timestamp }, void 0, !1, {
     fileName: "app/routes/__dama/index.(cat).js",
     lineNumber: 69,
     columnNumber: 13
   }, this),
   /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(
-    import_react85.Link,
+    import_react84.Link,
     {
       className: "bg-red-50 hover:bg-red-400 hover:text-white p-2",
       to: `/source/delete/${source.source_id}`,
@@ -10265,16 +10256,16 @@ function ErrorBoundary({ error }) {
 var dms_exports = {};
 __export(dms_exports, {
   default: () => Index3,
-  loader: () => loader7
+  loader: () => loader8
 });
-var import_react86 = require("@remix-run/react");
+var import_react85 = require("@remix-run/react");
 var import_jsx_dev_runtime74 = require("react/jsx-dev-runtime");
-async function loader7({ request }) {
+async function loader8({ request }) {
   return await checkAuth(request);
 }
 function Index3() {
-  let user = (0, import_react86.useLoaderData)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "bg-gray-100 px-4 text-gray-500 min-h-screen", children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(import_react86.Outlet, {}, void 0, !1, {
+  let user = (0, import_react85.useLoaderData)();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "bg-gray-100 px-4 text-gray-500 min-h-screen", children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(import_react85.Outlet, {}, void 0, !1, {
     fileName: "app/routes/__dms.jsx",
     lineNumber: 20,
     columnNumber: 9
@@ -10296,10 +10287,10 @@ __export(blog_config_exports, {
 });
 
 // app/modules/dms/components/table.js
-var import_react88 = require("@remix-run/react"), import_react89 = require("react");
+var import_react87 = require("@remix-run/react"), import_react88 = require("react");
 
 // app/modules/dms/theme/index.js
-var import_react87 = __toESM(require("react"));
+var import_react86 = __toESM(require("react"));
 
 // app/modules/dms/theme/default-theme.js
 function defaultTheme() {
@@ -10328,21 +10319,21 @@ function defaultTheme() {
 var default_theme_default = defaultTheme();
 
 // app/modules/dms/theme/index.js
-var ThemeContext2 = import_react87.default.createContext(default_theme_default), useTheme2 = () => (0, import_react87.useContext)(ThemeContext2), theme_default2 = ThemeContext2;
+var ThemeContext2 = import_react86.default.createContext(default_theme_default), useTheme2 = () => (0, import_react86.useContext)(ThemeContext2), theme_default2 = ThemeContext2;
 
 // app/modules/dms/components/table.js
 var import_lodash32 = __toESM(require("lodash.get")), import_jsx_dev_runtime75 = require("react/jsx-dev-runtime");
-function replaceVars(url, data2) {
+function replaceVars(url, data) {
   var regex = /:(\w+)/g;
   return url.replace(regex, function(match, p1) {
-    return data2[p1] || ":" + p1;
+    return data[p1] || ":" + p1;
   });
 }
 var ColumnTypes = {
-  data: function({ data: data2, column, className, key }) {
+  data: function({ data, column, className, key }) {
     return /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("td", { className, children: [
       " ",
-      (0, import_lodash32.default)(data2, [column.path], "").toString(),
+      (0, import_lodash32.default)(data, [column.path], "").toString(),
       " "
     ] }, key, !0, {
       fileName: "app/modules/dms/components/table.js",
@@ -10350,10 +10341,10 @@ var ColumnTypes = {
       columnNumber: 10
     }, this);
   },
-  date: function({ data: data2, column, className, key }) {
+  date: function({ data, column, className, key }) {
     return /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("td", { className, children: [
       " ",
-      new Date(data2[column.path]).toLocaleString(),
+      new Date(data[column.path]).toLocaleString(),
       " "
     ] }, key, !0, {
       fileName: "app/modules/dms/components/table.js",
@@ -10361,8 +10352,8 @@ var ColumnTypes = {
       columnNumber: 10
     }, this);
   },
-  link: function({ data: data2, column, className, key }) {
-    return /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("td", { className, children: /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)(import_react88.Link, { to: replaceVars(column.to, data2), children: replaceVars(column.text, data2) }, void 0, !1, {
+  link: function({ data, column, className, key }) {
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("td", { className, children: /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)(import_react87.Link, { to: replaceVars(column.to, data), children: replaceVars(column.text, data) }, void 0, !1, {
       fileName: "app/modules/dms/components/table.js",
       lineNumber: 23,
       columnNumber: 5
@@ -10373,9 +10364,9 @@ var ColumnTypes = {
     }, this);
   }
 };
-function TableColumn({ data: data2, column, className }) {
+function TableColumn({ data, column, className }) {
   let Column = (0, import_lodash32.default)(ColumnTypes, [column.type], ColumnTypes.data);
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)(Column, { data: data2, column, className }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)(Column, { data, column, className }, void 0, !1, {
     fileName: "app/modules/dms/components/table.js",
     lineNumber: 33,
     columnNumber: 9
@@ -10439,15 +10430,15 @@ function Table12({ dataItems = [], attributes = {}, options = {} }) {
 }
 
 // app/routes/__dms/blog/blog.config.js
-var import_react90 = require("@remix-run/react");
+var import_react89 = require("@remix-run/react");
 var import_jsx_dev_runtime76 = require("react/jsx-dev-runtime"), BlogLayout = ({ children, user }) => /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("div", { children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("div", { className: "flex p-2 text-gray-800 border-b w-full", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(import_react90.NavLink, { to: "/blog", className: "p-4", children: "Home" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(import_react89.NavLink, { to: "/blog", className: "p-4", children: "Home" }, void 0, !1, {
       fileName: "app/routes/__dms/blog/blog.config.js",
       lineNumber: 8,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(import_react90.NavLink, { to: "/blog/admin", className: "p-4", children: "Admin" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(import_react89.NavLink, { to: "/blog/admin", className: "p-4", children: "Admin" }, void 0, !1, {
       fileName: "app/routes/__dms/blog/blog.config.js",
       lineNumber: 9,
       columnNumber: 7
@@ -10480,7 +10471,7 @@ var import_jsx_dev_runtime76 = require("react/jsx-dev-runtime"), BlogLayout = ({
   lineNumber: 6,
   columnNumber: 3
 }, this), BlogAdmin = (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("div", { children: [
-  /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(import_react90.Link, { to: "/blog/new", className: "p-4 border", children: " New Post " }, void 0, !1, {
+  /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(import_react89.Link, { to: "/blog/new", className: "p-4 border", children: " New Post " }, void 0, !1, {
     fileName: "app/routes/__dms/blog/blog.config.js",
     lineNumber: 23,
     columnNumber: 7
@@ -10644,7 +10635,7 @@ __export(site_config_exports, {
   pageSection: () => pageSection,
   siteConfig: () => siteConfig
 });
-var import_react91 = require("@remix-run/react");
+var import_react90 = require("@remix-run/react");
 var import_jsx_dev_runtime77 = require("react/jsx-dev-runtime"), pageSection = {
   app: "dms-remix",
   type: "page-section",
@@ -10731,7 +10722,7 @@ var import_jsx_dev_runtime77 = require("react/jsx-dev-runtime"), pageSection = {
   ]
 }, SiteLayout = ({ children, user }) => /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)("div", { children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)("div", { className: "flex p-2 text-gray-800 border-b w-full", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)(import_react91.NavLink, { to: "/site", className: "p-4", children: "Home" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)(import_react90.NavLink, { to: "/site", className: "p-4", children: "Home" }, void 0, !1, {
       fileName: "app/routes/__dms/site/site.config.js",
       lineNumber: 98,
       columnNumber: 7
@@ -10764,7 +10755,7 @@ var import_jsx_dev_runtime77 = require("react/jsx-dev-runtime"), pageSection = {
   lineNumber: 96,
   columnNumber: 3
 }, this), SiteAdmin = (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)("div", { children: [
-  /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)("div", { className: "w-full p-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)(import_react91.Link, { to: "/site/new", className: "p-2 bg-blue-500 shadow text-gray-100", children: " New Page " }, void 0, !1, {
+  /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)("div", { className: "w-full p-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)(import_react90.Link, { to: "/site/new", className: "p-2 bg-blue-500 shadow text-gray-100", children: " New Page " }, void 0, !1, {
     fileName: "app/routes/__dms/site/site.config.js",
     lineNumber: 112,
     columnNumber: 7
@@ -10873,17 +10864,17 @@ var import_jsx_dev_runtime77 = require("react/jsx-dev-runtime"), pageSection = {
 var __exports = {};
 __export(__exports, {
   ErrorBoundary: () => ErrorBoundary2,
-  action: () => action4,
+  action: () => action3,
   default: () => DMS,
-  loader: () => loader8
+  loader: () => loader9
 });
-var import_react128 = require("react"), import_react129 = require("@remix-run/react");
+var import_react127 = require("react"), import_react128 = require("@remix-run/react");
 
 // app/modules/dms/wrappers/edit.js
-var import_react95 = __toESM(require("react")), import_react96 = require("@remix-run/react");
+var import_react94 = __toESM(require("react")), import_react95 = require("@remix-run/react");
 
 // app/modules/dms/data-types/text.js
-var import_react92 = require("react"), import_jsx_dev_runtime78 = require("react/jsx-dev-runtime"), Edit3 = ({ value, onChange }) => /* @__PURE__ */ (0, import_jsx_dev_runtime78.jsxDEV)(
+var import_react91 = require("react"), import_jsx_dev_runtime78 = require("react/jsx-dev-runtime"), Edit3 = ({ value, onChange }) => /* @__PURE__ */ (0, import_jsx_dev_runtime78.jsxDEV)(
   "input",
   {
     value,
@@ -10907,7 +10898,7 @@ var import_react92 = require("react"), import_jsx_dev_runtime78 = require("react
 };
 
 // app/modules/dms/data-types/textarea.js
-var import_react93 = require("react");
+var import_react92 = require("react");
 var import_lodash33 = __toESM(require("lodash.get")), import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), Edit4 = ({ value, onChange }) => /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)(
   "textarea",
   {
@@ -10935,7 +10926,7 @@ var import_lodash33 = __toESM(require("lodash.get")), import_jsx_dev_runtime79 =
 };
 
 // app/modules/dms/data-types/boolean.js
-var import_react94 = require("react"), import_jsx_dev_runtime80 = require("react/jsx-dev-runtime"), Edit5 = ({ value, onChange }) => /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
+var import_react93 = require("react"), import_jsx_dev_runtime80 = require("react/jsx-dev-runtime"), Edit5 = ({ value, onChange }) => /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
   "select",
   {
     value,
@@ -11006,8 +10997,8 @@ function getAttributes5(format, options, mode = "") {
 // app/modules/dms/wrappers/edit.js
 var import_lodash36 = require("lodash.get"), import_jsx_dev_runtime81 = require("react/jsx-dev-runtime");
 function EditWrapper({ Component, format, options, params, ...props }) {
-  let attributes = getAttributes5(format, options, "edit"), { "*": path } = (0, import_react96.useParams)(), pathParams = getParams(params, path), { data: data2, user } = (0, import_react96.useLoaderData)(), status = (0, import_react96.useActionData)(), [item, setItem] = import_react95.default.useState(
-    data2.filter((d) => filterParams(d, pathParams))[0] || {}
+  let attributes = getAttributes5(format, options, "edit"), { "*": path } = (0, import_react95.useParams)(), pathParams = getParams(params, path), { data, user } = (0, import_react95.useLoaderData)(), status = (0, import_react95.useActionData)(), [item, setItem] = import_react94.default.useState(
+    data.filter((d) => filterParams(d, pathParams))[0] || {}
   );
   return /* @__PURE__ */ (0, import_jsx_dev_runtime81.jsxDEV)("div", { className: "border border-green-300", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime81.jsxDEV)("div", { className: "text-xs", children: "Edit Wrapper" }, void 0, !1, {
@@ -11057,10 +11048,10 @@ function EditWrapper({ Component, format, options, params, ...props }) {
 }
 
 // app/modules/dms/wrappers/list.js
-var import_react97 = require("react"), import_react98 = require("@remix-run/react");
+var import_react96 = require("react"), import_react97 = require("@remix-run/react");
 var import_jsx_dev_runtime82 = require("react/jsx-dev-runtime");
 function ListWrapper({ Component, format, options, ...props }) {
-  let attributes = getAttributes5(format, options), { data: data2, user } = (0, import_react98.useLoaderData)();
+  let attributes = getAttributes5(format, options), { data, user } = (0, import_react97.useLoaderData)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: "border border-green-300", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: "text-xs", children: "List Wrapper" }, void 0, !1, {
       fileName: "app/modules/dms/wrappers/list.js",
@@ -11073,7 +11064,7 @@ function ListWrapper({ Component, format, options, ...props }) {
         ...props,
         format,
         attributes,
-        dataItems: data2,
+        dataItems: data,
         options,
         user
       },
@@ -11094,10 +11085,10 @@ function ListWrapper({ Component, format, options, ...props }) {
 }
 
 // app/modules/dms/wrappers/view.js
-var import_react99 = require("react"), import_react100 = require("@remix-run/react");
+var import_react98 = require("react"), import_react99 = require("@remix-run/react");
 var import_jsx_dev_runtime83 = require("react/jsx-dev-runtime");
 function ViewWrapper({ Component, format, options, ...props }) {
-  let attributes = getAttributes5(format, options), { data: data2, user } = (0, import_react100.useLoaderData)();
+  let attributes = getAttributes5(format, options), { data, user } = (0, import_react99.useLoaderData)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)("div", { className: "border border-green-300", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)("div", { children: "View Wrapper" }, void 0, !1, {
       fileName: "app/modules/dms/wrappers/view.js",
@@ -11110,7 +11101,7 @@ function ViewWrapper({ Component, format, options, ...props }) {
         ...props,
         format,
         attributes,
-        item: data2[0],
+        item: data[0],
         options,
         user
       },
@@ -11131,7 +11122,7 @@ function ViewWrapper({ Component, format, options, ...props }) {
 }
 
 // app/modules/dms/wrappers/error.js
-var import_react101 = require("react"), import_react102 = require("@remix-run/react");
+var import_react100 = require("react"), import_react101 = require("@remix-run/react");
 var import_jsx_dev_runtime84 = require("react/jsx-dev-runtime");
 function ErrorWrapper({ Component, format, options, ...props }) {
   let attributes = getAttributes5(format, options);
@@ -11176,7 +11167,7 @@ var wrappers_default = {
 };
 
 // app/modules/dms/components/dev-info.js
-var import_react103 = require("react"), import_jsx_dev_runtime85 = require("react/jsx-dev-runtime");
+var import_react102 = require("react"), import_jsx_dev_runtime85 = require("react/jsx-dev-runtime");
 function DevInfo(props) {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime85.jsxDEV)("div", { children: "404 - Config not found" }, void 0, !1, {
     fileName: "app/modules/dms/components/dev-info.js",
@@ -11186,10 +11177,10 @@ function DevInfo(props) {
 }
 
 // app/modules/dms/components/landing.js
-var import_react105 = require("react");
+var import_react104 = require("react");
 
 // app/modules/dms/components/card.js
-var import_react104 = require("react");
+var import_react103 = require("react");
 var import_lodash37 = __toESM(require("lodash.get")), import_jsx_dev_runtime86 = require("react/jsx-dev-runtime");
 function Card({ item, attributes }) {
   let theme = useTheme2();
@@ -11253,7 +11244,7 @@ function Landing({ dataItems = [], attributes }) {
 }
 
 // app/modules/dms/components/edit.js
-var import_react106 = require("react");
+var import_react105 = require("react");
 var import_lodash38 = __toESM(require("lodash.get")), import_jsx_dev_runtime88 = require("react/jsx-dev-runtime");
 function Card2({ item, updateAttribute, attributes, status }) {
   let theme = useTheme2();
@@ -11319,10 +11310,10 @@ var components_default = {
 
 // app/modules/dms/dms-manager/utils.js
 var import_jsx_dev_runtime89 = require("react/jsx-dev-runtime"), DefaultComponent = components_default.devinfo, DefaultWrapper = wrappers_default.error;
-function filterParams(data2, params) {
+function filterParams(data, params) {
   let filter = !1;
   return Object.keys(params).forEach((k) => {
-    data2[k] == params[k] ? filter = !0 : filter = !1;
+    data[k] == params[k] ? filter = !0 : filter = !1;
   }), filter;
 }
 function configMatcher(config, path, depth) {
@@ -11387,15 +11378,15 @@ async function dmsDataLoader(config, path = "/") {
     {}
   )).filter((d) => d.id).map((d) => (d.data.id = d.id, d.data.updated_at = d.updated_at, d.data.created_at = d.created_at, attributeFilter.length ? attributeFilter.reduce((out, attr) => (out[attr] = d.data[attr], out), {}) : d.data)) : [];
 }
-async function dmsDataEditor(config, data2, path = "/") {
-  let { app, type } = config.format, { id: id2 } = data2, attributeKeys = Object.keys(data2).filter((k) => !["id", "updated_at", "created_at"].includes(k)), activeConfig = getActiveConfig(config.children, path), updateData = attributeKeys.reduce((out, key) => (out[key] = data2[key], out), {});
+async function dmsDataEditor(config, data, path = "/") {
+  let { app, type } = config.format, { id: id2 } = data, attributeKeys = Object.keys(data).filter((k) => !["id", "updated_at", "created_at"].includes(k)), activeConfig = getActiveConfig(config.children, path), updateData = attributeKeys.reduce((out, key) => (out[key] = data[key], out), {});
   if (console.log("dmsDataEditor", id2, attributeKeys, updateData), id2 && attributeKeys.length > 0) {
-    let update = await falcor2.call(["dms", "data", "edit"], [id2, data2]);
+    let update = await falcor2.call(["dms", "data", "edit"], [id2, data]);
     return { message: "Update successful." };
   } else if (attributeKeys.length > 0) {
     let newData = await falcor2.call(
       ["dms", "data", "create"],
-      [app, type, data2]
+      [app, type, data]
     );
     return console.log("newData", newData), (0, import_node4.redirect)(activeConfig.redirect || "/");
   }
@@ -11403,10 +11394,10 @@ async function dmsDataEditor(config, data2, path = "/") {
 }
 
 // app/modules/dms/dms-manager/index.js
-var import_react108 = __toESM(require("react"));
+var import_react107 = __toESM(require("react"));
 
 // app/modules/dms/dms-manager/messages.js
-var import_react107 = require("react"), import_jsx_dev_runtime90 = require("react/jsx-dev-runtime");
+var import_react106 = require("react"), import_jsx_dev_runtime90 = require("react/jsx-dev-runtime");
 function InvalidConfig({ config }) {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime90.jsxDEV)("div", { children: [
     " Invalid DMS Config :",
@@ -11456,7 +11447,7 @@ var import_jsx_dev_runtime91 = require("react/jsx-dev-runtime"), DmsManager = ({
       lineNumber: 15,
       columnNumber: 10
     }, this);
-  let enhancedFormat = import_react108.default.useMemo(
+  let enhancedFormat = import_react107.default.useMemo(
     () => enhanceFormat(config.format),
     [config.format]
   ), RenderView = getActiveView(config.children, path, enhancedFormat);
@@ -11472,14 +11463,14 @@ var import_jsx_dev_runtime91 = require("react/jsx-dev-runtime"), DmsManager = ({
 }, dms_manager_default = DmsManager;
 
 // app/modules/dms-custom/draft/index.js
-var import_react127 = require("react"), import_lodash42 = require("lodash.get");
+var import_react126 = require("react"), import_lodash42 = require("lodash.get");
 
 // app/modules/dms-custom/draft/editor/index.js
-var import_react125 = __toESM(require("react"));
+var import_react124 = __toESM(require("react"));
 
 // app/modules/dms-custom/draft/editor/utils/img-loader.js
-var import_react109 = __toESM(require("react")), import_jsx_dev_runtime92 = require("react/jsx-dev-runtime"), img_loader_default = (Component, options = {}) => {
-  class ImgLoaderWrapper extends import_react109.default.Component {
+var import_react108 = __toESM(require("react")), import_jsx_dev_runtime92 = require("react/jsx-dev-runtime"), img_loader_default = (Component, options = {}) => {
+  class ImgLoaderWrapper extends import_react108.default.Component {
     state = {
       loading: !1,
       message: ""
@@ -11505,9 +11496,9 @@ var import_react109 = __toESM(require("react")), import_jsx_dev_runtime92 = requ
         });
       }).then(({ url }) => (this.setState({ loading: !1 }), { url, filename }));
     }
-    editImage(src, filename, action6, args) {
+    editImage(src, filename, action5, args) {
       return this.setState({ loading: !0 }), new Promise((resolve) => {
-        fetch(`${this.props.imgUploadUrl}/edit/${filename}/${action6}/${args}`, {
+        fetch(`${this.props.imgUploadUrl}/edit/${filename}/${action5}/${args}`, {
           method: "POST",
           body: JSON.stringify({ src: encodeURI(src) }),
           headers: {
@@ -11555,7 +11546,7 @@ var import_react109 = __toESM(require("react")), import_jsx_dev_runtime92 = requ
       );
     }
   }
-  return import_react109.default.forwardRef((props, ref) => /* @__PURE__ */ (0, import_jsx_dev_runtime92.jsxDEV)(ImgLoaderWrapper, { ...props, forwardRef: ref }, void 0, !1, {
+  return import_react108.default.forwardRef((props, ref) => /* @__PURE__ */ (0, import_jsx_dev_runtime92.jsxDEV)(ImgLoaderWrapper, { ...props, forwardRef: ref }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/utils/img-loader.js",
     lineNumber: 113,
     columnNumber: 43
@@ -11563,7 +11554,7 @@ var import_react109 = __toESM(require("react")), import_jsx_dev_runtime92 = requ
 };
 
 // app/modules/dms-custom/draft/editor/utils/show-loading.js
-var import_react110 = __toESM(require("react")), import_jsx_dev_runtime93 = require("react/jsx-dev-runtime"), Loader = ({ color }) => /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)("svg", { width: "100", height: "100", children: [
+var import_react109 = __toESM(require("react")), import_jsx_dev_runtime93 = require("react/jsx-dev-runtime"), Loader = ({ color }) => /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)("svg", { width: "100", height: "100", children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)("path", { fill: color, d: `M31.6,3.5C5.9,13.6-6.6,42.7,3.5,68.4c10.1,25.7,39.2,38.3,64.9,28.1l-3.1-7.9c-21.3,8.4-45.4-2-53.8-23.3
     c-8.4-21.3,2-45.4,23.3-53.8L31.6,3.5z`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)(
     "animateTransform",
@@ -11672,7 +11663,7 @@ var import_react110 = __toESM(require("react")), import_jsx_dev_runtime93 = requ
   }, this);
 }, show_loading_default = (Component, options = {}) => {
   let { position = "fixed" } = options;
-  return import_react110.default.forwardRef(({ children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)(import_jsx_dev_runtime93.Fragment, { children: [
+  return import_react109.default.forwardRef(({ children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)(import_jsx_dev_runtime93.Fragment, { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)(Component, { ...props, ref, children: [
       children,
       !props.loading || position !== "absolute" ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)(LoadingComponent, { ...options }, void 0, !1, {
@@ -11695,7 +11686,7 @@ var import_react110 = __toESM(require("react")), import_jsx_dev_runtime93 = requ
     lineNumber: 64,
     columnNumber: 5
   }, this));
-}, LoadingComponent = import_react110.default.memo(
+}, LoadingComponent = import_react109.default.memo(
   ({ color, position = "fixed", className = "", scale = 1 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)("div", { className: `
     ${position} left-0 top-0 right-0 bottom-0
     flex justify-center items-center z-50 bg-black opacity-50
@@ -11718,10 +11709,10 @@ var import_draft_js9 = require("draft-js"), import_editor = __toESM(require("@dr
 var import_immutable = __toESM(require("immutable"));
 
 // app/modules/dms-custom/draft/editor/buttons/makeBlockDataButton.js
-var import_react113 = require("react"), import_draft_js = require("draft-js");
+var import_react112 = require("react"), import_draft_js = require("draft-js");
 
 // app/modules/dms-custom/draft/editor/buttons/button.js
-var import_react111 = require("react"), import_jsx_dev_runtime94 = require("react/jsx-dev-runtime"), EditorButton = ({ active, disabled, children, ...props }) => /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)(
+var import_react110 = require("react"), import_jsx_dev_runtime94 = require("react/jsx-dev-runtime"), EditorButton = ({ active, disabled, children, ...props }) => /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)(
   "button",
   {
     ...props,
@@ -11742,7 +11733,7 @@ var import_react111 = require("react"), import_jsx_dev_runtime94 = require("reac
 ), button_default = EditorButton;
 
 // app/modules/dms-custom/draft/editor/buttons/icons.js
-var import_react112 = require("react"), import_jsx_dev_runtime95 = require("react/jsx-dev-runtime"), Text = ({ children }) => /* @__PURE__ */ (0, import_jsx_dev_runtime95.jsxDEV)("div", { className: "px-1 font-serif font-semibold", style: { fontSize: "1.25em" }, children }, void 0, !1, {
+var import_react111 = require("react"), import_jsx_dev_runtime95 = require("react/jsx-dev-runtime"), Text = ({ children }) => /* @__PURE__ */ (0, import_jsx_dev_runtime95.jsxDEV)("div", { className: "px-1 font-serif font-semibold", style: { fontSize: "1.25em" }, children }, void 0, !1, {
   fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
   lineNumber: 4,
   columnNumber: 3
@@ -11950,18 +11941,18 @@ var import_jsx_dev_runtime96 = require("react/jsx-dev-runtime"), makeBlockDataBu
 }, makeBlockDataButton_default = makeBlockDataButton;
 
 // app/modules/dms-custom/draft/editor/buttons/makeDataRangeButton.js
-var import_react114 = __toESM(require("react")), import_draft_js2 = require("draft-js");
+var import_react113 = __toESM(require("react")), import_draft_js2 = require("draft-js");
 var import_jsx_dev_runtime97 = require("react/jsx-dev-runtime"), makeDataRangeButton = (dataType, buttonType, store, shift, max, min = 0) => () => {
   let {
     getEditorState,
     setEditorState
-  } = store, editorState = getEditorState(), getStartData = import_react114.default.useCallback(
+  } = store, editorState = getEditorState(), getStartData = import_react113.default.useCallback(
     (contentState) => contentState.getBlockForKey(editorState.getSelection().getStartKey()).getData(),
     [editorState]
-  ), isDisabled = import_react114.default.useCallback(() => {
-    let data2 = getStartData(editorState.getCurrentContent()), value = data2.get(dataType) || 0;
+  ), isDisabled = import_react113.default.useCallback(() => {
+    let data = getStartData(editorState.getCurrentContent()), value = data.get(dataType) || 0;
     return value + shift < min || value + shift > max;
-  }, [getStartData, editorState]), click = import_react114.default.useCallback((e) => {
+  }, [getStartData, editorState]), click = import_react113.default.useCallback((e) => {
     e.preventDefault();
     let contentState = editorState.getCurrentContent(), selectionState = editorState.getSelection(), blockData = getStartData(contentState), value = blockData.get(dataType) || min;
     value = Math.max(min, Math.min(max, value + shift));
@@ -11985,7 +11976,7 @@ var import_jsx_dev_runtime97 = require("react/jsx-dev-runtime"), makeDataRangeBu
 }, makeDataRangeButton_default = makeDataRangeButton;
 
 // app/modules/dms-custom/draft/editor/buttons/makeBlockStyleButton.js
-var import_react115 = require("react"), import_draft_js3 = require("draft-js");
+var import_react114 = require("react"), import_draft_js3 = require("draft-js");
 var import_jsx_dev_runtime98 = require("react/jsx-dev-runtime"), makeBlockStyleButton = (buttonType, store) => () => {
   let {
     getEditorState,
@@ -12014,7 +12005,7 @@ var import_jsx_dev_runtime98 = require("react/jsx-dev-runtime"), makeBlockStyleB
 }, makeBlockStyleButton_default = makeBlockStyleButton;
 
 // app/modules/dms-custom/draft/editor/buttons/makeInlineStyleButton.js
-var import_react116 = require("react"), import_draft_js4 = require("draft-js");
+var import_react115 = require("react"), import_draft_js4 = require("draft-js");
 var import_jsx_dev_runtime99 = require("react/jsx-dev-runtime"), makeInlineStyleButton = (buttonType, store) => () => {
   let {
     getEditorState,
@@ -12071,7 +12062,7 @@ var ButtonsPlugin = () => {
 }, buttons_default = ButtonsPlugin;
 
 // app/modules/dms-custom/draft/editor/toolbar/index.js
-var import_react117 = require("react"), import_jsx_dev_runtime100 = require("react/jsx-dev-runtime"), Separator = ({ ...props }) => /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)("div", { className: "border-r border-l mx-2 border-current", style: { borderColor: "currentColor" } }, void 0, !1, {
+var import_react116 = require("react"), import_jsx_dev_runtime100 = require("react/jsx-dev-runtime"), Separator = ({ ...props }) => /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)("div", { className: "border-r border-l mx-2 border-current", style: { borderColor: "currentColor" } }, void 0, !1, {
   fileName: "app/modules/dms-custom/draft/editor/toolbar/index.js",
   lineNumber: 5,
   columnNumber: 3
@@ -12098,10 +12089,10 @@ var import_react117 = require("react"), import_jsx_dev_runtime100 = require("rea
 }, toolbar_default = ToolbarPlugin;
 
 // app/modules/dms-custom/draft/editor/image/index.js
-var import_react118 = __toESM(require("react")), import_draft_js5 = require("draft-js"), import_jsx_dev_runtime101 = require("react/jsx-dev-runtime"), ImagePlugin = (options = {}) => {
+var import_react117 = __toESM(require("react")), import_draft_js5 = require("draft-js"), import_jsx_dev_runtime101 = require("react/jsx-dev-runtime"), ImagePlugin = (options = {}) => {
   let {
     wrappers = []
-  } = options, ImageBlock = import_react118.default.forwardRef(
+  } = options, ImageBlock = import_react117.default.forwardRef(
     ({ blockProps, compProps }, ref) => /* @__PURE__ */ (0, import_jsx_dev_runtime101.jsxDEV)("img", { src: blockProps.src, ...compProps, ref, alt: "" }, blockProps.key, !1, {
       fileName: "app/modules/dms-custom/draft/editor/image/index.js",
       lineNumber: 11,
@@ -12152,7 +12143,7 @@ var import_react118 = __toESM(require("react")), import_draft_js5 = require("dra
 }, image_default = ImagePlugin;
 
 // app/modules/dms-custom/draft/editor/linkify-it/index.js
-var import_react119 = require("react"), import_linkify_it = __toESM(require("linkify-it")), import_tlds = __toESM(require("tlds")), import_jsx_dev_runtime102 = require("react/jsx-dev-runtime"), linkify = (0, import_linkify_it.default)().tlds(import_tlds.default).add("ftp", null).set({ fuzzyIP: !0 }), Link15 = ({ store, options, decoratedText, children, ...props }) => {
+var import_react118 = require("react"), import_linkify_it = __toESM(require("linkify-it")), import_tlds = __toESM(require("tlds")), import_jsx_dev_runtime102 = require("react/jsx-dev-runtime"), linkify = (0, import_linkify_it.default)().tlds(import_tlds.default).add("ftp", null).set({ fuzzyIP: !0 }), Link15 = ({ store, options, decoratedText, children, ...props }) => {
   let links2 = linkify.match(decoratedText), href = links2 && links2.pop().url, {
     target = "_blank"
   } = options;
@@ -12239,7 +12230,7 @@ var import_react119 = require("react"), import_linkify_it = __toESM(require("lin
 }, linkify_it_default = linkifyitPlugin;
 
 // app/modules/dms-custom/draft/editor/super-sub-script/index.js
-var import_react120 = require("react"), import_jsx_dev_runtime103 = require("react/jsx-dev-runtime"), makeStrategy = (script) => (contentBlock, callback, contentState) => {
+var import_react119 = require("react"), import_jsx_dev_runtime103 = require("react/jsx-dev-runtime"), makeStrategy = (script) => (contentBlock, callback, contentState) => {
   let characterList = contentBlock.getCharacterList(), start = null;
   characterList.forEach((c, i) => {
     let hasStyle = c.hasStyle(script);
@@ -12270,10 +12261,10 @@ var import_react120 = require("react"), import_jsx_dev_runtime103 = require("rea
 var import_draft_js6 = require("draft-js");
 
 // app/modules/dms-custom/draft/editor/positionable/wrapper.js
-var import_react122 = __toESM(require("react")), import_lodash40 = __toESM(require("lodash.throttle"));
+var import_react121 = __toESM(require("react")), import_lodash40 = __toESM(require("lodash.throttle"));
 
 // app/modules/dms-custom/draft/editor/utils/index.js
-var import_react121 = __toESM(require("react")), combineCompProps = (...props) => props.reduce((a, c) => {
+var import_react120 = __toESM(require("react")), combineCompProps = (...props) => props.reduce((a, c) => {
   for (let key in c)
     if (!(key in a))
       a[key] = c[key];
@@ -12298,7 +12289,7 @@ var import_react121 = __toESM(require("react")), combineCompProps = (...props) =
           break;
       }
   return a;
-}, {}), useSetRefs2 = (...refs) => import_react121.default.useCallback((node) => {
+}, {}), useSetRefs2 = (...refs) => import_react120.default.useCallback((node) => {
   [...refs].forEach((ref) => {
     !ref || (typeof ref == "function" ? ref(node) : ref.current = node);
   });
@@ -12422,7 +12413,7 @@ var import_jsx_dev_runtime104 = require("react/jsx-dev-runtime"), POSITIONS = ["
     },
     this
   )
-], positionableWrapper = (store) => (Component) => import_react122.default.forwardRef(({ compProps = {}, ...props }, ref) => {
+], positionableWrapper = (store) => (Component) => import_react121.default.forwardRef(({ compProps = {}, ...props }, ref) => {
   let {
     block,
     contentState,
@@ -12432,7 +12423,7 @@ var import_jsx_dev_runtime104 = require("react/jsx-dev-runtime"), POSITIONS = ["
     position
   } = blockProps, handleClick = (e, p) => {
     e.preventDefault(), p !== position && (adjustPosition(block, contentState, p), setDisplay("none"));
-  }, figRef = import_react122.default.useRef(), compRef = import_react122.default.useRef(), [display, setDisplay] = import_react122.default.useState("none"), [pos, setPos] = import_react122.default.useState([0, 0]), _onMouseMove = import_react122.default.useCallback((e) => {
+  }, figRef = import_react121.default.useRef(), compRef = import_react121.default.useRef(), [display, setDisplay] = import_react121.default.useState("none"), [pos, setPos] = import_react121.default.useState([0, 0]), _onMouseMove = import_react121.default.useCallback((e) => {
     if (setDisplay("flex"), compRef.current) {
       let figRect = figRef.current.getBoundingClientRect(), compRect = compRef.current.getBoundingClientRect();
       setPos([
@@ -12440,7 +12431,7 @@ var import_jsx_dev_runtime104 = require("react/jsx-dev-runtime"), POSITIONS = ["
         compRect.width
       ]);
     }
-  }, [figRef, compRef]), onMouseMove = import_react122.default.useMemo(() => (0, import_lodash40.default)(_onMouseMove, 25), [_onMouseMove]), newCompProps = combineCompProps(
+  }, [figRef, compRef]), onMouseMove = import_react121.default.useMemo(() => (0, import_lodash40.default)(_onMouseMove, 25), [_onMouseMove]), newCompProps = combineCompProps(
     compProps,
     { className: POSITIONS[position] }
   );
@@ -12560,7 +12551,7 @@ var PositionablePlugin = () => {
 }, positionable_default = PositionablePlugin;
 
 // app/modules/dms-custom/draft/editor/stuff/index.js
-var import_react123 = require("react"), import_draft_js7 = require("draft-js"), import_immutable2 = __toESM(require("immutable")), import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), customStyleMap = {
+var import_react122 = require("react"), import_draft_js7 = require("draft-js"), import_immutable2 = __toESM(require("immutable")), import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), customStyleMap = {
   STRIKETHROUGH: {
     textDecoration: "line-through"
   }
@@ -12657,8 +12648,8 @@ var import_react123 = require("react"), import_draft_js7 = require("draft-js"), 
 var import_draft_js8 = require("draft-js");
 
 // app/modules/dms-custom/draft/editor/resizable/wrapper.js
-var import_react124 = __toESM(require("react")), import_lodash41 = __toESM(require("lodash.throttle"));
-var import_jsx_dev_runtime106 = require("react/jsx-dev-runtime"), resizableWrapper = (store) => (Component) => import_react124.default.forwardRef(({ compProps = {}, ...props }, ref) => {
+var import_react123 = __toESM(require("react")), import_lodash41 = __toESM(require("lodash.throttle"));
+var import_jsx_dev_runtime106 = require("react/jsx-dev-runtime"), resizableWrapper = (store) => (Component) => import_react123.default.forwardRef(({ compProps = {}, ...props }, ref) => {
   let {
     block,
     contentState,
@@ -12666,23 +12657,23 @@ var import_jsx_dev_runtime106 = require("react/jsx-dev-runtime"), resizableWrapp
   } = props, {
     adjustWidth,
     width = null
-  } = blockProps, compRef = import_react124.default.useRef(), [hovering, setHovering] = import_react124.default.useState(!1), [canResize, setCanResize] = import_react124.default.useState(0), [resizing, setResizing] = import_react124.default.useState(0), [screenX, setScreenX] = import_react124.default.useState(0), _onResize = import_react124.default.useCallback((e) => {
+  } = blockProps, compRef = import_react123.default.useRef(), [hovering, setHovering] = import_react123.default.useState(!1), [canResize, setCanResize] = import_react123.default.useState(0), [resizing, setResizing] = import_react123.default.useState(0), [screenX, setScreenX] = import_react123.default.useState(0), _onResize = import_react123.default.useCallback((e) => {
     if (e.preventDefault(), compRef.current && resizing) {
       let compRect = compRef.current.getBoundingClientRect(), diff = screenX - e.screenX, width2 = compRect.width - diff * resizing;
       setScreenX(e.screenX), adjustWidth(block, contentState, width2);
     }
-  }, [compRef, resizing, screenX, adjustWidth, block, contentState]), onResize = import_react124.default.useMemo(() => (0, import_lodash41.default)(_onResize, 25), [_onResize]), onMouseUp = import_react124.default.useCallback((e) => {
+  }, [compRef, resizing, screenX, adjustWidth, block, contentState]), onResize = import_react123.default.useMemo(() => (0, import_lodash41.default)(_onResize, 25), [_onResize]), onMouseUp = import_react123.default.useCallback((e) => {
     setResizing(0);
   }, []);
-  import_react124.default.useEffect(() => (document.addEventListener("mousemove", onResize), document.addEventListener("mouseup", onMouseUp), () => {
+  import_react123.default.useEffect(() => (document.addEventListener("mousemove", onResize), document.addEventListener("mouseup", onMouseUp), () => {
     document.removeEventListener("mousemove", onResize), document.removeEventListener("mouseup", onMouseUp);
   }), [onResize, onMouseUp]);
-  let onMouseMove = import_react124.default.useCallback((e) => {
+  let onMouseMove = import_react123.default.useCallback((e) => {
     if (setHovering(!0), compRef.current) {
       let compRect = compRef.current.getBoundingClientRect();
       e.clientX >= compRect.x && e.clientX <= compRect.x + 20 ? setCanResize(-1) : e.clientX >= compRect.x + compRect.width - 20 && e.clientX <= compRect.x + compRect.width ? setCanResize(1) : setCanResize(0);
     }
-  }, [compRef]), onMouseDown = import_react124.default.useCallback((e) => {
+  }, [compRef]), onMouseDown = import_react123.default.useCallback((e) => {
     canResize && (e.preventDefault(), setResizing(canResize), setScreenX(e.screenX));
   }, [canResize]), newCompProps = combineCompProps(
     compProps,
@@ -12803,7 +12794,7 @@ var import_jsx_dev_runtime107 = require("react/jsx-dev-runtime"), buttonPlugin =
 ], decorator = new import_draft_js9.CompositeDecorator(
   linkItPlugin.decorators
 ), createEmpty = () => import_draft_js9.EditorState.createEmpty(decorator);
-var MyEditor = class extends import_react125.default.Component {
+var MyEditor = class extends import_react124.default.Component {
   constructor(props, ...args) {
     super(props, ...args), this.state = {
       hasFocus: !1
@@ -13030,7 +13021,7 @@ var LoadingOptions = {
 }, this);
 
 // app/modules/dms-custom/draft/editor/editor.read-only.js
-var import_react126 = require("react"), import_draft_js10 = require("draft-js"), import_editor2 = __toESM(require("@draft-js-plugins/editor"));
+var import_react125 = require("react"), import_draft_js10 = require("draft-js"), import_editor2 = __toESM(require("@draft-js-plugins/editor"));
 var import_jsx_dev_runtime108 = require("react/jsx-dev-runtime"), positionablePlugin2 = positionable_default(), resizablePlugin2 = resizable_default(), imagePlugin2 = image_default({
   wrappers: [
     positionablePlugin2.wrapper,
@@ -13082,12 +13073,12 @@ function isJson(str) {
   return !0;
 }
 var Edit6 = ({ value, onChange }) => {
-  let data2 = value ? isJson(value) ? JSON.parse(value) : value : createEmpty();
-  return value && (data2 = import_draft_js11.EditorState.createWithContent((0, import_draft_js11.convertFromRaw)(data2))), /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)("div", { className: "w-full relative", children: /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)(
+  let data = value ? isJson(value) ? JSON.parse(value) : value : createEmpty();
+  return value && (data = import_draft_js11.EditorState.createWithContent((0, import_draft_js11.convertFromRaw)(data))), /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)("div", { className: "w-full relative", children: /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)(
     editor_default,
     {
       editorKey: "foobar",
-      value: value ? data2 : createEmpty(),
+      value: value ? data : createEmpty(),
       onChange: (e) => {
         onChange((0, import_draft_js11.convertToRaw)(e.getCurrentContent()));
       },
@@ -13112,8 +13103,8 @@ Edit6.settings = {
   name: "ElementEdit"
 };
 var View4 = ({ value }) => {
-  let data2 = value ? isJson(value) ? JSON.parse(value) : value : createEmpty();
-  return value && (data2 = import_draft_js11.EditorState.createWithContent((0, import_draft_js11.convertFromRaw)(data2))), /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)("div", { className: "relative w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)(editor_read_only_default, { value: data2 }, void 0, !1, {
+  let data = value ? isJson(value) ? JSON.parse(value) : value : createEmpty();
+  return value && (data = import_draft_js11.EditorState.createWithContent((0, import_draft_js11.convertFromRaw)(data))), /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)("div", { className: "relative w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)(editor_read_only_default, { value: data }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/index.js",
     lineNumber: 56,
     columnNumber: 13
@@ -13130,18 +13121,18 @@ var View4 = ({ value }) => {
 // app/routes/__dms/blog/$.jsx
 var import_jsx_dev_runtime110 = require("react/jsx-dev-runtime");
 registerDataType("richtext", draft_default);
-async function loader8({ request, params }) {
+async function loader9({ request, params }) {
   return {
     data: await dmsDataLoader(blog_config_default, params["*"]),
     user: await checkAuth(request)
   };
 }
-async function action4({ request, params }) {
+async function action3({ request, params }) {
   let form = await request.formData();
   return dmsDataEditor(blog_config_default, JSON.parse(form.get("data")), params["*"]);
 }
 function DMS() {
-  let params = (0, import_react129.useParams)();
+  let params = (0, import_react128.useParams)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime110.jsxDEV)(
     dms_manager_default,
     {
@@ -13191,25 +13182,25 @@ function ErrorBoundary2({ error }) {
 var __exports2 = {};
 __export(__exports2, {
   ErrorBoundary: () => ErrorBoundary3,
-  action: () => action5,
+  action: () => action4,
   default: () => DMS2,
-  loader: () => loader9
+  loader: () => loader10
 });
-var import_react130 = require("react"), import_react131 = require("@remix-run/react");
+var import_react129 = require("react"), import_react130 = require("@remix-run/react");
 var import_jsx_dev_runtime111 = require("react/jsx-dev-runtime");
 registerDataType("richtext", draft_default);
-async function loader9({ request, params }) {
+async function loader10({ request, params }) {
   return console.log("loader", params["*"]), {
     data: await dmsDataLoader(siteConfig, params["*"]),
     user: await checkAuth(request)
   };
 }
-async function action5({ request, params }) {
+async function action4({ request, params }) {
   let form = await request.formData();
   return dmsDataEditor(siteConfig, JSON.parse(form.get("data")), params["*"]);
 }
 function DMS2() {
-  let params = (0, import_react131.useParams)();
+  let params = (0, import_react130.useParams)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)(
     dms_manager_default,
     {
@@ -13260,7 +13251,7 @@ var jokes_exports = {};
 __export(jokes_exports, {
   default: () => JokesRoute
 });
-var import_react132 = require("@remix-run/react"), import_jsx_dev_runtime112 = require("react/jsx-dev-runtime");
+var import_react131 = require("@remix-run/react"), import_jsx_dev_runtime112 = require("react/jsx-dev-runtime");
 function JokesRoute() {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime112.jsxDEV)("div", { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime112.jsxDEV)("h1", { children: "J\u{1F92A}KES" }, void 0, !1, {
@@ -13268,7 +13259,7 @@ function JokesRoute() {
       lineNumber: 6,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime112.jsxDEV)("main", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime112.jsxDEV)(import_react132.Outlet, {}, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime112.jsxDEV)("main", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime112.jsxDEV)(import_react131.Outlet, {}, void 0, !1, {
       fileName: "app/routes/jokes.jsx",
       lineNumber: 8,
       columnNumber: 9
@@ -13285,7 +13276,7 @@ function JokesRoute() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "3af16148", entry: { module: "/build/entry.client-X6NY7RBW.js", imports: ["/build/_shared/chunk-555WWVTX.js", "/build/_shared/chunk-NZDF7D52.js", "/build/_shared/chunk-JE7OEZ56.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-O4LRB2U5.js", imports: ["/build/_shared/chunk-R7YPTJHG.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PGEAZJ3L.js", "/build/_shared/chunk-MRSZUJR3.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth": { id: "routes/__auth", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__auth-RRPVQYYS.js", imports: ["/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/login": { id: "routes/__auth/login", parentId: "routes/__auth", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/login-ZDLJTCF4.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/logout": { id: "routes/__auth/logout", parentId: "routes/__auth", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/logout-LADMCKIU.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama": { id: "routes/__dama", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dama-QK2O6RVY.js", imports: ["/build/_shared/chunk-F3EXAHRW.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/index.(cat)": { id: "routes/__dama/index.(cat)", parentId: "routes/__dama", path: "cat?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/index.(cat)-JE6PTS7L.js", imports: ["/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dama/source/$sourceId.($page).($viewId)": { id: "routes/__dama/source/$sourceId.($page).($viewId)", parentId: "routes/__dama", path: "source/:sourceId/:page?/:viewId?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page).($viewId)-J3ZY34VX.js", imports: ["/build/_shared/chunk-HVIMHV5M.js", "/build/_shared/chunk-R7YPTJHG.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PGEAZJ3L.js", "/build/_shared/chunk-OWKBK3ME.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-MRSZUJR3.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/create": { id: "routes/__dama/source/create", parentId: "routes/__dama", path: "source/create", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/create-367H4TCL.js", imports: ["/build/_shared/chunk-HVIMHV5M.js", "/build/_shared/chunk-R7YPTJHG.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PGEAZJ3L.js", "/build/_shared/chunk-OWKBK3ME.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-MRSZUJR3.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/delete/$sourceId": { id: "routes/__dama/source/delete/$sourceId", parentId: "routes/__dama", path: "source/delete/:sourceId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/delete/$sourceId-TTORWIII.js", imports: ["/build/_shared/chunk-OWKBK3ME.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-MRSZUJR3.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/view/delete/$viewId": { id: "routes/__dama/view/delete/$viewId", parentId: "routes/__dama", path: "view/delete/:viewId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/view/delete/$viewId-RYPEHV27.js", imports: ["/build/_shared/chunk-OWKBK3ME.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-MRSZUJR3.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms": { id: "routes/__dms", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dms-YBMQABDD.js", imports: ["/build/_shared/chunk-F3EXAHRW.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/blog/$": { id: "routes/__dms/blog/$", parentId: "routes/__dms", path: "blog/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/$-GL5RCVJ2.js", imports: ["/build/_shared/chunk-UYIKZYMV.js", "/build/_shared/chunk-E35EGS6A.js", "/build/_shared/chunk-BS6M6LC6.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PGEAZJ3L.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/blog/blog.config": { id: "routes/__dms/blog/blog.config", parentId: "routes/__dms", path: "blog/blog/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/blog.config-4RJ6K53P.js", imports: ["/build/_shared/chunk-UYIKZYMV.js", "/build/_shared/chunk-BS6M6LC6.js", "/build/_shared/chunk-PGEAZJ3L.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/site/$": { id: "routes/__dms/site/$", parentId: "routes/__dms", path: "site/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/$-BFMLS5TL.js", imports: ["/build/_shared/chunk-E35EGS6A.js", "/build/_shared/chunk-BS6M6LC6.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PGEAZJ3L.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/site/site.config": { id: "routes/__dms/site/site.config", parentId: "routes/__dms", path: "site/site/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/site.config-OG7I4IWH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jokes": { id: "routes/jokes", parentId: "root", path: "jokes", index: void 0, caseSensitive: void 0, module: "/build/routes/jokes-TWKY32QH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-3AF16148.js" };
+var assets_manifest_default = { version: "1c57983e", entry: { module: "/build/entry.client-77ZATCX7.js", imports: ["/build/_shared/chunk-OSBGASVG.js", "/build/_shared/chunk-LGT5I7BR.js", "/build/_shared/chunk-JE7OEZ56.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-YGOQAI7T.js", imports: ["/build/_shared/chunk-3D56MA2H.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-N7ARZ6IZ.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth": { id: "routes/__auth", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__auth-36MDPPDF.js", imports: ["/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/login": { id: "routes/__auth/login", parentId: "routes/__auth", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/login-YNIDY7V4.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/logout": { id: "routes/__auth/logout", parentId: "routes/__auth", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/logout-LADMCKIU.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama": { id: "routes/__dama", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dama-7TFOQZQU.js", imports: ["/build/_shared/chunk-INBLTNRR.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/index.(cat)": { id: "routes/__dama/index.(cat)", parentId: "routes/__dama", path: "cat?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/index.(cat)-STTBKZNP.js", imports: ["/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dama/source/$sourceId.($page)": { id: "routes/__dama/source/$sourceId.($page)", parentId: "routes/__dama", path: "source/:sourceId/:page?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)-GLDXRVQE.js", imports: ["/build/_shared/chunk-BRSUGPAX.js", "/build/_shared/chunk-3D56MA2H.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-N7ARZ6IZ.js", "/build/_shared/chunk-OWKBK3ME.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/create": { id: "routes/__dama/source/create", parentId: "routes/__dama", path: "source/create", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/create-GEBOOXOU.js", imports: ["/build/_shared/chunk-BRSUGPAX.js", "/build/_shared/chunk-3D56MA2H.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-N7ARZ6IZ.js", "/build/_shared/chunk-OWKBK3ME.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/delete/$sourceId": { id: "routes/__dama/source/delete/$sourceId", parentId: "routes/__dama", path: "source/delete/:sourceId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/delete/$sourceId-IOZ3IB7Y.js", imports: ["/build/_shared/chunk-OWKBK3ME.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/view/delete/$viewId": { id: "routes/__dama/view/delete/$viewId", parentId: "routes/__dama", path: "view/delete/:viewId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/view/delete/$viewId-RLZKXBCW.js", imports: ["/build/_shared/chunk-OWKBK3ME.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms": { id: "routes/__dms", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dms-XV3ERRLL.js", imports: ["/build/_shared/chunk-INBLTNRR.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/blog/$": { id: "routes/__dms/blog/$", parentId: "routes/__dms", path: "blog/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/$-E3IZQWX5.js", imports: ["/build/_shared/chunk-LVFMSCCA.js", "/build/_shared/chunk-TIM5QSKK.js", "/build/_shared/chunk-T2TL255Z.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-N7ARZ6IZ.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/blog/blog.config": { id: "routes/__dms/blog/blog.config", parentId: "routes/__dms", path: "blog/blog/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/blog.config-HJLWSFEE.js", imports: ["/build/_shared/chunk-LVFMSCCA.js", "/build/_shared/chunk-T2TL255Z.js", "/build/_shared/chunk-N7ARZ6IZ.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/site/$": { id: "routes/__dms/site/$", parentId: "routes/__dms", path: "site/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/$-VYWX7FXB.js", imports: ["/build/_shared/chunk-TIM5QSKK.js", "/build/_shared/chunk-T2TL255Z.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-N7ARZ6IZ.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/site/site.config": { id: "routes/__dms/site/site.config", parentId: "routes/__dms", path: "site/site/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/site.config-OG7I4IWH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jokes": { id: "routes/jokes", parentId: "root", path: "jokes", index: void 0, caseSensitive: void 0, module: "/build/routes/jokes-4IH2PFLL.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-1C57983E.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { v2_meta: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {
@@ -13329,13 +13320,13 @@ var assetsBuildDirectory = "public/build", future = { v2_meta: !1 }, publicPath 
     caseSensitive: void 0,
     module: dama_exports
   },
-  "routes/__dama/source/$sourceId.($page).($viewId)": {
-    id: "routes/__dama/source/$sourceId.($page).($viewId)",
+  "routes/__dama/source/$sourceId.($page)": {
+    id: "routes/__dama/source/$sourceId.($page)",
     parentId: "routes/__dama",
-    path: "source/:sourceId/:page?/:viewId?",
+    path: "source/:sourceId/:page?",
     index: void 0,
     caseSensitive: void 0,
-    module: sourceId_page_viewId_exports
+    module: sourceId_page_exports
   },
   "routes/__dama/source/delete/$sourceId": {
     id: "routes/__dama/source/delete/$sourceId",
