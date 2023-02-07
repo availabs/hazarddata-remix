@@ -2,8 +2,9 @@ import React from 'react'
 import {DAMA_HOST} from "~/config";
 import { pgEnv} from '~/modules/data-manager/attributes'
 import {checkApiResponse, formatDate, newETL, getSrcViews, createNewDataSource, submitViewMeta} from "../utils/utils";
+import {useNavigate} from "react-router-dom";
 
-const CallServer = async ({rtPfx, source, etlContextId, userId, table, newVersion}) => {
+const CallServer = async ({rtPfx, source, etlContextId, userId, table, newVersion, navigate}) => {
     const { name: sourceName, display_name: sourceDisplayName } = source;
 
     const src = source.source_id ? source : await createNewDataSource(rtPfx, source, table);
@@ -23,10 +24,11 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, table, newVersio
     await checkApiResponse(stgLyrDataRes);
 
     console.log('res', stgLyrDataRes.body)
-    history.push(`/datasources/source/${src.source_id}`);
+    navigate(`/source/${src.source_id}/views`);
 }
 
 const Create =  ({ source, user, newVersion })=> {
+    const navigate = useNavigate();
     const [etlContextId, setEtlContextId] = React.useState();
 
     const rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
@@ -42,7 +44,7 @@ const Create =  ({ source, user, newVersion })=> {
     return (
         <div className='w-full'>
             <button onClick={() => CallServer({
-                rtPfx, source, etlContextId, userId: user.id, table: 'usda_crop_insurance_cause_of_loss', newVersion
+                rtPfx, source, etlContextId, userId: user.id, table: 'usda_crop_insurance_cause_of_loss', newVersion, navigate
             })}> Add New Source</button>
         </div>
     )

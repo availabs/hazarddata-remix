@@ -3,8 +3,9 @@ import get from 'lodash.get'
 import {DAMA_HOST} from "~/config";
 import { pgEnv} from '~/modules/data-manager/attributes'
 import {checkApiResponse, formatDate, newETL, getSrcViews, createNewDataSource, submitViewMeta} from "../utils/utils";
+import {useNavigate} from "react-router-dom";
 
-const CallServer = async ({rtPfx, source, etlContextId, userId, viewNCEI={}, viewNRI={}}, newVersion) => {
+const CallServer = async ({rtPfx, source, etlContextId, userId, viewNCEI={}, viewNRI={}, newVersion, navigate}) => {
     const { name: sourceName, display_name: sourceDisplayName } = source;
 
     const src = source.source_id ? source : await createNewDataSource(rtPfx, source, "per_basis");
@@ -34,7 +35,7 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, viewNCEI={}, vie
     await checkApiResponse(stgLyrDataRes);
 
     console.log('res', await stgLyrDataRes.json())
-    history.push(`/datasources/source/${src.source_id}`);
+    navigate(`/source/${src.source_id}/views`);
 }
 
 const RenderVersions = ({value, setValue, versions, type}) => {
@@ -71,8 +72,9 @@ const RenderVersions = ({value, setValue, versions, type}) => {
 }
 
 const Create = ({ source, user, newVersion }) => {
+    const navigate = useNavigate();
     const [etlContextId, setEtlContextId] = React.useState();
-
+    console.log('this loads', newVersion)
     // selected views/versions
     const [viewNCEI, setViewNCEI] = React.useState();
     const [viewNRI, setViewNRI] = React.useState();
@@ -103,7 +105,7 @@ const Create = ({ source, user, newVersion }) => {
                         {rtPfx, source, etlContextId, userId: user.id,
                             viewNCEI: versionsNCEI.views.find(v => v.view_id == viewNCEI),
                             viewNRI: versionsNRI.views.find(v => v.view_id == viewNRI),
-                            newVersion
+                            newVersion, navigate
                         })}>
                 Add New Source
             </button>

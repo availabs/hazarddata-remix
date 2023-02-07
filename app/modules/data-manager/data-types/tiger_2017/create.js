@@ -3,7 +3,8 @@ import React from 'react'
 import {DAMA_HOST} from "~/config";
 import { pgEnv} from '~/modules/data-manager/attributes'
 import {checkApiResponse, formatDate, newETL, getSrcViews, createNewDataSource, submitViewMeta} from "../utils/utils";
-const CallServer = async ({rtPfx, source, etlContextId, userId, tigerTable, newVersion}) => {
+import {useNavigate} from "react-router-dom";
+const CallServer = async ({rtPfx, source, etlContextId, userId, tigerTable, newVersion, navigate}) => {
     const { name: sourceName, display_name: sourceDisplayName } = source;
 
     const src =  source.source_id ? source : await createNewDataSource(rtPfx, source, `tl_${tigerTable.toLowerCase()}`);
@@ -24,7 +25,7 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, tigerTable, newV
     await checkApiResponse(stgLyrDataRes);
 
     console.log('res', stgLyrDataRes.body)
-    // redirect(`/datasources/source/${src.source_id}`);
+    navigate(`/source/${src.source_id}/views`);
 }
 
 const RenderTigerTables= ({value, setValue, domain}) => {
@@ -60,6 +61,7 @@ const RenderTigerTables= ({value, setValue, domain}) => {
 }
 
 const Create = ({ source, user, newVersion }) => {
+    const navigate = useNavigate();
     const [etlContextId, setEtlContextId] = React.useState();
     const [tigerTable, setTigerTable] = React.useState();
 
@@ -79,7 +81,7 @@ const Create = ({ source, user, newVersion }) => {
             <button
                 onClick={() =>
                     CallServer({
-                        rtPfx, source, etlContextId, userId:user.id, tigerTable, newVersion})}
+                        rtPfx, source, etlContextId, userId:user.id, tigerTable, newVersion, navigate})}
                 disabled={!tigerTable}
             >
                 Add New Source

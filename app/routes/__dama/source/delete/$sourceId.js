@@ -5,6 +5,7 @@ import {useLoaderData, Link} from "@remix-run/react";
 import get from 'lodash.get'
 import {deleteSource} from "~/modules/data-manager/data-types/utils/utils";
 import {DAMA_HOST} from "~/config";
+import {useNavigate} from "react-router-dom";
 
 export async function loader({params, request}) {
     // console.log('req', params)
@@ -20,14 +21,17 @@ export async function loader({params, request}) {
     };
 }
 
-const DeleteButton = ({text, sourceId}) => (
-    <button
-        className={'bg-red-50 hover:bg-red-400 hover:text-white p-2'}
-        onClick={() => deleteSource(`${DAMA_HOST}/dama-admin/${pgEnv}`, sourceId)}
-    >
-        {text}
-    </button>
-)
+const DeleteButton = ({text, sourceId}) => {
+    const navigate = useNavigate();
+    return (
+        <button
+            className={'bg-red-50 hover:bg-red-400 hover:text-white p-2'}
+            onClick={() => deleteSource(`${DAMA_HOST}/dama-admin/${pgEnv}`, sourceId) && navigate(-1)}
+        >
+            {text}
+        </button>
+    )
+}
 const LoadDependentViews = (data, sourceId) => (
     <>
         <div className={'pb-4 flex justify-between'}>

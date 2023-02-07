@@ -4,8 +4,9 @@ import {DAMA_HOST} from "~/config";
 import { pgEnv} from '~/modules/data-manager/attributes'
 
 import {checkApiResponse, formatDate, newETL, getSrcViews, createNewDataSource, submitViewMeta} from "../utils/utils";
+import {useNavigate} from "react-router-dom";
 
-const CallServer = async ({rtPfx, source, etlContextId, userId, viewNCEI={},viewZTC={}, viewCousubs={}, viewTract={}}, newVersion) => {
+const CallServer = async ({rtPfx, source, etlContextId, userId, viewNCEI={},viewZTC={}, viewCousubs={}, viewTract={}}, newVersion, navigate) => {
     const { name: sourceName, display_name: sourceDisplayName } = source;
 
     const src = source.source_id ? source :  await createNewDataSource(rtPfx, source, "ncei_storm_events_enhanced");
@@ -41,7 +42,7 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, viewNCEI={},view
     await checkApiResponse(stgLyrDataRes);
 
     console.log('res', await stgLyrDataRes.json())
-    history.push(`/datasources/source/${src.source_id}`);
+    navigate(`/source/${src.source_id}/views`);
 };
 
 const RenderVersions = ({value, setValue, versions, type}) => {
@@ -78,6 +79,7 @@ const RenderVersions = ({value, setValue, versions, type}) => {
 }
 
 const Create = ({ source, user, newVersion }) => {
+    const navigate = useNavigate();
     const [etlContextId, setEtlContextId] = React.useState();
 
     // selected views/versions
@@ -120,7 +122,7 @@ const Create = ({ source, user, newVersion }) => {
                             viewZTC: versionsZTC.views.find(v => v.view_id == viewZTC),
                             viewCousubs: versionsCousubs.views.find(v => v.view_id == viewCousubs),
                             viewTract: versionsTract.views.find(v => v.view_id == viewTract),
-                            newVersion
+                            newVersion, navigate
                         })}>
                 Add New Source
             </button>

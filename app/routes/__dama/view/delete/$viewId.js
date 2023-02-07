@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useNavigate } from "react-router-dom";
 import {falcor} from '~/utils/falcor.server'
 import {SourceAttributes, ViewAttributes, getAttributes, pgEnv} from '~/modules/data-manager/attributes'
 import {useLoaderData, Link} from "@remix-run/react";
@@ -18,17 +19,17 @@ export async function loader({params, request}) {
     };
 }
 
-const DeleteButton = ({text, viewId}) => (
-    <button
-        className={'bg-red-50 hover:bg-red-400 hover:text-white p-2'}
-        onClick={() => {
-            // deleteView(`${DAMA_HOST}/dama-admin/${pgEnv}`, viewId)
+const DeleteButton = ({text, viewId}) => {
+    const navigate = useNavigate();
+    return (
+        <button
+            className={'bg-red-50 hover:bg-red-400 hover:text-white p-2'}
+            onClick={() => deleteView(`${DAMA_HOST}/dama-admin/${pgEnv}`, viewId) && navigate(-1)} >
 
-        }
-    >
-        {text}
-    </button>
-)
+            {text}
+        </button>
+    )
+}
 const LoadDependentViews = (data, viewId) => (
     <>
         <div className={'pb-4 flex justify-between'}>

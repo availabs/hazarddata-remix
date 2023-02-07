@@ -1,10 +1,11 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 import {DAMA_HOST} from "~/config";
 import { pgEnv} from '~/modules/data-manager/attributes'
 import get from "lodash.get";
 import {checkApiResponse, formatDate, newETL, getSrcViews, createNewDataSource, submitViewMeta} from "../utils/utils";
 
-const CallServer = async ({rtPfx, source, etlContextId, userId, newVersion, viewPB={}, viewNRI={}, viewState={}, viewCounty={}, viewNCEI={}}) => {
+const CallServer = async ({rtPfx, source, etlContextId, userId, newVersion, navigate, viewPB={}, viewNRI={}, viewState={}, viewCounty={}, viewNCEI={}}) => {
     const { name: sourceName, display_name: sourceDisplayName } = source;
 
     const src = source.source_id ? source : await createNewDataSource(rtPfx, source, "hlr");
@@ -42,8 +43,9 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, newVersion, view
 
     await checkApiResponse(stgLyrDataRes);
 
-    console.log('res', await stgLyrDataRes.json())
-    history.push(`/datasources/source/${src.source_id}`);
+    console.log('res', await stgLyrDataRes.json());
+
+    navigate(`/source/${src.source_id}/views`);
 }
 
 const RenderVersions = ({value, setValue, versions, type}) => {
@@ -80,6 +82,7 @@ const RenderVersions = ({value, setValue, versions, type}) => {
 }
 
 const Create = ({ source, user, newVersion }) => {
+    const navigate = useNavigate();
     const [etlContextId, setEtlContextId] = React.useState();
 
     // selected views/versions
@@ -127,6 +130,7 @@ const Create = ({ source, user, newVersion }) => {
                             viewState: versionsState.views.find(v => v.view_id == viewState),
                             viewCounty: versionsCounty.views.find(v => v.view_id == viewCounty),
                             viewNCEI: versionsNCEI.views.find(v => v.view_id == viewNCEI),
+                            navigate
                         })}>
                 Add New Source
             </button>

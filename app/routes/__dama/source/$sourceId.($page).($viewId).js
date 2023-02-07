@@ -63,13 +63,13 @@ export async function loader ({ params, request }) {
 }
 
 export const action = async ({ request, params }) => {
-  // console.log('gonna invalidate sources length')
+  console.log('gonna invalidate sources length')
   // await falcor.invalidate(["dama", pgEnv, "sources", "length"]);
   //const data = await request.json();
   //let jsonData = json({ data });
 
-  console.log('I am gonna action',data, 'params', params)
-  return null
+  // console.log('I am gonna action',data, 'params', params)
+  return null;
 }
 
 
