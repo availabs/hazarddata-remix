@@ -30,6 +30,8 @@ export async function loader ({ params, request }) {
   const falcorCache = falcor.getCache();
 
   return {
+      falcorCache,
+      data,
     views:  Object.values(
         get(
           falcorCache,
@@ -63,22 +65,30 @@ export async function loader ({ params, request }) {
 }
 
 export const action = async ({ request, params }) => {
-  console.log('gonna invalidate sources length')
+    const { sourceId } = params
+  console.log('gonna invalidate sources length');
+  const fd = await request.formData();
+  // console.log('fd', fd, params, request.target)
   // await falcor.invalidate(["dama", pgEnv, "sources", "length"]);
-  //const data = await request.json();
-  //let jsonData = json({ data });
+  // await falcor.invalidate(["dama", pgEnv,'sources','byId', sourceId],);
+  const res = await falcor.call(["dama", pgEnv, "sources","byId",sourceId,"views","invalidate"]);
+  // console.log('res?', res)
+  // const data = await request.json();
+  // let jsonData = json({ data });
+    const falcorCache = falcor.getCache();
 
-  // console.log('I am gonna action',data, 'params', params)
-  return null;
+  // console.log('I am gonna action',data, 'params', params);
+  return {falcorCache};
 }
 
 
 export default function Dama() {
-    const {views,source,meta} = useLoaderData()
-    const {sourceId, page} = useParams()
+    const {views,source,meta, falcorCache, data} = useLoaderData()
+    const {sourceId, page, viewId} = useParams()
     const [ pages, setPages ] = useState(Pages)
     const { user } = useOutletContext()
 
+    console.log('index params?', sourceId, page)
     React.useEffect(() => {
 
       if(DataTypes[source.type] ){
