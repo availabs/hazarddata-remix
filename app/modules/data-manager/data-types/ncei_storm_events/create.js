@@ -17,7 +17,7 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, newVersion, navi
         })
 
     const url = new URL(
-        `${rtPfx}/staged-geospatial-dataset/loadNCEI`
+        `${rtPfx}/hazard_mitigation/loadNCEI`
     );
     url.searchParams.append("etl_context_id", etlContextId);
     url.searchParams.append("table_name", 'details');

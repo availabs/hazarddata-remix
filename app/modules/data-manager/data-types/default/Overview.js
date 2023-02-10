@@ -6,22 +6,25 @@ import { SourceAttributes, pgEnv } from '~/modules/data-manager/attributes'
 
 
 const Edit = ({startValue, attr, sourceId, cancel=()=>{}}) => {
-  const [value, setValue] = useState('')
-  const fetcher = useFetcher()
+  const [value, setValue] = useState('');
+  const fetcher = useFetcher();
 
   useEffect(() => {
     setValue(startValue)
   },[startValue])
 
   const save = async (attr, value) => {
-    console.log('this is save')
     if(sourceId) {
-      await fetcher.submit(
-          {"test": "some data"},
-          { 
-          method: "post", 
-          action: `/source/${sourceId}` 
-          })
+        console.log('this is save');
+        const res = await fetcher.submit(
+            { newData: 'newData' },
+            {
+                method: "post",
+                action: `/source/${sourceId}`,
+                formData: 'this is fd'
+            }
+        );
+      console.log('res?', res)
       // falcor.set({
       //     paths: [
       //       ['dama',pgEnv,'sources','byId',sourceId,'attributes', attr ]

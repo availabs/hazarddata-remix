@@ -13,7 +13,7 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, newVersion, navi
     const view = await submitViewMeta({rtPfx, etlContextId, userId, sourceName, src, newVersion})
 
     const url = new URL(
-        `${rtPfx}/staged-geospatial-dataset/csvUploadAction`
+        `${rtPfx}/hazard_mitigation/csvUploadAction`
     );
     url.searchParams.append("etl_context_id", etlContextId);
     url.searchParams.append("table_name", 'zone_to_county');

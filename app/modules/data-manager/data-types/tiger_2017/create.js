@@ -12,7 +12,7 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, tigerTable, newV
     const view = await submitViewMeta({rtPfx, etlContextId, userId, sourceName, src, newVersion})
 
     const url = new URL(
-        `${rtPfx}/staged-geospatial-dataset/tigerDownloadAction`
+        `${rtPfx}/hazard_mitigation/tigerDownloadAction`
     );
     url.searchParams.append("etl_context_id", etlContextId);
     url.searchParams.append("table", tigerTable);
@@ -61,6 +61,7 @@ const RenderTigerTables= ({value, setValue, domain}) => {
 }
 
 const Create = ({ source, user, newVersion }) => {
+    console.log(user)
     const navigate = useNavigate();
     const [etlContextId, setEtlContextId] = React.useState();
     const [tigerTable, setTigerTable] = React.useState();

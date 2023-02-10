@@ -22,7 +22,7 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, viewNCEI={},view
     })
 
     const url = new URL(
-        `${rtPfx}/staged-geospatial-dataset/enhanceNCEI`
+        `${rtPfx}/hazard_mitigation/enhanceNCEI`
     );
     url.searchParams.append("etl_context_id", etlContextId);
     url.searchParams.append("table_name", 'details_enhanced');

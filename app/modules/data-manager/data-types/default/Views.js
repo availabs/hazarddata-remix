@@ -2,6 +2,8 @@ import {deleteView} from "~/modules/data-manager/data-types/utils/utils";
 import {DAMA_HOST} from "~/config";
 import {pgEnv} from "~/modules/data-manager/attributes";
 import {Link} from "@remix-run/react";
+//import { useRevalidator } from "@remix-run/react";
+import {useEffect} from "react";
 
 const DeleteButton = ({text, viewId}) => (
     <Link className={'bg-red-50 hover:bg-red-400 hover:text-white p-2'} to={`/view/delete/${viewId}`}
@@ -10,8 +12,19 @@ const DeleteButton = ({text, viewId}) => (
     </Link>
 )
 
-const Views = ({source, views, user, falcor}) => {
+const RenderValue = ({value, isLink, source_id}) => {
+    const processedValue = typeof value === 'object' ? '' : value;
 
+    return isLink ? <Link to={`/source/${source_id}/views/${value}`}> {processedValue} </Link> : processedValue;
+}
+
+const Views = ({source, views, user, falcor}) => {
+    console.log(source)
+    /*let revalidator = useRevalidator();
+
+    useEffect(() => {
+        revalidator.revalidate();
+    })*/
     return (
         <div>
             <div className="py-4 sm:py-2 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6 border-b-2">
@@ -35,13 +48,14 @@ const Views = ({source, views, user, falcor}) => {
                                         {
                                             ['view_id', 'version', 'last_updated', '_modified_timestamp']
                                                 .map(key => (
-                                                    <dd key={key} className="mt-1 text-sm text-gray-900 sm:mt-0 align-middle">
-                                                        {typeof view[key] === 'object' ? '' : view[key]}
+                                                    <dd key={key}
+                                                        className="mt-1 text-sm text-gray-900 sm:mt-0 align-middle">
+                                                        <RenderValue value={view[key]} isLink={key === 'view_id'} source_id={source.source_id}/>
                                                     </dd>
                                                 ))
                                         }
                                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 flex justify-end">
-                                            <DeleteButton text={'delete'} viewId={view.view_id} />
+                                            <DeleteButton text={'delete'} viewId={view.view_id}/>
                                         </dd>
                                     </div>
 

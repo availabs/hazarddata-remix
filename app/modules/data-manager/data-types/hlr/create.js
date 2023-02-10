@@ -22,7 +22,7 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, newVersion, navi
     })
 
     const url = new URL(
-        `${rtPfx}/staged-geospatial-dataset/hlrLoader`
+        `${rtPfx}/hazard_mitigation/hlrLoader`
     );
     url.searchParams.append("etl_context_id", etlContextId);
     url.searchParams.append("table_name", 'hlr');

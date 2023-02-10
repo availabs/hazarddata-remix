@@ -7,11 +7,13 @@ import get from 'lodash.get'
 // import { useParams } from 'react-router-dom'
 import { SourceAttributes, ViewAttributes, getAttributes, pgEnv} from '~/modules/data-manager/attributes'
 import { Pages, DataTypes } from '~/modules/data-manager/data-types'
+import {useOutletContext} from "@remix-run/react";
 
 
     
 
 export default function sourceCreate () {
+    const { user } = useOutletContext()
   // prettier canary
   //const {falcor, falcorCache} = useFalcor()
   const [ source, setSource ] = useState( 
@@ -94,7 +96,7 @@ export default function sourceCreate () {
             </div>
           </div>
         </dl>
-        <CreateComp source={source} />
+        <CreateComp source={source} user={user}/>
       </div>
    
   

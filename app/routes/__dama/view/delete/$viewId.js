@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { useNavigate } from "react-router-dom";
 import {falcor} from '~/utils/falcor.server'
 import {SourceAttributes, ViewAttributes, getAttributes, pgEnv} from '~/modules/data-manager/attributes'
-import {useLoaderData, Link} from "@remix-run/react";
+import {useLoaderData, Link, useFetcher} from "@remix-run/react";
 import get from 'lodash.get'
 import {deleteView} from "~/modules/data-manager/data-types/utils/utils";
 import {DAMA_HOST} from "~/config";
@@ -11,31 +11,47 @@ export async function loader({params, request}) {
     // console.log('req', params)
     const {viewId} = params;
     const data = await falcor.get(
-        ['dama', pgEnv, 'views', "byId", viewId, 'dependents']
+        ['dama', pgEnv, 'views', "byId", viewId, 'dependents'],
+        ['dama', pgEnv, 'views', "byId", viewId, 'attributes', 'source_id'],
     );
     return {
         viewId: viewId,
-        dependents: get(data, ['json', 'dama', pgEnv, 'views', "byId", viewId, 'dependents'], [])
+        dependents: get(data, ['json', 'dama', pgEnv, 'views', "byId", viewId, 'dependents'], []),
+        sourceId: get(data, ['json', 'dama', pgEnv, 'views', "byId", viewId, 'attributes', 'source_id'], []),
     };
 }
 
-const DeleteButton = ({text, viewId}) => {
+const DeleteButton = ({text, viewId, sourceId}) => {
     const navigate = useNavigate();
+    const fetcher = useFetcher();
+
     return (
         <button
             className={'bg-red-50 hover:bg-red-400 hover:text-white p-2'}
-            onClick={() => deleteView(`${DAMA_HOST}/dama-admin/${pgEnv}`, viewId) && navigate(-1)} >
+            onClick={async () => {
+                await deleteView(`${DAMA_HOST}/dama-admin/${pgEnv}`, viewId)
+                await fetcher.submit(
+                    {},
+                    {
+                        method: "post",
+                        action: `/source/${sourceId}`,
+                        formData: 'this is fd'
+                    }
+                );
+                return navigate(`/source/${sourceId}/views`, { replace: true })
+            }
+                    } >
 
             {text}
         </button>
     )
 }
-const LoadDependentViews = (data, viewId) => (
+const LoadDependentViews = (data, viewId, sourceId) => (
     <>
         <div className={'pb-4 flex justify-between'}>
             <label>The View has following dependents:</label>
 
-            <DeleteButton text={'Delete anyway'} viewId={viewId}/>
+            <DeleteButton text={'Delete anyway'} viewId={viewId} sourceId={sourceId}/>
         </div>
 
         <div className={'p-4 bg-red-50'}>
@@ -75,20 +91,21 @@ const LoadDependentViews = (data, viewId) => (
         </div>
     </>)
 
-const LoadConfirmDelete = (viewId) => (
+const LoadConfirmDelete = (viewId, sourceId) => (
         <div className={'pb-4 flex justify-between'}>
             <label>No dependents found.</label>
 
-            <DeleteButton text={'Confirm Delete'} viewId={viewId}/>
+            <DeleteButton text={'Confirm Delete'} viewId={viewId} sourceId={sourceId}/>
         </div>
     )
 
 export default function Popup() {
-    const {viewId, dependents} = useLoaderData();
+    const {viewId, sourceId, dependents} = useLoaderData();
+
     return (
         <div className='w-full p-4 bg-white my-1 block border shadow'>
             <div className={'pb-4 font-bold'}>Delete <i>{viewId}</i></div>
-            {dependents.length ? LoadDependentViews(dependents, viewId) : LoadConfirmDelete(viewId)}
+            {dependents.length ? LoadDependentViews(dependents, viewId, sourceId) : LoadConfirmDelete(viewId, sourceId)}
         </div>
     )
 }

@@ -19,7 +19,7 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, viewNCEI={}, vie
     })
 
     const url = new URL(
-        `${rtPfx}/staged-geospatial-dataset/pbSWDLoader`
+        `${rtPfx}/hazard_mitigation/pbSWDLoader`
     );
     url.searchParams.append("etl_context_id", etlContextId);
     url.searchParams.append("table_name", 'per_basis_swd');

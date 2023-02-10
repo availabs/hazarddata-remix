@@ -117,7 +117,7 @@ export const newETL = async ({rtPfx, setEtlContextId}) => {
 export const getSrcViews = async ({rtPfx, setVersions, etlContextId, type}) => {
     if(!etlContextId) return {}
     const url = new URL(
-        `${rtPfx}/staged-geospatial-dataset/versionSelectorUtils`
+        `${rtPfx}/hazard_mitigation/versionSelectorUtils`
     );
     url.searchParams.append("etl_context_id", etlContextId);
     url.searchParams.append("type", type);
