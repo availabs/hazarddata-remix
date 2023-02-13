@@ -155,7 +155,7 @@ const reformatNRI = (data = {}) => React.useMemo(() => {
             }
         });
 
-    return formattedData;
+    return formattedData.sort((a, b) => a.nri_category.localeCompare(b.nri_category));
 }, [data])
 
 const reformatEnhancedNCEI = (data = {}) => React.useMemo(() => {
