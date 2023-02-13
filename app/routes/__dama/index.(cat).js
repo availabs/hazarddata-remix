@@ -182,7 +182,7 @@ const RenderViewDependencies = ({dama, srcMeta, viewId}) => (
         .map(id => {
             const tmpSrcId = get(get(dama, [viewId, 'dependencies'], [])
                                 .find(d => d.view_id === id), 'source_id')
-            return <Link key={id} to={`/sources/${tmpSrcId}/views/${id}`} className={'p-2'}>{get(srcMeta, [tmpSrcId, 'attributes', 'type'], id)}</Link>
+            return <Link key={id} to={`/source/${tmpSrcId}/views/${id}`} className={'p-2'}>{get(srcMeta, [tmpSrcId, 'attributes', 'type'], id)}</Link>
         })
 )
 
