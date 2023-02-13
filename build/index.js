@@ -54,7 +54,7 @@ var require_getCORSRequest = __commonJS({
 var require_request = __commonJS({
   "app/modules/avl-falcor/falcor-http-datasource/src/request.js"(exports, module2) {
     "use strict";
-    var getXMLHttpRequest = require_getXMLHttpRequest(), getCORSRequest = require_getCORSRequest(), hasOwnProp = Object.prototype.hasOwnProperty, noop2 = function() {
+    var getXMLHttpRequest = require_getXMLHttpRequest(), getCORSRequest = require_getCORSRequest(), hasOwnProp = Object.prototype.hasOwnProperty, noop3 = function() {
     };
     function Observable() {
     }
@@ -64,8 +64,8 @@ var require_request = __commonJS({
         var observer, disposable;
         return typeof onNext == "function" ? observer = {
           onNext,
-          onError: onError || noop2,
-          onCompleted: onCompleted || noop2
+          onError: onError || noop3,
+          onCompleted: onCompleted || noop3
         } : observer = onNext, disposable = subscribe(observer), typeof disposable == "function" ? {
           dispose: disposable
         } : disposable;
@@ -123,8 +123,8 @@ var require_request = __commonJS({
         if (status >= 200 && status <= 399) {
           try {
             responseType !== "json" && (responseData = JSON.parse(responseData || "")), typeof responseData == "string" && (responseData = JSON.parse(responseData || ""));
-          } catch (e2) {
-            _handleXhrError(observer, "invalid json", e2);
+          } catch (e3) {
+            _handleXhrError(observer, "invalid json", e3);
           }
           observer.onNext(responseData), observer.onCompleted();
           return;
@@ -431,7 +431,7 @@ var avl_design = (colorname, size) => {
   let primary = "gray", highlight = "white", accent = "blue";
   return {
     sidenav: (opts = {}) => {
-      let { color = "white", size: size2 = "compact", subMenuStyle = "inline" } = opts, colors = {
+      let { color: color2 = "white", size: size2 = "compact", subMenuStyle = "inline" } = opts, colors = {
         white: {
           contentBg: `bg-${highlight}`,
           contentBgAccent: "bg-neutral-100",
@@ -511,25 +511,25 @@ var avl_design = (colorname, size) => {
         }
       };
       return {
-        contentBg: `${colors[color].contentBg}`,
-        contentBgAccent: `${colors[color].contentBgAccent}`,
-        logoWrapper: `${sizes[size2].wrapper} ${colors[color].contentBgAccent} ${colors[color].textColorAccent}`,
-        sidenavWrapper: `${colors[color].contentBg} ${sizes[size2].wrapper} h-full hidden md:block z-20`,
-        menuIconSide: `text-${colors[color].accentColor} ${sizes[size2].icon} group-hover:${colors[color].highlightColor}`,
+        contentBg: `${colors[color2].contentBg}`,
+        contentBgAccent: `${colors[color2].contentBgAccent}`,
+        logoWrapper: `${sizes[size2].wrapper} ${colors[color2].contentBgAccent} ${colors[color2].textColorAccent}`,
+        sidenavWrapper: `${colors[color2].contentBg} ${sizes[size2].wrapper} h-full hidden md:block z-20`,
+        menuIconSide: `text-${colors[color2].accentColor} ${sizes[size2].icon} group-hover:${colors[color2].highlightColor}`,
         menuIconClosed: "fa fa-bars p-3 cursor-pointer",
         menuIconOpen: "fa fa-cancel",
-        itemsWrapper: `p-4 border-t ${colors[color].borderColor} ${sizes[size2].wrapper}`,
+        itemsWrapper: `p-4 border-t ${colors[color2].borderColor} ${sizes[size2].wrapper}`,
         navitemSide: ` 
 	            group font-sans flex flex-col
-	            ${sizes[size2].sideItem} ${colors[color].textColor} ${colors[color].borderColor} 
-	            hover:${colors[color].highlightColor} 
+	            ${sizes[size2].sideItem} ${colors[color2].textColor} ${colors[color2].borderColor} 
+	            hover:${colors[color2].highlightColor} 
 	            focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 
 	            transition-all cursor-pointer
 	         `,
         navitemSideActive: `
 	            group font-sans flex flex-col w-full
-	            ${sizes[size2].sideItem} ${colors[color].textColor} ${colors[color].borderColor} 
-	            hover:${colors[color].highlightColor} 
+	            ${sizes[size2].sideItem} ${colors[color2].textColor} ${colors[color2].borderColor} 
+	            hover:${colors[color2].highlightColor} 
 	            focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 
 	            transition-all cursor-pointer
 	          `,
@@ -542,7 +542,7 @@ var avl_design = (colorname, size) => {
       };
     },
     topnav: (opts = {}) => {
-      let { color = "white", size: size2 = "compact" } = opts, colors = {
+      let { color: color2 = "white", size: size2 = "compact" } = opts, colors = {
         white: {
           contentBg: `bg-${highlight}`,
           accentColor: `${accent}-600`,
@@ -572,24 +572,24 @@ var avl_design = (colorname, size) => {
         }
       };
       return {
-        topnavWrapper: `w-full ${colors[color].contentBg} ${sizes[size2].wrapper} `,
+        topnavWrapper: `w-full ${colors[color2].contentBg} ${sizes[size2].wrapper} `,
         topnavContent: "flex w-full h-full",
         topnavMenu: "hidden md:flex flex-1 h-full overflow-x-auto overflow-y-hidden scrollbar-sm",
-        menuIconTop: `text-${colors[color].accentColor} ${sizes[size2].icon} group-hover:${colors[color].highlightColor}`,
+        menuIconTop: `text-${colors[color2].accentColor} ${sizes[size2].icon} group-hover:${colors[color2].highlightColor}`,
         menuOpenIcon: "os-icon os-icon-menu",
         menuCloseIcon: "os-icon os-icon-x",
         navitemTop: `
 				    group font-sans 
-				    ${sizes[size2].topItem} ${colors[color].textColor} ${colors[color].borderColor} 
-				    ${colors[color].accentBg} hover:${colors[color].highlightColor} 
+				    ${sizes[size2].topItem} ${colors[color2].textColor} ${colors[color2].borderColor} 
+				    ${colors[color2].accentBg} hover:${colors[color2].highlightColor} 
 				    focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 
 				    transition cursor-pointer
 				`,
         topmenuRightNavContainer: "hidden md:block h-full",
         navitemTopActive: `
 					group font-sans
-		    		${sizes[size2].topItem} ${colors[color].textColor} ${colors[color].borderColor} 
-		    		${colors[color].accentBg} hover:${colors[color].highlightColor} 
+		    		${sizes[size2].topItem} ${colors[color2].textColor} ${colors[color2].borderColor} 
+		    		${colors[color2].accentBg} hover:${colors[color2].highlightColor} 
 		    		focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 
 		    		transition cursor-pointer
 		    	`,
@@ -601,7 +601,7 @@ var avl_design = (colorname, size) => {
       };
     },
     select: (opts = {}) => {
-      let { color = "white", size: size2 = "full", wrapStyle = "no-wrap" } = opts, colors = {
+      let { color: color2 = "white", size: size2 = "full", wrapStyle = "no-wrap" } = opts, colors = {
         white: "white",
         transparent: "gray-100"
       }, sizes = {
@@ -613,12 +613,12 @@ var avl_design = (colorname, size) => {
         wrap: "whitespace-normal"
       };
       return {
-        menuWrapper: `bg-${colors[color]} my-1 text-sm`,
-        menuItemActive: `px-2 py-2 cursor-not-allowed bg-${accent}-200 border-1 border-${colors[color]} focus:border-${accent}-300`,
-        menuItem: `px-2 py-2 cursor-pointer hover:bg-blue-100 border-1 border-${colors[color]} focus:border-blue-300 flex-wrap`,
+        menuWrapper: `bg-${colors[color2]} my-1 text-sm`,
+        menuItemActive: `px-2 py-2 cursor-not-allowed bg-${accent}-200 border-1 border-${colors[color2]} focus:border-${accent}-300`,
+        menuItem: `px-2 py-2 cursor-pointer hover:bg-blue-100 border-1 border-${colors[color2]} focus:border-blue-300 flex-wrap`,
         valueItem: `max-w-full ${wrapStyles[wrapStyle]}`,
         itemText: "text-xl",
-        select: `bg-${colors[color]} w-full flex flex-1 flex-row justify-between truncate ${sizes[size2]} cursor-pointer border-2 border-${colors[color]} focus:border-blue-300`,
+        select: `bg-${colors[color2]} w-full flex flex-1 flex-row justify-between truncate ${sizes[size2]} cursor-pointer border-2 border-${colors[color2]} focus:border-blue-300`,
         selectIcon: "self-center fa fa-angle-down text-gray-400 pt-2 px-2",
         vars: {
           color: colors,
@@ -628,7 +628,7 @@ var avl_design = (colorname, size) => {
       };
     },
     table: (opts = {}) => {
-      let { color = "white", size: size2 = "compact" } = opts, colors = {
+      let { color: color2 = "white", size: size2 = "compact" } = opts, colors = {
         white: "bg-white hover:bg-gray-100",
         gray: "bg-gray-100 hover:bg-gray-200",
         transparent: "gray-100"
@@ -639,7 +639,7 @@ var avl_design = (colorname, size) => {
       return {
         tableHeader: `${sizes[size2]} pb-1 border-b-2 border-gray-300 bg-gray-200 text-left font-medium text-gray-700 uppercase first:rounded-tl-md last:rounded-tr-md`,
         tableInfoBar: "bg-white",
-        tableRow: `${colors[color]} transition ease-in-out duration-150`,
+        tableRow: `${colors[color2]} transition ease-in-out duration-150`,
         tableRowStriped: "bg-gray-100 even:bg-gray-200 hover:bg-gray-300 transition ease-in-out duration-150",
         tableCell: `${sizes[size2]} whitespace-no-wrap`,
         inputSmall: "w-24",
@@ -679,7 +679,7 @@ var avl_design = (colorname, size) => {
       };
     },
     button: (opts = {}) => {
-      let { color = "white", size: size2 = "base", width = "block" } = opts, colors = {
+      let { color: color2 = "white", size: size2 = "base", width = "block" } = opts, colors = {
         white: `
                     border border-gray-300  text-gray-700 bg-white hover:text-gray-500
                     focus:outline-none focus:shadow-outline-blue focus:border-blue-300
@@ -706,7 +706,7 @@ var avl_design = (colorname, size) => {
       return {
         button: `
                     inline-flex items-center justify-items-center text-center
-                    ${colors[color]} ${sizes[size2]} ${widths[width]}
+                    ${colors[color2]} ${sizes[size2]} ${widths[width]}
                 `,
         vars: {
           color: colors,
@@ -716,7 +716,7 @@ var avl_design = (colorname, size) => {
       };
     },
     input: (opts = {}) => {
-      let { color = "white", size: size2 = "small", width = "block" } = opts, colors = {
+      let { color: color2 = "white", size: size2 = "small", width = "block" } = opts, colors = {
         white: "bg-white",
         gray: "bg-gray-100"
       }, sizes = {
@@ -729,7 +729,7 @@ var avl_design = (colorname, size) => {
       };
       return {
         input: `
-                 ${colors[color]} ${sizes[size2]} ${widths[width]}
+                 ${colors[color2]} ${sizes[size2]} ${widths[width]}
                 `,
         vars: {
           color: colors,
@@ -1091,7 +1091,7 @@ var import_react3 = __toESM(require("react")), import_lodash = __toESM(require("
   let {
     propsToShare = {}
   } = options;
-  return ({ children, ...props }) => {
+  return ({ children: children2, ...props }) => {
     let toShare = {};
     if (typeof propsToShare == "string") {
       let split = propsToShare.split(".");
@@ -1104,7 +1104,7 @@ var import_react3 = __toESM(require("react")), import_lodash = __toESM(require("
     else
       for (let prop in propsToShare)
         toShare[prop] = (0, import_lodash.default)(props, propsToShare[prop], propsToShare[prop]);
-    return /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(Component, { ...props, children: import_react3.default.Children.map(children, (child) => import_react3.default.cloneElement(child, toShare)) }, void 0, !1, {
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(Component, { ...props, children: import_react3.default.Children.map(children2, (child) => import_react3.default.cloneElement(child, toShare)) }, void 0, !1, {
       fileName: "app/modules/avl-components/src/wrappers/share-props.js",
       lineNumber: 27,
       columnNumber: 7
@@ -1495,6 +1495,10 @@ for (let type in colorbrewer_default.schemeGroups)
         colors: group[length]
       });
   });
+var getColorRange = (size, name, reverse = !1) => {
+  let range2 = (0, import_lodash3.default)(ColorRanges, [size], []).reduce((a, c) => c.name === name ? c.colors : a, []).slice();
+  return reverse && range2.reverse(), range2;
+};
 
 // app/modules/avl-components/src/components/utils/index.js
 var composeOptions = ({ ...options }) => Object.keys(options).reduce((a, c) => (options[c] && a.push(c.split("").map((c2, i) => i === 0 ? c2.toUpperCase() : c2).join("")), a), []).join(""), useSetRefs = (...refs) => import_react6.default.useCallback((node) => {
@@ -1509,6 +1513,19 @@ var composeOptions = ({ ...options }) => Object.keys(options).reduce((a, c) => (
     };
     return node && document.addEventListener("mousedown", checkOutside), () => document.removeEventListener("mousedown", checkOutside);
   }, [node, handleClick]), [setNode, node];
+}, getRect = (ref) => {
+  let node = ref && ref.current;
+  return node ? node.getBoundingClientRect() : { width: 0, height: 0 };
+}, useSetSize = (ref, callback) => {
+  let [size, setSize] = import_react6.default.useState({ width: 0, height: 0, x: 0, y: 0 }), doSetSize = import_react6.default.useCallback(() => {
+    let rect = getRect(ref), { width, height, x, y } = rect;
+    (width !== size.width || height !== size.height) && (typeof callback == "function" && callback({ width, height, x, y }), setSize({ width, height, x, y }));
+  }, [ref, size, callback]);
+  return import_react6.default.useEffect(() => (window.addEventListener("resize", doSetSize), () => {
+    window.removeEventListener("resize", doSetSize);
+  }), [doSetSize]), import_react6.default.useEffect(() => {
+    doSetSize();
+  }), size;
 };
 
 // app/modules/avl-components/src/components/Nav/Menu.js
@@ -1530,7 +1547,7 @@ var import_react8 = require("react"), import_jsx_dev_runtime7 = require("react/j
 
 // app/modules/avl-components/src/components/Nav/Item.js
 var import_jsx_dev_runtime8 = require("react/jsx-dev-runtime"), NavItem = ({
-  children,
+  children: children2,
   icon,
   to,
   onClick,
@@ -1578,7 +1595,7 @@ var import_jsx_dev_runtime8 = require("react/jsx-dev-runtime"), NavItem = ({
               },
               this
             ) : null,
-            /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { className: theme.navItemContent, children }, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { className: theme.navItemContent, children: children2 }, void 0, !1, {
               fileName: "app/modules/avl-components/src/components/Nav/Item.js",
               lineNumber: 92,
               columnNumber: 7
@@ -1714,7 +1731,7 @@ var import_jsx_dev_runtime8 = require("react/jsx-dev-runtime"), NavItem = ({
 
 // app/modules/avl-components/src/components/Dropdown/index.js
 var import_react10 = __toESM(require("react"));
-var import_jsx_dev_runtime9 = require("react/jsx-dev-runtime"), Dropdown = ({ control, children, className, openType = "hover" }) => {
+var import_jsx_dev_runtime9 = require("react/jsx-dev-runtime"), Dropdown = ({ control, children: children2, className, openType = "hover" }) => {
   let [open, setOpen] = import_react10.default.useState(!1), clickedOutside = import_react10.default.useCallback(() => setOpen(!1), []), [setRef] = useClickOutside(clickedOutside);
   return /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(
     "div",
@@ -1730,7 +1747,7 @@ var import_jsx_dev_runtime9 = require("react/jsx-dev-runtime"), Dropdown = ({ co
       },
       children: [
         control,
-        open ? /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("div", { className: `shadow fixed w-full max-w-[193px] rounded-b-lg ${open ? "block" : "hidden"} z-10`, children }, void 0, !1, {
+        open ? /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("div", { className: `shadow fixed w-full max-w-[193px] rounded-b-lg ${open ? "block" : "hidden"} z-10`, children: children2 }, void 0, !1, {
           fileName: "app/modules/avl-components/src/components/Dropdown/index.js",
           lineNumber: 27,
           columnNumber: 17
@@ -1941,12 +1958,12 @@ var import_prop_types = __toESM(require("prop-types")), import_react17 = __toESM
 
 // app/modules/avl-components/src/components/Sidebar/scrollSpy/throttle.js
 var throttle = (fn, threshold = 100) => {
-  let last, timer;
+  let last, timer2;
   return () => {
-    let now = +new Date();
-    !!last && now < last + threshold ? (clearTimeout(timer), timer = setTimeout(() => {
-      last = now, fn();
-    }, threshold)) : (last = now, fn());
+    let now2 = +new Date();
+    !!last && now2 < last + threshold ? (clearTimeout(timer2), timer2 = setTimeout(() => {
+      last = now2, fn();
+    }, threshold)) : (last = now2, fn());
   };
 }, throttle_default = throttle;
 
@@ -2013,9 +2030,9 @@ var Scrollspy = class extends import_react17.default.Component {
   _initSpyTarget(items) {
     return items.map((item) => document.getElementById(item));
   }
-  _fillArray(array, val) {
+  _fillArray(array2, val) {
     let newArray = [];
-    for (let i = 0, max = array.length; i < max; i++)
+    for (let i = 0, max = array2.length; i < max; i++)
       newArray[i] = val;
     return newArray;
   }
@@ -2100,11 +2117,11 @@ var Scrollspy = class extends import_react17.default.Component {
   }
   render() {
     let Tag = this.props.componentTag, {
-      children,
+      children: children2,
       className,
       scrolledPastClassName,
       style
-    } = this.props, counter = 0, items = import_react17.default.Children.map(children, (child, idx) => {
+    } = this.props, counter = 0, items = import_react17.default.Children.map(children2, (child, idx) => {
       if (!child)
         return null;
       let ChildTag = child.type, isScrolledPast = scrolledPastClassName && this.state.isScrolledPast[idx], childClass = classNames({
@@ -2347,7 +2364,7 @@ var import_jsx_dev_runtime20 = require("react/jsx-dev-runtime"), input_default =
 
 // app/modules/avl-components/src/components/Inputs/textarea.js
 var import_react23 = __toESM(require("react"));
-var import_jsx_dev_runtime21 = require("react/jsx-dev-runtime"), textarea_default = import_react23.default.forwardRef(({ large, small, className = "", children, onChange, value, ...props }, ref) => {
+var import_jsx_dev_runtime21 = require("react/jsx-dev-runtime"), textarea_default = import_react23.default.forwardRef(({ large, small, className = "", children: children2, onChange, value, ...props }, ref) => {
   let theme = useTheme(), inputTheme = theme[`input${composeOptions({ large, small })}`];
   return /* @__PURE__ */ (0, import_jsx_dev_runtime21.jsxDEV)(
     "textarea",
@@ -2358,7 +2375,7 @@ var import_jsx_dev_runtime21 = require("react/jsx-dev-runtime"), textarea_defaul
       className: `${inputTheme} ${className}`,
       ref,
       rows: 6,
-      children
+      children: children2
     },
     void 0,
     !1,
@@ -2378,23 +2395,23 @@ var import_react26 = require("react");
 var import_react24 = __toESM(require("react")), import_react_router_dom4 = require("react-router-dom");
 var import_jsx_dev_runtime22 = require("react/jsx-dev-runtime"), ConfirmButton = ({
   onClick,
-  children,
+  children: children2,
   confirmMessage,
   type,
   ...props
 }) => {
-  let [canClick, setCanClick] = import_react24.default.useState(!1), timeout = import_react24.default.useRef(null), confirm = import_react24.default.useCallback(
+  let [canClick, setCanClick] = import_react24.default.useState(!1), timeout2 = import_react24.default.useRef(null), confirm = import_react24.default.useCallback(
     (e) => {
-      e.preventDefault(), setCanClick(!0), timeout.current = setTimeout(setCanClick, 5e3, !1);
+      e.preventDefault(), setCanClick(!0), timeout2.current = setTimeout(setCanClick, 5e3, !1);
     },
-    [timeout]
+    [timeout2]
   ), doOnClick = import_react24.default.useCallback(
     (e) => {
       setCanClick(!1), onClick && onClick(e);
     },
     [onClick]
   );
-  return import_react24.default.useEffect(() => () => clearTimeout(timeout.current), [timeout]), /* @__PURE__ */ (0, import_jsx_dev_runtime22.jsxDEV)(
+  return import_react24.default.useEffect(() => () => clearTimeout(timeout2.current), [timeout2]), /* @__PURE__ */ (0, import_jsx_dev_runtime22.jsxDEV)(
     "button",
     {
       onClick: canClick ? type === "submit" ? null : doOnClick : confirm,
@@ -2410,7 +2427,7 @@ var import_jsx_dev_runtime22 = require("react/jsx-dev-runtime"), ConfirmButton =
           lineNumber: 45,
           columnNumber: 11
         }, this) : null,
-        /* @__PURE__ */ (0, import_jsx_dev_runtime22.jsxDEV)("div", { style: { color: canClick ? "transparent" : null }, children }, void 0, !1, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime22.jsxDEV)("div", { style: { color: canClick ? "transparent" : null }, children: children2 }, void 0, !1, {
           fileName: "app/modules/avl-components/src/components/Button/index.js",
           lineNumber: 49,
           columnNumber: 9
@@ -2431,7 +2448,7 @@ var import_jsx_dev_runtime22 = require("react/jsx-dev-runtime"), ConfirmButton =
     this
   );
 }, Button = ({
-  children,
+  children: children2,
   type = "button",
   showConfirm = !1,
   confirmMessage = "click to confirm",
@@ -2446,7 +2463,7 @@ var import_jsx_dev_runtime22 = require("react/jsx-dev-runtime"), ConfirmButton =
       ...props,
       confirmMessage,
       className: `${theme.button}`,
-      children
+      children: children2
     },
     void 0,
     !1,
@@ -2462,7 +2479,7 @@ var import_jsx_dev_runtime22 = require("react/jsx-dev-runtime"), ConfirmButton =
       type,
       ...props,
       className: `${theme.button}`,
-      children
+      children: children2
     },
     void 0,
     !1,
@@ -2478,7 +2495,7 @@ var import_jsx_dev_runtime22 = require("react/jsx-dev-runtime"), ConfirmButton =
 // app/modules/avl-components/src/components/Inputs/parts.js
 var import_react25 = __toESM(require("react"));
 var import_jsx_dev_runtime23 = require("react/jsx-dev-runtime");
-var ValueContainer = import_react25.default.forwardRef(({ children, hasFocus, large, small, disabled = !1, customTheme, className = "", ...props }, ref) => {
+var ValueContainer = import_react25.default.forwardRef(({ children: children2, hasFocus, large, small, disabled = !1, customTheme, className = "", ...props }, ref) => {
   let theme = { ...useTheme(), ...customTheme };
   return /* @__PURE__ */ (0, import_jsx_dev_runtime23.jsxDEV)(
     "div",
@@ -2492,7 +2509,7 @@ var ValueContainer = import_react25.default.forwardRef(({ children, hasFocus, la
         ${large ? theme.textLarge : small ? theme.textSmall : theme.textBase}
         ${className}
       `,
-      children
+      children: children2
     },
     void 0,
     !1,
@@ -3069,16 +3086,16 @@ function getKeyAttributes(key) {
 }
 
 // app/modules/avl-components/src/components/Inputs/Select.js
-var import_jsx_dev_runtime25 = require("react/jsx-dev-runtime"), ValueItem2 = ({ isPlaceholder, children, remove, edit, disabled = !1, themeOptions }) => {
+var import_jsx_dev_runtime25 = require("react/jsx-dev-runtime"), ValueItem2 = ({ isPlaceholder, children: children2, remove: remove2, edit, disabled = !1, themeOptions }) => {
   let theme = useTheme().select(themeOptions);
   return /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("div", { className: `
-        ${isPlaceholder ? theme.textLight : `${disabled ? theme.accent2 : remove || edit ? theme.menuBgActive : ""}
-            mr-1 pl-2 ${!disabled && (remove || edit) ? "pr-1" : "pr-4"}
+        ${isPlaceholder ? theme.textLight : `${disabled ? theme.accent2 : remove2 || edit ? theme.menuBgActive : ""}
+            mr-1 pl-2 ${!disabled && (remove2 || edit) ? "pr-1" : "pr-4"}
           `}
         ${theme.itemText}
          mt-1 flex items-center max-w-full
       `, children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("span", { className: theme.valueItem, children }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("span", { className: theme.valueItem, children: children2 }, void 0, !1, {
       fileName: "app/modules/avl-components/src/components/Inputs/Select.js",
       lineNumber: 32,
       columnNumber: 7
@@ -3117,14 +3134,14 @@ var import_jsx_dev_runtime25 = require("react/jsx-dev-runtime"), ValueItem2 = ({
       },
       this
     ),
-    isPlaceholder || disabled || !remove ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
+    isPlaceholder || disabled || !remove2 ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
       "div",
       {
         className: `
             ${theme.menuBgActive} ${theme.menuBgActiveHover} ${theme.textContrast}
             ${edit ? "ml-1" : "ml-2"} p-1 flex justify-center items-center rounded cursor-pointer
           `,
-        onClick: remove,
+        onClick: remove2,
         children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("svg", { width: "8", height: "8", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("line", { x2: "8", y2: "8", style: { stroke: "currentColor", strokeWidth: 2 } }, void 0, !1, {
             fileName: "app/modules/avl-components/src/components/Inputs/Select.js",
@@ -3157,7 +3174,7 @@ var import_jsx_dev_runtime25 = require("react/jsx-dev-runtime"), ValueItem2 = ({
     columnNumber: 5
   }, this);
 }, Dropdown2 = import_react27.default.forwardRef(
-  ({ children, searchable, opened, direction, themeOptions = {} }, ref) => {
+  ({ children: children2, searchable, opened, direction, themeOptions = {} }, ref) => {
     let theme = useTheme().select(themeOptions);
     return /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
       "div",
@@ -3168,7 +3185,7 @@ var import_jsx_dev_runtime25 = require("react/jsx-dev-runtime"), ValueItem2 = ({
     `,
         style: direction === "down" ? { top: "100%" } : { bottom: "100%" },
         ref,
-        children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("div", { className: `${theme.menuWrapper}`, children }, void 0, !1, {
+        children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("div", { className: `${theme.menuWrapper}`, children: children2 }, void 0, !1, {
           fileName: "app/modules/avl-components/src/components/Inputs/Select.js",
           lineNumber: 73,
           columnNumber: 9
@@ -3551,7 +3568,7 @@ var import_jsx_dev_runtime27 = require("react/jsx-dev-runtime"), boolean_input_d
 // app/modules/avl-components/src/components/Sidebar/collapsible-sidebar.js
 var import_react30 = __toESM(require("react"));
 var import_jsx_dev_runtime28 = require("react/jsx-dev-runtime"), SidebarContext = import_react30.default.createContext({});
-var Expandable = import_react30.default.forwardRef(({ open, transitioning, width, padding, children, heightFull = !0 }, ref) => {
+var Expandable = import_react30.default.forwardRef(({ open, transitioning, width, padding, children: children2, heightFull = !0 }, ref) => {
   let theme = useTheme(), hFull = heightFull ? "h-full" : "";
   return /* @__PURE__ */ (0, import_jsx_dev_runtime28.jsxDEV)(
     "div",
@@ -3577,7 +3594,7 @@ var Expandable = import_react30.default.forwardRef(({ open, transitioning, width
               lineNumber: 234,
               columnNumber: 9
             }, this),
-            children
+            children2
           ]
         },
         void 0,
@@ -3694,7 +3711,7 @@ var noop = () => {
 }), falcor = falcorGraph("https://graph.availabs.org");
 
 // app/modules/avl-falcor/index.js
-var import_jsx_dev_runtime30 = require("react/jsx-dev-runtime"), FalcorContext = import_react33.default.createContext(), useFalcor = () => import_react33.default.useContext(FalcorContext), FalcorConsumer = FalcorContext.Consumer, FalcorProvider = ({ falcor: falcor3, children }) => {
+var import_jsx_dev_runtime30 = require("react/jsx-dev-runtime"), FalcorContext = import_react33.default.createContext(), useFalcor = () => import_react33.default.useContext(FalcorContext), FalcorConsumer = FalcorContext.Consumer, FalcorProvider = ({ falcor: falcor3, children: children2 }) => {
   let [falcorCache, setFalcorCache] = import_react33.default.useState({}), updateCache = import_react33.default.useMemo(
     () => (0, import_lodash9.default)(() => {
       let cache = falcor3.getCache();
@@ -3709,7 +3726,7 @@ var import_jsx_dev_runtime30 = require("react/jsx-dev-runtime"), FalcorContext =
     () => ({ falcor: falcor3, falcorCache }),
     [falcor3, falcorCache]
   );
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime30.jsxDEV)(FalcorContext.Provider, { value: falcorValue, children }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime30.jsxDEV)(FalcorContext.Provider, { value: falcorValue, children: children2 }, void 0, !1, {
     fileName: "app/modules/avl-falcor/index.js",
     lineNumber: 35,
     columnNumber: 5
@@ -3717,7 +3734,7 @@ var import_jsx_dev_runtime30 = require("react/jsx-dev-runtime"), FalcorContext =
 };
 
 // app/styles/app.css
-var app_default = "/build/_assets/app-NRNYUNMN.css";
+var app_default = "/build/_assets/app-K2YGGATW.css";
 
 // app/theme.js
 var ppdaf = () => {
@@ -3726,7 +3743,7 @@ var ppdaf = () => {
     graphColors: ["#1e40af", "#93c5fd", "#1d4ed8", "#bfdbfe"],
     graphCategorical: ["#fde72f", "#95d840", "#55a488", "#2f708e", "#453781", "#472354"],
     sidenav: (opts = {}) => {
-      let { color = "white", size = "compact", subMenuStyle = "inline", responsive = "top" } = opts, mobile = {
+      let { color: color2 = "white", size = "compact", subMenuStyle = "inline", responsive = "top" } = opts, mobile = {
         top: "hidden md:block",
         side: "hidden md:block",
         none: ""
@@ -3829,21 +3846,21 @@ var ppdaf = () => {
       };
       return {
         fixed: `md:${sizes[size].fixed}`,
-        logoWrapper: `${sizes[size].wrapper} ${colors[color].contentBgAccent} ${colors[color].textColorAccent}`,
-        sidenavWrapper: `${mobile[responsive]} ${colors[color].contentBg} ${sizes[size].wrapper} h-full z-20`,
-        menuIconSide: `${sizes[size].icon} group-hover:${colors[color].highlightColor}`,
-        itemsWrapper: `${colors[color].borderColor} ${sizes[size].itemWrapper}  `,
+        logoWrapper: `${sizes[size].wrapper} ${colors[color2].contentBgAccent} ${colors[color2].textColorAccent}`,
+        sidenavWrapper: `${mobile[responsive]} ${colors[color2].contentBg} ${sizes[size].wrapper} h-full z-20`,
+        menuIconSide: `${sizes[size].icon} group-hover:${colors[color2].highlightColor}`,
+        itemsWrapper: `${colors[color2].borderColor} ${sizes[size].itemWrapper}  `,
         navItemContent: `${sizes[size].sideItemContent}`,
         navitemSide: `
             group font-sans flex flex-col
-            ${sizes[size].sideItem} ${colors[color].sideItem}
+            ${sizes[size].sideItem} ${colors[color2].sideItem}
             focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300
             transition-all cursor-pointer
          `,
         navitemSideActive: `
             group font-sans flex flex-col
-            ${sizes[size].sideItem} ${sizes[size].sideItemActive} ${colors[color].sideItemActive} 
-            hover:${colors[color].highlightColor}
+            ${sizes[size].sideItem} ${sizes[size].sideItemActive} ${colors[color2].sideItemActive} 
+            hover:${colors[color2].highlightColor}
             focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300
             transition-all cursor-pointer
 
@@ -3856,7 +3873,7 @@ var ppdaf = () => {
         }
       };
     },
-    topnav: ({ color = "white", size = "compact" }) => {
+    topnav: ({ color: color2 = "white", size = "compact" }) => {
       let colors = {
         white: {
           contentBg: "bg-slate-100",
@@ -3878,28 +3895,28 @@ var ppdaf = () => {
         compact: {
           menu: "hidden md:flex flex-1 justify-end",
           sideItem: "flex mx-6 pr-4 py-2 text-sm font-light hover:pl-4",
-          topItem: `flex items-center text-sm px-4 border-r h-12 ${colors[color].textColor} ${colors[color].borderColor}
-            ${colors[color].accentBg} hover:${colors[color].highlightColor}`,
-          activeItem: `flex items-center text-sm px-4 border-r h-12 ${colors[color].textColor} ${colors[color].borderColor}
-            ${colors[color].accentBg} hover:${colors[color].highlightColor}`,
+          topItem: `flex items-center text-sm px-4 border-r h-12 ${colors[color2].textColor} ${colors[color2].borderColor}
+            ${colors[color2].accentBg} hover:${colors[color2].highlightColor}`,
+          activeItem: `flex items-center text-sm px-4 border-r h-12 ${colors[color2].textColor} ${colors[color2].borderColor}
+            ${colors[color2].accentBg} hover:${colors[color2].highlightColor}`,
           icon: "mr-3 text-lg",
           responsive: "md:hidden"
         },
         inline: {
           menu: "flex flex-1",
           sideItem: "flex mx-4 pr-4 py-4 text-base font-base border-b hover:pl-4",
-          topItem: `flex px-4 py-2 mx-2 font-medium text-gray-400 border-b-2 ${colors[color].textColor} ${colors[color].borderColor}
+          topItem: `flex px-4 py-2 mx-2 font-medium text-gray-400 border-b-2 ${colors[color2].textColor} ${colors[color2].borderColor}
           hover:border-gray-300 hover:text-gray-700 border-gray-100 `,
-          activeItem: `flex px-4 py-2 mx-2 font-medium text-blue-600 border-b-2 ${colors[color].textColor} ${colors[color].borderColor} border-blue-600 `,
+          activeItem: `flex px-4 py-2 mx-2 font-medium text-blue-600 border-b-2 ${colors[color2].textColor} ${colors[color2].borderColor} border-blue-600 `,
           icon: "mr-4 text-2xl",
           responsive: "hidden"
         }
       };
       return {
-        topnavWrapper: `w-full ${colors[color].contentBg} border-b border-gray-200`,
+        topnavWrapper: `w-full ${colors[color2].contentBg} border-b border-gray-200`,
         topnavContent: "flex w-full h-full",
         topnavMenu: `${sizes[size].menu} h-full overflow-x-auto overflow-y-hidden scrollbar-sm`,
-        menuIconTop: `text-${colors[color].accentColor} ${sizes[size].icon} group-hover:${colors[color].highlightColor}`,
+        menuIconTop: `text-${colors[color2].accentColor} ${sizes[size].icon} group-hover:${colors[color2].highlightColor}`,
         menuOpenIcon: "fa fa-bars",
         menuCloseIcon: 'fa fa-xmark fa-fw"',
         navitemTop: `
@@ -3914,7 +3931,7 @@ var ppdaf = () => {
             focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300
             transition cursor-pointer
           `,
-        mobileButton: `${sizes[size].responsive} ${colors[color].contentBg} inline-flex items-center justify-center p-2  text-gray-400 hover:bg-gray-100 `,
+        mobileButton: `${sizes[size].responsive} ${colors[color2].contentBg} inline-flex items-center justify-center p-2  text-gray-400 hover:bg-gray-100 `,
         vars: {
           colors,
           sizes
@@ -3922,20 +3939,20 @@ var ppdaf = () => {
       };
     },
     select: (opts = {}) => {
-      let { color = "white" } = opts, colors = {
+      let { color: color2 = "white" } = opts, colors = {
         white: "white",
         transparent: "gray-100 border border-gray-200 shadow-sm"
       };
       return {
-        menuWrapper: `bg-${colors[color]} my-1`,
+        menuWrapper: `bg-${colors[color2]} my-1`,
         menuItemActive: `px-4 py-2 cursor-not-allowed bg-${accent}-200 border-1 focus:border-${accent}-300`,
-        menuItem: `px-4 py-2 cursor-pointer hover:bg-blue-100 border-1 border-${colors[color]} focus:border-blue-300`,
-        select: `bg-${colors[color]} w-full flex flex-row flex-wrap justify-between px-4 py-2 cursor-pointer focus:border-blue-300`,
+        menuItem: `px-4 py-2 cursor-pointer hover:bg-blue-100 border-1 border-${colors[color2]} focus:border-blue-300`,
+        select: `bg-${colors[color2]} w-full flex flex-row flex-wrap justify-between px-4 py-2 cursor-pointer focus:border-blue-300`,
         selectIcon: "fal fa-angle-down text-gray-400 pt-2"
       };
     },
     table: (opts = {}) => {
-      let { color = "white", size = "compact" } = opts, colors = {
+      let { color: color2 = "white", size = "compact" } = opts, colors = {
         white: "bg-white hover:bg-gray-100",
         gray: "bg-gray-100 hover:bg-gray-200",
         transparent: "gray-100"
@@ -3946,7 +3963,7 @@ var ppdaf = () => {
       return {
         tableHeader: `${sizes[size]} py-1 border-b-2 bg-gray-100 border-gray-200 text-left font-medium text-gray-600  first:rounded-tl-md last:rounded-tr-md`,
         tableInfoBar: "bg-white",
-        tableRow: `${colors[color]} transition ease-in-out duration-150 border-b border-gray-100`,
+        tableRow: `${colors[color2]} transition ease-in-out duration-150 border-b border-gray-100`,
         tableRowStriped: "bg-gray-100 even:bg-gray-200 hover:bg-gray-300 transition ease-in-out duration-150",
         tableCell: `${sizes[size]} whitespace-no-wrap`,
         inputSmall: "w-24",
@@ -3985,7 +4002,7 @@ var ppdaf = () => {
       };
     },
     button: (opts = {}) => {
-      let { color = "white", size = "base", width = "block" } = opts, colors = {
+      let { color: color2 = "white", size = "base", width = "block" } = opts, colors = {
         white: `
                     border border-gray-300  text-gray-700 bg-white hover:text-gray-500
                     focus:outline-none focus:shadow-outline-blue focus:border-blue-300
@@ -4020,7 +4037,7 @@ var ppdaf = () => {
       };
       return {
         button: `
-                  ${colors[color]} ${sizes[size]} ${widths[width]}
+                  ${colors[color2]} ${sizes[size]} ${widths[width]}
                 `,
         vars: {
           color: colors,
@@ -4030,7 +4047,7 @@ var ppdaf = () => {
       };
     },
     input: (opts = {}) => {
-      let { color = "white", size = "small", width = "block" } = opts, colors = {
+      let { color: color2 = "white", size = "small", width = "block" } = opts, colors = {
         white: "bg-white focus:outline-none",
         gray: "bg-gray-100"
       }, sizes = {
@@ -4043,7 +4060,7 @@ var ppdaf = () => {
       };
       return {
         input: `
-                 ${colors[color]} ${sizes[size]} ${widths[width]}
+                 ${colors[color2]} ${sizes[size]} ${widths[width]}
                 `,
         vars: {
           color: colors,
@@ -5332,12 +5349,12 @@ var import_react53 = __toESM(require("react"));
 var import_react50 = __toESM(require("react")), import_maplibre_gl = __toESM(require("maplibre-gl")), import_lodash14 = __toESM(require("lodash.get"));
 
 // app/modules/avl-map/src/components/utils.js
-var import_react47 = __toESM(require("react")), getRect = (ref) => {
+var import_react47 = __toESM(require("react")), getRect2 = (ref) => {
   let node = ref && ref.current;
   return node ? node.getBoundingClientRect() : { width: 0, height: 0 };
 }, useSetSize2 = (ref, callback) => {
   let [size, setSize] = import_react47.default.useState({ width: 0, height: 0, x: 0, y: 0 }), doSetSize = import_react47.default.useCallback(() => {
-    let rect = getRect(ref), { width, height, x, y } = rect;
+    let rect = getRect2(ref), { width, height, x, y } = rect;
     (width !== size.width || height !== size.height) && (typeof callback == "function" && callback({ width, height, x, y }), setSize({ width, height, x, y }));
   }, [ref, size, callback]);
   return import_react47.default.useEffect(() => (window.addEventListener("resize", doSetSize), () => {
@@ -5353,7 +5370,7 @@ var import_react48 = __toESM(require("react")), import_jsx_dev_runtime40 = requi
   cursor = "cursor-pointer",
   className = "",
   style = {},
-  children
+  children: children2
 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime40.jsxDEV)(
   "div",
   {
@@ -5363,7 +5380,7 @@ var import_react48 = __toESM(require("react")), import_jsx_dev_runtime40 = requi
         hover:text-blue-500 flex items-center justify-center
       `,
     style: { ...style },
-    children
+    children: children2
   },
   void 0,
   !1,
@@ -5394,7 +5411,7 @@ var import_react48 = __toESM(require("react")), import_jsx_dev_runtime40 = requi
     calc(-100% + ${x - 30}px),
     ${yTrans}
   )`;
-}, getTransform = ({ x }, orientation) => orientation === "right" ? "translate(-50%, -50%) rotate(45deg) skew(-15deg, -15deg)" : "translate(50%, -50%) rotate(45deg) skew(-15deg, -15deg)", RemoveButton = ({ orientation, children }) => /* @__PURE__ */ (0, import_jsx_dev_runtime40.jsxDEV)(
+}, getTransform = ({ x }, orientation) => orientation === "right" ? "translate(-50%, -50%) rotate(45deg) skew(-15deg, -15deg)" : "translate(50%, -50%) rotate(45deg) skew(-15deg, -15deg)", RemoveButton = ({ orientation, children: children2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime40.jsxDEV)(
   "div",
   {
     style: {
@@ -5405,7 +5422,7 @@ var import_react48 = __toESM(require("react")), import_jsx_dev_runtime40 = requi
         rounded absolute inline-block top-0 z-20
         ${orientation === "left" ? "left-0" : "right-0"}
       `,
-    children
+    children: children2
   },
   void 0,
   !1,
@@ -5415,7 +5432,7 @@ var import_react48 = __toESM(require("react")), import_jsx_dev_runtime40 = requi
     columnNumber: 5
   },
   this
-), PinnedHoverComp = ({ children, remove, id: id2, project, lngLat, width }) => {
+), PinnedHoverComp = ({ children: children2, remove: remove2, id: id3, project, lngLat, width }) => {
   let pos = project(lngLat), orientation = import_react48.default.useRef(pos.x < width * 0.5 ? "right" : "left"), style = import_react48.default.useMemo(() => ({
     top: "50%",
     transform: getTransform(pos, orientation.current)
@@ -5453,8 +5470,8 @@ var import_react48 = __toESM(require("react")), import_jsx_dev_runtime40 = requi
           },
           this
         ),
-        children,
-        /* @__PURE__ */ (0, import_jsx_dev_runtime40.jsxDEV)(RemoveButton, { orientation: orientation.current, children: /* @__PURE__ */ (0, import_jsx_dev_runtime40.jsxDEV)(Icon, { onClick: (e) => remove(id2), children: /* @__PURE__ */ (0, import_jsx_dev_runtime40.jsxDEV)("span", { className: "fa fa-times" }, void 0, !1, {
+        children2,
+        /* @__PURE__ */ (0, import_jsx_dev_runtime40.jsxDEV)(RemoveButton, { orientation: orientation.current, children: /* @__PURE__ */ (0, import_jsx_dev_runtime40.jsxDEV)(Icon, { onClick: (e) => remove2(id3), children: /* @__PURE__ */ (0, import_jsx_dev_runtime40.jsxDEV)("span", { className: "fa fa-times" }, void 0, !1, {
           fileName: "app/modules/avl-map/src/components/HoverCompContainer.js",
           lineNumber: 127,
           columnNumber: 13
@@ -5478,7 +5495,7 @@ var import_react48 = __toESM(require("react")), import_jsx_dev_runtime40 = requi
     },
     this
   );
-}, HoverCompContainer = ({ show, children, lngLat, project, ...rest }) => {
+}, HoverCompContainer = ({ show, children: children2, lngLat, project, ...rest }) => {
   let pos = project(lngLat);
   return /* @__PURE__ */ (0, import_jsx_dev_runtime40.jsxDEV)(
     "div",
@@ -5494,7 +5511,7 @@ var import_react48 = __toESM(require("react")), import_jsx_dev_runtime40 = requi
         transform: getTranslate(pos, rest),
         boxShadow: "2px 2px 8px 0px rgba(0, 0, 0, 0.75)"
       },
-      children
+      children: children2
     },
     void 0,
     !1,
@@ -5629,8 +5646,8 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
   center: [-74.180647, 42.58],
   zoom: 2.5
 }, getStaticImageUrl = (style, options = {}) => {
-  let { size, center, zoom } = { ...DefaultStaticOptions, ...options };
-  return `https://api.mapbox.com/styles/v1/${style.slice(16)}/static/${center},${zoom}/${size.join("x")}?attribution=false&logo=false&access_token=${import_maplibre_gl.default.accessToken}`;
+  let { size, center: center2, zoom } = { ...DefaultStaticOptions, ...options };
+  return `https://api.mapbox.com/styles/v1/${style.slice(16)}/static/${center2},${zoom}/${size.join("x")}?attribution=false&logo=false&access_token=${import_maplibre_gl.default.accessToken}`;
 }, InitialState = {
   map: null,
   initializedLayers: [],
@@ -5691,7 +5708,7 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
       return {
         ...state,
         activeLayers: state.activeLayers.filter(
-          ({ id: id2 }) => id2 !== payload.layerId
+          ({ id: id3 }) => id3 !== payload.layerId
         ),
         layerStates: {
           ...state.layerStates,
@@ -5703,10 +5720,10 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
         }
       };
     case "hover-layer-move": {
-      let { data, layer, HoverComp: HoverComp2, pinnable, sortOrder, ...rest } = payload;
+      let { data, layer, HoverComp: HoverComp3, pinnable, sortOrder, ...rest } = payload;
       return state.hoverData.data.set(layer.id, {
         data,
-        HoverComp: HoverComp2,
+        HoverComp: HoverComp3,
         layer,
         pinnable,
         sortOrder
@@ -5754,7 +5771,7 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
       return {
         ...state,
         dynamicLayers: state.dynamicLayers.filter(
-          ({ id: id2 }) => id2 !== payload.layer.id
+          ({ id: id3 }) => id3 !== payload.layer.id
         )
       };
     case "show-modal": {
@@ -5831,8 +5848,8 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
     navigationControl = "bottom-right",
     falcor: falcor3 = () => {
     }
-  } = props, [state, dispatch] = import_react50.default.useReducer(Reducer, InitialState), updateHover = import_react50.default.useCallback((hoverData2) => {
-    dispatch(hoverData2);
+  } = props, [state, dispatch2] = import_react50.default.useReducer(Reducer, InitialState), updateHover = import_react50.default.useCallback((hoverData2) => {
+    dispatch2(hoverData2);
   }, []), projectLngLat = import_react50.default.useCallback(
     (lngLat) => state.map.project(lngLat),
     [state.map]
@@ -5840,7 +5857,7 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
     (layer, filterName, value) => {
       if (!(0, import_lodash14.default)(layer, ["filters", filterName], null))
         return;
-      dispatch({ type: "loading-start", layerId: layer.id });
+      dispatch2({ type: "loading-start", layerId: layer.id });
       let prevValue = layer.filters[filterName].value;
       layer.filters = {
         ...layer.filters,
@@ -5852,14 +5869,14 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
       };
       let props2 = (0, import_lodash14.default)(layerProps, layer.id, {});
       Promise.resolve(layer.onFilterChange(filterName, value, prevValue, props2)).then(() => layer.fetchData(falcor3, props2)).then(() => layer.render(state.map, falcor3, props2)).then(() => {
-        dispatch({ type: "loading-stop", layerId: layer.id });
+        dispatch2({ type: "loading-stop", layerId: layer.id });
       });
     },
     [state.map, falcor3, layerProps]
   ), fetchData = import_react50.default.useCallback(
     (layer) => {
-      dispatch({ type: "loading-start", layerId: layer.id }), Promise.resolve(layer.fetchData(falcor3)).then(() => layer.render(state.map, falcor3)).then(() => {
-        dispatch({ type: "loading-stop", layerId: layer.id });
+      dispatch2({ type: "loading-start", layerId: layer.id }), Promise.resolve(layer.fetchData(falcor3)).then(() => layer.render(state.map, falcor3)).then(() => {
+        dispatch2({ type: "loading-stop", layerId: layer.id });
       });
     },
     [state.map, falcor3]
@@ -5868,17 +5885,17 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
       !(0, import_lodash14.default)(layer, "legend", null) || (layer.legend = {
         ...layer.legend,
         ...update
-      }, layer.render(state.map, falcor3), dispatch({ type: "update-state" }));
+      }, layer.render(state.map, falcor3), dispatch2({ type: "update-state" }));
     },
     [state.map, falcor3]
   ), addDynamicLayer = import_react50.default.useCallback((layer) => {
-    layer.isDynamic = !0, dispatch({
+    layer.isDynamic = !0, dispatch2({
       type: "add-dynamic-layer",
       layer
     });
   }, []), removeDynamicLayer = import_react50.default.useCallback(
     (layer) => {
-      layer._onRemove(state.map), dispatch({
+      layer._onRemove(state.map), dispatch2({
         type: "remove-dynamic-layer",
         layer
       });
@@ -5886,12 +5903,12 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
     [state.map]
   ), toggleVisibility = import_react50.default.useCallback(
     (layer) => {
-      layer.toggleVisibility(state.map), dispatch({ type: "update-state" });
+      layer.toggleVisibility(state.map), dispatch2({ type: "update-state" });
     },
     [state.map]
   ), addLayer = import_react50.default.useCallback(
     (layer) => {
-      layer._onAdd(state.map, falcor3, updateHover), dispatch({
+      layer._onAdd(state.map, falcor3, updateHover), dispatch2({
         type: "activate-layer",
         layer
       });
@@ -5899,45 +5916,45 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
     [state.map, falcor3, updateHover]
   ), removeLayer = import_react50.default.useCallback(
     (layer) => {
-      layer._onRemove(state.map), dispatch({
+      layer._onRemove(state.map), dispatch2({
         type: "deactivate-layer",
         layerId: layer.id
       });
     },
     [state.map]
   ), setSidebarTab = import_react50.default.useCallback((sidebarTabIndex) => {
-    dispatch({
+    dispatch2({
       type: "switch-tab",
       sidebarTabIndex
     });
   }, []), showModal = import_react50.default.useCallback((layerId, modalKey) => {
-    dispatch({
+    dispatch2({
       type: "show-modal",
       layerId,
       modalKey
     });
   }, []), closeModal = import_react50.default.useCallback((layerId, modalKey) => {
-    dispatch({
+    dispatch2({
       type: "close-modal",
       layerId,
       modalKey
     });
   }, []), bringModalToFront = import_react50.default.useCallback((layerId, modalKey) => {
-    dispatch({
+    dispatch2({
       type: "bring-modal-to-front",
       layerId,
       modalKey
     });
-  }, []), removePinnedHoverComp = import_react50.default.useCallback((id3) => {
-    dispatch({
+  }, []), removePinnedHoverComp = import_react50.default.useCallback((id4) => {
+    dispatch2({
       type: "remove-pinned",
-      id: id3
+      id: id4
     });
   }, []), addPinnedHoverComp = import_react50.default.useCallback(
     ({ lngLat, hoverData: hoverData2 }) => {
       if (hoverData2.pinnable) {
         let marker = new import_maplibre_gl.default.Marker().setLngLat(lngLat).addTo(state.map);
-        dispatch({
+        dispatch2({
           type: "pin-hover-comp",
           marker,
           lngLat
@@ -5959,7 +5976,7 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
         ), Promise.resolve());
       }), state.activeLayers.forEach((layer) => {
         layer._onRemove(state.map);
-      }), state.map.setStyle(state.mapStyles[styleIndex].style), dispatch({
+      }), state.map.setStyle(state.mapStyles[styleIndex].style), dispatch2({
         type: "set-map-style",
         styleIndex
       });
@@ -6002,7 +6019,7 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
       addPinnedHoverComp,
       projectLngLat
     ]
-  ), MapOptions = import_react50.default.useRef({ ...DefaultMapOptions, ...mapOptions }), id2 = import_react50.default.useRef(props.id || getUniqueId());
+  ), MapOptions = import_react50.default.useRef({ ...DefaultMapOptions, ...mapOptions }), id3 = import_react50.default.useRef(props.id || getUniqueId());
   import_react50.default.useEffect(() => {
     if (!accessToken)
       return;
@@ -6019,21 +6036,21 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
         imageUrl: getStaticImageUrl(style, Options)
       }) : styleIndex = index;
     }
-    let map = new import_maplibre_gl.default.Map({
-      container: id2.current,
+    let map2 = new import_maplibre_gl.default.Map({
+      container: id3.current,
       logoControl: !1,
       ...Options,
       style: mapStyles[styleIndex].style
     });
-    return navigationControl && map.addControl(new import_maplibre_gl.default.NavigationControl(), navigationControl), map.on("move", (e) => {
-      dispatch({ type: "update-state", mapMoved: performance.now() });
-    }), map.once("load", (e) => {
-      dispatch({ type: "map-loaded", map, mapStyles, styleIndex });
-    }), () => map.remove();
+    return navigationControl && map2.addControl(new import_maplibre_gl.default.NavigationControl(), navigationControl), map2.on("move", (e) => {
+      dispatch2({ type: "update-state", mapMoved: performance.now() });
+    }), map2.once("load", (e) => {
+      dispatch2({ type: "map-loaded", map: map2, mapStyles, styleIndex });
+    }), () => map2.remove();
   }, [accessToken, navigationControl]), import_react50.default.useEffect(() => {
-    !state.map || [...layers, ...state.dynamicLayers].filter(({ id: id3 }) => !state.initializedLayers.includes(id3)).reverse().reduce((promise, layer) => {
-      dispatch({ type: "init-layer", layer }), layer.dispatchStateUpdate = (layer2, newState) => {
-        dispatch({
+    !state.map || [...layers, ...state.dynamicLayers].filter(({ id: id4 }) => !state.initializedLayers.includes(id4)).reverse().reduce((promise, layer) => {
+      dispatch2({ type: "init-layer", layer }), layer.dispatchStateUpdate = (layer2, newState) => {
+        dispatch2({
           type: "layer-update",
           newState,
           layer: layer2
@@ -6046,7 +6063,7 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
       }), layer.mapActions.forEach((action7) => {
         action7.actionFunc = action7.action.bind(layer);
       }), promise.then(() => layer._init(state.map, falcor3, MapActions)).then(() => {
-        layer.setActive && layer.fetchData(falcor3).then(() => layer._onAdd(state.map, falcor3, updateHover)).then(() => dispatch({ type: "activate-layer", layer }));
+        layer.setActive && layer.fetchData(falcor3).then(() => layer._onAdd(state.map, falcor3, updateHover)).then(() => dispatch2({ type: "activate-layer", layer }));
       });
     }, Promise.resolve());
   }, [
@@ -6064,7 +6081,7 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
     ({ lngLat }) => {
       if (state.hoverData.pinnable) {
         let marker = new import_maplibre_gl.default.Marker().setLngLat(lngLat).addTo(state.map);
-        dispatch({
+        dispatch2({
           type: "pin-hover-comp",
           marker,
           lngLat
@@ -6105,7 +6122,7 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
       fetchData(layer);
     }), needsRender.forEach((layer) => {
       layer.render(state.map, falcor3);
-    }), (needsFetch.length || needsRender.length) && dispatch({
+    }), (needsFetch.length || needsRender.length) && dispatch2({
       type: "update-prev",
       layerProps,
       updateProps: needsFetch,
@@ -6121,11 +6138,11 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
     falcor3,
     fetchData
   ]);
-  let ref = import_react50.default.useRef(null), size = useSetSize2(ref), AllMapActions = import_react50.default.useMemo(() => ({ ...MapActions, setMapStyle }), [MapActions, setMapStyle]), getRect2 = import_react50.default.useCallback(() => ref.current ? ref.current.getBoundingClientRect() : { width: 0, height: 0 }, []), { width, height } = getRect2();
+  let ref = import_react50.default.useRef(null), size = useSetSize2(ref), AllMapActions = import_react50.default.useMemo(() => ({ ...MapActions, setMapStyle }), [MapActions, setMapStyle]), getRect3 = import_react50.default.useCallback(() => ref.current ? ref.current.getBoundingClientRect() : { width: 0, height: 0 }, []), { width, height } = getRect3();
   return import_react50.default.useEffect(() => {
     state.map && state.map.resize();
   }, [width, height, state.map]), /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)("div", { ref, className: "w-full h-full relative focus:outline-none", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)("div", { id: id2.current, className: "w-full h-full relative" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)("div", { id: id3.current, className: "w-full h-full relative" }, void 0, !1, {
       fileName: "app/modules/avl-map/src/avl-map.js",
       lineNumber: 915,
       columnNumber: 7
@@ -6186,18 +6203,18 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
       `,
         children: [
           state.pinnedHoverComps.map(
-            ({ HoverComps: HoverComps2, data, id: id3, ...hoverData2 }) => /* @__PURE__ */ (0, import_react51.createElement)(
+            ({ HoverComps: HoverComps2, data, id: id4, ...hoverData2 }) => /* @__PURE__ */ (0, import_react51.createElement)(
               PinnedHoverComp,
               {
                 ...hoverData2,
                 ...size,
                 remove: removePinnedHoverComp,
                 project: projectLngLat,
-                key: id3,
-                id: id3
+                key: id4,
+                id: id4
               },
-              HoverComps2.map(({ HoverComp: HoverComp2, data: data2, layer }, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)(
-                HoverComp2,
+              HoverComps2.map(({ HoverComp: HoverComp3, data: data2, layer }, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)(
+                HoverComp3,
                 {
                   layer,
                   data: data2,
@@ -6221,8 +6238,8 @@ var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime"), import_react51 
               ))
             )
           ),
-          Boolean(state.hoverData.data.size) ? /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)(HoverCompContainer, { ...hoverData, ...size, project: projectLngLat, children: HoverComps.map(({ HoverComp: HoverComp2, data, layer }, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)(
-            HoverComp2,
+          Boolean(state.hoverData.data.size) ? /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)(HoverCompContainer, { ...hoverData, ...size, project: projectLngLat, children: HoverComps.map(({ HoverComp: HoverComp3, data, layer }, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime42.jsxDEV)(
+            HoverComp3,
             {
               layer,
               data,
@@ -6351,8 +6368,8 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
     typeof newState == "function" ? this.state = newState(this.state) : this.state = { ...this.state, ...newState }, this.dispatchStateUpdate(this, this.state);
   }
   _onAdd(mapboxMap, falcor3, updateHover) {
-    return this.sources.forEach(({ id: id2, source }) => {
-      mapboxMap.getSource(id2) || mapboxMap.addSource(id2, source);
+    return this.sources.forEach(({ id: id3, source }) => {
+      mapboxMap.getSource(id3) || mapboxMap.addSource(id3, source);
     }), this.layers.forEach((layer) => {
       mapboxMap.getLayer(layer.id) || (layer.beneath && mapboxMap.getLayer(layer.beneath) ? mapboxMap.addLayer(layer, layer.beneath) : mapboxMap.addLayer(layer), this.isVisible || this._setVisibilityNone(mapboxMap, layer.id), this.layerVisibility[layer.id] = mapboxMap.getLayoutProperty(layer.id, "visibility"));
     }), this.onHover && this.addHover(mapboxMap, updateHover), this.onClick && this.addClick(mapboxMap), this.onBoxSelect && (this.state = {
@@ -6364,8 +6381,8 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
     return Promise.resolve();
   }
   addClick(mapboxMap) {
-    function click(layerId, { point, features, lngLat }) {
-      this.onClick.callback.call(this, layerId, features, lngLat, point);
+    function click(layerId, { point: point2, features, lngLat }) {
+      this.onClick.callback.call(this, layerId, features, lngLat, point2);
     }
     this.onClick.layers.forEach((layerId) => {
       if (layerId === "mapboxMap") {
@@ -6390,17 +6407,17 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
     }), this.hoveredFeatures.delete(layerId));
   }
   addHover(mapboxMap, updateHover) {
-    let callback = (0, import_lodash15.default)(this, ["onHover", "callback"], DefaultCallback).bind(this), HoverComp2 = (0, import_lodash15.default)(this, ["onHover", "HoverComp"], DefaultHoverComp_default), property = (0, import_lodash15.default)(this, ["onHover", "property"], null), filterFunc = (0, import_lodash15.default)(this, ["onHover", "filterFunc"], null), pinnable = (0, import_lodash15.default)(this, ["onHover", "pinnable"], !0), sortOrder = (0, import_lodash15.default)(this, ["onHover", "sortOrder"], 1 / 0), mousemove = (layerId, { point, features, lngLat }) => {
+    let callback = (0, import_lodash15.default)(this, ["onHover", "callback"], DefaultCallback).bind(this), HoverComp3 = (0, import_lodash15.default)(this, ["onHover", "HoverComp"], DefaultHoverComp_default), property = (0, import_lodash15.default)(this, ["onHover", "property"], null), filterFunc = (0, import_lodash15.default)(this, ["onHover", "filterFunc"], null), pinnable = (0, import_lodash15.default)(this, ["onHover", "pinnable"], !0), sortOrder = (0, import_lodash15.default)(this, ["onHover", "sortOrder"], 1 / 0), mousemove = (layerId, { point: point2, features, lngLat }) => {
       let hoveredFeatures = this.hoveredFeatures.get(layerId) || /* @__PURE__ */ new Map();
       this.hoveredFeatures.set(layerId, /* @__PURE__ */ new Map());
       let hoverFeatures = (features2) => {
-        features2.forEach(({ id: id2, source, sourceLayer }) => {
-          if (id2 != null)
-            if (hoveredFeatures.has(id2))
-              this.hoveredFeatures.get(layerId).set(id2, hoveredFeatures.get(id2)), hoveredFeatures.delete(id2);
+        features2.forEach(({ id: id3, source, sourceLayer }) => {
+          if (id3 != null)
+            if (hoveredFeatures.has(id3))
+              this.hoveredFeatures.get(layerId).set(id3, hoveredFeatures.get(id3)), hoveredFeatures.delete(id3);
             else {
-              let value = { id: id2, source, sourceLayer };
-              this.hoveredFeatures.get(layerId).set(id2, value), mapboxMap.setFeatureState(value, { hover: !0 });
+              let value = { id: id3, source, sourceLayer };
+              this.hoveredFeatures.get(layerId).set(id3, value), mapboxMap.setFeatureState(value, { hover: !0 });
             }
         });
       }, featuresMap = /* @__PURE__ */ new Map();
@@ -6417,8 +6434,8 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
         });
       }
       if (filterFunc) {
-        let filter = filterFunc.call(this, layerId, features, lngLat, point);
-        hasValue2(filter) && mapboxMap.queryRenderedFeatures({ layers: [layerId], filter }).forEach((feature) => {
+        let filter2 = filterFunc.call(this, layerId, features, lngLat, point2);
+        hasValue2(filter2) && mapboxMap.queryRenderedFeatures({ layers: [layerId], filter: filter2 }).forEach((feature) => {
           featuresMap.set(feature.id, feature);
         });
       }
@@ -6427,11 +6444,11 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
       }), hoverFeatures([...featuresMap.values()]), hoveredFeatures.forEach((value) => {
         mapboxMap.setFeatureState(value, { hover: !1 });
       });
-      let data = callback(layerId, features, lngLat, point);
+      let data = callback(layerId, features, lngLat, point2);
       hasValue2(data) && updateHover({
-        pos: [point.x, point.y],
+        pos: [point2.x, point2.y],
         type: "hover-layer-move",
-        HoverComp: HoverComp2,
+        HoverComp: HoverComp3,
         layer: this,
         pinnable,
         sortOrder,
@@ -6458,7 +6475,7 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
     }, this);
   }
   addBoxSelect(mapboxMap) {
-    let start, current, box, canvasContainer = mapboxMap.getCanvasContainer(), getPos = (e) => {
+    let start2, current, box, canvasContainer = mapboxMap.getCanvasContainer(), getPos = (e) => {
       let rect = canvasContainer.getBoundingClientRect();
       return new import_maplibre_gl2.default.Point(
         e.clientX - rect.left - canvasContainer.clientLeft,
@@ -6469,10 +6486,10 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
         let className = (0, import_lodash15.default)(this, ["onBoxSelect", "className"], "bg-black bg-opacity-50 border-2 border-black");
         box = document.createElement("div"), box.className = "absolute top-0 left-0 w-0 h-0 " + className, canvasContainer.appendChild(box);
       }
-      var minX = Math.min(start.x, current.x), maxX = Math.max(start.x, current.x), minY = Math.min(start.y, current.y), maxY = Math.max(start.y, current.y);
+      var minX = Math.min(start2.x, current.x), maxX = Math.max(start2.x, current.x), minY = Math.min(start2.y, current.y), maxY = Math.max(start2.y, current.y);
       box.style.transform = `translate( ${minX}px, ${minY}px)`, box.style.width = `${maxX - minX}px`, box.style.height = `${maxY - minY}px`;
     }, mouseup = (e) => {
-      finish([start, getPos(e)]);
+      finish([start2, getPos(e)]);
     }, keyup = (e) => {
       (e.keyCode === 27 || e.which === 27 || e.code === "Escape") && finish();
     }, finish = (bbox) => {
@@ -6494,7 +6511,7 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
         }), this.updateState({ selection: features });
       }
     }, mousedown = (e) => {
-      !(e.shiftKey && e.button === 0) || (document.addEventListener("mousemove", mousemove), document.addEventListener("mouseup", mouseup), document.addEventListener("keydown", keyup), mapboxMap.dragPan.disable(), start = getPos(e));
+      !(e.shiftKey && e.button === 0) || (document.addEventListener("mousemove", mousemove), document.addEventListener("mouseup", mouseup), document.addEventListener("keydown", keyup), mapboxMap.dragPan.disable(), start2 = getPos(e));
     };
     this.callbacks.push({
       action: "mousemove",
@@ -6507,8 +6524,8 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
       let { action: action7, layerId, callback, element } = this.callbacks.pop();
       element ? element.removeEventListener(action7, callback) : layerId ? this.mapboxMap.off(action7, layerId, callback) : this.mapboxMap.off(action7, callback);
     }
-    this.layers.forEach(({ id: id2 }) => {
-      this.mapboxMap.removeLayer(id2);
+    this.layers.forEach(({ id: id3 }) => {
+      this.mapboxMap.removeLayer(id3);
     }), this.onRemove(this.mapboxMap);
   }
   onRemove(mapboxMap) {
@@ -6519,8 +6536,8 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
   render(mapboxMap, falcor3) {
   }
   toggleVisibility(mapboxMap) {
-    this.isVisible = !this.isVisible, this.layers.forEach(({ id: id2 }) => {
-      this.isVisible ? this._setVisibilityVisible(mapboxMap, id2) : this._setVisibilityNone(mapboxMap, id2);
+    this.isVisible = !this.isVisible, this.layers.forEach(({ id: id3 }) => {
+      this.isVisible ? this._setVisibilityVisible(mapboxMap, id3) : this._setVisibilityNone(mapboxMap, id3);
     });
   }
   _setVisibilityVisible(mapboxMap, layerId) {
@@ -6542,7 +6559,7 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
 
 // app/modules/data-manager/data-types/freight_atlas_shapefile/FreightAtlasLayer.js
 var import_lodash16 = __toESM(require("lodash.get")), import_jsx_dev_runtime44 = require("react/jsx-dev-runtime"), HoverComp = ({ data, layer }) => {
-  let { falcor: falcor3, falcorCache } = useFalcor(), { layerName, version } = layer, id2 = import_react53.default.useMemo(() => (0, import_lodash16.default)(data, "[0]", null), [data]), attributes = import_react53.default.useMemo(
+  let { falcor: falcor3, falcorCache } = useFalcor(), { layerName, version } = layer, id3 = import_react53.default.useMemo(() => (0, import_lodash16.default)(data, "[0]", null), [data]), attributes = import_react53.default.useMemo(
     () => (0, import_lodash16.default)(layer.source, "metadata", []).map((d) => d.name).filter((d) => !["wkb_geometry", "objectid", "objectid_1"].includes(d)),
     [layer.source]
   );
@@ -6554,26 +6571,26 @@ var import_lodash16 = __toESM(require("lodash.get")), import_jsx_dev_runtime44 =
         "byVersion",
         version,
         "byId",
-        id2,
+        id3,
         attributes
       ]
     );
-  }, [id2, layerName, version, attributes, falcor3]);
+  }, [id3, layerName, version, attributes, falcor3]);
   let AttrInfo = import_react53.default.useMemo(() => (0, import_lodash16.default)(falcorCache, [
     "nysdot-freight-atlas",
     layerName,
     "byVersion",
     version,
     "byId",
-    id2
-  ], {}), [id2, falcorCache, layerName, version]);
+    id3
+  ], {}), [id3, falcorCache, layerName, version]);
   return /* @__PURE__ */ (0, import_jsx_dev_runtime44.jsxDEV)("div", { className: "bg-white p-4 max-h-64 scrollbar-xs overflow-y-scroll", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime44.jsxDEV)("div", { className: "font-medium pb-1 w-full border-b ", children: layer.source.display_name }, void 0, !1, {
       fileName: "app/modules/data-manager/data-types/freight_atlas_shapefile/FreightAtlasLayer.js",
       lineNumber: 42,
       columnNumber: 7
     }, this),
-    Object.keys(AttrInfo).length === 0 ? `Fetching Attributes ${id2}` : "",
+    Object.keys(AttrInfo).length === 0 ? `Fetching Attributes ${id3}` : "",
     Object.keys(AttrInfo).map(
       (k, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime44.jsxDEV)("div", { className: "flex border-b pt-1", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime44.jsxDEV)("div", { className: "flex-1 font-medium text-sm pl-1", children: k }, void 0, !1, {
@@ -6611,7 +6628,7 @@ var import_lodash16 = __toESM(require("lodash.get")), import_jsx_dev_runtime44 =
     callback: (layerId, features, lngLat) => [features[0].properties.id, layerId],
     HoverComp
   };
-  init(map, falcor3) {
+  init(map2, falcor3) {
     console.log("init freight atlas layer");
     let { data_table } = (0, import_lodash16.default)(this, `views[${this.activeView}]`, "");
     this.layerName = (0, import_lodash16.default)(data_table.split("."), "[1]", "").slice(0, -6), this.version = (0, import_lodash16.default)(data_table.split("."), "[1]", "").slice(-4);
@@ -6644,7 +6661,7 @@ var import_lodash16 = __toESM(require("lodash.get")), import_jsx_dev_runtime44 =
       ]) : res;
     }) : Promise.resolve({});
   }
-  render(map) {
+  render(map2) {
     let { layerName, version } = this, falcorCache = this.falcor.getCache(), versionData = (0, import_lodash16.default)(falcorCache, [
       "nysdot-freight-atlas",
       layerName,
@@ -6655,7 +6672,7 @@ var import_lodash16 = __toESM(require("lodash.get")), import_jsx_dev_runtime44 =
     (0, import_lodash16.default)(this, "symbology", []).forEach((sym) => {
       switch (sym.type) {
         case "simple":
-          map.setPaintProperty(`${layerName}_v${version}`, sym.paint, isNaN(+sym.value) ? sym.value : +sym.value);
+          map2.setPaintProperty(`${layerName}_v${version}`, sym.paint, isNaN(+sym.value) ? sym.value : +sym.value);
           break;
         default:
           console.log("no type for symbology", sym);
@@ -8903,7 +8920,7 @@ var import_lodash24 = __toESM(require("lodash.get")), import_jsx_dev_runtime66 =
     columnNumber: 5
   },
   this
-), fnum = (number) => parseInt(number).toLocaleString(), Stats4 = ({ source, views }) => {
+), fnum = (number4) => parseInt(number4).toLocaleString(), Stats4 = ({ source, views }) => {
   let { falcor: falcor3, falcorCache } = useFalcor(), [activeView, setActiveView] = (0, import_react75.useState)(views[0].view_id), [compareView, setCompareView] = (0, import_react75.useState)(views[0].view_id), [compareMode, setCompareMode] = (0, import_react75.useState)(void 0);
   (0, import_react75.useEffect)(() => {
     falcor3.get(
@@ -9408,7 +9425,7 @@ var import_lodash26 = __toESM(require("lodash.get")), import_jsx_dev_runtime68 =
     columnNumber: 5
   },
   this
-), fnum2 = (number) => parseInt(number).toLocaleString(), Stats5 = ({ source, views }) => {
+), fnum2 = (number4) => parseInt(number4).toLocaleString(), Stats5 = ({ source, views }) => {
   let { falcor: falcor3, falcorCache } = useFalcor(), [activeView, setActiveView] = (0, import_react77.useState)(views[0].view_id), [compareView, setCompareView] = (0, import_react77.useState)(views[0].view_id), [compareMode, setCompareMode] = (0, import_react77.useState)(void 0);
   (0, import_react77.useEffect)(() => {
     falcor3.get(
@@ -10328,9 +10345,9 @@ function sourceCreate() {
   }, this);
 }
 
-// app/routes/__dama/index.(cat).js
-var index_cat_exports = {};
-__export(index_cat_exports, {
+// app/routes/__dama/datasources.js
+var datasources_exports = {};
+__export(datasources_exports, {
   ErrorBoundary: () => ErrorBoundary,
   default: () => Dama3,
   loader: () => loader7
@@ -10363,17 +10380,17 @@ function Dama3() {
       void 0,
       !1,
       {
-        fileName: "app/routes/__dama/index.(cat).js",
+        fileName: "app/routes/__dama/datasources.js",
         lineNumber: 32,
         columnNumber: 21
       },
       this
     ) }, void 0, !1, {
-      fileName: "app/routes/__dama/index.(cat).js",
+      fileName: "app/routes/__dama/datasources.js",
       lineNumber: 31,
       columnNumber: 17
     }, this) }, void 0, !1, {
-      fileName: "app/routes/__dama/index.(cat).js",
+      fileName: "app/routes/__dama/datasources.js",
       lineNumber: 30,
       columnNumber: 13
     }, this),
@@ -10381,23 +10398,23 @@ function Dama3() {
       let searchTerm = source.name + " " + (0, import_lodash32.default)(source, "categories[0]", []).join(" ");
       return !layerSearch.length > 2 || searchTerm.toLowerCase().includes(layerSearch.toLowerCase());
     }).map((s, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(SourceThumb, { source: s }, i, !1, {
-      fileName: "app/routes/__dama/index.(cat).js",
+      fileName: "app/routes/__dama/datasources.js",
       lineNumber: 46,
       columnNumber: 36
     }, this))
   ] }, void 0, !0, {
-    fileName: "app/routes/__dama/index.(cat).js",
+    fileName: "app/routes/__dama/datasources.js",
     lineNumber: 29,
     columnNumber: 9
   }, this);
 }
 var SourceThumb = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "w-full p-4 bg-white my-1 hover:bg-blue-50 block border shadow flex", children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(import_react89.Link, { to: `/source/${source.source_id}`, className: "text-xl font-medium w-full block", children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("span", { children: source.name }, void 0, !1, {
-    fileName: "app/routes/__dama/index.(cat).js",
+    fileName: "app/routes/__dama/datasources.js",
     lineNumber: 56,
     columnNumber: 17
   }, this) }, void 0, !1, {
-    fileName: "app/routes/__dama/index.(cat).js",
+    fileName: "app/routes/__dama/datasources.js",
     lineNumber: 55,
     columnNumber: 13
   }, this),
@@ -10411,23 +10428,23 @@ var SourceThumb = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime74.j
     i,
     !1,
     {
-      fileName: "app/routes/__dama/index.(cat).js",
+      fileName: "app/routes/__dama/datasources.js",
       lineNumber: 61,
       columnNumber: 25
     },
     this
   ))) }, void 0, !1, {
-    fileName: "app/routes/__dama/index.(cat).js",
+    fileName: "app/routes/__dama/datasources.js",
     lineNumber: 58,
     columnNumber: 13
   }, this),
   /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(import_react89.Link, { to: `/source/${source.source_id}`, className: "py-2 block", children: source.description }, void 0, !1, {
-    fileName: "app/routes/__dama/index.(cat).js",
+    fileName: "app/routes/__dama/datasources.js",
     lineNumber: 66,
     columnNumber: 13
   }, this),
   /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(import_react89.Link, { to: `/source/${source.source_id}`, className: "py-2 block", children: source._created_timestamp }, void 0, !1, {
-    fileName: "app/routes/__dama/index.(cat).js",
+    fileName: "app/routes/__dama/datasources.js",
     lineNumber: 69,
     columnNumber: 13
   }, this),
@@ -10441,42 +10458,3762 @@ var SourceThumb = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime74.j
     void 0,
     !1,
     {
-      fileName: "app/routes/__dama/index.(cat).js",
+      fileName: "app/routes/__dama/datasources.js",
       lineNumber: 72,
       columnNumber: 13
     },
     this
   )
 ] }, void 0, !0, {
-  fileName: "app/routes/__dama/index.(cat).js",
+  fileName: "app/routes/__dama/datasources.js",
   lineNumber: 54,
   columnNumber: 9
 }, this);
 function ErrorBoundary({ error }) {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("h1", { children: "Error" }, void 0, !1, {
-      fileName: "app/routes/__dama/index.(cat).js",
+      fileName: "app/routes/__dama/datasources.js",
       lineNumber: 81,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("p", { children: error.message }, void 0, !1, {
-      fileName: "app/routes/__dama/index.(cat).js",
+      fileName: "app/routes/__dama/datasources.js",
       lineNumber: 82,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("p", { children: "The stack trace is:" }, void 0, !1, {
-      fileName: "app/routes/__dama/index.(cat).js",
+      fileName: "app/routes/__dama/datasources.js",
       lineNumber: 83,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("pre", { children: error.stack }, void 0, !1, {
-      fileName: "app/routes/__dama/index.(cat).js",
+      fileName: "app/routes/__dama/datasources.js",
       lineNumber: 84,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
-    fileName: "app/routes/__dama/index.(cat).js",
+    fileName: "app/routes/__dama/datasources.js",
     lineNumber: 80,
+    columnNumber: 9
+  }, this);
+}
+
+// app/routes/__dama/index.(cat).js
+var index_cat_exports = {};
+__export(index_cat_exports, {
+  default: () => SourceThumb2,
+  loader: () => loader8
+});
+var import_react96 = __toESM(require("react"));
+var import_react97 = require("@remix-run/react"), import_lodash36 = __toESM(require("lodash.get"));
+
+// app/modules/avl-graph/src/BarGraph.js
+var import_react95 = __toESM(require("react"));
+
+// node_modules/d3-array/src/ascending.js
+function ascending(a, b) {
+  return a == null || b == null ? NaN : a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
+}
+
+// node_modules/d3-array/src/descending.js
+function descending(a, b) {
+  return a == null || b == null ? NaN : b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
+}
+
+// node_modules/d3-array/src/bisector.js
+function bisector(f) {
+  let compare1, compare2, delta;
+  f.length !== 2 ? (compare1 = ascending, compare2 = (d, x) => ascending(f(d), x), delta = (d, x) => f(d) - x) : (compare1 = f === ascending || f === descending ? f : zero, compare2 = f, delta = f);
+  function left2(a, x, lo = 0, hi = a.length) {
+    if (lo < hi) {
+      if (compare1(x, x) !== 0)
+        return hi;
+      do {
+        let mid = lo + hi >>> 1;
+        compare2(a[mid], x) < 0 ? lo = mid + 1 : hi = mid;
+      } while (lo < hi);
+    }
+    return lo;
+  }
+  function right2(a, x, lo = 0, hi = a.length) {
+    if (lo < hi) {
+      if (compare1(x, x) !== 0)
+        return hi;
+      do {
+        let mid = lo + hi >>> 1;
+        compare2(a[mid], x) <= 0 ? lo = mid + 1 : hi = mid;
+      } while (lo < hi);
+    }
+    return lo;
+  }
+  function center2(a, x, lo = 0, hi = a.length) {
+    let i = left2(a, x, lo, hi - 1);
+    return i > lo && delta(a[i - 1], x) > -delta(a[i], x) ? i - 1 : i;
+  }
+  return { left: left2, center: center2, right: right2 };
+}
+function zero() {
+  return 0;
+}
+
+// node_modules/d3-array/src/number.js
+function number(x) {
+  return x === null ? NaN : +x;
+}
+
+// node_modules/d3-array/src/bisect.js
+var ascendingBisect = bisector(ascending), bisectRight = ascendingBisect.right, bisectLeft = ascendingBisect.left, bisectCenter = bisector(number).center, bisect_default = bisectRight;
+
+// node_modules/internmap/src/index.js
+var InternMap = class extends Map {
+  constructor(entries, key = keyof) {
+    if (super(), Object.defineProperties(this, { _intern: { value: /* @__PURE__ */ new Map() }, _key: { value: key } }), entries != null)
+      for (let [key2, value] of entries)
+        this.set(key2, value);
+  }
+  get(key) {
+    return super.get(intern_get(this, key));
+  }
+  has(key) {
+    return super.has(intern_get(this, key));
+  }
+  set(key, value) {
+    return super.set(intern_set(this, key), value);
+  }
+  delete(key) {
+    return super.delete(intern_delete(this, key));
+  }
+};
+function intern_get({ _intern, _key }, value) {
+  let key = _key(value);
+  return _intern.has(key) ? _intern.get(key) : value;
+}
+function intern_set({ _intern, _key }, value) {
+  let key = _key(value);
+  return _intern.has(key) ? _intern.get(key) : (_intern.set(key, value), value);
+}
+function intern_delete({ _intern, _key }, value) {
+  let key = _key(value);
+  return _intern.has(key) && (value = _intern.get(key), _intern.delete(key)), value;
+}
+function keyof(value) {
+  return value !== null && typeof value == "object" ? value.valueOf() : value;
+}
+
+// node_modules/d3-array/src/ticks.js
+var e10 = Math.sqrt(50), e5 = Math.sqrt(10), e2 = Math.sqrt(2);
+function tickSpec(start2, stop, count) {
+  let step = (stop - start2) / Math.max(0, count), power = Math.floor(Math.log10(step)), error = step / Math.pow(10, power), factor = error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1, i1, i2, inc;
+  return power < 0 ? (inc = Math.pow(10, -power) / factor, i1 = Math.round(start2 * inc), i2 = Math.round(stop * inc), i1 / inc < start2 && ++i1, i2 / inc > stop && --i2, inc = -inc) : (inc = Math.pow(10, power) * factor, i1 = Math.round(start2 / inc), i2 = Math.round(stop / inc), i1 * inc < start2 && ++i1, i2 * inc > stop && --i2), i2 < i1 && 0.5 <= count && count < 2 ? tickSpec(start2, stop, count * 2) : [i1, i2, inc];
+}
+function ticks(start2, stop, count) {
+  if (stop = +stop, start2 = +start2, count = +count, !(count > 0))
+    return [];
+  if (start2 === stop)
+    return [start2];
+  let reverse = stop < start2, [i1, i2, inc] = reverse ? tickSpec(stop, start2, count) : tickSpec(start2, stop, count);
+  if (!(i2 >= i1))
+    return [];
+  let n = i2 - i1 + 1, ticks2 = new Array(n);
+  if (reverse)
+    if (inc < 0)
+      for (let i = 0; i < n; ++i)
+        ticks2[i] = (i2 - i) / -inc;
+    else
+      for (let i = 0; i < n; ++i)
+        ticks2[i] = (i2 - i) * inc;
+  else if (inc < 0)
+    for (let i = 0; i < n; ++i)
+      ticks2[i] = (i1 + i) / -inc;
+  else
+    for (let i = 0; i < n; ++i)
+      ticks2[i] = (i1 + i) * inc;
+  return ticks2;
+}
+function tickIncrement(start2, stop, count) {
+  return stop = +stop, start2 = +start2, count = +count, tickSpec(start2, stop, count)[2];
+}
+function tickStep(start2, stop, count) {
+  stop = +stop, start2 = +start2, count = +count;
+  let reverse = stop < start2, inc = reverse ? tickIncrement(stop, start2, count) : tickIncrement(start2, stop, count);
+  return (reverse ? -1 : 1) * (inc < 0 ? 1 / -inc : inc);
+}
+
+// node_modules/d3-array/src/range.js
+function range(start2, stop, step) {
+  start2 = +start2, stop = +stop, step = (n = arguments.length) < 2 ? (stop = start2, start2 = 0, 1) : n < 3 ? 1 : +step;
+  for (var i = -1, n = Math.max(0, Math.ceil((stop - start2) / step)) | 0, range2 = new Array(n); ++i < n; )
+    range2[i] = start2 + i * step;
+  return range2;
+}
+
+// node_modules/d3-scale/src/init.js
+function initRange(domain, range2) {
+  switch (arguments.length) {
+    case 0:
+      break;
+    case 1:
+      this.range(domain);
+      break;
+    default:
+      this.range(range2).domain(domain);
+      break;
+  }
+  return this;
+}
+
+// node_modules/d3-scale/src/ordinal.js
+var implicit = Symbol("implicit");
+function ordinal() {
+  var index = new InternMap(), domain = [], range2 = [], unknown = implicit;
+  function scale(d) {
+    let i = index.get(d);
+    if (i === void 0) {
+      if (unknown !== implicit)
+        return unknown;
+      index.set(d, i = domain.push(d) - 1);
+    }
+    return range2[i % range2.length];
+  }
+  return scale.domain = function(_) {
+    if (!arguments.length)
+      return domain.slice();
+    domain = [], index = new InternMap();
+    for (let value of _)
+      index.has(value) || index.set(value, domain.push(value) - 1);
+    return scale;
+  }, scale.range = function(_) {
+    return arguments.length ? (range2 = Array.from(_), scale) : range2.slice();
+  }, scale.unknown = function(_) {
+    return arguments.length ? (unknown = _, scale) : unknown;
+  }, scale.copy = function() {
+    return ordinal(domain, range2).unknown(unknown);
+  }, initRange.apply(scale, arguments), scale;
+}
+
+// node_modules/d3-scale/src/band.js
+function band() {
+  var scale = ordinal().unknown(void 0), domain = scale.domain, ordinalRange = scale.range, r0 = 0, r1 = 1, step, bandwidth, round = !1, paddingInner = 0, paddingOuter = 0, align = 0.5;
+  delete scale.unknown;
+  function rescale() {
+    var n = domain().length, reverse = r1 < r0, start2 = reverse ? r1 : r0, stop = reverse ? r0 : r1;
+    step = (stop - start2) / Math.max(1, n - paddingInner + paddingOuter * 2), round && (step = Math.floor(step)), start2 += (stop - start2 - step * (n - paddingInner)) * align, bandwidth = step * (1 - paddingInner), round && (start2 = Math.round(start2), bandwidth = Math.round(bandwidth));
+    var values = range(n).map(function(i) {
+      return start2 + step * i;
+    });
+    return ordinalRange(reverse ? values.reverse() : values);
+  }
+  return scale.domain = function(_) {
+    return arguments.length ? (domain(_), rescale()) : domain();
+  }, scale.range = function(_) {
+    return arguments.length ? ([r0, r1] = _, r0 = +r0, r1 = +r1, rescale()) : [r0, r1];
+  }, scale.rangeRound = function(_) {
+    return [r0, r1] = _, r0 = +r0, r1 = +r1, round = !0, rescale();
+  }, scale.bandwidth = function() {
+    return bandwidth;
+  }, scale.step = function() {
+    return step;
+  }, scale.round = function(_) {
+    return arguments.length ? (round = !!_, rescale()) : round;
+  }, scale.padding = function(_) {
+    return arguments.length ? (paddingInner = Math.min(1, paddingOuter = +_), rescale()) : paddingInner;
+  }, scale.paddingInner = function(_) {
+    return arguments.length ? (paddingInner = Math.min(1, _), rescale()) : paddingInner;
+  }, scale.paddingOuter = function(_) {
+    return arguments.length ? (paddingOuter = +_, rescale()) : paddingOuter;
+  }, scale.align = function(_) {
+    return arguments.length ? (align = Math.max(0, Math.min(1, _)), rescale()) : align;
+  }, scale.copy = function() {
+    return band(domain(), [r0, r1]).round(round).paddingInner(paddingInner).paddingOuter(paddingOuter).align(align);
+  }, initRange.apply(rescale(), arguments);
+}
+
+// node_modules/d3-color/src/define.js
+function define_default(constructor, factory, prototype) {
+  constructor.prototype = factory.prototype = prototype, prototype.constructor = constructor;
+}
+function extend(parent, definition) {
+  var prototype = Object.create(parent.prototype);
+  for (var key in definition)
+    prototype[key] = definition[key];
+  return prototype;
+}
+
+// node_modules/d3-color/src/color.js
+function Color() {
+}
+var darker = 0.7, brighter = 1 / darker, reI = "\\s*([+-]?\\d+)\\s*", reN = "\\s*([+-]?(?:\\d*\\.)?\\d+(?:[eE][+-]?\\d+)?)\\s*", reP = "\\s*([+-]?(?:\\d*\\.)?\\d+(?:[eE][+-]?\\d+)?)%\\s*", reHex = /^#([0-9a-f]{3,8})$/, reRgbInteger = new RegExp(`^rgb\\(${reI},${reI},${reI}\\)$`), reRgbPercent = new RegExp(`^rgb\\(${reP},${reP},${reP}\\)$`), reRgbaInteger = new RegExp(`^rgba\\(${reI},${reI},${reI},${reN}\\)$`), reRgbaPercent = new RegExp(`^rgba\\(${reP},${reP},${reP},${reN}\\)$`), reHslPercent = new RegExp(`^hsl\\(${reN},${reP},${reP}\\)$`), reHslaPercent = new RegExp(`^hsla\\(${reN},${reP},${reP},${reN}\\)$`), named = {
+  aliceblue: 15792383,
+  antiquewhite: 16444375,
+  aqua: 65535,
+  aquamarine: 8388564,
+  azure: 15794175,
+  beige: 16119260,
+  bisque: 16770244,
+  black: 0,
+  blanchedalmond: 16772045,
+  blue: 255,
+  blueviolet: 9055202,
+  brown: 10824234,
+  burlywood: 14596231,
+  cadetblue: 6266528,
+  chartreuse: 8388352,
+  chocolate: 13789470,
+  coral: 16744272,
+  cornflowerblue: 6591981,
+  cornsilk: 16775388,
+  crimson: 14423100,
+  cyan: 65535,
+  darkblue: 139,
+  darkcyan: 35723,
+  darkgoldenrod: 12092939,
+  darkgray: 11119017,
+  darkgreen: 25600,
+  darkgrey: 11119017,
+  darkkhaki: 12433259,
+  darkmagenta: 9109643,
+  darkolivegreen: 5597999,
+  darkorange: 16747520,
+  darkorchid: 10040012,
+  darkred: 9109504,
+  darksalmon: 15308410,
+  darkseagreen: 9419919,
+  darkslateblue: 4734347,
+  darkslategray: 3100495,
+  darkslategrey: 3100495,
+  darkturquoise: 52945,
+  darkviolet: 9699539,
+  deeppink: 16716947,
+  deepskyblue: 49151,
+  dimgray: 6908265,
+  dimgrey: 6908265,
+  dodgerblue: 2003199,
+  firebrick: 11674146,
+  floralwhite: 16775920,
+  forestgreen: 2263842,
+  fuchsia: 16711935,
+  gainsboro: 14474460,
+  ghostwhite: 16316671,
+  gold: 16766720,
+  goldenrod: 14329120,
+  gray: 8421504,
+  green: 32768,
+  greenyellow: 11403055,
+  grey: 8421504,
+  honeydew: 15794160,
+  hotpink: 16738740,
+  indianred: 13458524,
+  indigo: 4915330,
+  ivory: 16777200,
+  khaki: 15787660,
+  lavender: 15132410,
+  lavenderblush: 16773365,
+  lawngreen: 8190976,
+  lemonchiffon: 16775885,
+  lightblue: 11393254,
+  lightcoral: 15761536,
+  lightcyan: 14745599,
+  lightgoldenrodyellow: 16448210,
+  lightgray: 13882323,
+  lightgreen: 9498256,
+  lightgrey: 13882323,
+  lightpink: 16758465,
+  lightsalmon: 16752762,
+  lightseagreen: 2142890,
+  lightskyblue: 8900346,
+  lightslategray: 7833753,
+  lightslategrey: 7833753,
+  lightsteelblue: 11584734,
+  lightyellow: 16777184,
+  lime: 65280,
+  limegreen: 3329330,
+  linen: 16445670,
+  magenta: 16711935,
+  maroon: 8388608,
+  mediumaquamarine: 6737322,
+  mediumblue: 205,
+  mediumorchid: 12211667,
+  mediumpurple: 9662683,
+  mediumseagreen: 3978097,
+  mediumslateblue: 8087790,
+  mediumspringgreen: 64154,
+  mediumturquoise: 4772300,
+  mediumvioletred: 13047173,
+  midnightblue: 1644912,
+  mintcream: 16121850,
+  mistyrose: 16770273,
+  moccasin: 16770229,
+  navajowhite: 16768685,
+  navy: 128,
+  oldlace: 16643558,
+  olive: 8421376,
+  olivedrab: 7048739,
+  orange: 16753920,
+  orangered: 16729344,
+  orchid: 14315734,
+  palegoldenrod: 15657130,
+  palegreen: 10025880,
+  paleturquoise: 11529966,
+  palevioletred: 14381203,
+  papayawhip: 16773077,
+  peachpuff: 16767673,
+  peru: 13468991,
+  pink: 16761035,
+  plum: 14524637,
+  powderblue: 11591910,
+  purple: 8388736,
+  rebeccapurple: 6697881,
+  red: 16711680,
+  rosybrown: 12357519,
+  royalblue: 4286945,
+  saddlebrown: 9127187,
+  salmon: 16416882,
+  sandybrown: 16032864,
+  seagreen: 3050327,
+  seashell: 16774638,
+  sienna: 10506797,
+  silver: 12632256,
+  skyblue: 8900331,
+  slateblue: 6970061,
+  slategray: 7372944,
+  slategrey: 7372944,
+  snow: 16775930,
+  springgreen: 65407,
+  steelblue: 4620980,
+  tan: 13808780,
+  teal: 32896,
+  thistle: 14204888,
+  tomato: 16737095,
+  turquoise: 4251856,
+  violet: 15631086,
+  wheat: 16113331,
+  white: 16777215,
+  whitesmoke: 16119285,
+  yellow: 16776960,
+  yellowgreen: 10145074
+};
+define_default(Color, color, {
+  copy(channels) {
+    return Object.assign(new this.constructor(), this, channels);
+  },
+  displayable() {
+    return this.rgb().displayable();
+  },
+  hex: color_formatHex,
+  formatHex: color_formatHex,
+  formatHex8: color_formatHex8,
+  formatHsl: color_formatHsl,
+  formatRgb: color_formatRgb,
+  toString: color_formatRgb
+});
+function color_formatHex() {
+  return this.rgb().formatHex();
+}
+function color_formatHex8() {
+  return this.rgb().formatHex8();
+}
+function color_formatHsl() {
+  return hslConvert(this).formatHsl();
+}
+function color_formatRgb() {
+  return this.rgb().formatRgb();
+}
+function color(format2) {
+  var m, l;
+  return format2 = (format2 + "").trim().toLowerCase(), (m = reHex.exec(format2)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) : l === 3 ? new Rgb(m >> 8 & 15 | m >> 4 & 240, m >> 4 & 15 | m & 240, (m & 15) << 4 | m & 15, 1) : l === 8 ? rgba(m >> 24 & 255, m >> 16 & 255, m >> 8 & 255, (m & 255) / 255) : l === 4 ? rgba(m >> 12 & 15 | m >> 8 & 240, m >> 8 & 15 | m >> 4 & 240, m >> 4 & 15 | m & 240, ((m & 15) << 4 | m & 15) / 255) : null) : (m = reRgbInteger.exec(format2)) ? new Rgb(m[1], m[2], m[3], 1) : (m = reRgbPercent.exec(format2)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) : (m = reRgbaInteger.exec(format2)) ? rgba(m[1], m[2], m[3], m[4]) : (m = reRgbaPercent.exec(format2)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) : (m = reHslPercent.exec(format2)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) : (m = reHslaPercent.exec(format2)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) : named.hasOwnProperty(format2) ? rgbn(named[format2]) : format2 === "transparent" ? new Rgb(NaN, NaN, NaN, 0) : null;
+}
+function rgbn(n) {
+  return new Rgb(n >> 16 & 255, n >> 8 & 255, n & 255, 1);
+}
+function rgba(r, g, b, a) {
+  return a <= 0 && (r = g = b = NaN), new Rgb(r, g, b, a);
+}
+function rgbConvert(o) {
+  return o instanceof Color || (o = color(o)), o ? (o = o.rgb(), new Rgb(o.r, o.g, o.b, o.opacity)) : new Rgb();
+}
+function rgb(r, g, b, opacity) {
+  return arguments.length === 1 ? rgbConvert(r) : new Rgb(r, g, b, opacity ?? 1);
+}
+function Rgb(r, g, b, opacity) {
+  this.r = +r, this.g = +g, this.b = +b, this.opacity = +opacity;
+}
+define_default(Rgb, rgb, extend(Color, {
+  brighter(k) {
+    return k = k == null ? brighter : Math.pow(brighter, k), new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
+  },
+  darker(k) {
+    return k = k == null ? darker : Math.pow(darker, k), new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
+  },
+  rgb() {
+    return this;
+  },
+  clamp() {
+    return new Rgb(clampi(this.r), clampi(this.g), clampi(this.b), clampa(this.opacity));
+  },
+  displayable() {
+    return -0.5 <= this.r && this.r < 255.5 && -0.5 <= this.g && this.g < 255.5 && -0.5 <= this.b && this.b < 255.5 && 0 <= this.opacity && this.opacity <= 1;
+  },
+  hex: rgb_formatHex,
+  formatHex: rgb_formatHex,
+  formatHex8: rgb_formatHex8,
+  formatRgb: rgb_formatRgb,
+  toString: rgb_formatRgb
+}));
+function rgb_formatHex() {
+  return `#${hex(this.r)}${hex(this.g)}${hex(this.b)}`;
+}
+function rgb_formatHex8() {
+  return `#${hex(this.r)}${hex(this.g)}${hex(this.b)}${hex((isNaN(this.opacity) ? 1 : this.opacity) * 255)}`;
+}
+function rgb_formatRgb() {
+  let a = clampa(this.opacity);
+  return `${a === 1 ? "rgb(" : "rgba("}${clampi(this.r)}, ${clampi(this.g)}, ${clampi(this.b)}${a === 1 ? ")" : `, ${a})`}`;
+}
+function clampa(opacity) {
+  return isNaN(opacity) ? 1 : Math.max(0, Math.min(1, opacity));
+}
+function clampi(value) {
+  return Math.max(0, Math.min(255, Math.round(value) || 0));
+}
+function hex(value) {
+  return value = clampi(value), (value < 16 ? "0" : "") + value.toString(16);
+}
+function hsla(h, s, l, a) {
+  return a <= 0 ? h = s = l = NaN : l <= 0 || l >= 1 ? h = s = NaN : s <= 0 && (h = NaN), new Hsl(h, s, l, a);
+}
+function hslConvert(o) {
+  if (o instanceof Hsl)
+    return new Hsl(o.h, o.s, o.l, o.opacity);
+  if (o instanceof Color || (o = color(o)), !o)
+    return new Hsl();
+  if (o instanceof Hsl)
+    return o;
+  o = o.rgb();
+  var r = o.r / 255, g = o.g / 255, b = o.b / 255, min = Math.min(r, g, b), max = Math.max(r, g, b), h = NaN, s = max - min, l = (max + min) / 2;
+  return s ? (r === max ? h = (g - b) / s + (g < b) * 6 : g === max ? h = (b - r) / s + 2 : h = (r - g) / s + 4, s /= l < 0.5 ? max + min : 2 - max - min, h *= 60) : s = l > 0 && l < 1 ? 0 : h, new Hsl(h, s, l, o.opacity);
+}
+function hsl(h, s, l, opacity) {
+  return arguments.length === 1 ? hslConvert(h) : new Hsl(h, s, l, opacity ?? 1);
+}
+function Hsl(h, s, l, opacity) {
+  this.h = +h, this.s = +s, this.l = +l, this.opacity = +opacity;
+}
+define_default(Hsl, hsl, extend(Color, {
+  brighter(k) {
+    return k = k == null ? brighter : Math.pow(brighter, k), new Hsl(this.h, this.s, this.l * k, this.opacity);
+  },
+  darker(k) {
+    return k = k == null ? darker : Math.pow(darker, k), new Hsl(this.h, this.s, this.l * k, this.opacity);
+  },
+  rgb() {
+    var h = this.h % 360 + (this.h < 0) * 360, s = isNaN(h) || isNaN(this.s) ? 0 : this.s, l = this.l, m2 = l + (l < 0.5 ? l : 1 - l) * s, m1 = 2 * l - m2;
+    return new Rgb(
+      hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2),
+      hsl2rgb(h, m1, m2),
+      hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2),
+      this.opacity
+    );
+  },
+  clamp() {
+    return new Hsl(clamph(this.h), clampt(this.s), clampt(this.l), clampa(this.opacity));
+  },
+  displayable() {
+    return (0 <= this.s && this.s <= 1 || isNaN(this.s)) && 0 <= this.l && this.l <= 1 && 0 <= this.opacity && this.opacity <= 1;
+  },
+  formatHsl() {
+    let a = clampa(this.opacity);
+    return `${a === 1 ? "hsl(" : "hsla("}${clamph(this.h)}, ${clampt(this.s) * 100}%, ${clampt(this.l) * 100}%${a === 1 ? ")" : `, ${a})`}`;
+  }
+}));
+function clamph(value) {
+  return value = (value || 0) % 360, value < 0 ? value + 360 : value;
+}
+function clampt(value) {
+  return Math.max(0, Math.min(1, value || 0));
+}
+function hsl2rgb(h, m1, m2) {
+  return (h < 60 ? m1 + (m2 - m1) * h / 60 : h < 180 ? m2 : h < 240 ? m1 + (m2 - m1) * (240 - h) / 60 : m1) * 255;
+}
+
+// node_modules/d3-interpolate/src/basis.js
+function basis(t1, v0, v1, v2, v3) {
+  var t2 = t1 * t1, t3 = t2 * t1;
+  return ((1 - 3 * t1 + 3 * t2 - t3) * v0 + (4 - 6 * t2 + 3 * t3) * v1 + (1 + 3 * t1 + 3 * t2 - 3 * t3) * v2 + t3 * v3) / 6;
+}
+function basis_default(values) {
+  var n = values.length - 1;
+  return function(t) {
+    var i = t <= 0 ? t = 0 : t >= 1 ? (t = 1, n - 1) : Math.floor(t * n), v1 = values[i], v2 = values[i + 1], v0 = i > 0 ? values[i - 1] : 2 * v1 - v2, v3 = i < n - 1 ? values[i + 2] : 2 * v2 - v1;
+    return basis((t - i / n) * n, v0, v1, v2, v3);
+  };
+}
+
+// node_modules/d3-interpolate/src/basisClosed.js
+function basisClosed_default(values) {
+  var n = values.length;
+  return function(t) {
+    var i = Math.floor(((t %= 1) < 0 ? ++t : t) * n), v0 = values[(i + n - 1) % n], v1 = values[i % n], v2 = values[(i + 1) % n], v3 = values[(i + 2) % n];
+    return basis((t - i / n) * n, v0, v1, v2, v3);
+  };
+}
+
+// node_modules/d3-interpolate/src/constant.js
+var constant_default = (x) => () => x;
+
+// node_modules/d3-interpolate/src/color.js
+function linear(a, d) {
+  return function(t) {
+    return a + t * d;
+  };
+}
+function exponential(a, b, y) {
+  return a = Math.pow(a, y), b = Math.pow(b, y) - a, y = 1 / y, function(t) {
+    return Math.pow(a + t * b, y);
+  };
+}
+function gamma(y) {
+  return (y = +y) == 1 ? nogamma : function(a, b) {
+    return b - a ? exponential(a, b, y) : constant_default(isNaN(a) ? b : a);
+  };
+}
+function nogamma(a, b) {
+  var d = b - a;
+  return d ? linear(a, d) : constant_default(isNaN(a) ? b : a);
+}
+
+// node_modules/d3-interpolate/src/rgb.js
+var rgb_default = function rgbGamma(y) {
+  var color2 = gamma(y);
+  function rgb2(start2, end) {
+    var r = color2((start2 = rgb(start2)).r, (end = rgb(end)).r), g = color2(start2.g, end.g), b = color2(start2.b, end.b), opacity = nogamma(start2.opacity, end.opacity);
+    return function(t) {
+      return start2.r = r(t), start2.g = g(t), start2.b = b(t), start2.opacity = opacity(t), start2 + "";
+    };
+  }
+  return rgb2.gamma = rgbGamma, rgb2;
+}(1);
+function rgbSpline(spline) {
+  return function(colors) {
+    var n = colors.length, r = new Array(n), g = new Array(n), b = new Array(n), i, color2;
+    for (i = 0; i < n; ++i)
+      color2 = rgb(colors[i]), r[i] = color2.r || 0, g[i] = color2.g || 0, b[i] = color2.b || 0;
+    return r = spline(r), g = spline(g), b = spline(b), color2.opacity = 1, function(t) {
+      return color2.r = r(t), color2.g = g(t), color2.b = b(t), color2 + "";
+    };
+  };
+}
+var rgbBasis = rgbSpline(basis_default), rgbBasisClosed = rgbSpline(basisClosed_default);
+
+// node_modules/d3-interpolate/src/numberArray.js
+function numberArray_default(a, b) {
+  b || (b = []);
+  var n = a ? Math.min(b.length, a.length) : 0, c = b.slice(), i;
+  return function(t) {
+    for (i = 0; i < n; ++i)
+      c[i] = a[i] * (1 - t) + b[i] * t;
+    return c;
+  };
+}
+function isNumberArray(x) {
+  return ArrayBuffer.isView(x) && !(x instanceof DataView);
+}
+
+// node_modules/d3-interpolate/src/array.js
+function genericArray(a, b) {
+  var nb = b ? b.length : 0, na = a ? Math.min(nb, a.length) : 0, x = new Array(na), c = new Array(nb), i;
+  for (i = 0; i < na; ++i)
+    x[i] = value_default(a[i], b[i]);
+  for (; i < nb; ++i)
+    c[i] = b[i];
+  return function(t) {
+    for (i = 0; i < na; ++i)
+      c[i] = x[i](t);
+    return c;
+  };
+}
+
+// node_modules/d3-interpolate/src/date.js
+function date_default(a, b) {
+  var d = new Date();
+  return a = +a, b = +b, function(t) {
+    return d.setTime(a * (1 - t) + b * t), d;
+  };
+}
+
+// node_modules/d3-interpolate/src/number.js
+function number_default(a, b) {
+  return a = +a, b = +b, function(t) {
+    return a * (1 - t) + b * t;
+  };
+}
+
+// node_modules/d3-interpolate/src/object.js
+function object_default(a, b) {
+  var i = {}, c = {}, k;
+  (a === null || typeof a != "object") && (a = {}), (b === null || typeof b != "object") && (b = {});
+  for (k in b)
+    k in a ? i[k] = value_default(a[k], b[k]) : c[k] = b[k];
+  return function(t) {
+    for (k in i)
+      c[k] = i[k](t);
+    return c;
+  };
+}
+
+// node_modules/d3-interpolate/src/string.js
+var reA = /[-+]?(?:\d+\.?\d*|\.?\d+)(?:[eE][-+]?\d+)?/g, reB = new RegExp(reA.source, "g");
+function zero2(b) {
+  return function() {
+    return b;
+  };
+}
+function one(b) {
+  return function(t) {
+    return b(t) + "";
+  };
+}
+function string_default(a, b) {
+  var bi = reA.lastIndex = reB.lastIndex = 0, am, bm, bs, i = -1, s = [], q = [];
+  for (a = a + "", b = b + ""; (am = reA.exec(a)) && (bm = reB.exec(b)); )
+    (bs = bm.index) > bi && (bs = b.slice(bi, bs), s[i] ? s[i] += bs : s[++i] = bs), (am = am[0]) === (bm = bm[0]) ? s[i] ? s[i] += bm : s[++i] = bm : (s[++i] = null, q.push({ i, x: number_default(am, bm) })), bi = reB.lastIndex;
+  return bi < b.length && (bs = b.slice(bi), s[i] ? s[i] += bs : s[++i] = bs), s.length < 2 ? q[0] ? one(q[0].x) : zero2(b) : (b = q.length, function(t) {
+    for (var i2 = 0, o; i2 < b; ++i2)
+      s[(o = q[i2]).i] = o.x(t);
+    return s.join("");
+  });
+}
+
+// node_modules/d3-interpolate/src/value.js
+function value_default(a, b) {
+  var t = typeof b, c;
+  return b == null || t === "boolean" ? constant_default(b) : (t === "number" ? number_default : t === "string" ? (c = color(b)) ? (b = c, rgb_default) : string_default : b instanceof color ? rgb_default : b instanceof Date ? date_default : isNumberArray(b) ? numberArray_default : Array.isArray(b) ? genericArray : typeof b.valueOf != "function" && typeof b.toString != "function" || isNaN(b) ? object_default : number_default)(a, b);
+}
+
+// node_modules/d3-interpolate/src/round.js
+function round_default(a, b) {
+  return a = +a, b = +b, function(t) {
+    return Math.round(a * (1 - t) + b * t);
+  };
+}
+
+// node_modules/d3-interpolate/src/transform/decompose.js
+var degrees = 180 / Math.PI, identity = {
+  translateX: 0,
+  translateY: 0,
+  rotate: 0,
+  skewX: 0,
+  scaleX: 1,
+  scaleY: 1
+};
+function decompose_default(a, b, c, d, e, f) {
+  var scaleX, scaleY, skewX;
+  return (scaleX = Math.sqrt(a * a + b * b)) && (a /= scaleX, b /= scaleX), (skewX = a * c + b * d) && (c -= a * skewX, d -= b * skewX), (scaleY = Math.sqrt(c * c + d * d)) && (c /= scaleY, d /= scaleY, skewX /= scaleY), a * d < b * c && (a = -a, b = -b, skewX = -skewX, scaleX = -scaleX), {
+    translateX: e,
+    translateY: f,
+    rotate: Math.atan2(b, a) * degrees,
+    skewX: Math.atan(skewX) * degrees,
+    scaleX,
+    scaleY
+  };
+}
+
+// node_modules/d3-interpolate/src/transform/parse.js
+var svgNode;
+function parseCss(value) {
+  let m = new (typeof DOMMatrix == "function" ? DOMMatrix : WebKitCSSMatrix)(value + "");
+  return m.isIdentity ? identity : decompose_default(m.a, m.b, m.c, m.d, m.e, m.f);
+}
+function parseSvg(value) {
+  return value == null ? identity : (svgNode || (svgNode = document.createElementNS("http://www.w3.org/2000/svg", "g")), svgNode.setAttribute("transform", value), (value = svgNode.transform.baseVal.consolidate()) ? (value = value.matrix, decompose_default(value.a, value.b, value.c, value.d, value.e, value.f)) : identity);
+}
+
+// node_modules/d3-interpolate/src/transform/index.js
+function interpolateTransform(parse, pxComma, pxParen, degParen) {
+  function pop(s) {
+    return s.length ? s.pop() + " " : "";
+  }
+  function translate(xa, ya, xb, yb, s, q) {
+    if (xa !== xb || ya !== yb) {
+      var i = s.push("translate(", null, pxComma, null, pxParen);
+      q.push({ i: i - 4, x: number_default(xa, xb) }, { i: i - 2, x: number_default(ya, yb) });
+    } else
+      (xb || yb) && s.push("translate(" + xb + pxComma + yb + pxParen);
+  }
+  function rotate(a, b, s, q) {
+    a !== b ? (a - b > 180 ? b += 360 : b - a > 180 && (a += 360), q.push({ i: s.push(pop(s) + "rotate(", null, degParen) - 2, x: number_default(a, b) })) : b && s.push(pop(s) + "rotate(" + b + degParen);
+  }
+  function skewX(a, b, s, q) {
+    a !== b ? q.push({ i: s.push(pop(s) + "skewX(", null, degParen) - 2, x: number_default(a, b) }) : b && s.push(pop(s) + "skewX(" + b + degParen);
+  }
+  function scale(xa, ya, xb, yb, s, q) {
+    if (xa !== xb || ya !== yb) {
+      var i = s.push(pop(s) + "scale(", null, ",", null, ")");
+      q.push({ i: i - 4, x: number_default(xa, xb) }, { i: i - 2, x: number_default(ya, yb) });
+    } else
+      (xb !== 1 || yb !== 1) && s.push(pop(s) + "scale(" + xb + "," + yb + ")");
+  }
+  return function(a, b) {
+    var s = [], q = [];
+    return a = parse(a), b = parse(b), translate(a.translateX, a.translateY, b.translateX, b.translateY, s, q), rotate(a.rotate, b.rotate, s, q), skewX(a.skewX, b.skewX, s, q), scale(a.scaleX, a.scaleY, b.scaleX, b.scaleY, s, q), a = b = null, function(t) {
+      for (var i = -1, n = q.length, o; ++i < n; )
+        s[(o = q[i]).i] = o.x(t);
+      return s.join("");
+    };
+  };
+}
+var interpolateTransformCss = interpolateTransform(parseCss, "px, ", "px)", "deg)"), interpolateTransformSvg = interpolateTransform(parseSvg, ", ", ")", ")");
+
+// node_modules/d3-scale/src/constant.js
+function constants(x) {
+  return function() {
+    return x;
+  };
+}
+
+// node_modules/d3-scale/src/number.js
+function number2(x) {
+  return +x;
+}
+
+// node_modules/d3-scale/src/continuous.js
+var unit = [0, 1];
+function identity2(x) {
+  return x;
+}
+function normalize(a, b) {
+  return (b -= a = +a) ? function(x) {
+    return (x - a) / b;
+  } : constants(isNaN(b) ? NaN : 0.5);
+}
+function clamper(a, b) {
+  var t;
+  return a > b && (t = a, a = b, b = t), function(x) {
+    return Math.max(a, Math.min(b, x));
+  };
+}
+function bimap(domain, range2, interpolate) {
+  var d0 = domain[0], d1 = domain[1], r0 = range2[0], r1 = range2[1];
+  return d1 < d0 ? (d0 = normalize(d1, d0), r0 = interpolate(r1, r0)) : (d0 = normalize(d0, d1), r0 = interpolate(r0, r1)), function(x) {
+    return r0(d0(x));
+  };
+}
+function polymap(domain, range2, interpolate) {
+  var j = Math.min(domain.length, range2.length) - 1, d = new Array(j), r = new Array(j), i = -1;
+  for (domain[j] < domain[0] && (domain = domain.slice().reverse(), range2 = range2.slice().reverse()); ++i < j; )
+    d[i] = normalize(domain[i], domain[i + 1]), r[i] = interpolate(range2[i], range2[i + 1]);
+  return function(x) {
+    var i2 = bisect_default(domain, x, 1, j) - 1;
+    return r[i2](d[i2](x));
+  };
+}
+function copy(source, target) {
+  return target.domain(source.domain()).range(source.range()).interpolate(source.interpolate()).clamp(source.clamp()).unknown(source.unknown());
+}
+function transformer() {
+  var domain = unit, range2 = unit, interpolate = value_default, transform, untransform, unknown, clamp = identity2, piecewise, output, input2;
+  function rescale() {
+    var n = Math.min(domain.length, range2.length);
+    return clamp !== identity2 && (clamp = clamper(domain[0], domain[n - 1])), piecewise = n > 2 ? polymap : bimap, output = input2 = null, scale;
+  }
+  function scale(x) {
+    return x == null || isNaN(x = +x) ? unknown : (output || (output = piecewise(domain.map(transform), range2, interpolate)))(transform(clamp(x)));
+  }
+  return scale.invert = function(y) {
+    return clamp(untransform((input2 || (input2 = piecewise(range2, domain.map(transform), number_default)))(y)));
+  }, scale.domain = function(_) {
+    return arguments.length ? (domain = Array.from(_, number2), rescale()) : domain.slice();
+  }, scale.range = function(_) {
+    return arguments.length ? (range2 = Array.from(_), rescale()) : range2.slice();
+  }, scale.rangeRound = function(_) {
+    return range2 = Array.from(_), interpolate = round_default, rescale();
+  }, scale.clamp = function(_) {
+    return arguments.length ? (clamp = _ ? !0 : identity2, rescale()) : clamp !== identity2;
+  }, scale.interpolate = function(_) {
+    return arguments.length ? (interpolate = _, rescale()) : interpolate;
+  }, scale.unknown = function(_) {
+    return arguments.length ? (unknown = _, scale) : unknown;
+  }, function(t, u) {
+    return transform = t, untransform = u, rescale();
+  };
+}
+function continuous() {
+  return transformer()(identity2, identity2);
+}
+
+// node_modules/d3-format/src/formatDecimal.js
+function formatDecimal_default(x) {
+  return Math.abs(x = Math.round(x)) >= 1e21 ? x.toLocaleString("en").replace(/,/g, "") : x.toString(10);
+}
+function formatDecimalParts(x, p) {
+  if ((i = (x = p ? x.toExponential(p - 1) : x.toExponential()).indexOf("e")) < 0)
+    return null;
+  var i, coefficient = x.slice(0, i);
+  return [
+    coefficient.length > 1 ? coefficient[0] + coefficient.slice(2) : coefficient,
+    +x.slice(i + 1)
+  ];
+}
+
+// node_modules/d3-format/src/exponent.js
+function exponent_default(x) {
+  return x = formatDecimalParts(Math.abs(x)), x ? x[1] : NaN;
+}
+
+// node_modules/d3-format/src/formatGroup.js
+function formatGroup_default(grouping, thousands) {
+  return function(value, width) {
+    for (var i = value.length, t = [], j = 0, g = grouping[0], length = 0; i > 0 && g > 0 && (length + g + 1 > width && (g = Math.max(1, width - length)), t.push(value.substring(i -= g, i + g)), !((length += g + 1) > width)); )
+      g = grouping[j = (j + 1) % grouping.length];
+    return t.reverse().join(thousands);
+  };
+}
+
+// node_modules/d3-format/src/formatNumerals.js
+function formatNumerals_default(numerals) {
+  return function(value) {
+    return value.replace(/[0-9]/g, function(i) {
+      return numerals[+i];
+    });
+  };
+}
+
+// node_modules/d3-format/src/formatSpecifier.js
+var re = /^(?:(.)?([<>=^]))?([+\-( ])?([$#])?(0)?(\d+)?(,)?(\.\d+)?(~)?([a-z%])?$/i;
+function formatSpecifier(specifier) {
+  if (!(match = re.exec(specifier)))
+    throw new Error("invalid format: " + specifier);
+  var match;
+  return new FormatSpecifier({
+    fill: match[1],
+    align: match[2],
+    sign: match[3],
+    symbol: match[4],
+    zero: match[5],
+    width: match[6],
+    comma: match[7],
+    precision: match[8] && match[8].slice(1),
+    trim: match[9],
+    type: match[10]
+  });
+}
+formatSpecifier.prototype = FormatSpecifier.prototype;
+function FormatSpecifier(specifier) {
+  this.fill = specifier.fill === void 0 ? " " : specifier.fill + "", this.align = specifier.align === void 0 ? ">" : specifier.align + "", this.sign = specifier.sign === void 0 ? "-" : specifier.sign + "", this.symbol = specifier.symbol === void 0 ? "" : specifier.symbol + "", this.zero = !!specifier.zero, this.width = specifier.width === void 0 ? void 0 : +specifier.width, this.comma = !!specifier.comma, this.precision = specifier.precision === void 0 ? void 0 : +specifier.precision, this.trim = !!specifier.trim, this.type = specifier.type === void 0 ? "" : specifier.type + "";
+}
+FormatSpecifier.prototype.toString = function() {
+  return this.fill + this.align + this.sign + this.symbol + (this.zero ? "0" : "") + (this.width === void 0 ? "" : Math.max(1, this.width | 0)) + (this.comma ? "," : "") + (this.precision === void 0 ? "" : "." + Math.max(0, this.precision | 0)) + (this.trim ? "~" : "") + this.type;
+};
+
+// node_modules/d3-format/src/formatTrim.js
+function formatTrim_default(s) {
+  out:
+    for (var n = s.length, i = 1, i0 = -1, i1; i < n; ++i)
+      switch (s[i]) {
+        case ".":
+          i0 = i1 = i;
+          break;
+        case "0":
+          i0 === 0 && (i0 = i), i1 = i;
+          break;
+        default:
+          if (!+s[i])
+            break out;
+          i0 > 0 && (i0 = 0);
+          break;
+      }
+  return i0 > 0 ? s.slice(0, i0) + s.slice(i1 + 1) : s;
+}
+
+// node_modules/d3-format/src/formatPrefixAuto.js
+var prefixExponent;
+function formatPrefixAuto_default(x, p) {
+  var d = formatDecimalParts(x, p);
+  if (!d)
+    return x + "";
+  var coefficient = d[0], exponent = d[1], i = exponent - (prefixExponent = Math.max(-8, Math.min(8, Math.floor(exponent / 3))) * 3) + 1, n = coefficient.length;
+  return i === n ? coefficient : i > n ? coefficient + new Array(i - n + 1).join("0") : i > 0 ? coefficient.slice(0, i) + "." + coefficient.slice(i) : "0." + new Array(1 - i).join("0") + formatDecimalParts(x, Math.max(0, p + i - 1))[0];
+}
+
+// node_modules/d3-format/src/formatRounded.js
+function formatRounded_default(x, p) {
+  var d = formatDecimalParts(x, p);
+  if (!d)
+    return x + "";
+  var coefficient = d[0], exponent = d[1];
+  return exponent < 0 ? "0." + new Array(-exponent).join("0") + coefficient : coefficient.length > exponent + 1 ? coefficient.slice(0, exponent + 1) + "." + coefficient.slice(exponent + 1) : coefficient + new Array(exponent - coefficient.length + 2).join("0");
+}
+
+// node_modules/d3-format/src/formatTypes.js
+var formatTypes_default = {
+  "%": (x, p) => (x * 100).toFixed(p),
+  b: (x) => Math.round(x).toString(2),
+  c: (x) => x + "",
+  d: formatDecimal_default,
+  e: (x, p) => x.toExponential(p),
+  f: (x, p) => x.toFixed(p),
+  g: (x, p) => x.toPrecision(p),
+  o: (x) => Math.round(x).toString(8),
+  p: (x, p) => formatRounded_default(x * 100, p),
+  r: formatRounded_default,
+  s: formatPrefixAuto_default,
+  X: (x) => Math.round(x).toString(16).toUpperCase(),
+  x: (x) => Math.round(x).toString(16)
+};
+
+// node_modules/d3-format/src/identity.js
+function identity_default(x) {
+  return x;
+}
+
+// node_modules/d3-format/src/locale.js
+var map = Array.prototype.map, prefixes = ["y", "z", "a", "f", "p", "n", "\xB5", "m", "", "k", "M", "G", "T", "P", "E", "Z", "Y"];
+function locale_default(locale2) {
+  var group = locale2.grouping === void 0 || locale2.thousands === void 0 ? identity_default : formatGroup_default(map.call(locale2.grouping, Number), locale2.thousands + ""), currencyPrefix = locale2.currency === void 0 ? "" : locale2.currency[0] + "", currencySuffix = locale2.currency === void 0 ? "" : locale2.currency[1] + "", decimal = locale2.decimal === void 0 ? "." : locale2.decimal + "", numerals = locale2.numerals === void 0 ? identity_default : formatNumerals_default(map.call(locale2.numerals, String)), percent = locale2.percent === void 0 ? "%" : locale2.percent + "", minus = locale2.minus === void 0 ? "\u2212" : locale2.minus + "", nan = locale2.nan === void 0 ? "NaN" : locale2.nan + "";
+  function newFormat(specifier) {
+    specifier = formatSpecifier(specifier);
+    var fill = specifier.fill, align = specifier.align, sign = specifier.sign, symbol = specifier.symbol, zero3 = specifier.zero, width = specifier.width, comma = specifier.comma, precision = specifier.precision, trim = specifier.trim, type = specifier.type;
+    type === "n" ? (comma = !0, type = "g") : formatTypes_default[type] || (precision === void 0 && (precision = 12), trim = !0, type = "g"), (zero3 || fill === "0" && align === "=") && (zero3 = !0, fill = "0", align = "=");
+    var prefix = symbol === "$" ? currencyPrefix : symbol === "#" && /[boxX]/.test(type) ? "0" + type.toLowerCase() : "", suffix = symbol === "$" ? currencySuffix : /[%p]/.test(type) ? percent : "", formatType = formatTypes_default[type], maybeSuffix = /[defgprs%]/.test(type);
+    precision = precision === void 0 ? 6 : /[gprs]/.test(type) ? Math.max(1, Math.min(21, precision)) : Math.max(0, Math.min(20, precision));
+    function format2(value) {
+      var valuePrefix = prefix, valueSuffix = suffix, i, n, c;
+      if (type === "c")
+        valueSuffix = formatType(value) + valueSuffix, value = "";
+      else {
+        value = +value;
+        var valueNegative = value < 0 || 1 / value < 0;
+        if (value = isNaN(value) ? nan : formatType(Math.abs(value), precision), trim && (value = formatTrim_default(value)), valueNegative && +value == 0 && sign !== "+" && (valueNegative = !1), valuePrefix = (valueNegative ? sign === "(" ? sign : minus : sign === "-" || sign === "(" ? "" : sign) + valuePrefix, valueSuffix = (type === "s" ? prefixes[8 + prefixExponent / 3] : "") + valueSuffix + (valueNegative && sign === "(" ? ")" : ""), maybeSuffix) {
+          for (i = -1, n = value.length; ++i < n; )
+            if (c = value.charCodeAt(i), 48 > c || c > 57) {
+              valueSuffix = (c === 46 ? decimal + value.slice(i + 1) : value.slice(i)) + valueSuffix, value = value.slice(0, i);
+              break;
+            }
+        }
+      }
+      comma && !zero3 && (value = group(value, 1 / 0));
+      var length = valuePrefix.length + value.length + valueSuffix.length, padding = length < width ? new Array(width - length + 1).join(fill) : "";
+      switch (comma && zero3 && (value = group(padding + value, padding.length ? width - valueSuffix.length : 1 / 0), padding = ""), align) {
+        case "<":
+          value = valuePrefix + value + valueSuffix + padding;
+          break;
+        case "=":
+          value = valuePrefix + padding + value + valueSuffix;
+          break;
+        case "^":
+          value = padding.slice(0, length = padding.length >> 1) + valuePrefix + value + valueSuffix + padding.slice(length);
+          break;
+        default:
+          value = padding + valuePrefix + value + valueSuffix;
+          break;
+      }
+      return numerals(value);
+    }
+    return format2.toString = function() {
+      return specifier + "";
+    }, format2;
+  }
+  function formatPrefix2(specifier, value) {
+    var f = newFormat((specifier = formatSpecifier(specifier), specifier.type = "f", specifier)), e = Math.max(-8, Math.min(8, Math.floor(exponent_default(value) / 3))) * 3, k = Math.pow(10, -e), prefix = prefixes[8 + e / 3];
+    return function(value2) {
+      return f(k * value2) + prefix;
+    };
+  }
+  return {
+    format: newFormat,
+    formatPrefix: formatPrefix2
+  };
+}
+
+// node_modules/d3-format/src/defaultLocale.js
+var locale, format, formatPrefix;
+defaultLocale({
+  thousands: ",",
+  grouping: [3],
+  currency: ["$", ""]
+});
+function defaultLocale(definition) {
+  return locale = locale_default(definition), format = locale.format, formatPrefix = locale.formatPrefix, locale;
+}
+
+// node_modules/d3-format/src/precisionFixed.js
+function precisionFixed_default(step) {
+  return Math.max(0, -exponent_default(Math.abs(step)));
+}
+
+// node_modules/d3-format/src/precisionPrefix.js
+function precisionPrefix_default(step, value) {
+  return Math.max(0, Math.max(-8, Math.min(8, Math.floor(exponent_default(value) / 3))) * 3 - exponent_default(Math.abs(step)));
+}
+
+// node_modules/d3-format/src/precisionRound.js
+function precisionRound_default(step, max) {
+  return step = Math.abs(step), max = Math.abs(max) - step, Math.max(0, exponent_default(max) - exponent_default(step)) + 1;
+}
+
+// node_modules/d3-scale/src/tickFormat.js
+function tickFormat(start2, stop, count, specifier) {
+  var step = tickStep(start2, stop, count), precision;
+  switch (specifier = formatSpecifier(specifier ?? ",f"), specifier.type) {
+    case "s": {
+      var value = Math.max(Math.abs(start2), Math.abs(stop));
+      return specifier.precision == null && !isNaN(precision = precisionPrefix_default(step, value)) && (specifier.precision = precision), formatPrefix(specifier, value);
+    }
+    case "":
+    case "e":
+    case "g":
+    case "p":
+    case "r": {
+      specifier.precision == null && !isNaN(precision = precisionRound_default(step, Math.max(Math.abs(start2), Math.abs(stop)))) && (specifier.precision = precision - (specifier.type === "e"));
+      break;
+    }
+    case "f":
+    case "%": {
+      specifier.precision == null && !isNaN(precision = precisionFixed_default(step)) && (specifier.precision = precision - (specifier.type === "%") * 2);
+      break;
+    }
+  }
+  return format(specifier);
+}
+
+// node_modules/d3-scale/src/linear.js
+function linearish(scale) {
+  var domain = scale.domain;
+  return scale.ticks = function(count) {
+    var d = domain();
+    return ticks(d[0], d[d.length - 1], count ?? 10);
+  }, scale.tickFormat = function(count, specifier) {
+    var d = domain();
+    return tickFormat(d[0], d[d.length - 1], count ?? 10, specifier);
+  }, scale.nice = function(count) {
+    count == null && (count = 10);
+    var d = domain(), i0 = 0, i1 = d.length - 1, start2 = d[i0], stop = d[i1], prestep, step, maxIter = 10;
+    for (stop < start2 && (step = start2, start2 = stop, stop = step, step = i0, i0 = i1, i1 = step); maxIter-- > 0; ) {
+      if (step = tickIncrement(start2, stop, count), step === prestep)
+        return d[i0] = start2, d[i1] = stop, domain(d);
+      if (step > 0)
+        start2 = Math.floor(start2 / step) * step, stop = Math.ceil(stop / step) * step;
+      else if (step < 0)
+        start2 = Math.ceil(start2 * step) / step, stop = Math.floor(stop * step) / step;
+      else
+        break;
+      prestep = step;
+    }
+    return scale;
+  }, scale;
+}
+function linear2() {
+  var scale = continuous();
+  return scale.copy = function() {
+    return copy(scale, linear2());
+  }, initRange.apply(scale, arguments), linearish(scale);
+}
+
+// node_modules/d3-selection/src/namespaces.js
+var xhtml = "http://www.w3.org/1999/xhtml", namespaces_default = {
+  svg: "http://www.w3.org/2000/svg",
+  xhtml,
+  xlink: "http://www.w3.org/1999/xlink",
+  xml: "http://www.w3.org/XML/1998/namespace",
+  xmlns: "http://www.w3.org/2000/xmlns/"
+};
+
+// node_modules/d3-selection/src/namespace.js
+function namespace_default(name) {
+  var prefix = name += "", i = prefix.indexOf(":");
+  return i >= 0 && (prefix = name.slice(0, i)) !== "xmlns" && (name = name.slice(i + 1)), namespaces_default.hasOwnProperty(prefix) ? { space: namespaces_default[prefix], local: name } : name;
+}
+
+// node_modules/d3-selection/src/creator.js
+function creatorInherit(name) {
+  return function() {
+    var document2 = this.ownerDocument, uri = this.namespaceURI;
+    return uri === xhtml && document2.documentElement.namespaceURI === xhtml ? document2.createElement(name) : document2.createElementNS(uri, name);
+  };
+}
+function creatorFixed(fullname) {
+  return function() {
+    return this.ownerDocument.createElementNS(fullname.space, fullname.local);
+  };
+}
+function creator_default(name) {
+  var fullname = namespace_default(name);
+  return (fullname.local ? creatorFixed : creatorInherit)(fullname);
+}
+
+// node_modules/d3-selection/src/selector.js
+function none() {
+}
+function selector_default(selector) {
+  return selector == null ? none : function() {
+    return this.querySelector(selector);
+  };
+}
+
+// node_modules/d3-selection/src/selection/select.js
+function select_default(select) {
+  typeof select != "function" && (select = selector_default(select));
+  for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j)
+    for (var group = groups[j], n = group.length, subgroup = subgroups[j] = new Array(n), node, subnode, i = 0; i < n; ++i)
+      (node = group[i]) && (subnode = select.call(node, node.__data__, i, group)) && ("__data__" in node && (subnode.__data__ = node.__data__), subgroup[i] = subnode);
+  return new Selection(subgroups, this._parents);
+}
+
+// node_modules/d3-selection/src/array.js
+function array(x) {
+  return x == null ? [] : Array.isArray(x) ? x : Array.from(x);
+}
+
+// node_modules/d3-selection/src/selectorAll.js
+function empty() {
+  return [];
+}
+function selectorAll_default(selector) {
+  return selector == null ? empty : function() {
+    return this.querySelectorAll(selector);
+  };
+}
+
+// node_modules/d3-selection/src/selection/selectAll.js
+function arrayAll(select) {
+  return function() {
+    return array(select.apply(this, arguments));
+  };
+}
+function selectAll_default(select) {
+  typeof select == "function" ? select = arrayAll(select) : select = selectorAll_default(select);
+  for (var groups = this._groups, m = groups.length, subgroups = [], parents = [], j = 0; j < m; ++j)
+    for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i)
+      (node = group[i]) && (subgroups.push(select.call(node, node.__data__, i, group)), parents.push(node));
+  return new Selection(subgroups, parents);
+}
+
+// node_modules/d3-selection/src/matcher.js
+function matcher_default(selector) {
+  return function() {
+    return this.matches(selector);
+  };
+}
+function childMatcher(selector) {
+  return function(node) {
+    return node.matches(selector);
+  };
+}
+
+// node_modules/d3-selection/src/selection/selectChild.js
+var find = Array.prototype.find;
+function childFind(match) {
+  return function() {
+    return find.call(this.children, match);
+  };
+}
+function childFirst() {
+  return this.firstElementChild;
+}
+function selectChild_default(match) {
+  return this.select(match == null ? childFirst : childFind(typeof match == "function" ? match : childMatcher(match)));
+}
+
+// node_modules/d3-selection/src/selection/selectChildren.js
+var filter = Array.prototype.filter;
+function children() {
+  return Array.from(this.children);
+}
+function childrenFilter(match) {
+  return function() {
+    return filter.call(this.children, match);
+  };
+}
+function selectChildren_default(match) {
+  return this.selectAll(match == null ? children : childrenFilter(typeof match == "function" ? match : childMatcher(match)));
+}
+
+// node_modules/d3-selection/src/selection/filter.js
+function filter_default(match) {
+  typeof match != "function" && (match = matcher_default(match));
+  for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j)
+    for (var group = groups[j], n = group.length, subgroup = subgroups[j] = [], node, i = 0; i < n; ++i)
+      (node = group[i]) && match.call(node, node.__data__, i, group) && subgroup.push(node);
+  return new Selection(subgroups, this._parents);
+}
+
+// node_modules/d3-selection/src/selection/sparse.js
+function sparse_default(update) {
+  return new Array(update.length);
+}
+
+// node_modules/d3-selection/src/selection/enter.js
+function enter_default() {
+  return new Selection(this._enter || this._groups.map(sparse_default), this._parents);
+}
+function EnterNode(parent, datum2) {
+  this.ownerDocument = parent.ownerDocument, this.namespaceURI = parent.namespaceURI, this._next = null, this._parent = parent, this.__data__ = datum2;
+}
+EnterNode.prototype = {
+  constructor: EnterNode,
+  appendChild: function(child) {
+    return this._parent.insertBefore(child, this._next);
+  },
+  insertBefore: function(child, next) {
+    return this._parent.insertBefore(child, next);
+  },
+  querySelector: function(selector) {
+    return this._parent.querySelector(selector);
+  },
+  querySelectorAll: function(selector) {
+    return this._parent.querySelectorAll(selector);
+  }
+};
+
+// node_modules/d3-selection/src/constant.js
+function constant_default2(x) {
+  return function() {
+    return x;
+  };
+}
+
+// node_modules/d3-selection/src/selection/data.js
+function bindIndex(parent, group, enter, update, exit, data) {
+  for (var i = 0, node, groupLength = group.length, dataLength = data.length; i < dataLength; ++i)
+    (node = group[i]) ? (node.__data__ = data[i], update[i] = node) : enter[i] = new EnterNode(parent, data[i]);
+  for (; i < groupLength; ++i)
+    (node = group[i]) && (exit[i] = node);
+}
+function bindKey(parent, group, enter, update, exit, data, key) {
+  var i, node, nodeByKeyValue = /* @__PURE__ */ new Map(), groupLength = group.length, dataLength = data.length, keyValues = new Array(groupLength), keyValue;
+  for (i = 0; i < groupLength; ++i)
+    (node = group[i]) && (keyValues[i] = keyValue = key.call(node, node.__data__, i, group) + "", nodeByKeyValue.has(keyValue) ? exit[i] = node : nodeByKeyValue.set(keyValue, node));
+  for (i = 0; i < dataLength; ++i)
+    keyValue = key.call(parent, data[i], i, data) + "", (node = nodeByKeyValue.get(keyValue)) ? (update[i] = node, node.__data__ = data[i], nodeByKeyValue.delete(keyValue)) : enter[i] = new EnterNode(parent, data[i]);
+  for (i = 0; i < groupLength; ++i)
+    (node = group[i]) && nodeByKeyValue.get(keyValues[i]) === node && (exit[i] = node);
+}
+function datum(node) {
+  return node.__data__;
+}
+function data_default(value, key) {
+  if (!arguments.length)
+    return Array.from(this, datum);
+  var bind = key ? bindKey : bindIndex, parents = this._parents, groups = this._groups;
+  typeof value != "function" && (value = constant_default2(value));
+  for (var m = groups.length, update = new Array(m), enter = new Array(m), exit = new Array(m), j = 0; j < m; ++j) {
+    var parent = parents[j], group = groups[j], groupLength = group.length, data = arraylike(value.call(parent, parent && parent.__data__, j, parents)), dataLength = data.length, enterGroup = enter[j] = new Array(dataLength), updateGroup = update[j] = new Array(dataLength), exitGroup = exit[j] = new Array(groupLength);
+    bind(parent, group, enterGroup, updateGroup, exitGroup, data, key);
+    for (var i0 = 0, i1 = 0, previous, next; i0 < dataLength; ++i0)
+      if (previous = enterGroup[i0]) {
+        for (i0 >= i1 && (i1 = i0 + 1); !(next = updateGroup[i1]) && ++i1 < dataLength; )
+          ;
+        previous._next = next || null;
+      }
+  }
+  return update = new Selection(update, parents), update._enter = enter, update._exit = exit, update;
+}
+function arraylike(data) {
+  return typeof data == "object" && "length" in data ? data : Array.from(data);
+}
+
+// node_modules/d3-selection/src/selection/exit.js
+function exit_default() {
+  return new Selection(this._exit || this._groups.map(sparse_default), this._parents);
+}
+
+// node_modules/d3-selection/src/selection/join.js
+function join_default(onenter, onupdate, onexit) {
+  var enter = this.enter(), update = this, exit = this.exit();
+  return typeof onenter == "function" ? (enter = onenter(enter), enter && (enter = enter.selection())) : enter = enter.append(onenter + ""), onupdate != null && (update = onupdate(update), update && (update = update.selection())), onexit == null ? exit.remove() : onexit(exit), enter && update ? enter.merge(update).order() : update;
+}
+
+// node_modules/d3-selection/src/selection/merge.js
+function merge_default(context) {
+  for (var selection2 = context.selection ? context.selection() : context, groups0 = this._groups, groups1 = selection2._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j)
+    for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge = merges[j] = new Array(n), node, i = 0; i < n; ++i)
+      (node = group0[i] || group1[i]) && (merge[i] = node);
+  for (; j < m0; ++j)
+    merges[j] = groups0[j];
+  return new Selection(merges, this._parents);
+}
+
+// node_modules/d3-selection/src/selection/order.js
+function order_default() {
+  for (var groups = this._groups, j = -1, m = groups.length; ++j < m; )
+    for (var group = groups[j], i = group.length - 1, next = group[i], node; --i >= 0; )
+      (node = group[i]) && (next && node.compareDocumentPosition(next) ^ 4 && next.parentNode.insertBefore(node, next), next = node);
+  return this;
+}
+
+// node_modules/d3-selection/src/selection/sort.js
+function sort_default(compare) {
+  compare || (compare = ascending2);
+  function compareNode(a, b) {
+    return a && b ? compare(a.__data__, b.__data__) : !a - !b;
+  }
+  for (var groups = this._groups, m = groups.length, sortgroups = new Array(m), j = 0; j < m; ++j) {
+    for (var group = groups[j], n = group.length, sortgroup = sortgroups[j] = new Array(n), node, i = 0; i < n; ++i)
+      (node = group[i]) && (sortgroup[i] = node);
+    sortgroup.sort(compareNode);
+  }
+  return new Selection(sortgroups, this._parents).order();
+}
+function ascending2(a, b) {
+  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
+}
+
+// node_modules/d3-selection/src/selection/call.js
+function call_default() {
+  var callback = arguments[0];
+  return arguments[0] = this, callback.apply(null, arguments), this;
+}
+
+// node_modules/d3-selection/src/selection/nodes.js
+function nodes_default() {
+  return Array.from(this);
+}
+
+// node_modules/d3-selection/src/selection/node.js
+function node_default() {
+  for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j)
+    for (var group = groups[j], i = 0, n = group.length; i < n; ++i) {
+      var node = group[i];
+      if (node)
+        return node;
+    }
+  return null;
+}
+
+// node_modules/d3-selection/src/selection/size.js
+function size_default() {
+  let size = 0;
+  for (let node of this)
+    ++size;
+  return size;
+}
+
+// node_modules/d3-selection/src/selection/empty.js
+function empty_default() {
+  return !this.node();
+}
+
+// node_modules/d3-selection/src/selection/each.js
+function each_default(callback) {
+  for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j)
+    for (var group = groups[j], i = 0, n = group.length, node; i < n; ++i)
+      (node = group[i]) && callback.call(node, node.__data__, i, group);
+  return this;
+}
+
+// node_modules/d3-selection/src/selection/attr.js
+function attrRemove(name) {
+  return function() {
+    this.removeAttribute(name);
+  };
+}
+function attrRemoveNS(fullname) {
+  return function() {
+    this.removeAttributeNS(fullname.space, fullname.local);
+  };
+}
+function attrConstant(name, value) {
+  return function() {
+    this.setAttribute(name, value);
+  };
+}
+function attrConstantNS(fullname, value) {
+  return function() {
+    this.setAttributeNS(fullname.space, fullname.local, value);
+  };
+}
+function attrFunction(name, value) {
+  return function() {
+    var v = value.apply(this, arguments);
+    v == null ? this.removeAttribute(name) : this.setAttribute(name, v);
+  };
+}
+function attrFunctionNS(fullname, value) {
+  return function() {
+    var v = value.apply(this, arguments);
+    v == null ? this.removeAttributeNS(fullname.space, fullname.local) : this.setAttributeNS(fullname.space, fullname.local, v);
+  };
+}
+function attr_default(name, value) {
+  var fullname = namespace_default(name);
+  if (arguments.length < 2) {
+    var node = this.node();
+    return fullname.local ? node.getAttributeNS(fullname.space, fullname.local) : node.getAttribute(fullname);
+  }
+  return this.each((value == null ? fullname.local ? attrRemoveNS : attrRemove : typeof value == "function" ? fullname.local ? attrFunctionNS : attrFunction : fullname.local ? attrConstantNS : attrConstant)(fullname, value));
+}
+
+// node_modules/d3-selection/src/window.js
+function window_default(node) {
+  return node.ownerDocument && node.ownerDocument.defaultView || node.document && node || node.defaultView;
+}
+
+// node_modules/d3-selection/src/selection/style.js
+function styleRemove(name) {
+  return function() {
+    this.style.removeProperty(name);
+  };
+}
+function styleConstant(name, value, priority) {
+  return function() {
+    this.style.setProperty(name, value, priority);
+  };
+}
+function styleFunction(name, value, priority) {
+  return function() {
+    var v = value.apply(this, arguments);
+    v == null ? this.style.removeProperty(name) : this.style.setProperty(name, v, priority);
+  };
+}
+function style_default(name, value, priority) {
+  return arguments.length > 1 ? this.each((value == null ? styleRemove : typeof value == "function" ? styleFunction : styleConstant)(name, value, priority ?? "")) : styleValue(this.node(), name);
+}
+function styleValue(node, name) {
+  return node.style.getPropertyValue(name) || window_default(node).getComputedStyle(node, null).getPropertyValue(name);
+}
+
+// node_modules/d3-selection/src/selection/property.js
+function propertyRemove(name) {
+  return function() {
+    delete this[name];
+  };
+}
+function propertyConstant(name, value) {
+  return function() {
+    this[name] = value;
+  };
+}
+function propertyFunction(name, value) {
+  return function() {
+    var v = value.apply(this, arguments);
+    v == null ? delete this[name] : this[name] = v;
+  };
+}
+function property_default(name, value) {
+  return arguments.length > 1 ? this.each((value == null ? propertyRemove : typeof value == "function" ? propertyFunction : propertyConstant)(name, value)) : this.node()[name];
+}
+
+// node_modules/d3-selection/src/selection/classed.js
+function classArray(string) {
+  return string.trim().split(/^|\s+/);
+}
+function classList(node) {
+  return node.classList || new ClassList(node);
+}
+function ClassList(node) {
+  this._node = node, this._names = classArray(node.getAttribute("class") || "");
+}
+ClassList.prototype = {
+  add: function(name) {
+    var i = this._names.indexOf(name);
+    i < 0 && (this._names.push(name), this._node.setAttribute("class", this._names.join(" ")));
+  },
+  remove: function(name) {
+    var i = this._names.indexOf(name);
+    i >= 0 && (this._names.splice(i, 1), this._node.setAttribute("class", this._names.join(" ")));
+  },
+  contains: function(name) {
+    return this._names.indexOf(name) >= 0;
+  }
+};
+function classedAdd(node, names) {
+  for (var list2 = classList(node), i = -1, n = names.length; ++i < n; )
+    list2.add(names[i]);
+}
+function classedRemove(node, names) {
+  for (var list2 = classList(node), i = -1, n = names.length; ++i < n; )
+    list2.remove(names[i]);
+}
+function classedTrue(names) {
+  return function() {
+    classedAdd(this, names);
+  };
+}
+function classedFalse(names) {
+  return function() {
+    classedRemove(this, names);
+  };
+}
+function classedFunction(names, value) {
+  return function() {
+    (value.apply(this, arguments) ? classedAdd : classedRemove)(this, names);
+  };
+}
+function classed_default(name, value) {
+  var names = classArray(name + "");
+  if (arguments.length < 2) {
+    for (var list2 = classList(this.node()), i = -1, n = names.length; ++i < n; )
+      if (!list2.contains(names[i]))
+        return !1;
+    return !0;
+  }
+  return this.each((typeof value == "function" ? classedFunction : value ? classedTrue : classedFalse)(names, value));
+}
+
+// node_modules/d3-selection/src/selection/text.js
+function textRemove() {
+  this.textContent = "";
+}
+function textConstant(value) {
+  return function() {
+    this.textContent = value;
+  };
+}
+function textFunction(value) {
+  return function() {
+    var v = value.apply(this, arguments);
+    this.textContent = v ?? "";
+  };
+}
+function text_default(value) {
+  return arguments.length ? this.each(value == null ? textRemove : (typeof value == "function" ? textFunction : textConstant)(value)) : this.node().textContent;
+}
+
+// node_modules/d3-selection/src/selection/html.js
+function htmlRemove() {
+  this.innerHTML = "";
+}
+function htmlConstant(value) {
+  return function() {
+    this.innerHTML = value;
+  };
+}
+function htmlFunction(value) {
+  return function() {
+    var v = value.apply(this, arguments);
+    this.innerHTML = v ?? "";
+  };
+}
+function html_default(value) {
+  return arguments.length ? this.each(value == null ? htmlRemove : (typeof value == "function" ? htmlFunction : htmlConstant)(value)) : this.node().innerHTML;
+}
+
+// node_modules/d3-selection/src/selection/raise.js
+function raise() {
+  this.nextSibling && this.parentNode.appendChild(this);
+}
+function raise_default() {
+  return this.each(raise);
+}
+
+// node_modules/d3-selection/src/selection/lower.js
+function lower() {
+  this.previousSibling && this.parentNode.insertBefore(this, this.parentNode.firstChild);
+}
+function lower_default() {
+  return this.each(lower);
+}
+
+// node_modules/d3-selection/src/selection/append.js
+function append_default(name) {
+  var create2 = typeof name == "function" ? name : creator_default(name);
+  return this.select(function() {
+    return this.appendChild(create2.apply(this, arguments));
+  });
+}
+
+// node_modules/d3-selection/src/selection/insert.js
+function constantNull() {
+  return null;
+}
+function insert_default(name, before) {
+  var create2 = typeof name == "function" ? name : creator_default(name), select = before == null ? constantNull : typeof before == "function" ? before : selector_default(before);
+  return this.select(function() {
+    return this.insertBefore(create2.apply(this, arguments), select.apply(this, arguments) || null);
+  });
+}
+
+// node_modules/d3-selection/src/selection/remove.js
+function remove() {
+  var parent = this.parentNode;
+  parent && parent.removeChild(this);
+}
+function remove_default() {
+  return this.each(remove);
+}
+
+// node_modules/d3-selection/src/selection/clone.js
+function selection_cloneShallow() {
+  var clone = this.cloneNode(!1), parent = this.parentNode;
+  return parent ? parent.insertBefore(clone, this.nextSibling) : clone;
+}
+function selection_cloneDeep() {
+  var clone = this.cloneNode(!0), parent = this.parentNode;
+  return parent ? parent.insertBefore(clone, this.nextSibling) : clone;
+}
+function clone_default(deep) {
+  return this.select(deep ? selection_cloneDeep : selection_cloneShallow);
+}
+
+// node_modules/d3-selection/src/selection/datum.js
+function datum_default(value) {
+  return arguments.length ? this.property("__data__", value) : this.node().__data__;
+}
+
+// node_modules/d3-selection/src/selection/on.js
+function contextListener(listener) {
+  return function(event) {
+    listener.call(this, event, this.__data__);
+  };
+}
+function parseTypenames(typenames) {
+  return typenames.trim().split(/^|\s+/).map(function(t) {
+    var name = "", i = t.indexOf(".");
+    return i >= 0 && (name = t.slice(i + 1), t = t.slice(0, i)), { type: t, name };
+  });
+}
+function onRemove(typename) {
+  return function() {
+    var on = this.__on;
+    if (!!on) {
+      for (var j = 0, i = -1, m = on.length, o; j < m; ++j)
+        o = on[j], (!typename.type || o.type === typename.type) && o.name === typename.name ? this.removeEventListener(o.type, o.listener, o.options) : on[++i] = o;
+      ++i ? on.length = i : delete this.__on;
+    }
+  };
+}
+function onAdd(typename, value, options) {
+  return function() {
+    var on = this.__on, o, listener = contextListener(value);
+    if (on) {
+      for (var j = 0, m = on.length; j < m; ++j)
+        if ((o = on[j]).type === typename.type && o.name === typename.name) {
+          this.removeEventListener(o.type, o.listener, o.options), this.addEventListener(o.type, o.listener = listener, o.options = options), o.value = value;
+          return;
+        }
+    }
+    this.addEventListener(typename.type, listener, options), o = { type: typename.type, name: typename.name, value, listener, options }, on ? on.push(o) : this.__on = [o];
+  };
+}
+function on_default(typename, value, options) {
+  var typenames = parseTypenames(typename + ""), i, n = typenames.length, t;
+  if (arguments.length < 2) {
+    var on = this.node().__on;
+    if (on) {
+      for (var j = 0, m = on.length, o; j < m; ++j)
+        for (i = 0, o = on[j]; i < n; ++i)
+          if ((t = typenames[i]).type === o.type && t.name === o.name)
+            return o.value;
+    }
+    return;
+  }
+  for (on = value ? onAdd : onRemove, i = 0; i < n; ++i)
+    this.each(on(typenames[i], value, options));
+  return this;
+}
+
+// node_modules/d3-selection/src/selection/dispatch.js
+function dispatchEvent(node, type, params) {
+  var window2 = window_default(node), event = window2.CustomEvent;
+  typeof event == "function" ? event = new event(type, params) : (event = window2.document.createEvent("Event"), params ? (event.initEvent(type, params.bubbles, params.cancelable), event.detail = params.detail) : event.initEvent(type, !1, !1)), node.dispatchEvent(event);
+}
+function dispatchConstant(type, params) {
+  return function() {
+    return dispatchEvent(this, type, params);
+  };
+}
+function dispatchFunction(type, params) {
+  return function() {
+    return dispatchEvent(this, type, params.apply(this, arguments));
+  };
+}
+function dispatch_default(type, params) {
+  return this.each((typeof params == "function" ? dispatchFunction : dispatchConstant)(type, params));
+}
+
+// node_modules/d3-selection/src/selection/iterator.js
+function* iterator_default() {
+  for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j)
+    for (var group = groups[j], i = 0, n = group.length, node; i < n; ++i)
+      (node = group[i]) && (yield node);
+}
+
+// node_modules/d3-selection/src/selection/index.js
+var root = [null];
+function Selection(groups, parents) {
+  this._groups = groups, this._parents = parents;
+}
+function selection() {
+  return new Selection([[document.documentElement]], root);
+}
+function selection_selection() {
+  return this;
+}
+Selection.prototype = selection.prototype = {
+  constructor: Selection,
+  select: select_default,
+  selectAll: selectAll_default,
+  selectChild: selectChild_default,
+  selectChildren: selectChildren_default,
+  filter: filter_default,
+  data: data_default,
+  enter: enter_default,
+  exit: exit_default,
+  join: join_default,
+  merge: merge_default,
+  selection: selection_selection,
+  order: order_default,
+  sort: sort_default,
+  call: call_default,
+  nodes: nodes_default,
+  node: node_default,
+  size: size_default,
+  empty: empty_default,
+  each: each_default,
+  attr: attr_default,
+  style: style_default,
+  property: property_default,
+  classed: classed_default,
+  text: text_default,
+  html: html_default,
+  raise: raise_default,
+  lower: lower_default,
+  append: append_default,
+  insert: insert_default,
+  remove: remove_default,
+  clone: clone_default,
+  datum: datum_default,
+  on: on_default,
+  dispatch: dispatch_default,
+  [Symbol.iterator]: iterator_default
+};
+var selection_default = selection;
+
+// node_modules/d3-selection/src/select.js
+function select_default2(selector) {
+  return typeof selector == "string" ? new Selection([[document.querySelector(selector)]], [document.documentElement]) : new Selection([[selector]], root);
+}
+
+// app/modules/avl-graph/src/BarGraph.js
+var import_deepequal2 = require("deepequal"), import_lodash35 = __toESM(require("lodash.get"));
+
+// app/modules/avl-graph/src/components/AxisBottom.js
+var import_react90 = __toESM(require("react"));
+
+// node_modules/d3-dispatch/src/dispatch.js
+var noop2 = { value: () => {
+} };
+function dispatch() {
+  for (var i = 0, n = arguments.length, _ = {}, t; i < n; ++i) {
+    if (!(t = arguments[i] + "") || t in _ || /[\s.]/.test(t))
+      throw new Error("illegal type: " + t);
+    _[t] = [];
+  }
+  return new Dispatch(_);
+}
+function Dispatch(_) {
+  this._ = _;
+}
+function parseTypenames2(typenames, types) {
+  return typenames.trim().split(/^|\s+/).map(function(t) {
+    var name = "", i = t.indexOf(".");
+    if (i >= 0 && (name = t.slice(i + 1), t = t.slice(0, i)), t && !types.hasOwnProperty(t))
+      throw new Error("unknown type: " + t);
+    return { type: t, name };
+  });
+}
+Dispatch.prototype = dispatch.prototype = {
+  constructor: Dispatch,
+  on: function(typename, callback) {
+    var _ = this._, T = parseTypenames2(typename + "", _), t, i = -1, n = T.length;
+    if (arguments.length < 2) {
+      for (; ++i < n; )
+        if ((t = (typename = T[i]).type) && (t = get31(_[t], typename.name)))
+          return t;
+      return;
+    }
+    if (callback != null && typeof callback != "function")
+      throw new Error("invalid callback: " + callback);
+    for (; ++i < n; )
+      if (t = (typename = T[i]).type)
+        _[t] = set(_[t], typename.name, callback);
+      else if (callback == null)
+        for (t in _)
+          _[t] = set(_[t], typename.name, null);
+    return this;
+  },
+  copy: function() {
+    var copy2 = {}, _ = this._;
+    for (var t in _)
+      copy2[t] = _[t].slice();
+    return new Dispatch(copy2);
+  },
+  call: function(type, that) {
+    if ((n = arguments.length - 2) > 0)
+      for (var args = new Array(n), i = 0, n, t; i < n; ++i)
+        args[i] = arguments[i + 2];
+    if (!this._.hasOwnProperty(type))
+      throw new Error("unknown type: " + type);
+    for (t = this._[type], i = 0, n = t.length; i < n; ++i)
+      t[i].value.apply(that, args);
+  },
+  apply: function(type, that, args) {
+    if (!this._.hasOwnProperty(type))
+      throw new Error("unknown type: " + type);
+    for (var t = this._[type], i = 0, n = t.length; i < n; ++i)
+      t[i].value.apply(that, args);
+  }
+};
+function get31(type, name) {
+  for (var i = 0, n = type.length, c; i < n; ++i)
+    if ((c = type[i]).name === name)
+      return c.value;
+}
+function set(type, name, callback) {
+  for (var i = 0, n = type.length; i < n; ++i)
+    if (type[i].name === name) {
+      type[i] = noop2, type = type.slice(0, i).concat(type.slice(i + 1));
+      break;
+    }
+  return callback != null && type.push({ name, value: callback }), type;
+}
+var dispatch_default2 = dispatch;
+
+// node_modules/d3-timer/src/timer.js
+var frame = 0, timeout = 0, interval = 0, pokeDelay = 1e3, taskHead, taskTail, clockLast = 0, clockNow = 0, clockSkew = 0, clock = typeof performance == "object" && performance.now ? performance : Date, setFrame = typeof window == "object" && window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : function(f) {
+  setTimeout(f, 17);
+};
+function now() {
+  return clockNow || (setFrame(clearNow), clockNow = clock.now() + clockSkew);
+}
+function clearNow() {
+  clockNow = 0;
+}
+function Timer() {
+  this._call = this._time = this._next = null;
+}
+Timer.prototype = timer.prototype = {
+  constructor: Timer,
+  restart: function(callback, delay, time) {
+    if (typeof callback != "function")
+      throw new TypeError("callback is not a function");
+    time = (time == null ? now() : +time) + (delay == null ? 0 : +delay), !this._next && taskTail !== this && (taskTail ? taskTail._next = this : taskHead = this, taskTail = this), this._call = callback, this._time = time, sleep();
+  },
+  stop: function() {
+    this._call && (this._call = null, this._time = 1 / 0, sleep());
+  }
+};
+function timer(callback, delay, time) {
+  var t = new Timer();
+  return t.restart(callback, delay, time), t;
+}
+function timerFlush() {
+  now(), ++frame;
+  for (var t = taskHead, e; t; )
+    (e = clockNow - t._time) >= 0 && t._call.call(void 0, e), t = t._next;
+  --frame;
+}
+function wake() {
+  clockNow = (clockLast = clock.now()) + clockSkew, frame = timeout = 0;
+  try {
+    timerFlush();
+  } finally {
+    frame = 0, nap(), clockNow = 0;
+  }
+}
+function poke() {
+  var now2 = clock.now(), delay = now2 - clockLast;
+  delay > pokeDelay && (clockSkew -= delay, clockLast = now2);
+}
+function nap() {
+  for (var t0, t1 = taskHead, t2, time = 1 / 0; t1; )
+    t1._call ? (time > t1._time && (time = t1._time), t0 = t1, t1 = t1._next) : (t2 = t1._next, t1._next = null, t1 = t0 ? t0._next = t2 : taskHead = t2);
+  taskTail = t0, sleep(time);
+}
+function sleep(time) {
+  if (!frame) {
+    timeout && (timeout = clearTimeout(timeout));
+    var delay = time - clockNow;
+    delay > 24 ? (time < 1 / 0 && (timeout = setTimeout(wake, time - clock.now() - clockSkew)), interval && (interval = clearInterval(interval))) : (interval || (clockLast = clock.now(), interval = setInterval(poke, pokeDelay)), frame = 1, setFrame(wake));
+  }
+}
+
+// node_modules/d3-timer/src/timeout.js
+function timeout_default(callback, delay, time) {
+  var t = new Timer();
+  return delay = delay == null ? 0 : +delay, t.restart((elapsed) => {
+    t.stop(), callback(elapsed + delay);
+  }, delay, time), t;
+}
+
+// node_modules/d3-transition/src/transition/schedule.js
+var emptyOn = dispatch_default2("start", "end", "cancel", "interrupt"), emptyTween = [], CREATED = 0, SCHEDULED = 1, STARTING = 2, STARTED = 3, RUNNING = 4, ENDING = 5, ENDED = 6;
+function schedule_default(node, name, id3, index, group, timing) {
+  var schedules = node.__transition;
+  if (!schedules)
+    node.__transition = {};
+  else if (id3 in schedules)
+    return;
+  create(node, id3, {
+    name,
+    index,
+    group,
+    on: emptyOn,
+    tween: emptyTween,
+    time: timing.time,
+    delay: timing.delay,
+    duration: timing.duration,
+    ease: timing.ease,
+    timer: null,
+    state: CREATED
+  });
+}
+function init(node, id3) {
+  var schedule = get32(node, id3);
+  if (schedule.state > CREATED)
+    throw new Error("too late; already scheduled");
+  return schedule;
+}
+function set2(node, id3) {
+  var schedule = get32(node, id3);
+  if (schedule.state > STARTED)
+    throw new Error("too late; already running");
+  return schedule;
+}
+function get32(node, id3) {
+  var schedule = node.__transition;
+  if (!schedule || !(schedule = schedule[id3]))
+    throw new Error("transition not found");
+  return schedule;
+}
+function create(node, id3, self) {
+  var schedules = node.__transition, tween;
+  schedules[id3] = self, self.timer = timer(schedule, 0, self.time);
+  function schedule(elapsed) {
+    self.state = SCHEDULED, self.timer.restart(start2, self.delay, self.time), self.delay <= elapsed && start2(elapsed - self.delay);
+  }
+  function start2(elapsed) {
+    var i, j, n, o;
+    if (self.state !== SCHEDULED)
+      return stop();
+    for (i in schedules)
+      if (o = schedules[i], o.name === self.name) {
+        if (o.state === STARTED)
+          return timeout_default(start2);
+        o.state === RUNNING ? (o.state = ENDED, o.timer.stop(), o.on.call("interrupt", node, node.__data__, o.index, o.group), delete schedules[i]) : +i < id3 && (o.state = ENDED, o.timer.stop(), o.on.call("cancel", node, node.__data__, o.index, o.group), delete schedules[i]);
+      }
+    if (timeout_default(function() {
+      self.state === STARTED && (self.state = RUNNING, self.timer.restart(tick, self.delay, self.time), tick(elapsed));
+    }), self.state = STARTING, self.on.call("start", node, node.__data__, self.index, self.group), self.state === STARTING) {
+      for (self.state = STARTED, tween = new Array(n = self.tween.length), i = 0, j = -1; i < n; ++i)
+        (o = self.tween[i].value.call(node, node.__data__, self.index, self.group)) && (tween[++j] = o);
+      tween.length = j + 1;
+    }
+  }
+  function tick(elapsed) {
+    for (var t = elapsed < self.duration ? self.ease.call(null, elapsed / self.duration) : (self.timer.restart(stop), self.state = ENDING, 1), i = -1, n = tween.length; ++i < n; )
+      tween[i].call(node, t);
+    self.state === ENDING && (self.on.call("end", node, node.__data__, self.index, self.group), stop());
+  }
+  function stop() {
+    self.state = ENDED, self.timer.stop(), delete schedules[id3];
+    for (var i in schedules)
+      return;
+    delete node.__transition;
+  }
+}
+
+// node_modules/d3-transition/src/interrupt.js
+function interrupt_default(node, name) {
+  var schedules = node.__transition, schedule, active, empty2 = !0, i;
+  if (!!schedules) {
+    name = name == null ? null : name + "";
+    for (i in schedules) {
+      if ((schedule = schedules[i]).name !== name) {
+        empty2 = !1;
+        continue;
+      }
+      active = schedule.state > STARTING && schedule.state < ENDING, schedule.state = ENDED, schedule.timer.stop(), schedule.on.call(active ? "interrupt" : "cancel", node, node.__data__, schedule.index, schedule.group), delete schedules[i];
+    }
+    empty2 && delete node.__transition;
+  }
+}
+
+// node_modules/d3-transition/src/selection/interrupt.js
+function interrupt_default2(name) {
+  return this.each(function() {
+    interrupt_default(this, name);
+  });
+}
+
+// node_modules/d3-transition/src/transition/tween.js
+function tweenRemove(id3, name) {
+  var tween0, tween1;
+  return function() {
+    var schedule = set2(this, id3), tween = schedule.tween;
+    if (tween !== tween0) {
+      tween1 = tween0 = tween;
+      for (var i = 0, n = tween1.length; i < n; ++i)
+        if (tween1[i].name === name) {
+          tween1 = tween1.slice(), tween1.splice(i, 1);
+          break;
+        }
+    }
+    schedule.tween = tween1;
+  };
+}
+function tweenFunction(id3, name, value) {
+  var tween0, tween1;
+  if (typeof value != "function")
+    throw new Error();
+  return function() {
+    var schedule = set2(this, id3), tween = schedule.tween;
+    if (tween !== tween0) {
+      tween1 = (tween0 = tween).slice();
+      for (var t = { name, value }, i = 0, n = tween1.length; i < n; ++i)
+        if (tween1[i].name === name) {
+          tween1[i] = t;
+          break;
+        }
+      i === n && tween1.push(t);
+    }
+    schedule.tween = tween1;
+  };
+}
+function tween_default(name, value) {
+  var id3 = this._id;
+  if (name += "", arguments.length < 2) {
+    for (var tween = get32(this.node(), id3).tween, i = 0, n = tween.length, t; i < n; ++i)
+      if ((t = tween[i]).name === name)
+        return t.value;
+    return null;
+  }
+  return this.each((value == null ? tweenRemove : tweenFunction)(id3, name, value));
+}
+function tweenValue(transition2, name, value) {
+  var id3 = transition2._id;
+  return transition2.each(function() {
+    var schedule = set2(this, id3);
+    (schedule.value || (schedule.value = {}))[name] = value.apply(this, arguments);
+  }), function(node) {
+    return get32(node, id3).value[name];
+  };
+}
+
+// node_modules/d3-transition/src/transition/interpolate.js
+function interpolate_default(a, b) {
+  var c;
+  return (typeof b == "number" ? number_default : b instanceof color ? rgb_default : (c = color(b)) ? (b = c, rgb_default) : string_default)(a, b);
+}
+
+// node_modules/d3-transition/src/transition/attr.js
+function attrRemove2(name) {
+  return function() {
+    this.removeAttribute(name);
+  };
+}
+function attrRemoveNS2(fullname) {
+  return function() {
+    this.removeAttributeNS(fullname.space, fullname.local);
+  };
+}
+function attrConstant2(name, interpolate, value1) {
+  var string00, string1 = value1 + "", interpolate0;
+  return function() {
+    var string0 = this.getAttribute(name);
+    return string0 === string1 ? null : string0 === string00 ? interpolate0 : interpolate0 = interpolate(string00 = string0, value1);
+  };
+}
+function attrConstantNS2(fullname, interpolate, value1) {
+  var string00, string1 = value1 + "", interpolate0;
+  return function() {
+    var string0 = this.getAttributeNS(fullname.space, fullname.local);
+    return string0 === string1 ? null : string0 === string00 ? interpolate0 : interpolate0 = interpolate(string00 = string0, value1);
+  };
+}
+function attrFunction2(name, interpolate, value) {
+  var string00, string10, interpolate0;
+  return function() {
+    var string0, value1 = value(this), string1;
+    return value1 == null ? void this.removeAttribute(name) : (string0 = this.getAttribute(name), string1 = value1 + "", string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1)));
+  };
+}
+function attrFunctionNS2(fullname, interpolate, value) {
+  var string00, string10, interpolate0;
+  return function() {
+    var string0, value1 = value(this), string1;
+    return value1 == null ? void this.removeAttributeNS(fullname.space, fullname.local) : (string0 = this.getAttributeNS(fullname.space, fullname.local), string1 = value1 + "", string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1)));
+  };
+}
+function attr_default2(name, value) {
+  var fullname = namespace_default(name), i = fullname === "transform" ? interpolateTransformSvg : interpolate_default;
+  return this.attrTween(name, typeof value == "function" ? (fullname.local ? attrFunctionNS2 : attrFunction2)(fullname, i, tweenValue(this, "attr." + name, value)) : value == null ? (fullname.local ? attrRemoveNS2 : attrRemove2)(fullname) : (fullname.local ? attrConstantNS2 : attrConstant2)(fullname, i, value));
+}
+
+// node_modules/d3-transition/src/transition/attrTween.js
+function attrInterpolate(name, i) {
+  return function(t) {
+    this.setAttribute(name, i.call(this, t));
+  };
+}
+function attrInterpolateNS(fullname, i) {
+  return function(t) {
+    this.setAttributeNS(fullname.space, fullname.local, i.call(this, t));
+  };
+}
+function attrTweenNS(fullname, value) {
+  var t0, i0;
+  function tween() {
+    var i = value.apply(this, arguments);
+    return i !== i0 && (t0 = (i0 = i) && attrInterpolateNS(fullname, i)), t0;
+  }
+  return tween._value = value, tween;
+}
+function attrTween(name, value) {
+  var t0, i0;
+  function tween() {
+    var i = value.apply(this, arguments);
+    return i !== i0 && (t0 = (i0 = i) && attrInterpolate(name, i)), t0;
+  }
+  return tween._value = value, tween;
+}
+function attrTween_default(name, value) {
+  var key = "attr." + name;
+  if (arguments.length < 2)
+    return (key = this.tween(key)) && key._value;
+  if (value == null)
+    return this.tween(key, null);
+  if (typeof value != "function")
+    throw new Error();
+  var fullname = namespace_default(name);
+  return this.tween(key, (fullname.local ? attrTweenNS : attrTween)(fullname, value));
+}
+
+// node_modules/d3-transition/src/transition/delay.js
+function delayFunction(id3, value) {
+  return function() {
+    init(this, id3).delay = +value.apply(this, arguments);
+  };
+}
+function delayConstant(id3, value) {
+  return value = +value, function() {
+    init(this, id3).delay = value;
+  };
+}
+function delay_default(value) {
+  var id3 = this._id;
+  return arguments.length ? this.each((typeof value == "function" ? delayFunction : delayConstant)(id3, value)) : get32(this.node(), id3).delay;
+}
+
+// node_modules/d3-transition/src/transition/duration.js
+function durationFunction(id3, value) {
+  return function() {
+    set2(this, id3).duration = +value.apply(this, arguments);
+  };
+}
+function durationConstant(id3, value) {
+  return value = +value, function() {
+    set2(this, id3).duration = value;
+  };
+}
+function duration_default(value) {
+  var id3 = this._id;
+  return arguments.length ? this.each((typeof value == "function" ? durationFunction : durationConstant)(id3, value)) : get32(this.node(), id3).duration;
+}
+
+// node_modules/d3-transition/src/transition/ease.js
+function easeConstant(id3, value) {
+  if (typeof value != "function")
+    throw new Error();
+  return function() {
+    set2(this, id3).ease = value;
+  };
+}
+function ease_default(value) {
+  var id3 = this._id;
+  return arguments.length ? this.each(easeConstant(id3, value)) : get32(this.node(), id3).ease;
+}
+
+// node_modules/d3-transition/src/transition/easeVarying.js
+function easeVarying(id3, value) {
+  return function() {
+    var v = value.apply(this, arguments);
+    if (typeof v != "function")
+      throw new Error();
+    set2(this, id3).ease = v;
+  };
+}
+function easeVarying_default(value) {
+  if (typeof value != "function")
+    throw new Error();
+  return this.each(easeVarying(this._id, value));
+}
+
+// node_modules/d3-transition/src/transition/filter.js
+function filter_default2(match) {
+  typeof match != "function" && (match = matcher_default(match));
+  for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j)
+    for (var group = groups[j], n = group.length, subgroup = subgroups[j] = [], node, i = 0; i < n; ++i)
+      (node = group[i]) && match.call(node, node.__data__, i, group) && subgroup.push(node);
+  return new Transition(subgroups, this._parents, this._name, this._id);
+}
+
+// node_modules/d3-transition/src/transition/merge.js
+function merge_default2(transition2) {
+  if (transition2._id !== this._id)
+    throw new Error();
+  for (var groups0 = this._groups, groups1 = transition2._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j)
+    for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge = merges[j] = new Array(n), node, i = 0; i < n; ++i)
+      (node = group0[i] || group1[i]) && (merge[i] = node);
+  for (; j < m0; ++j)
+    merges[j] = groups0[j];
+  return new Transition(merges, this._parents, this._name, this._id);
+}
+
+// node_modules/d3-transition/src/transition/on.js
+function start(name) {
+  return (name + "").trim().split(/^|\s+/).every(function(t) {
+    var i = t.indexOf(".");
+    return i >= 0 && (t = t.slice(0, i)), !t || t === "start";
+  });
+}
+function onFunction(id3, name, listener) {
+  var on0, on1, sit = start(name) ? init : set2;
+  return function() {
+    var schedule = sit(this, id3), on = schedule.on;
+    on !== on0 && (on1 = (on0 = on).copy()).on(name, listener), schedule.on = on1;
+  };
+}
+function on_default2(name, listener) {
+  var id3 = this._id;
+  return arguments.length < 2 ? get32(this.node(), id3).on.on(name) : this.each(onFunction(id3, name, listener));
+}
+
+// node_modules/d3-transition/src/transition/remove.js
+function removeFunction(id3) {
+  return function() {
+    var parent = this.parentNode;
+    for (var i in this.__transition)
+      if (+i !== id3)
+        return;
+    parent && parent.removeChild(this);
+  };
+}
+function remove_default2() {
+  return this.on("end.remove", removeFunction(this._id));
+}
+
+// node_modules/d3-transition/src/transition/select.js
+function select_default3(select) {
+  var name = this._name, id3 = this._id;
+  typeof select != "function" && (select = selector_default(select));
+  for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j)
+    for (var group = groups[j], n = group.length, subgroup = subgroups[j] = new Array(n), node, subnode, i = 0; i < n; ++i)
+      (node = group[i]) && (subnode = select.call(node, node.__data__, i, group)) && ("__data__" in node && (subnode.__data__ = node.__data__), subgroup[i] = subnode, schedule_default(subgroup[i], name, id3, i, subgroup, get32(node, id3)));
+  return new Transition(subgroups, this._parents, name, id3);
+}
+
+// node_modules/d3-transition/src/transition/selectAll.js
+function selectAll_default2(select) {
+  var name = this._name, id3 = this._id;
+  typeof select != "function" && (select = selectorAll_default(select));
+  for (var groups = this._groups, m = groups.length, subgroups = [], parents = [], j = 0; j < m; ++j)
+    for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i)
+      if (node = group[i]) {
+        for (var children2 = select.call(node, node.__data__, i, group), child, inherit2 = get32(node, id3), k = 0, l = children2.length; k < l; ++k)
+          (child = children2[k]) && schedule_default(child, name, id3, k, children2, inherit2);
+        subgroups.push(children2), parents.push(node);
+      }
+  return new Transition(subgroups, parents, name, id3);
+}
+
+// node_modules/d3-transition/src/transition/selection.js
+var Selection2 = selection_default.prototype.constructor;
+function selection_default2() {
+  return new Selection2(this._groups, this._parents);
+}
+
+// node_modules/d3-transition/src/transition/style.js
+function styleNull(name, interpolate) {
+  var string00, string10, interpolate0;
+  return function() {
+    var string0 = styleValue(this, name), string1 = (this.style.removeProperty(name), styleValue(this, name));
+    return string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : interpolate0 = interpolate(string00 = string0, string10 = string1);
+  };
+}
+function styleRemove2(name) {
+  return function() {
+    this.style.removeProperty(name);
+  };
+}
+function styleConstant2(name, interpolate, value1) {
+  var string00, string1 = value1 + "", interpolate0;
+  return function() {
+    var string0 = styleValue(this, name);
+    return string0 === string1 ? null : string0 === string00 ? interpolate0 : interpolate0 = interpolate(string00 = string0, value1);
+  };
+}
+function styleFunction2(name, interpolate, value) {
+  var string00, string10, interpolate0;
+  return function() {
+    var string0 = styleValue(this, name), value1 = value(this), string1 = value1 + "";
+    return value1 == null && (string1 = value1 = (this.style.removeProperty(name), styleValue(this, name))), string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+  };
+}
+function styleMaybeRemove(id3, name) {
+  var on0, on1, listener0, key = "style." + name, event = "end." + key, remove2;
+  return function() {
+    var schedule = set2(this, id3), on = schedule.on, listener = schedule.value[key] == null ? remove2 || (remove2 = styleRemove2(name)) : void 0;
+    (on !== on0 || listener0 !== listener) && (on1 = (on0 = on).copy()).on(event, listener0 = listener), schedule.on = on1;
+  };
+}
+function style_default2(name, value, priority) {
+  var i = (name += "") == "transform" ? interpolateTransformCss : interpolate_default;
+  return value == null ? this.styleTween(name, styleNull(name, i)).on("end.style." + name, styleRemove2(name)) : typeof value == "function" ? this.styleTween(name, styleFunction2(name, i, tweenValue(this, "style." + name, value))).each(styleMaybeRemove(this._id, name)) : this.styleTween(name, styleConstant2(name, i, value), priority).on("end.style." + name, null);
+}
+
+// node_modules/d3-transition/src/transition/styleTween.js
+function styleInterpolate(name, i, priority) {
+  return function(t) {
+    this.style.setProperty(name, i.call(this, t), priority);
+  };
+}
+function styleTween(name, value, priority) {
+  var t, i0;
+  function tween() {
+    var i = value.apply(this, arguments);
+    return i !== i0 && (t = (i0 = i) && styleInterpolate(name, i, priority)), t;
+  }
+  return tween._value = value, tween;
+}
+function styleTween_default(name, value, priority) {
+  var key = "style." + (name += "");
+  if (arguments.length < 2)
+    return (key = this.tween(key)) && key._value;
+  if (value == null)
+    return this.tween(key, null);
+  if (typeof value != "function")
+    throw new Error();
+  return this.tween(key, styleTween(name, value, priority ?? ""));
+}
+
+// node_modules/d3-transition/src/transition/text.js
+function textConstant2(value) {
+  return function() {
+    this.textContent = value;
+  };
+}
+function textFunction2(value) {
+  return function() {
+    var value1 = value(this);
+    this.textContent = value1 ?? "";
+  };
+}
+function text_default2(value) {
+  return this.tween("text", typeof value == "function" ? textFunction2(tweenValue(this, "text", value)) : textConstant2(value == null ? "" : value + ""));
+}
+
+// node_modules/d3-transition/src/transition/textTween.js
+function textInterpolate(i) {
+  return function(t) {
+    this.textContent = i.call(this, t);
+  };
+}
+function textTween(value) {
+  var t0, i0;
+  function tween() {
+    var i = value.apply(this, arguments);
+    return i !== i0 && (t0 = (i0 = i) && textInterpolate(i)), t0;
+  }
+  return tween._value = value, tween;
+}
+function textTween_default(value) {
+  var key = "text";
+  if (arguments.length < 1)
+    return (key = this.tween(key)) && key._value;
+  if (value == null)
+    return this.tween(key, null);
+  if (typeof value != "function")
+    throw new Error();
+  return this.tween(key, textTween(value));
+}
+
+// node_modules/d3-transition/src/transition/transition.js
+function transition_default() {
+  for (var name = this._name, id0 = this._id, id1 = newId(), groups = this._groups, m = groups.length, j = 0; j < m; ++j)
+    for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i)
+      if (node = group[i]) {
+        var inherit2 = get32(node, id0);
+        schedule_default(node, name, id1, i, group, {
+          time: inherit2.time + inherit2.delay + inherit2.duration,
+          delay: 0,
+          duration: inherit2.duration,
+          ease: inherit2.ease
+        });
+      }
+  return new Transition(groups, this._parents, name, id1);
+}
+
+// node_modules/d3-transition/src/transition/end.js
+function end_default() {
+  var on0, on1, that = this, id3 = that._id, size = that.size();
+  return new Promise(function(resolve, reject) {
+    var cancel = { value: reject }, end = { value: function() {
+      --size === 0 && resolve();
+    } };
+    that.each(function() {
+      var schedule = set2(this, id3), on = schedule.on;
+      on !== on0 && (on1 = (on0 = on).copy(), on1._.cancel.push(cancel), on1._.interrupt.push(cancel), on1._.end.push(end)), schedule.on = on1;
+    }), size === 0 && resolve();
+  });
+}
+
+// node_modules/d3-transition/src/transition/index.js
+var id2 = 0;
+function Transition(groups, parents, name, id3) {
+  this._groups = groups, this._parents = parents, this._name = name, this._id = id3;
+}
+function transition(name) {
+  return selection_default().transition(name);
+}
+function newId() {
+  return ++id2;
+}
+var selection_prototype = selection_default.prototype;
+Transition.prototype = transition.prototype = {
+  constructor: Transition,
+  select: select_default3,
+  selectAll: selectAll_default2,
+  selectChild: selection_prototype.selectChild,
+  selectChildren: selection_prototype.selectChildren,
+  filter: filter_default2,
+  merge: merge_default2,
+  selection: selection_default2,
+  transition: transition_default,
+  call: selection_prototype.call,
+  nodes: selection_prototype.nodes,
+  node: selection_prototype.node,
+  size: selection_prototype.size,
+  empty: selection_prototype.empty,
+  each: selection_prototype.each,
+  on: on_default2,
+  attr: attr_default2,
+  attrTween: attrTween_default,
+  style: style_default2,
+  styleTween: styleTween_default,
+  text: text_default2,
+  textTween: textTween_default,
+  remove: remove_default2,
+  tween: tween_default,
+  delay: delay_default,
+  duration: duration_default,
+  ease: ease_default,
+  easeVarying: easeVarying_default,
+  end: end_default,
+  [Symbol.iterator]: selection_prototype[Symbol.iterator]
+};
+
+// node_modules/d3-ease/src/cubic.js
+function cubicInOut(t) {
+  return ((t *= 2) <= 1 ? t * t * t : (t -= 2) * t * t + 2) / 2;
+}
+
+// node_modules/d3-transition/src/selection/transition.js
+var defaultTiming = {
+  time: null,
+  delay: 0,
+  duration: 250,
+  ease: cubicInOut
+};
+function inherit(node, id3) {
+  for (var timing; !(timing = node.__transition) || !(timing = timing[id3]); )
+    if (!(node = node.parentNode))
+      throw new Error(`transition ${id3} not found`);
+  return timing;
+}
+function transition_default2(name) {
+  var id3, timing;
+  name instanceof Transition ? (id3 = name._id, name = name._name) : (id3 = newId(), (timing = defaultTiming).time = now(), name = name == null ? null : name + "");
+  for (var groups = this._groups, m = groups.length, j = 0; j < m; ++j)
+    for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i)
+      (node = group[i]) && schedule_default(node, name, id3, i, group, timing || inherit(node, id3));
+  return new Transition(groups, this._parents, name, id3);
+}
+
+// node_modules/d3-transition/src/selection/index.js
+selection_default.prototype.interrupt = interrupt_default2;
+selection_default.prototype.transition = transition_default2;
+
+// node_modules/d3-axis/src/identity.js
+function identity_default2(x) {
+  return x;
+}
+
+// node_modules/d3-axis/src/axis.js
+var top = 1, right = 2, bottom = 3, left = 4, epsilon = 1e-6;
+function translateX(x) {
+  return "translate(" + x + ",0)";
+}
+function translateY(y) {
+  return "translate(0," + y + ")";
+}
+function number3(scale) {
+  return (d) => +scale(d);
+}
+function center(scale, offset) {
+  return offset = Math.max(0, scale.bandwidth() - offset * 2) / 2, scale.round() && (offset = Math.round(offset)), (d) => +scale(d) + offset;
+}
+function entering() {
+  return !this.__axis;
+}
+function axis(orient, scale) {
+  var tickArguments = [], tickValues = null, tickFormat2 = null, tickSizeInner = 6, tickSizeOuter = 6, tickPadding = 3, offset = typeof window < "u" && window.devicePixelRatio > 1 ? 0 : 0.5, k = orient === top || orient === left ? -1 : 1, x = orient === left || orient === right ? "x" : "y", transform = orient === top || orient === bottom ? translateX : translateY;
+  function axis2(context) {
+    var values = tickValues ?? (scale.ticks ? scale.ticks.apply(scale, tickArguments) : scale.domain()), format2 = tickFormat2 ?? (scale.tickFormat ? scale.tickFormat.apply(scale, tickArguments) : identity_default2), spacing = Math.max(tickSizeInner, 0) + tickPadding, range2 = scale.range(), range0 = +range2[0] + offset, range1 = +range2[range2.length - 1] + offset, position = (scale.bandwidth ? center : number3)(scale.copy(), offset), selection2 = context.selection ? context.selection() : context, path = selection2.selectAll(".domain").data([null]), tick = selection2.selectAll(".tick").data(values, scale).order(), tickExit = tick.exit(), tickEnter = tick.enter().append("g").attr("class", "tick"), line = tick.select("line"), text = tick.select("text");
+    path = path.merge(path.enter().insert("path", ".tick").attr("class", "domain").attr("stroke", "currentColor")), tick = tick.merge(tickEnter), line = line.merge(tickEnter.append("line").attr("stroke", "currentColor").attr(x + "2", k * tickSizeInner)), text = text.merge(tickEnter.append("text").attr("fill", "currentColor").attr(x, k * spacing).attr("dy", orient === top ? "0em" : orient === bottom ? "0.71em" : "0.32em")), context !== selection2 && (path = path.transition(context), tick = tick.transition(context), line = line.transition(context), text = text.transition(context), tickExit = tickExit.transition(context).attr("opacity", epsilon).attr("transform", function(d) {
+      return isFinite(d = position(d)) ? transform(d + offset) : this.getAttribute("transform");
+    }), tickEnter.attr("opacity", epsilon).attr("transform", function(d) {
+      var p = this.parentNode.__axis;
+      return transform((p && isFinite(p = p(d)) ? p : position(d)) + offset);
+    })), tickExit.remove(), path.attr("d", orient === left || orient === right ? tickSizeOuter ? "M" + k * tickSizeOuter + "," + range0 + "H" + offset + "V" + range1 + "H" + k * tickSizeOuter : "M" + offset + "," + range0 + "V" + range1 : tickSizeOuter ? "M" + range0 + "," + k * tickSizeOuter + "V" + offset + "H" + range1 + "V" + k * tickSizeOuter : "M" + range0 + "," + offset + "H" + range1), tick.attr("opacity", 1).attr("transform", function(d) {
+      return transform(position(d) + offset);
+    }), line.attr(x + "2", k * tickSizeInner), text.attr(x, k * spacing).text(format2), selection2.filter(entering).attr("fill", "none").attr("font-size", 10).attr("font-family", "sans-serif").attr("text-anchor", orient === right ? "start" : orient === left ? "end" : "middle"), selection2.each(function() {
+      this.__axis = position;
+    });
+  }
+  return axis2.scale = function(_) {
+    return arguments.length ? (scale = _, axis2) : scale;
+  }, axis2.ticks = function() {
+    return tickArguments = Array.from(arguments), axis2;
+  }, axis2.tickArguments = function(_) {
+    return arguments.length ? (tickArguments = _ == null ? [] : Array.from(_), axis2) : tickArguments.slice();
+  }, axis2.tickValues = function(_) {
+    return arguments.length ? (tickValues = _ == null ? null : Array.from(_), axis2) : tickValues && tickValues.slice();
+  }, axis2.tickFormat = function(_) {
+    return arguments.length ? (tickFormat2 = _, axis2) : tickFormat2;
+  }, axis2.tickSize = function(_) {
+    return arguments.length ? (tickSizeInner = tickSizeOuter = +_, axis2) : tickSizeInner;
+  }, axis2.tickSizeInner = function(_) {
+    return arguments.length ? (tickSizeInner = +_, axis2) : tickSizeInner;
+  }, axis2.tickSizeOuter = function(_) {
+    return arguments.length ? (tickSizeOuter = +_, axis2) : tickSizeOuter;
+  }, axis2.tickPadding = function(_) {
+    return arguments.length ? (tickPadding = +_, axis2) : tickPadding;
+  }, axis2.offset = function(_) {
+    return arguments.length ? (offset = +_, axis2) : offset;
+  }, axis2;
+}
+function axisRight(scale) {
+  return axis(right, scale);
+}
+function axisBottom(scale) {
+  return axis(bottom, scale);
+}
+function axisLeft(scale) {
+  return axis(left, scale);
+}
+
+// app/modules/avl-graph/src/components/AxisBottom.js
+var import_jsx_dev_runtime75 = require("react/jsx-dev-runtime"), AxisBottom = (props) => {
+  let {
+    adjustedWidth,
+    adjustedHeight,
+    type = "band",
+    domain,
+    scale,
+    format: format2,
+    tickValues,
+    secondary,
+    label,
+    margin,
+    tickDensity = 2
+  } = props, ref = import_react90.default.useRef();
+  return import_react90.default.useEffect(
+    () => {
+      ref.current && renderAxisBottom({
+        ref: ref.current,
+        adjustedWidth,
+        adjustedHeight,
+        type,
+        domain,
+        scale,
+        format: format2,
+        tickValues,
+        secondary,
+        label,
+        margin,
+        tickDensity
+      });
+    },
+    [
+      adjustedWidth,
+      adjustedHeight,
+      type,
+      domain,
+      scale,
+      format2,
+      tickValues,
+      secondary,
+      label,
+      margin,
+      tickDensity
+    ]
+  ), /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("g", { ref }, void 0, !1, {
+    fileName: "app/modules/avl-graph/src/components/AxisBottom.js",
+    lineNumber: 30,
+    columnNumber: 10
+  }, this);
+}, renderAxisBottom = ({
+  ref,
+  adjustedWidth,
+  adjustedHeight,
+  domain,
+  scale,
+  format: format2,
+  secondary,
+  label,
+  tickValues,
+  type,
+  margin,
+  tickDensity
+}) => {
+  let { left: left2, top: top2, bottom: bottom2 } = margin;
+  if (!tickValues && type === "band") {
+    let ticks2 = Math.ceil(adjustedWidth / 100 * tickDensity), mod = Math.ceil(domain.length / ticks2), halfMod = Math.floor(mod * 0.5);
+    tickValues = domain.filter(
+      (d, i) => (mod === 1 || i > 0) && (mod === 1 || i < domain.length - 1) && !((i - halfMod) % mod)
+    );
+  } else if (!tickValues && type === "ordinal") {
+    let density = 100 / tickDensity, tick = 0;
+    tickValues = [];
+    for (let i = 0; i < domain.length; ++i)
+      i > 0 && (tick += scale(domain[i]) - scale(domain[i - 1])), (!tickValues.length && tick >= density * 0.5 || tick >= density) && (tickValues.push(domain[i]), tick = 0);
+  }
+  let axisBottom2 = axisBottom(scale).tickValues(tickValues).tickFormat(format2), transition2 = transition().duration(1e3), group = select_default2(ref).selectAll("g.animated-group").data(["animated-group"]).join(
+    (enter) => enter.append("g").attr("class", "animated-group").call(
+      (enter2) => enter2.style("transform", `translate(${left2}px, ${adjustedHeight + top2}px)`)
+    ),
+    (update) => update.call(
+      (update2) => update2.transition(transition2).style("transform", `translate(${left2}px, ${adjustedHeight + top2}px)`)
+    ),
+    (exit) => exit.call(
+      (exit2) => exit2.transition(transition2).remove()
+    )
+  ).selectAll("g.axis-group").data(domain.length ? ["axis-group"] : []).join(
+    (enter) => enter.append("g").attr("class", "axis-group").call(
+      (enter2) => enter2.style("transform", "scale(0, 0)").transition(transition2).style("transform", "scale(1, 1)")
+    ),
+    (update) => update.call(
+      (update2) => update2.transition(transition2).style("transform", "scale(1, 1)")
+    ),
+    (exit) => exit.call(
+      (exit2) => exit2.transition(transition2).style("transform", "scale(0, 0)").remove()
+    )
+  );
+  group.selectAll("g.axis").data(domain.length ? ["axis-bottom"] : []).join("g").attr("class", "axis axis-bottom").classed("secondary", secondary).transition(transition2).call(axisBottom2), group.selectAll("text.axis-label").data(domain.length && Boolean(label) ? [label] : []).join("text").attr("class", "axis-label axis-label-bottom").style("transform", `translate(${adjustedWidth * 0.5}px, ${bottom2 - 9}px)`).attr("text-anchor", "middle").attr("fill", "currentColor").attr("font-size", "1rem").text((d) => d);
+};
+
+// app/modules/avl-graph/src/components/AxisLeft.js
+var import_react91 = __toESM(require("react"));
+var import_jsx_dev_runtime76 = require("react/jsx-dev-runtime"), AxisLeft = (props) => {
+  let {
+    adjustedWidth,
+    adjustedHeight,
+    showGridLines = !0,
+    domain,
+    scale,
+    format: format2,
+    type = "linear",
+    secondary,
+    label,
+    margin,
+    ticks: ticks2 = 10,
+    tickValues
+  } = props, ref = import_react91.default.useRef();
+  return import_react91.default.useEffect(
+    () => {
+      ref.current && renderAxisLeft(
+        ref.current,
+        adjustedWidth,
+        adjustedHeight,
+        domain,
+        scale,
+        type,
+        format2,
+        secondary,
+        label,
+        margin,
+        ticks2,
+        tickValues,
+        showGridLines
+      );
+    },
+    [
+      adjustedWidth,
+      adjustedHeight,
+      showGridLines,
+      domain,
+      scale,
+      type,
+      format2,
+      secondary,
+      label,
+      margin,
+      ticks2,
+      tickValues
+    ]
+  ), /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("g", { ref }, void 0, !1, {
+    fileName: "app/modules/avl-graph/src/components/AxisLeft.js",
+    lineNumber: 31,
+    columnNumber: 10
+  }, this);
+}, renderAxisLeft = (ref, adjustedWidth, adjustedHeight, domain, scale, type, format2, secondary, label, margin, ticks2, tickValues, showGridLines) => {
+  let { left: left2, top: top2 } = margin, axisLeft2 = axisLeft(scale).tickFormat(format2);
+  tickValues ? axisLeft2.tickValues(tickValues) : axisLeft2.ticks(ticks2);
+  let transition2 = transition().duration(1e3), group = select_default2(ref).selectAll("g.animated-group").data(["animated-group"]).join(
+    (enter) => enter.append("g").attr("class", "animated-group").call(
+      (enter2) => enter2.style("transform", `translate(${left2}px, ${top2}px)`)
+    ),
+    (update) => update.call(
+      (update2) => update2.transition(transition2).style("transform", `translate(${left2}px, ${top2}px)`)
+    ),
+    (exit) => exit.call(
+      (exit2) => exit2.transition(transition2).style("transform", `translate(${left2}px, ${top2}px)`).remove()
+    )
+  ).selectAll("g.axis-group").data(domain.length ? ["axis-group"] : []).join(
+    (enter) => enter.append("g").attr("class", "axis-group").call(
+      (enter2) => enter2.style("transform", `translateY(${adjustedHeight}px) scale(0, 0)`).transition(transition2).style("transform", "translateY(0px) scale(1, 1)")
+    ),
+    (update) => update.call(
+      (update2) => update2.transition(transition2).style("transform", "translateY(0px) scale(1, 1)")
+    ),
+    (exit) => exit.call(
+      (exit2) => exit2.transition(transition2).style("transform", `translateY(${adjustedHeight}px) scale(0, 0)`).remove()
+    )
+  );
+  if (group.selectAll("g.axis").data(domain.length ? ["axis-left"] : []).join("g").attr("class", "axis axis-left").classed("secondary", secondary).transition(transition2).call(axisLeft2), group.selectAll("text.axis-label").data(domain.length && Boolean(label) ? [label] : []).join("text").attr("class", "axis-label axis-label-left").style(
+    "transform",
+    `translate(${-left2 + 20}px, ${adjustedHeight * 0.5}px) rotate(-90deg)`
+  ).attr("text-anchor", "middle").attr("fill", "currentColor").attr("font-size", "1rem").text((d) => d), type !== "linear" || !showGridLines)
+    return;
+  let gridLines = group.selectAll("line.grid-line"), numGridLines = gridLines.size(), numTicks = scale.ticks(ticks2).length, gridEnter = numGridLines && numGridLines < numTicks ? scale(domain[1] * 1.5) : scale(0), gridExit = scale(domain[1] * 1.5);
+  gridLines.data(domain.length ? scale.ticks(ticks2) : []).join(
+    (enter) => enter.append("line").attr("class", "grid-line").attr("x1", 0).attr("x2", adjustedWidth).attr("y1", gridEnter).attr("y2", gridEnter).attr("stroke", "currentColor").call(
+      (enter2) => enter2.transition(transition2).attr("y1", (d) => scale(d) + 0.5).attr("y2", (d) => scale(d) + 0.5)
+    ),
+    (update) => update.call(
+      (update2) => update2.attr("stroke", "currentColor").transition(transition2).attr("x2", adjustedWidth).attr("y1", (d) => scale(d) + 0.5).attr("y2", (d) => scale(d) + 0.5)
+    ),
+    (exit) => exit.call(
+      (exit2) => exit2.transition(transition2).attr("y1", gridExit).attr("y2", gridExit).remove()
+    )
+  );
+};
+
+// app/modules/avl-graph/src/components/AxisRight.js
+var import_react92 = __toESM(require("react"));
+var import_jsx_dev_runtime77 = require("react/jsx-dev-runtime"), AxisRight = (props) => {
+  let {
+    adjustedWidth,
+    adjustedHeight,
+    showGridLines = !0,
+    domain,
+    scale,
+    format: format2,
+    type = "linear",
+    secondary,
+    label,
+    margin,
+    ticks: ticks2 = 10
+  } = props, ref = import_react92.default.useRef();
+  return import_react92.default.useEffect(
+    () => {
+      ref.current && renderAxisRight(
+        ref.current,
+        adjustedWidth,
+        adjustedHeight,
+        domain,
+        scale,
+        type,
+        format2,
+        secondary,
+        label,
+        margin,
+        ticks2,
+        showGridLines
+      );
+    },
+    [
+      adjustedWidth,
+      adjustedHeight,
+      showGridLines,
+      domain,
+      scale,
+      type,
+      format2,
+      secondary,
+      label,
+      margin,
+      ticks2
+    ]
+  ), /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)("g", { ref }, void 0, !1, {
+    fileName: "app/modules/avl-graph/src/components/AxisRight.js",
+    lineNumber: 30,
+    columnNumber: 10
+  }, this);
+}, renderAxisRight = (ref, adjustedWidth, adjustedHeight, domain, scale, type, format2, secondary, label, margin, ticks2, showGridLines) => {
+  let { left: left2, right: right2, top: top2 } = margin, axisRight2 = axisRight(scale).tickFormat(format2).ticks(ticks2), transition2 = transition().duration(1e3), group = select_default2(ref).selectAll("g.animated-group").data(["animated-group"]).join(
+    (enter) => enter.append("g").attr("class", "animated-group").call(
+      (enter2) => enter2.style("transform", `translate(${adjustedWidth + left2}px, ${top2}px)`)
+    ),
+    (update) => update.call(
+      (update2) => update2.transition(transition2).style("transform", `translate(${adjustedWidth + left2}px, ${top2}px)`)
+    ),
+    (exit) => exit.call(
+      (exit2) => exit2.transition(transition2).style("transform", `translate(${adjustedWidth + left2}px, ${top2}px)`).remove()
+    )
+  ).selectAll("g.axis-group").data(domain.length ? ["axis-group"] : []).join(
+    (enter) => enter.append("g").attr("class", "axis-group").call(
+      (enter2) => enter2.style("transform", `translateY(${adjustedHeight}px) scale(0, 0)`).transition(transition2).style("transform", "translateY(0px) scale(1, 1)")
+    ),
+    (update) => update.call(
+      (update2) => update2.transition(transition2).style("transform", "translateY(0px) scale(1, 1)")
+    ),
+    (exit) => exit.call(
+      (exit2) => exit2.transition(transition2).style("transform", `translateY(${adjustedHeight}px) scale(0, 0)`).remove()
+    )
+  );
+  if (group.selectAll("g.axis").data(domain.length ? ["axis-right"] : []).join("g").attr("class", "axis axis-right").transition(transition2).call(axisRight2), group.selectAll("g.axis.axis-right .domain").attr("stroke-dasharray", secondary ? "8 4" : null), group.selectAll("text.axis-label").data(domain.length && Boolean(label) ? [label] : []).join("text").attr("class", "axis-label axis-label-right").style(
+    "transform",
+    `translate(${right2 - 20}px, ${adjustedHeight * 0.5}px) rotate(90deg)`
+  ).attr("text-anchor", "middle").attr("fill", "currentColor").attr("font-size", "1rem").text((d) => d), type !== "linear" || !showGridLines)
+    return;
+  let gridLines = group.selectAll("line.grid-line"), numGridLines = gridLines.size(), numTicks = scale.ticks().length, gridEnter = numGridLines && numGridLines < numTicks ? scale(domain[1] * 1.5) : scale(0), gridExit = scale(domain[1] * 1.5);
+  gridLines.data(domain.length ? scale.ticks() : []).join(
+    (enter) => enter.append("line").attr("class", "grid-line").attr("stroke-dasharray", secondary ? "8 4" : null).attr("x1", 0).attr("x2", -adjustedWidth).attr("y1", gridEnter).attr("y2", gridEnter).attr("stroke", "currentColor").call(
+      (enter2) => enter2.transition(transition2).attr("y1", (d) => scale(d) + 0.5).attr("y2", (d) => scale(d) + 0.5)
+    ),
+    (update) => update.call(
+      (update2) => update2.attr("stroke", "currentColor").transition(transition2).attr("x2", -adjustedWidth).attr("y1", (d) => scale(d) + 0.5).attr("y2", (d) => scale(d) + 0.5)
+    ),
+    (exit) => exit.call(
+      (exit2) => exit2.transition(transition2).attr("y1", gridExit).attr("y2", gridExit).remove()
+    )
+  );
+};
+
+// app/modules/avl-graph/src/components/HoverCompContainer.js
+var import_react93 = __toESM(require("react")), import_lodash33 = __toESM(require("lodash.throttle")), import_jsx_dev_runtime78 = require("react/jsx-dev-runtime"), getTranslate2 = ({ pos, svgWidth, svgHeight, margin, position }) => {
+  let [x, y] = pos;
+  switch (position) {
+    case "above": {
+      let xMax = svgWidth - margin.right;
+      return `translate(
+        max(
+          min(calc(${x}px - 50%), calc(${xMax - 10}px - 100%)),
+          calc(${margin.left + 10}px)
+        ),
+        calc(-100% - ${30 - y}px)
+      )`;
+    }
+    default: {
+      let yMax = svgHeight - margin.bottom, yTrans = `max(
+          ${margin.top + 10}px,
+          min(${y - 30}px, calc(${yMax - 10}px - 100%))
+        )`;
+      return x < margin.left + (svgWidth - margin.left - margin.right) * 0.5 ? `translate(
+          ${x + 30}px,
+          ${yTrans}
+        )` : `translate(
+        calc(-100% + ${x - 30}px),
+        ${yTrans}
+      )`;
+    }
+  }
+}, HoverCompContainer2 = ({ show, children: children2, ...rest }) => /* @__PURE__ */ (0, import_jsx_dev_runtime78.jsxDEV)(
+  "div",
+  {
+    className: `
+      absolute top-0 left-0 z-50 pointer-events-none
+      rounded whitespace-nowrap hover-comp
+    `,
+    style: {
+      display: show ? "inline-block" : "none",
+      transform: getTranslate2(rest),
+      boxShadow: "2px 2px 8px 0px rgba(0, 0, 0, 0.75)",
+      transition: "transform 0.15s ease-out"
+    },
+    children: children2
+  },
+  void 0,
+  !1,
+  {
+    fileName: "app/modules/avl-graph/src/components/HoverCompContainer.js",
+    lineNumber: 42,
+    columnNumber: 3
+  },
+  this
+), UPDATE_DATA = "update-data", SET_SHOW = "set-show", Reducer2 = (state, action7) => {
+  let { type, ...payload } = action7;
+  switch (type) {
+    case UPDATE_DATA:
+    case SET_SHOW:
+      return {
+        ...state,
+        ...payload
+      };
+    default:
+      return state;
+  }
+}, InitialState2 = {
+  show: !1,
+  pos: [0, 0],
+  data: null,
+  target: "graph"
+}, useHoverComp = (ref) => {
+  let [hoverData, dispatch2] = import_react93.default.useReducer(Reducer2, InitialState2), updateHoverData = import_react93.default.useMemo(() => (0, import_lodash33.default)(dispatch2, 25), [dispatch2]), onMouseOver = import_react93.default.useCallback((e, data, { pos = null, target = "graph" } = {}) => {
+    let rect = ref.current.getBoundingClientRect();
+    updateHoverData({
+      type: UPDATE_DATA,
+      show: !0,
+      target,
+      data,
+      pos: pos ? [pos.x - rect.x, pos.y - rect.y] : [e.clientX - rect.x, e.clientY - rect.y]
+    });
+  }, [ref, updateHoverData]), onMouseMove = import_react93.default.useCallback((e, data, { pos = null, target = "graph" } = {}) => {
+    let rect = ref.current.getBoundingClientRect();
+    updateHoverData({
+      type: UPDATE_DATA,
+      show: !0,
+      target,
+      data,
+      pos: pos ? [pos.x - rect.x, pos.y - rect.y] : [e.clientX - rect.x, e.clientY - rect.y]
+    });
+  }, [ref, updateHoverData]), onMouseLeave = import_react93.default.useCallback((e) => {
+    updateHoverData({ type: SET_SHOW, show: !1 });
+  }, [updateHoverData]);
+  return {
+    hoverData,
+    onMouseOver,
+    onMouseMove,
+    onMouseLeave
+  };
+};
+
+// app/modules/avl-graph/src/utils/index.js
+var import_react94 = __toESM(require("react")), import_deepequal = __toESM(require("deepequal")), import_lodash34 = __toESM(require("lodash.get"));
+var DEFAULT_COLORS = getColorRange(12, "Set3"), getColorFunc = (colors) => {
+  if (typeof colors == "function")
+    return colors;
+  let colorRange = [...DEFAULT_COLORS];
+  if (typeof colors == "string") {
+    let [k1, k2, reverse = !1] = colors.split("-");
+    colorRange = getColorRange(k1, k2), reverse && colorRange.reverse();
+  } else
+    Array.isArray(colors) && (colorRange = [...colors]);
+  return (d, i) => colorRange[i % colorRange.length];
+}, Identity2 = (i) => i, EmptyArray2 = [], EmptyObject2 = {}, strictNaN = (v) => v === null || isNaN(v), DefaultMargin = {
+  left: 70,
+  top: 20,
+  right: 20,
+  bottom: 30
+};
+var useShouldComponentUpdate = (props) => {
+  let prevProps = import_react94.default.useRef({}), ShouldComponentUpdate = import_react94.default.useMemo(() => {
+    let keys = (0, import_lodash34.default)(props, "shouldComponentUpdate", []);
+    return keys.reduce((a, c) => a || !(0, import_deepequal.default)((0, import_lodash34.default)(prevProps, ["current", c]), (0, import_lodash34.default)(props, c)), !Boolean(keys.length));
+  }, [props]);
+  return import_react94.default.useEffect(() => {
+    prevProps.current = props;
+  }, [props]), ShouldComponentUpdate;
+};
+
+// app/modules/avl-graph/src/BarGraph.js
+var import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), DefaultHoverComp2 = ({ data, keys, indexFormat, keyFormat, valueFormat }) => {
+  let theme = useTheme();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: `
+      flex flex-col px-2 pt-1 rounded
+      ${keys.length <= 1 ? "pb-2" : "pb-1"}
+      ${theme.accent1}
+    `, children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: "font-bold text-lg leading-6 border-b-2 mb-1 pl-2", children: indexFormat((0, import_lodash35.default)(data, "index", null)) }, void 0, !1, {
+      fileName: "app/modules/avl-graph/src/BarGraph.js",
+      lineNumber: 41,
+      columnNumber: 7
+    }, this),
+    keys.slice().reverse().filter((key) => (0, import_lodash35.default)(data, ["data", key], !1)).map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: `
+            flex items-center px-2 border-2 rounded transition
+            ${data.key === key ? "border-current" : "border-transparent"}
+          `, children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)(
+        "div",
+        {
+          className: "mr-2 rounded-sm color-square w-5 h-5",
+          style: {
+            backgroundColor: (0, import_lodash35.default)(data, ["barValues", key, "color"], null),
+            opacity: data.key === key ? 1 : 0.2
+          }
+        },
+        void 0,
+        !1,
+        {
+          fileName: "app/modules/avl-graph/src/BarGraph.js",
+          lineNumber: 51,
+          columnNumber: 13
+        },
+        this
+      ),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: "mr-4", children: [
+        keyFormat(key),
+        ":"
+      ] }, void 0, !0, {
+        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        lineNumber: 56,
+        columnNumber: 13
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: "text-right flex-1", children: valueFormat((0, import_lodash35.default)(data, ["data", key], 0)) }, void 0, !1, {
+        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        lineNumber: 59,
+        columnNumber: 13
+      }, this)
+    ] }, key, !0, {
+      fileName: "app/modules/avl-graph/src/BarGraph.js",
+      lineNumber: 47,
+      columnNumber: 11
+    }, this)),
+    keys.length <= 1 ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: "flex pr-2", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: "w-5 mr-2" }, void 0, !1, {
+        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        lineNumber: 67,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: "mr-4 pl-2", children: "Total:" }, void 0, !1, {
+        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        lineNumber: 68,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: "flex-1 text-right", children: valueFormat(keys.reduce((a, c) => a + (0, import_lodash35.default)(data, ["data", c], 0), 0)) }, void 0, !1, {
+        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        lineNumber: 71,
+        columnNumber: 11
+      }, this)
+    ] }, void 0, !0, {
+      fileName: "app/modules/avl-graph/src/BarGraph.js",
+      lineNumber: 66,
+      columnNumber: 9
+    }, this)
+  ] }, void 0, !0, {
+    fileName: "app/modules/avl-graph/src/BarGraph.js",
+    lineNumber: 36,
+    columnNumber: 5
+  }, this);
+}, DefaultHoverCompData = {
+  HoverComp: DefaultHoverComp2,
+  indexFormat: Identity2,
+  keyFormat: Identity2,
+  valueFormat: Identity2,
+  position: "side"
+}, InitialState3 = {
+  xDomain: [],
+  yDomain: [],
+  XScale: null,
+  YScale: null,
+  adjustedWidth: 0,
+  adjustedHeight: 0
+}, BarGraph = (props) => {
+  let {
+    data = EmptyArray2,
+    keys = EmptyArray2,
+    margin = EmptyObject2,
+    hoverComp = EmptyObject2,
+    axisBottom: axisBottom2 = null,
+    xScale = null,
+    axisLeft: axisLeft2 = null,
+    yScale = null,
+    axisRight: axisRight2 = null,
+    indexBy = "index",
+    className = "",
+    paddingInner = 0,
+    paddingOuter = 0,
+    padding,
+    colors,
+    groupMode = "stacked"
+  } = props, Margin = import_react95.default.useMemo(() => ({ ...DefaultMargin, ...margin }), [margin]), HoverCompData = import_react95.default.useMemo(() => {
+    let hcData = { ...DefaultHoverCompData, ...hoverComp };
+    return typeof hcData.indexFormat == "string" && (hcData.indexFormat = format(hcData.indexFormat)), typeof hcData.keyFormat == "string" && (hcData.keyFormat = format(hcData.keyFormat)), typeof hcData.valueFormat == "string" && (hcData.valueFormat = format(hcData.valueFormat)), hcData;
+  }, [hoverComp]), ref = import_react95.default.useRef(), { width, height } = useSetSize(ref), [state, setState] = import_react95.default.useState(InitialState3), barData = import_react95.default.useRef(EmptyArray2), exitingData = import_react95.default.useRef(EmptyArray2), exitData = import_react95.default.useCallback(() => {
+    barData.current = barData.current.filter(({ id: id3 }) => !(id3 in exitingData.current)), setState((prev) => ({ ...prev }));
+  }, []), ShouldComponentUpdate = useShouldComponentUpdate(props);
+  import_react95.default.useEffect(
+    () => {
+      if (!(width && height) || !ShouldComponentUpdate)
+        return;
+      let adjustedWidth = Math.max(0, width - (Margin.left + Margin.right)), adjustedHeight = Math.max(0, height - (Margin.top + Margin.bottom)), xDomain2 = data.map((d) => d[indexBy]), yDomain2 = [];
+      xDomain2.length && (groupMode === "stacked" ? yDomain2 = data.reduce((a, c) => {
+        let y = keys.reduce((a2, k) => a2 + (0, import_lodash35.default)(c, k, 0), 0);
+        return strictNaN(y) ? a : [0, Math.max(y, (0, import_lodash35.default)(a, 1, 0))];
+      }, []) : groupMode === "grouped" && (yDomain2 = data.reduce((a, c) => {
+        let y = keys.reduce((a2, k) => Math.max(a2, (0, import_lodash35.default)(c, k, 0)), 0);
+        return strictNaN(y) ? a : [0, Math.max(y, (0, import_lodash35.default)(a, 1, 0))];
+      }, [])));
+      let XScale2 = band().paddingInner(padding || paddingInner).paddingOuter(padding || paddingOuter).domain(xDomain2).range([0, adjustedWidth]);
+      xScale && (xDomain2 = (0, import_lodash35.default)(xScale, "domain", xDomain2), XScale2.domain(xDomain2));
+      let bandwidth = XScale2.bandwidth(), step = XScale2.step(), outer = XScale2.paddingOuter() * step, zeroYdomain = yDomain2[0] === 0 && yDomain2[1] === 0, YScale2 = linear2().domain(yDomain2).range([adjustedHeight, zeroYdomain ? adjustedHeight : 0]);
+      yScale && (yDomain2 = (0, import_lodash35.default)(yScale, "domain", yDomain2), YScale2.domain(yDomain2));
+      let colorFunc = getColorFunc(colors), [updating, exiting] = barData.current.reduce((a, c) => {
+        let [u, e] = a;
+        return u[c.id] = "updating", e[c.id] = c, c.state = "exiting", [u, e];
+      }, [{}, {}]);
+      barData.current = data.map((d, i) => {
+        delete exiting[d[indexBy]];
+        let barValues = {};
+        if (groupMode === "stacked") {
+          let current = adjustedHeight;
+          return {
+            stacks: keys.map((key, ii) => {
+              let value = (0, import_lodash35.default)(d, key, 0), height2 = Math.max(0, adjustedHeight - YScale2(value)), color2 = colorFunc(value, ii, d, key);
+              return current -= height2, barValues[key] = { value, color: color2 }, {
+                data: d,
+                key,
+                width: bandwidth,
+                height: height2,
+                index: d[indexBy],
+                y: current,
+                x: 0,
+                color: color2,
+                value,
+                barValues
+              };
+            }),
+            barValues,
+            left: outer + i * step,
+            data: d,
+            state: (0, import_lodash35.default)(updating, d[indexBy], "entering"),
+            id: d[indexBy].toString()
+          };
+        } else if (groupMode === "grouped")
+          return {
+            stacks: keys.slice().map((key, ii) => {
+              let value = (0, import_lodash35.default)(d, key, 0), y = Math.min(adjustedHeight, YScale2(value)), color2 = colorFunc(d, ii, key);
+              return barValues[key] = { value, color: color2 }, {
+                data: d,
+                key,
+                width: bandwidth / keys.length,
+                height: adjustedHeight - y,
+                index: d[indexBy],
+                y,
+                x: bandwidth / keys.length * ii,
+                color: color2,
+                value,
+                barValues
+              };
+            }),
+            barValues,
+            left: outer + i * step,
+            data: d,
+            state: (0, import_lodash35.default)(updating, d[indexBy], "entering"),
+            id: d[indexBy].toString()
+          };
+        return { stacks: [] };
+      }), exitingData.current = exiting;
+      let exitingAsArray = Object.values(exiting);
+      exitingAsArray.length && setTimeout(exitData, 1050), barData.current = barData.current.concat(exitingAsArray), setState({
+        xDomain: xDomain2,
+        yDomain: yDomain2,
+        XScale: XScale2,
+        YScale: YScale2,
+        adjustedWidth,
+        adjustedHeight
+      });
+    },
+    [
+      data,
+      keys,
+      width,
+      height,
+      groupMode,
+      Margin,
+      colors,
+      indexBy,
+      exitData,
+      padding,
+      paddingInner,
+      paddingOuter,
+      ShouldComponentUpdate
+    ]
+  );
+  let {
+    onMouseMove,
+    onMouseLeave,
+    hoverData
+  } = useHoverComp(ref), {
+    xDomain,
+    XScale,
+    yDomain,
+    YScale,
+    ...restOfState
+  } = state, {
+    HoverComp: HoverComp3,
+    position,
+    ...hoverCompRest
+  } = HoverCompData;
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: "w-full h-full avl-graph-container relative", ref, children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("svg", { className: `w-full h-full block avl-graph ${className}`, children: [
+      barData.current.length ? /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("g", { children: [
+        axisBottom2 ? /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)(
+          AxisBottom,
+          {
+            ...restOfState,
+            margin: Margin,
+            scale: XScale,
+            domain: xDomain,
+            ...axisBottom2
+          },
+          void 0,
+          !1,
+          {
+            fileName: "app/modules/avl-graph/src/BarGraph.js",
+            lineNumber: 354,
+            columnNumber: 15
+          },
+          this
+        ) : null,
+        axisLeft2 ? /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)(
+          AxisLeft,
+          {
+            ...restOfState,
+            margin: Margin,
+            scale: YScale,
+            domain: yDomain,
+            ...axisLeft2
+          },
+          void 0,
+          !1,
+          {
+            fileName: "app/modules/avl-graph/src/BarGraph.js",
+            lineNumber: 361,
+            columnNumber: 15
+          },
+          this
+        ) : null,
+        axisRight2 ? /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)(
+          AxisRight,
+          {
+            ...restOfState,
+            margin: Margin,
+            scale: YScale,
+            domain: yDomain,
+            ...axisRight2
+          },
+          void 0,
+          !1,
+          {
+            fileName: "app/modules/avl-graph/src/BarGraph.js",
+            lineNumber: 368,
+            columnNumber: 15
+          },
+          this
+        ) : null
+      ] }, void 0, !0, {
+        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        lineNumber: 352,
+        columnNumber: 11
+      }, this) : null,
+      /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)(
+        "g",
+        {
+          style: { transform: `translate(${Margin.left}px, ${Margin.top}px)` },
+          onMouseLeave,
+          children: barData.current.map(
+            ({ id: id3, ...rest }) => /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)(
+              Bar,
+              {
+                ...rest,
+                svgHeight: state.adjustedHeight,
+                onMouseMove
+              },
+              id3,
+              !1,
+              {
+                fileName: "app/modules/avl-graph/src/BarGraph.js",
+                lineNumber: 379,
+                columnNumber: 15
+              },
+              this
+            )
+          )
+        },
+        void 0,
+        !1,
+        {
+          fileName: "app/modules/avl-graph/src/BarGraph.js",
+          lineNumber: 376,
+          columnNumber: 9
+        },
+        this
+      )
+    ] }, void 0, !0, {
+      fileName: "app/modules/avl-graph/src/BarGraph.js",
+      lineNumber: 350,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)(
+      HoverCompContainer2,
+      {
+        ...hoverData,
+        position,
+        svgWidth: width,
+        svgHeight: height,
+        margin: Margin,
+        children: hoverData.data ? /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)(
+          HoverComp3,
+          {
+            data: hoverData.data,
+            keys,
+            ...hoverCompRest
+          },
+          void 0,
+          !1,
+          {
+            fileName: "app/modules/avl-graph/src/BarGraph.js",
+            lineNumber: 393,
+            columnNumber: 11
+          },
+          this
+        ) : null
+      },
+      void 0,
+      !1,
+      {
+        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        lineNumber: 387,
+        columnNumber: 7
+      },
+      this
+    )
+  ] }, void 0, !0, {
+    fileName: "app/modules/avl-graph/src/BarGraph.js",
+    lineNumber: 348,
+    columnNumber: 5
+  }, this);
+}, Stack = import_react95.default.memo((props) => {
+  let {
+    state,
+    width,
+    svgHeight,
+    height,
+    y,
+    x,
+    color: color2,
+    onMouseMove,
+    Key,
+    index,
+    value,
+    data,
+    barValues
+  } = props, ref = import_react95.default.useRef();
+  import_react95.default.useEffect(() => {
+    state === "entering" ? select_default2(ref.current).attr("width", width).attr("height", 0).attr("x", x).attr("y", svgHeight).transition().duration(1e3).attr("height", height).attr("y", y).attr("fill", color2) : state === "exiting" ? select_default2(ref.current).transition().duration(1e3).attr("height", 0).attr("y", svgHeight) : select_default2(ref.current).transition().duration(1e3).attr("height", height).attr("x", x).attr("y", y).attr("width", width).attr("fill", color2);
+  }, [ref, state, width, svgHeight, height, x, y, color2]);
+  let _onMouseMove = import_react95.default.useCallback((e) => {
+    onMouseMove(e, { color: color2, key: Key, index, value, data, barValues });
+  }, [onMouseMove, color2, Key, index, value, data, barValues]);
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)(
+    "rect",
+    {
+      className: "avl-stack",
+      ref,
+      onMouseMove: _onMouseMove
+    },
+    void 0,
+    !1,
+    {
+      fileName: "app/modules/avl-graph/src/BarGraph.js",
+      lineNumber: 452,
+      columnNumber: 5
+    },
+    this
+  );
+}), Bar = import_react95.default.memo(({ stacks, left: left2, state, ...props }) => {
+  let ref = import_react95.default.useRef();
+  return import_react95.default.useEffect(() => {
+    state === "entering" ? select_default2(ref.current).attr("transform", `translate(${left2} 0)`) : select_default2(ref.current).transition().duration(1e3).attr("transform", `translate(${left2} 0)`);
+  }, [ref, state, left2]), /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("g", { className: "avl-bar", ref, children: stacks.map(
+    ({ key, ...rest }, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)(
+      Stack,
+      {
+        Key: key,
+        state,
+        ...props,
+        ...rest
+      },
+      key,
+      !1,
+      {
+        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        lineNumber: 476,
+        columnNumber: 11
+      },
+      this
+    )
+  ) }, void 0, !1, {
+    fileName: "app/modules/avl-graph/src/BarGraph.js",
+    lineNumber: 474,
+    columnNumber: 5
+  }, this);
+});
+
+// app/routes/__dama/index.(cat).js
+var import_jsx_dev_runtime80 = require("react/jsx-dev-runtime"), getViews = (sourceId, falcorCache) => Object.values(
+  (0, import_lodash36.default)(
+    falcorCache,
+    ["dama", pgEnv, "sources", "byId", sourceId, "views", "byIndex"],
+    {}
+  )
+).map(
+  (v) => getAttributes(
+    (0, import_lodash36.default)(
+      falcorCache,
+      v.value,
+      { attributes: {} }
+    ).attributes
+  )
+);
+async function loader8({ request }) {
+  let lengthPath = ["dama", pgEnv, "sources", "byId", [218, 198], "views", "length"], resp = await falcor2.get(lengthPath);
+  await falcor2.get(
+    [
+      "dama",
+      pgEnv,
+      "sources",
+      "byId",
+      218,
+      "views",
+      "byIndex",
+      { from: 0, to: (0, import_lodash36.default)(resp.json, ["dama", pgEnv, "sources", "byId", 218, "views", "length"], 0) - 1 },
+      "attributes",
+      Object.values(ViewAttributes)
+    ],
+    [
+      "dama",
+      pgEnv,
+      "sources",
+      "byId",
+      198,
+      "views",
+      "byIndex",
+      { from: 0, to: (0, import_lodash36.default)(resp.json, ["dama", pgEnv, "sources", "byId", 198, "views", "length"], 0) - 1 },
+      "attributes",
+      Object.values(ViewAttributes)
+    ]
+  );
+  let falcorCache = falcor2.getCache(), hlrViews = getViews(218, falcorCache), enhancedNCEIViews = getViews(198, falcorCache), ltsHlrView = hlrViews[0].view_id, ltsEnhancedNCEIView = enhancedNCEIViews[0].view_id, sourceData = await falcor2.get(
+    ["hlr", pgEnv, "source", 218, "view", ltsHlrView, "eal"],
+    ["nri", "totals", "detailed", "all"],
+    ["ncei_storm_events_enhanced", pgEnv, "source", 198, "view", ltsEnhancedNCEIView, "lossByYearByType"]
+  );
+  return console.log(["ncei_storm_events_enhanced", pgEnv, "source", 198, "view", ltsEnhancedNCEIView, "lossByYearByType"]), {
+    avail: (0, import_lodash36.default)(sourceData, ["json", "hlr", pgEnv, "source", 218, "view", ltsHlrView, "eal"], []).filter((d) => !["Heavy Rain", "Freezing Fog"].includes(d.nri_category)),
+    nri: (0, import_lodash36.default)(sourceData, ["json", "nri", "totals", "detailed", "all", 0], []),
+    enhancedNCEILoss: (0, import_lodash36.default)(sourceData, ["json", "ncei_storm_events_enhanced", pgEnv, "source", 198, "view", ltsEnhancedNCEIView, "lossByYearByType"], [])
+  };
+}
+var HoverComp2 = ({ data, keys, indexFormat, keyFormat, valueFormat }) => /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: `
+      flex flex-col px-2 pt-1 rounded bg-white
+      ${keys.length <= 1 ? "pb-2" : "pb-1"}`, children: [
+  /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "font-bold text-lg leading-6 border-b-2 mb-1 pl-2", children: indexFormat((0, import_lodash36.default)(data, "index", null)) }, void 0, !1, {
+    fileName: "app/routes/__dama/index.(cat).js",
+    lineNumber: 76,
+    columnNumber: 13
+  }, this),
+  keys.slice().filter((key) => data.key === key).reverse().map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: `
+            flex items-center px-2 border-2 rounded transition
+            ${data.key === key ? "border-current" : "border-transparent"}
+          `, children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
+      "div",
+      {
+        className: "mr-2 rounded-sm color-square w-5 h-5",
+        style: {
+          backgroundColor: (0, import_lodash36.default)(data, ["barValues", key, "color"], null),
+          opacity: data.key === key ? 1 : 0.2
+        }
+      },
+      void 0,
+      !1,
+      {
+        fileName: "app/routes/__dama/index.(cat).js",
+        lineNumber: 87,
+        columnNumber: 25
+      },
+      this
+    ),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "mr-4", children: [
+      keyFormat(key),
+      ":"
+    ] }, void 0, !0, {
+      fileName: "app/routes/__dama/index.(cat).js",
+      lineNumber: 92,
+      columnNumber: 25
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "text-right flex-1", children: valueFormat((0, import_lodash36.default)(data, ["data", key], 0)) }, void 0, !1, {
+      fileName: "app/routes/__dama/index.(cat).js",
+      lineNumber: 95,
+      columnNumber: 25
+    }, this)
+  ] }, key, !0, {
+    fileName: "app/routes/__dama/index.(cat).js",
+    lineNumber: 83,
+    columnNumber: 21
+  }, this)),
+  keys.length <= 1 ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "flex pr-2", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "w-5 mr-2" }, void 0, !1, {
+      fileName: "app/routes/__dama/index.(cat).js",
+      lineNumber: 103,
+      columnNumber: 21
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "mr-4 pl-2", children: "Total:" }, void 0, !1, {
+      fileName: "app/routes/__dama/index.(cat).js",
+      lineNumber: 104,
+      columnNumber: 21
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "flex-1 text-right", children: valueFormat(keys.reduce((a, c) => a + (0, import_lodash36.default)(data, ["data", c], 0), 0)) }, void 0, !1, {
+      fileName: "app/routes/__dama/index.(cat).js",
+      lineNumber: 107,
+      columnNumber: 21
+    }, this)
+  ] }, void 0, !0, {
+    fileName: "app/routes/__dama/index.(cat).js",
+    lineNumber: 102,
+    columnNumber: 17
+  }, this)
+] }, void 0, !0, {
+  fileName: "app/routes/__dama/index.(cat).js",
+  lineNumber: 73,
+  columnNumber: 9
+}, this), fnum3 = (d) => parseInt(d).toLocaleString(), fnumIndex = (d) => d >= 1e9 ? `${d / 1e9} B` : d >= 1e6 ? `${d / 1e6} M` : d >= 1e3 ? `${d / 1e3} K` : `${d}`, reformatNRI = (data = {}) => import_react96.default.useMemo(() => {
+  let formattedData = [];
+  return Object.keys(data).filter((key) => key !== "group_by" && key.includes("_")).forEach((key) => {
+    let [nri_category, ctype] = key.split("_"), tmpExisting = formattedData.find((f) => f.nri_category === nri_category);
+    tmpExisting ? tmpExisting[ctype] = data[nri_category] : formattedData.push({ nri_category, [ctype]: data[nri_category] });
+  }), formattedData;
+}, [data]), reformatEnhancedNCEI = (data = {}) => import_react96.default.useMemo(() => {
+  let formattedData = [], nri_categories = /* @__PURE__ */ new Set();
+  return console.log("data", data), data.forEach((row) => {
+    nri_categories.add(row.event_type_formatted);
+    let tmpExisting = formattedData.find((f) => f.year === row.year);
+    tmpExisting ? tmpExisting[row.event_type_formatted] = parseInt(row.total_damage) : formattedData.push({ year: row.year, [row.event_type_formatted]: parseInt(row.total_damage) });
+  }), { formattedData, nri_categories: [...nri_categories] };
+}, [data]);
+function SourceThumb2({ source }) {
+  let { avail, nri, enhancedNCEILoss } = (0, import_react97.useLoaderData)(), reformattedNRI = reformatNRI(nri), { formattedData: reformattedEnhancedNCEI, nri_categories } = reformatEnhancedNCEI(enhancedNCEILoss);
+  return console.log("ncei", reformattedEnhancedNCEI, avail), /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(import_jsx_dev_runtime80.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "w-full p-4 bg-white my-1 block border shadow flex flex-col", style: { height: "500px" }, children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-lg", children: "EALs (AVAIL) " }, void 0, !1, {
+        fileName: "app/routes/__dama/index.(cat).js",
+        lineNumber: 171,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-sm", children: "using: " }, void 0, !1, {
+        fileName: "app/routes/__dama/index.(cat).js",
+        lineNumber: 172,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
+        BarGraph,
+        {
+          data: avail,
+          keys: ["swd_buildings", "swd_crop", "swd_population"],
+          indexBy: "nri_category",
+          axisBottom: (d) => d,
+          axisLeft: { format: fnumIndex },
+          hoverComp: {
+            HoverComp: HoverComp2,
+            valueFormat: fnum3
+          }
+        },
+        void 0,
+        !1,
+        {
+          fileName: "app/routes/__dama/index.(cat).js",
+          lineNumber: 173,
+          columnNumber: 17
+        },
+        this
+      )
+    ] }, void 0, !0, {
+      fileName: "app/routes/__dama/index.(cat).js",
+      lineNumber: 170,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "w-full p-4 bg-white my-1 block border shadow flex flex-col", style: { height: "500px" }, children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-lg", children: "EALs (NRI) " }, void 0, !1, {
+        fileName: "app/routes/__dama/index.(cat).js",
+        lineNumber: 186,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-sm", children: "using: " }, void 0, !1, {
+        fileName: "app/routes/__dama/index.(cat).js",
+        lineNumber: 187,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
+        BarGraph,
+        {
+          data: reformattedNRI,
+          keys: ["buildings", "crop", "population"],
+          indexBy: "nri_category",
+          axisBottom: (d) => d,
+          axisLeft: { format: fnumIndex },
+          hoverComp: {
+            HoverComp: HoverComp2,
+            valueFormat: fnum3
+          }
+        },
+        void 0,
+        !1,
+        {
+          fileName: "app/routes/__dama/index.(cat).js",
+          lineNumber: 188,
+          columnNumber: 17
+        },
+        this
+      )
+    ] }, void 0, !0, {
+      fileName: "app/routes/__dama/index.(cat).js",
+      lineNumber: 185,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "w-full p-4 bg-white my-1 block border shadow flex flex-col", style: { height: "500px" }, children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-lg", children: "EALs (NRI) " }, void 0, !1, {
+        fileName: "app/routes/__dama/index.(cat).js",
+        lineNumber: 201,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-sm", children: "using: " }, void 0, !1, {
+        fileName: "app/routes/__dama/index.(cat).js",
+        lineNumber: 202,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
+        BarGraph,
+        {
+          data: reformattedEnhancedNCEI,
+          keys: nri_categories,
+          indexBy: "year",
+          axisBottom: (d) => d,
+          axisLeft: { format: fnumIndex },
+          hoverComp: {
+            HoverComp: HoverComp2,
+            valueFormat: fnum3
+          }
+        },
+        void 0,
+        !1,
+        {
+          fileName: "app/routes/__dama/index.(cat).js",
+          lineNumber: 203,
+          columnNumber: 17
+        },
+        this
+      )
+    ] }, void 0, !0, {
+      fileName: "app/routes/__dama/index.(cat).js",
+      lineNumber: 200,
+      columnNumber: 13
+    }, this)
+  ] }, void 0, !0, {
+    fileName: "app/routes/__dama/index.(cat).js",
+    lineNumber: 169,
     columnNumber: 9
   }, this);
 }
@@ -10485,16 +14222,16 @@ function ErrorBoundary({ error }) {
 var dms_exports = {};
 __export(dms_exports, {
   default: () => Index3,
-  loader: () => loader8
+  loader: () => loader9
 });
-var import_react90 = require("@remix-run/react");
-var import_jsx_dev_runtime75 = require("react/jsx-dev-runtime");
-async function loader8({ request }) {
+var import_react98 = require("@remix-run/react");
+var import_jsx_dev_runtime81 = require("react/jsx-dev-runtime");
+async function loader9({ request }) {
   return await checkAuth(request);
 }
 function Index3() {
-  let user = (0, import_react90.useLoaderData)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("div", { className: "bg-gray-100 px-4 text-gray-500 min-h-screen", children: /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)(import_react90.Outlet, {}, void 0, !1, {
+  let user = (0, import_react98.useLoaderData)();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime81.jsxDEV)("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ (0, import_jsx_dev_runtime81.jsxDEV)("div", { className: "bg-gray-100 px-4 text-gray-500 min-h-screen", children: /* @__PURE__ */ (0, import_jsx_dev_runtime81.jsxDEV)(import_react98.Outlet, {}, void 0, !1, {
     fileName: "app/routes/__dms.jsx",
     lineNumber: 20,
     columnNumber: 9
@@ -10516,10 +14253,10 @@ __export(blog_config_exports, {
 });
 
 // app/modules/dms/components/table.js
-var import_react92 = require("@remix-run/react"), import_react93 = require("react");
+var import_react100 = require("@remix-run/react"), import_react101 = require("react");
 
 // app/modules/dms/theme/index.js
-var import_react91 = __toESM(require("react"));
+var import_react99 = __toESM(require("react"));
 
 // app/modules/dms/theme/default-theme.js
 function defaultTheme() {
@@ -10548,10 +14285,10 @@ function defaultTheme() {
 var default_theme_default = defaultTheme();
 
 // app/modules/dms/theme/index.js
-var ThemeContext2 = import_react91.default.createContext(default_theme_default), useTheme2 = () => (0, import_react91.useContext)(ThemeContext2), theme_default2 = ThemeContext2;
+var ThemeContext2 = import_react99.default.createContext(default_theme_default), useTheme2 = () => (0, import_react99.useContext)(ThemeContext2), theme_default2 = ThemeContext2;
 
 // app/modules/dms/components/table.js
-var import_lodash33 = __toESM(require("lodash.get")), import_jsx_dev_runtime76 = require("react/jsx-dev-runtime");
+var import_lodash37 = __toESM(require("lodash.get")), import_jsx_dev_runtime82 = require("react/jsx-dev-runtime");
 function replaceVars(url, data) {
   var regex = /:(\w+)/g;
   return url.replace(regex, function(match, p1) {
@@ -10560,9 +14297,9 @@ function replaceVars(url, data) {
 }
 var ColumnTypes = {
   data: function({ data, column, className, key }) {
-    return /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("td", { className, children: [
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("td", { className, children: [
       " ",
-      (0, import_lodash33.default)(data, [column.path], "").toString(),
+      (0, import_lodash37.default)(data, [column.path], "").toString(),
       " "
     ] }, key, !0, {
       fileName: "app/modules/dms/components/table.js",
@@ -10571,7 +14308,7 @@ var ColumnTypes = {
     }, this);
   },
   date: function({ data, column, className, key }) {
-    return /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("td", { className, children: [
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("td", { className, children: [
       " ",
       new Date(data[column.path]).toLocaleString(),
       " "
@@ -10582,7 +14319,7 @@ var ColumnTypes = {
     }, this);
   },
   link: function({ data, column, className, key }) {
-    return /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("td", { className, children: /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(import_react92.Link, { to: replaceVars(column.to, data), children: replaceVars(column.text, data) }, void 0, !1, {
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("td", { className, children: /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)(import_react100.Link, { to: replaceVars(column.to, data), children: replaceVars(column.text, data) }, void 0, !1, {
       fileName: "app/modules/dms/components/table.js",
       lineNumber: 23,
       columnNumber: 5
@@ -10594,8 +14331,8 @@ var ColumnTypes = {
   }
 };
 function TableColumn({ data, column, className }) {
-  let Column = (0, import_lodash33.default)(ColumnTypes, [column.type], ColumnTypes.data);
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(Column, { data, column, className }, void 0, !1, {
+  let Column = (0, import_lodash37.default)(ColumnTypes, [column.type], ColumnTypes.data);
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)(Column, { data, column, className }, void 0, !1, {
     fileName: "app/modules/dms/components/table.js",
     lineNumber: 33,
     columnNumber: 9
@@ -10603,12 +14340,12 @@ function TableColumn({ data, column, className }) {
 }
 function Table12({ dataItems = [], attributes = {}, options = {} }) {
   let theme = useTheme2(), { columns = [] } = options;
-  return columns.length === 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("div", { children: " No columns specified. " }, void 0, !1, {
+  return columns.length === 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { children: " No columns specified. " }, void 0, !1, {
     fileName: "app/modules/dms/components/table.js",
     lineNumber: 40,
     columnNumber: 10
-  }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("div", { className: "", children: /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("table", { className: `${theme.table.table}`, children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("thead", { className: `${theme.table.thead}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("tr", { children: columns.map((col, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("th", { className: `${theme.table.th}`, children: col.name }, i, !1, {
+  }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: "", children: /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("table", { className: `${theme.table.table}`, children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("thead", { className: `${theme.table.thead}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("tr", { children: columns.map((col, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("th", { className: `${theme.table.th}`, children: col.name }, i, !1, {
       fileName: "app/modules/dms/components/table.js",
       lineNumber: 47,
       columnNumber: 31
@@ -10621,8 +14358,8 @@ function Table12({ dataItems = [], attributes = {}, options = {} }) {
       lineNumber: 45,
       columnNumber: 5
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("tbody", { className: `${theme.table.tbody}`, children: dataItems.map(
-      (d) => /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("tr", { children: columns.map((col, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(
+    /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("tbody", { className: `${theme.table.tbody}`, children: dataItems.map(
+      (d) => /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("tr", { children: columns.map((col, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)(
         TableColumn,
         {
           className: `${theme.table.td}`,
@@ -10659,20 +14396,20 @@ function Table12({ dataItems = [], attributes = {}, options = {} }) {
 }
 
 // app/routes/__dms/blog/blog.config.js
-var import_react94 = require("@remix-run/react");
-var import_jsx_dev_runtime77 = require("react/jsx-dev-runtime"), BlogLayout = ({ children, user }) => /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)("div", { children: [
-  /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)("div", { className: "flex p-2 text-gray-800 border-b w-full", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)(import_react94.NavLink, { to: "/blog", className: "p-4", children: "Home" }, void 0, !1, {
+var import_react102 = require("@remix-run/react");
+var import_jsx_dev_runtime83 = require("react/jsx-dev-runtime"), BlogLayout = ({ children: children2, user }) => /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)("div", { children: [
+  /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)("div", { className: "flex p-2 text-gray-800 border-b w-full", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)(import_react102.NavLink, { to: "/blog", className: "p-4", children: "Home" }, void 0, !1, {
       fileName: "app/routes/__dms/blog/blog.config.js",
       lineNumber: 8,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)(import_react94.NavLink, { to: "/blog/admin", className: "p-4", children: "Admin" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)(import_react102.NavLink, { to: "/blog/admin", className: "p-4", children: "Admin" }, void 0, !1, {
       fileName: "app/routes/__dms/blog/blog.config.js",
       lineNumber: 9,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)("div", { className: "flex flex-1 justify-end ", children: /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)(AuthMenu_default, { user }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)("div", { className: "flex flex-1 justify-end ", children: /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)(AuthMenu_default, { user }, void 0, !1, {
       fileName: "app/routes/__dms/blog/blog.config.js",
       lineNumber: 12,
       columnNumber: 11
@@ -10690,7 +14427,7 @@ var import_jsx_dev_runtime77 = require("react/jsx-dev-runtime"), BlogLayout = ({
     lineNumber: 7,
     columnNumber: 5
   }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)("div", { children }, void 0, !1, {
+  /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)("div", { children: children2 }, void 0, !1, {
     fileName: "app/routes/__dms/blog/blog.config.js",
     lineNumber: 16,
     columnNumber: 5
@@ -10699,8 +14436,8 @@ var import_jsx_dev_runtime77 = require("react/jsx-dev-runtime"), BlogLayout = ({
   fileName: "app/routes/__dms/blog/blog.config.js",
   lineNumber: 6,
   columnNumber: 3
-}, this), BlogAdmin = (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)("div", { children: [
-  /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)(import_react94.Link, { to: "/blog/new", className: "p-4 border", children: " New Post " }, void 0, !1, {
+}, this), BlogAdmin = (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)("div", { children: [
+  /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)(import_react102.Link, { to: "/blog/new", className: "p-4 border", children: " New Post " }, void 0, !1, {
     fileName: "app/routes/__dms/blog/blog.config.js",
     lineNumber: 23,
     columnNumber: 7
@@ -10709,7 +14446,7 @@ var import_jsx_dev_runtime77 = require("react/jsx-dev-runtime"), BlogLayout = ({
     lineNumber: 22,
     columnNumber: 5
   }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)(Table12, { ...props }, void 0, !1, {
+  /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)(Table12, { ...props }, void 0, !1, {
     fileName: "app/routes/__dms/blog/blog.config.js",
     lineNumber: 25,
     columnNumber: 5
@@ -10847,7 +14584,7 @@ var import_jsx_dev_runtime77 = require("react/jsx-dev-runtime"), BlogLayout = ({
       ]
     },
     {
-      type: (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)("div", { children: "Test Page" }, void 0, !1, {
+      type: (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)("div", { children: "Test Page" }, void 0, !1, {
         fileName: "app/routes/__dms/blog/blog.config.js",
         lineNumber: 152,
         columnNumber: 24
@@ -10864,8 +14601,8 @@ __export(site_config_exports, {
   pageSection: () => pageSection,
   siteConfig: () => siteConfig
 });
-var import_react95 = require("@remix-run/react");
-var import_jsx_dev_runtime78 = require("react/jsx-dev-runtime"), pageSection = {
+var import_react103 = require("@remix-run/react");
+var import_jsx_dev_runtime84 = require("react/jsx-dev-runtime"), pageSection = {
   app: "dms-remix",
   type: "page-section",
   attributes: [
@@ -10949,14 +14686,14 @@ var import_jsx_dev_runtime78 = require("react/jsx-dev-runtime"), pageSection = {
       required: !0
     }
   ]
-}, SiteLayout = ({ children, user }) => /* @__PURE__ */ (0, import_jsx_dev_runtime78.jsxDEV)("div", { children: [
-  /* @__PURE__ */ (0, import_jsx_dev_runtime78.jsxDEV)("div", { className: "flex p-2 text-gray-800 border-b w-full", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime78.jsxDEV)(import_react95.NavLink, { to: "/site", className: "p-4", children: "Home" }, void 0, !1, {
+}, SiteLayout = ({ children: children2, user }) => /* @__PURE__ */ (0, import_jsx_dev_runtime84.jsxDEV)("div", { children: [
+  /* @__PURE__ */ (0, import_jsx_dev_runtime84.jsxDEV)("div", { className: "flex p-2 text-gray-800 border-b w-full", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime84.jsxDEV)(import_react103.NavLink, { to: "/site", className: "p-4", children: "Home" }, void 0, !1, {
       fileName: "app/routes/__dms/site/site.config.js",
       lineNumber: 98,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime78.jsxDEV)("div", { className: "flex flex-1 justify-end ", children: /* @__PURE__ */ (0, import_jsx_dev_runtime78.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime78.jsxDEV)(AuthMenu_default, { user }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime84.jsxDEV)("div", { className: "flex flex-1 justify-end ", children: /* @__PURE__ */ (0, import_jsx_dev_runtime84.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime84.jsxDEV)(AuthMenu_default, { user }, void 0, !1, {
       fileName: "app/routes/__dms/site/site.config.js",
       lineNumber: 101,
       columnNumber: 11
@@ -10974,7 +14711,7 @@ var import_jsx_dev_runtime78 = require("react/jsx-dev-runtime"), pageSection = {
     lineNumber: 97,
     columnNumber: 5
   }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime78.jsxDEV)("div", { children }, void 0, !1, {
+  /* @__PURE__ */ (0, import_jsx_dev_runtime84.jsxDEV)("div", { children: children2 }, void 0, !1, {
     fileName: "app/routes/__dms/site/site.config.js",
     lineNumber: 105,
     columnNumber: 5
@@ -10983,8 +14720,8 @@ var import_jsx_dev_runtime78 = require("react/jsx-dev-runtime"), pageSection = {
   fileName: "app/routes/__dms/site/site.config.js",
   lineNumber: 96,
   columnNumber: 3
-}, this), SiteAdmin = (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime78.jsxDEV)("div", { children: [
-  /* @__PURE__ */ (0, import_jsx_dev_runtime78.jsxDEV)("div", { className: "w-full p-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime78.jsxDEV)(import_react95.Link, { to: "/site/new", className: "p-2 bg-blue-500 shadow text-gray-100", children: " New Page " }, void 0, !1, {
+}, this), SiteAdmin = (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime84.jsxDEV)("div", { children: [
+  /* @__PURE__ */ (0, import_jsx_dev_runtime84.jsxDEV)("div", { className: "w-full p-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime84.jsxDEV)(import_react103.Link, { to: "/site/new", className: "p-2 bg-blue-500 shadow text-gray-100", children: " New Page " }, void 0, !1, {
     fileName: "app/routes/__dms/site/site.config.js",
     lineNumber: 112,
     columnNumber: 7
@@ -10993,7 +14730,7 @@ var import_jsx_dev_runtime78 = require("react/jsx-dev-runtime"), pageSection = {
     lineNumber: 111,
     columnNumber: 5
   }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime78.jsxDEV)(Table12, { ...props }, void 0, !1, {
+  /* @__PURE__ */ (0, import_jsx_dev_runtime84.jsxDEV)(Table12, { ...props }, void 0, !1, {
     fileName: "app/routes/__dms/site/site.config.js",
     lineNumber: 114,
     columnNumber: 5
@@ -11079,7 +14816,7 @@ var import_jsx_dev_runtime78 = require("react/jsx-dev-runtime"), pageSection = {
       ]
     },
     {
-      type: (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime78.jsxDEV)("div", { children: "Test Page" }, void 0, !1, {
+      type: (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime84.jsxDEV)("div", { children: "Test Page" }, void 0, !1, {
         fileName: "app/routes/__dms/site/site.config.js",
         lineNumber: 192,
         columnNumber: 24
@@ -11095,15 +14832,15 @@ __export(__exports, {
   ErrorBoundary: () => ErrorBoundary2,
   action: () => action5,
   default: () => DMS,
-  loader: () => loader9
+  loader: () => loader10
 });
-var import_react132 = require("react"), import_react133 = require("@remix-run/react");
+var import_react140 = require("react"), import_react141 = require("@remix-run/react");
 
 // app/modules/dms/wrappers/edit.js
-var import_react99 = __toESM(require("react")), import_react100 = require("@remix-run/react");
+var import_react107 = __toESM(require("react")), import_react108 = require("@remix-run/react");
 
 // app/modules/dms/data-types/text.js
-var import_react96 = require("react"), import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), Edit3 = ({ value, onChange }) => /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)(
+var import_react104 = require("react"), import_jsx_dev_runtime85 = require("react/jsx-dev-runtime"), Edit3 = ({ value, onChange }) => /* @__PURE__ */ (0, import_jsx_dev_runtime85.jsxDEV)(
   "input",
   {
     value,
@@ -11117,18 +14854,18 @@ var import_react96 = require("react"), import_jsx_dev_runtime79 = require("react
     columnNumber: 9
   },
   this
-), View = ({ value }) => value ? /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { children: value }, void 0, !1, {
+), View = ({ value }) => value ? /* @__PURE__ */ (0, import_jsx_dev_runtime85.jsxDEV)("div", { children: value }, void 0, !1, {
   fileName: "app/modules/dms/data-types/text.js",
   lineNumber: 16,
   columnNumber: 9
-}, this) : !1, text_default = {
+}, this) : !1, text_default3 = {
   EditComp: Edit3,
   ViewComp: View
 };
 
 // app/modules/dms/data-types/textarea.js
-var import_react97 = require("react");
-var import_lodash34 = __toESM(require("lodash.get")), import_jsx_dev_runtime80 = require("react/jsx-dev-runtime"), Edit4 = ({ value, onChange }) => /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
+var import_react105 = require("react");
+var import_lodash38 = __toESM(require("lodash.get")), import_jsx_dev_runtime86 = require("react/jsx-dev-runtime"), Edit4 = ({ value, onChange }) => /* @__PURE__ */ (0, import_jsx_dev_runtime86.jsxDEV)(
   "textarea",
   {
     value,
@@ -11144,7 +14881,7 @@ var import_lodash34 = __toESM(require("lodash.get")), import_jsx_dev_runtime80 =
   this
 ), View2 = ({ value }) => {
   let theme = useTheme2();
-  return value ? /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("pre", { className: (0, import_lodash34.default)(theme, "textarea.viewWrapper", ""), children: JSON.stringify(value, null, 3) }, void 0, !1, {
+  return value ? /* @__PURE__ */ (0, import_jsx_dev_runtime86.jsxDEV)("pre", { className: (0, import_lodash38.default)(theme, "textarea.viewWrapper", ""), children: JSON.stringify(value, null, 3) }, void 0, !1, {
     fileName: "app/modules/dms/data-types/textarea.js",
     lineNumber: 18,
     columnNumber: 9
@@ -11155,18 +14892,18 @@ var import_lodash34 = __toESM(require("lodash.get")), import_jsx_dev_runtime80 =
 };
 
 // app/modules/dms/data-types/boolean.js
-var import_react98 = require("react"), import_jsx_dev_runtime81 = require("react/jsx-dev-runtime"), Edit5 = ({ value, onChange }) => /* @__PURE__ */ (0, import_jsx_dev_runtime81.jsxDEV)(
+var import_react106 = require("react"), import_jsx_dev_runtime87 = require("react/jsx-dev-runtime"), Edit5 = ({ value, onChange }) => /* @__PURE__ */ (0, import_jsx_dev_runtime87.jsxDEV)(
   "select",
   {
     value,
     onChange: (e) => onChange(e.target.value),
     children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime81.jsxDEV)("option", { value: !0, children: "True" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime87.jsxDEV)("option", { value: !0, children: "True" }, void 0, !1, {
         fileName: "app/modules/dms/data-types/boolean.js",
         lineNumber: 9,
         columnNumber: 13
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime81.jsxDEV)("option", { value: !1, children: "False" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime87.jsxDEV)("option", { value: !1, children: "False" }, void 0, !1, {
         fileName: "app/modules/dms/data-types/boolean.js",
         lineNumber: 10,
         columnNumber: 13
@@ -11181,7 +14918,7 @@ var import_react98 = require("react"), import_jsx_dev_runtime81 = require("react
     columnNumber: 9
   },
   this
-), View3 = ({ value }) => value ? /* @__PURE__ */ (0, import_jsx_dev_runtime81.jsxDEV)("div", { children: value }, void 0, !1, {
+), View3 = ({ value }) => value ? /* @__PURE__ */ (0, import_jsx_dev_runtime87.jsxDEV)("div", { children: value }, void 0, !1, {
   fileName: "app/modules/dms/data-types/boolean.js",
   lineNumber: 19,
   columnNumber: 9
@@ -11191,56 +14928,56 @@ var import_react98 = require("react"), import_jsx_dev_runtime81 = require("react
 };
 
 // app/modules/dms/data-types/index.js
-var import_lodash35 = __toESM(require("lodash.get")), DmsDataTypes = {
-  text: text_default,
-  datetime: text_default,
+var import_lodash39 = __toESM(require("lodash.get")), DmsDataTypes = {
+  text: text_default3,
+  datetime: text_default3,
   textarea: textarea_default2,
   boolean: boolean_default,
-  default: text_default
+  default: text_default3
 };
 function registerDataType(name, dataType) {
   DmsDataTypes[name] = dataType;
 }
 function getViewComp(type) {
-  return (0, import_lodash35.default)(DmsDataTypes, `[${type}]`, DmsDataTypes.default).ViewComp;
+  return (0, import_lodash39.default)(DmsDataTypes, `[${type}]`, DmsDataTypes.default).ViewComp;
 }
 function getEditComp(type) {
-  return (0, import_lodash35.default)(DmsDataTypes, `[${type}]`, DmsDataTypes.default).EditComp;
+  return (0, import_lodash39.default)(DmsDataTypes, `[${type}]`, DmsDataTypes.default).EditComp;
 }
 
 // app/modules/dms/wrappers/_utils.js
-var import_lodash36 = __toESM(require("lodash.get"));
-function getAttributes5(format, options, mode = "") {
-  let attributeFilter = (0, import_lodash36.default)(options, "attributes", []), attributes = format.attributes.filter((attr) => attributeFilter.length === 0 || attributeFilter.includes(attr.key)).filter(
+var import_lodash40 = __toESM(require("lodash.get"));
+function getAttributes5(format2, options, mode = "") {
+  let attributeFilter = (0, import_lodash40.default)(options, "attributes", []), attributes = format2.attributes.filter((attr) => attributeFilter.length === 0 || attributeFilter.includes(attr.key)).filter(
     (attr) => mode !== "edit" || typeof attr.editable > "u" || !!attr.editable
   ).reduce((out, attr) => (out[attr.key] = attr, out), {}), attributeKeys = Object.keys(attributes);
   return Object.keys(attributes).filter((attributeKey) => attributeKeys.includes(attributeKey)).map((attributeKey) => {
     attributes[attributeKey].ViewComp = getViewComp(
-      (0, import_lodash36.default)(attributes, `[${attributeKey}].type`, "default")
+      (0, import_lodash40.default)(attributes, `[${attributeKey}].type`, "default")
     ), attributes[attributeKey].EditComp = getEditComp(
-      (0, import_lodash36.default)(attributes, `[${attributeKey}].type`, "default")
+      (0, import_lodash40.default)(attributes, `[${attributeKey}].type`, "default")
     );
   }), attributes;
 }
 
 // app/modules/dms/wrappers/edit.js
-var import_lodash37 = require("lodash.get"), import_jsx_dev_runtime82 = require("react/jsx-dev-runtime");
-function EditWrapper({ Component, format, options, params, ...props }) {
-  let attributes = getAttributes5(format, options, "edit"), { "*": path } = (0, import_react100.useParams)(), pathParams = getParams(params, path), { data, user } = (0, import_react100.useLoaderData)(), status = (0, import_react100.useActionData)(), [item, setItem] = import_react99.default.useState(
+var import_lodash41 = require("lodash.get"), import_jsx_dev_runtime88 = require("react/jsx-dev-runtime");
+function EditWrapper({ Component, format: format2, options, params, ...props }) {
+  let attributes = getAttributes5(format2, options, "edit"), { "*": path } = (0, import_react108.useParams)(), pathParams = getParams(params, path), { data, user } = (0, import_react108.useLoaderData)(), status = (0, import_react108.useActionData)(), [item, setItem] = import_react107.default.useState(
     data.filter((d) => filterParams(d, pathParams))[0] || {}
   );
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: "border border-green-300", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: "text-xs", children: "Edit Wrapper" }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime88.jsxDEV)("div", { className: "border border-green-300", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime88.jsxDEV)("div", { className: "text-xs", children: "Edit Wrapper" }, void 0, !1, {
       fileName: "app/modules/dms/wrappers/edit.js",
       lineNumber: 26,
       columnNumber: 4
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("form", { method: "post", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)(
+    /* @__PURE__ */ (0, import_jsx_dev_runtime88.jsxDEV)("form", { method: "post", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime88.jsxDEV)(
         Component,
         {
           ...props,
-          format,
+          format: format2,
           attributes,
           item,
           updateAttribute: (attr, value) => {
@@ -11259,7 +14996,7 @@ function EditWrapper({ Component, format, options, params, ...props }) {
         },
         this
       ),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("input", { type: "hidden", name: "data", value: JSON.stringify(item) }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime88.jsxDEV)("input", { type: "hidden", name: "data", value: JSON.stringify(item) }, void 0, !1, {
         fileName: "app/modules/dms/wrappers/edit.js",
         lineNumber: 39,
         columnNumber: 5
@@ -11277,21 +15014,21 @@ function EditWrapper({ Component, format, options, params, ...props }) {
 }
 
 // app/modules/dms/wrappers/list.js
-var import_react101 = require("react"), import_react102 = require("@remix-run/react");
-var import_jsx_dev_runtime83 = require("react/jsx-dev-runtime");
-function ListWrapper({ Component, format, options, ...props }) {
-  let attributes = getAttributes5(format, options), { data, user } = (0, import_react102.useLoaderData)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)("div", { className: "border border-green-300", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)("div", { className: "text-xs", children: "List Wrapper" }, void 0, !1, {
+var import_react109 = require("react"), import_react110 = require("@remix-run/react");
+var import_jsx_dev_runtime89 = require("react/jsx-dev-runtime");
+function ListWrapper({ Component, format: format2, options, ...props }) {
+  let attributes = getAttributes5(format2, options), { data, user } = (0, import_react110.useLoaderData)();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime89.jsxDEV)("div", { className: "border border-green-300", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime89.jsxDEV)("div", { className: "text-xs", children: "List Wrapper" }, void 0, !1, {
       fileName: "app/modules/dms/wrappers/list.js",
       lineNumber: 28,
       columnNumber: 4
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime83.jsxDEV)(
+    /* @__PURE__ */ (0, import_jsx_dev_runtime89.jsxDEV)(
       Component,
       {
         ...props,
-        format,
+        format: format2,
         attributes,
         dataItems: data,
         options,
@@ -11314,21 +15051,21 @@ function ListWrapper({ Component, format, options, ...props }) {
 }
 
 // app/modules/dms/wrappers/view.js
-var import_react103 = require("react"), import_react104 = require("@remix-run/react");
-var import_jsx_dev_runtime84 = require("react/jsx-dev-runtime");
-function ViewWrapper({ Component, format, options, ...props }) {
-  let attributes = getAttributes5(format, options), { data, user } = (0, import_react104.useLoaderData)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime84.jsxDEV)("div", { className: "border border-green-300", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime84.jsxDEV)("div", { children: "View Wrapper" }, void 0, !1, {
+var import_react111 = require("react"), import_react112 = require("@remix-run/react");
+var import_jsx_dev_runtime90 = require("react/jsx-dev-runtime");
+function ViewWrapper({ Component, format: format2, options, ...props }) {
+  let attributes = getAttributes5(format2, options), { data, user } = (0, import_react112.useLoaderData)();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime90.jsxDEV)("div", { className: "border border-green-300", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime90.jsxDEV)("div", { children: "View Wrapper" }, void 0, !1, {
       fileName: "app/modules/dms/wrappers/view.js",
       lineNumber: 12,
       columnNumber: 4
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime84.jsxDEV)(
+    /* @__PURE__ */ (0, import_jsx_dev_runtime90.jsxDEV)(
       Component,
       {
         ...props,
-        format,
+        format: format2,
         attributes,
         item: data[0],
         options,
@@ -11351,21 +15088,21 @@ function ViewWrapper({ Component, format, options, ...props }) {
 }
 
 // app/modules/dms/wrappers/error.js
-var import_react105 = require("react"), import_react106 = require("@remix-run/react");
-var import_jsx_dev_runtime85 = require("react/jsx-dev-runtime");
-function ErrorWrapper({ Component, format, options, ...props }) {
-  let attributes = getAttributes5(format, options);
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime85.jsxDEV)("div", { className: "border border-green-300", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime85.jsxDEV)("div", { className: "text-xs", children: "Error Wrapper" }, void 0, !1, {
+var import_react113 = require("react"), import_react114 = require("@remix-run/react");
+var import_jsx_dev_runtime91 = require("react/jsx-dev-runtime");
+function ErrorWrapper({ Component, format: format2, options, ...props }) {
+  let attributes = getAttributes5(format2, options);
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime91.jsxDEV)("div", { className: "border border-green-300", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime91.jsxDEV)("div", { className: "text-xs", children: "Error Wrapper" }, void 0, !1, {
       fileName: "app/modules/dms/wrappers/error.js",
       lineNumber: 27,
       columnNumber: 4
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime85.jsxDEV)(
+    /* @__PURE__ */ (0, import_jsx_dev_runtime91.jsxDEV)(
       Component,
       {
         ...props,
-        format,
+        format: format2,
         attributes,
         dataItems: [],
         options,
@@ -11396,9 +15133,9 @@ var wrappers_default = {
 };
 
 // app/modules/dms/components/dev-info.js
-var import_react107 = require("react"), import_jsx_dev_runtime86 = require("react/jsx-dev-runtime");
+var import_react115 = require("react"), import_jsx_dev_runtime92 = require("react/jsx-dev-runtime");
 function DevInfo(props) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime86.jsxDEV)("div", { children: "404 - Config not found" }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime92.jsxDEV)("div", { children: "404 - Config not found" }, void 0, !1, {
     fileName: "app/modules/dms/components/dev-info.js",
     lineNumber: 5,
     columnNumber: 3
@@ -11406,22 +15143,22 @@ function DevInfo(props) {
 }
 
 // app/modules/dms/components/landing.js
-var import_react109 = require("react");
+var import_react117 = require("react");
 
 // app/modules/dms/components/card.js
-var import_react108 = require("react");
-var import_lodash38 = __toESM(require("lodash.get")), import_jsx_dev_runtime87 = require("react/jsx-dev-runtime");
+var import_react116 = require("react");
+var import_lodash42 = __toESM(require("lodash.get")), import_jsx_dev_runtime93 = require("react/jsx-dev-runtime");
 function Card({ item, attributes }) {
   let theme = useTheme2();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime87.jsxDEV)("div", { className: (0, import_lodash38.default)(theme, "card.wrapper", ""), children: Object.keys(attributes).map((attrKey, i) => {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)("div", { className: (0, import_lodash42.default)(theme, "card.wrapper", ""), children: Object.keys(attributes).map((attrKey, i) => {
     let ViewComp = attributes[attrKey].ViewComp;
-    return /* @__PURE__ */ (0, import_jsx_dev_runtime87.jsxDEV)("div", { className: (0, import_lodash38.default)(theme, "card.row", ""), children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime87.jsxDEV)("div", { className: (0, import_lodash38.default)(theme, "card.rowLabel", ""), children: attrKey }, void 0, !1, {
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)("div", { className: (0, import_lodash42.default)(theme, "card.row", ""), children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)("div", { className: (0, import_lodash42.default)(theme, "card.rowLabel", ""), children: attrKey }, void 0, !1, {
         fileName: "app/modules/dms/components/card.js",
         lineNumber: 14,
         columnNumber: 8
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime87.jsxDEV)("div", { className: (0, import_lodash38.default)(theme, "card.rowContent", ""), children: /* @__PURE__ */ (0, import_jsx_dev_runtime87.jsxDEV)(ViewComp, { value: item[attrKey] }, `${attrKey}-${i}`, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)("div", { className: (0, import_lodash42.default)(theme, "card.rowContent", ""), children: /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)(ViewComp, { value: item[attrKey] }, `${attrKey}-${i}`, !1, {
         fileName: "app/modules/dms/components/card.js",
         lineNumber: 16,
         columnNumber: 9
@@ -11443,13 +15180,13 @@ function Card({ item, attributes }) {
 }
 
 // app/modules/dms/components/landing.js
-var import_jsx_dev_runtime88 = require("react/jsx-dev-runtime");
+var import_jsx_dev_runtime94 = require("react/jsx-dev-runtime");
 function Landing({ dataItems = [], attributes }) {
   let theme = useTheme2();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime88.jsxDEV)("div", { className: "border border-pink-300", children: [
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)("div", { className: "border border-pink-300", children: [
     "Landing",
     dataItems.map(
-      (d, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime88.jsxDEV)(
+      (d, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)(
         Card,
         {
           item: d,
@@ -11473,25 +15210,25 @@ function Landing({ dataItems = [], attributes }) {
 }
 
 // app/modules/dms/components/edit.js
-var import_react110 = require("react");
-var import_lodash39 = __toESM(require("lodash.get")), import_jsx_dev_runtime89 = require("react/jsx-dev-runtime");
+var import_react118 = require("react");
+var import_lodash43 = __toESM(require("lodash.get")), import_jsx_dev_runtime95 = require("react/jsx-dev-runtime");
 function Card2({ item, updateAttribute, attributes, status }) {
   let theme = useTheme2();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime89.jsxDEV)("div", { className: (0, import_lodash39.default)(theme, "card.wrapper", ""), children: [
-    status ? /* @__PURE__ */ (0, import_jsx_dev_runtime89.jsxDEV)("div", { children: JSON.stringify(status) }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime95.jsxDEV)("div", { className: (0, import_lodash43.default)(theme, "card.wrapper", ""), children: [
+    status ? /* @__PURE__ */ (0, import_jsx_dev_runtime95.jsxDEV)("div", { children: JSON.stringify(status) }, void 0, !1, {
       fileName: "app/modules/dms/components/edit.js",
       lineNumber: 10,
       columnNumber: 14
     }, this) : "",
     Object.keys(attributes).map((attrKey, i) => {
       let EditComp = attributes[attrKey].EditComp;
-      return /* @__PURE__ */ (0, import_jsx_dev_runtime89.jsxDEV)("div", { className: (0, import_lodash39.default)(theme, "card.row", ""), children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime89.jsxDEV)("div", { className: (0, import_lodash39.default)(theme, "card.rowLabel", ""), children: attrKey }, void 0, !1, {
+      return /* @__PURE__ */ (0, import_jsx_dev_runtime95.jsxDEV)("div", { className: (0, import_lodash43.default)(theme, "card.row", ""), children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime95.jsxDEV)("div", { className: (0, import_lodash43.default)(theme, "card.rowLabel", ""), children: attrKey }, void 0, !1, {
           fileName: "app/modules/dms/components/edit.js",
           lineNumber: 17,
           columnNumber: 9
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime89.jsxDEV)("div", { className: (0, import_lodash39.default)(theme, "card.rowContent", ""), children: /* @__PURE__ */ (0, import_jsx_dev_runtime89.jsxDEV)(
+        /* @__PURE__ */ (0, import_jsx_dev_runtime95.jsxDEV)("div", { className: (0, import_lodash43.default)(theme, "card.rowContent", ""), children: /* @__PURE__ */ (0, import_jsx_dev_runtime95.jsxDEV)(
           EditComp,
           {
             value: item[attrKey],
@@ -11516,7 +15253,7 @@ function Card2({ item, updateAttribute, attributes, status }) {
         columnNumber: 8
       }, this);
     }),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime89.jsxDEV)("button", { type: "submit", children: " Save " }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime95.jsxDEV)("button", { type: "submit", children: " Save " }, void 0, !1, {
       fileName: "app/modules/dms/components/edit.js",
       lineNumber: 29,
       columnNumber: 5
@@ -11538,12 +15275,12 @@ var components_default = {
 };
 
 // app/modules/dms/dms-manager/utils.js
-var import_jsx_dev_runtime90 = require("react/jsx-dev-runtime"), DefaultComponent = components_default.devinfo, DefaultWrapper = wrappers_default.error;
+var import_jsx_dev_runtime96 = require("react/jsx-dev-runtime"), DefaultComponent = components_default.devinfo, DefaultWrapper = wrappers_default.error;
 function filterParams(data, params) {
-  let filter = !1;
+  let filter2 = !1;
   return Object.keys(params).forEach((k) => {
-    data[k] == params[k] ? filter = !0 : filter = !1;
-  }), filter;
+    data[k] == params[k] ? filter2 = !0 : filter2 = !1;
+  }), filter2;
 }
 function configMatcher(config, path, depth) {
   let params = [.../* @__PURE__ */ new Set(["", ...path.split("/")])];
@@ -11555,16 +15292,16 @@ function getActiveConfig(config = [], path = "/", depth = 0) {
     out.children = getActiveConfig(out.children, path, depth + 1);
   }), configs || [];
 }
-function getActiveView(config, path, format, depth = 0) {
+function getActiveView(config, path, format2, depth = 0) {
   return configMatcher(config, path, depth).map((activeConfig) => {
-    let comp = typeof activeConfig.type == "function" ? activeConfig.type : components_default[activeConfig.type] || DefaultComponent, Wrapper = wrappers_default[activeConfig.action] || DefaultWrapper, children = [];
-    return activeConfig.children && (children = getActiveView(activeConfig.children, path, format, depth + 1)), /* @__PURE__ */ (0, import_jsx_dev_runtime90.jsxDEV)(
+    let comp = typeof activeConfig.type == "function" ? activeConfig.type : components_default[activeConfig.type] || DefaultComponent, Wrapper = wrappers_default[activeConfig.action] || DefaultWrapper, children2 = [];
+    return activeConfig.children && (children2 = getActiveView(activeConfig.children, path, format2, depth + 1)), /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(
       Wrapper,
       {
         Component: comp,
-        format,
+        format: format2,
         ...activeConfig,
-        children
+        children: children2
       },
       global.i++,
       !1,
@@ -11577,11 +15314,11 @@ function getActiveView(config, path, format, depth = 0) {
     );
   });
 }
-function validFormat(format) {
-  return format && format.attributes && format.attributes.length > 0;
+function validFormat(format2) {
+  return format2 && format2.attributes && format2.attributes.length > 0;
 }
-function enhanceFormat(format) {
-  let out = { ...format };
+function enhanceFormat(format2) {
+  let out = { ...format2 };
   return out.attributes.filter((d) => d.key === "updated_at").length === 0 && (out.attributes.push({ key: "updated_at", type: "datetime", editable: !1 }), out.attributes.push({ key: "created_at", type: "datetime", editable: !1 })), out;
 }
 function getParams(params, path = "") {
@@ -11592,12 +15329,12 @@ function getParams(params, path = "") {
 }
 
 // app/modules/dms/api/index.js
-var import_node4 = require("@remix-run/node"), import_lodash40 = __toESM(require("lodash.get"));
+var import_node5 = require("@remix-run/node"), import_lodash44 = __toESM(require("lodash.get"));
 async function dmsDataLoader(config, path = "/") {
-  let { app, type } = config.format, activeConfig = getActiveConfig(config.children, path)[0] || {}, attributeFilter = (0, import_lodash40.default)(activeConfig, "options.attributes", []), params = getParams(activeConfig.params, path);
+  let { app, type } = config.format, activeConfig = getActiveConfig(config.children, path)[0] || {}, attributeFilter = (0, import_lodash44.default)(activeConfig, "options.attributes", []), params = getParams(activeConfig.params, path);
   console.log("dmsDataLoader", activeConfig, params, path);
-  let lengthReq = ["dms", "data", `${app}+${type}`, "length"], length = (0, import_lodash40.default)(await falcor2.get(lengthReq), ["json", ...lengthReq], 0), itemReq = ["dms", "data", `${app}+${type}`, "byIndex"];
-  return length ? Object.values((0, import_lodash40.default)(
+  let lengthReq = ["dms", "data", `${app}+${type}`, "length"], length = (0, import_lodash44.default)(await falcor2.get(lengthReq), ["json", ...lengthReq], 0), itemReq = ["dms", "data", `${app}+${type}`, "byIndex"];
+  return length ? Object.values((0, import_lodash44.default)(
     await falcor2.get([
       ...itemReq,
       { from: 0, to: length - 1 },
@@ -11608,29 +15345,29 @@ async function dmsDataLoader(config, path = "/") {
   )).filter((d) => d.id).map((d) => (d.data.id = d.id, d.data.updated_at = d.updated_at, d.data.created_at = d.created_at, attributeFilter.length ? attributeFilter.reduce((out, attr) => (out[attr] = d.data[attr], out), {}) : d.data)) : [];
 }
 async function dmsDataEditor(config, data, path = "/") {
-  let { app, type } = config.format, { id: id2 } = data, attributeKeys = Object.keys(data).filter((k) => !["id", "updated_at", "created_at"].includes(k)), activeConfig = getActiveConfig(config.children, path), updateData = attributeKeys.reduce((out, key) => (out[key] = data[key], out), {});
-  if (console.log("dmsDataEditor", id2, attributeKeys, updateData), id2 && attributeKeys.length > 0) {
-    let update = await falcor2.call(["dms", "data", "edit"], [id2, data]);
+  let { app, type } = config.format, { id: id3 } = data, attributeKeys = Object.keys(data).filter((k) => !["id", "updated_at", "created_at"].includes(k)), activeConfig = getActiveConfig(config.children, path), updateData = attributeKeys.reduce((out, key) => (out[key] = data[key], out), {});
+  if (console.log("dmsDataEditor", id3, attributeKeys, updateData), id3 && attributeKeys.length > 0) {
+    let update = await falcor2.call(["dms", "data", "edit"], [id3, data]);
     return { message: "Update successful." };
   } else if (attributeKeys.length > 0) {
     let newData = await falcor2.call(
       ["dms", "data", "create"],
       [app, type, data]
     );
-    return console.log("newData", newData), (0, import_node4.redirect)(activeConfig.redirect || "/");
+    return console.log("newData", newData), (0, import_node5.redirect)(activeConfig.redirect || "/");
   }
   return { message: "Not sure how I got here." };
 }
 
 // app/modules/dms/dms-manager/index.js
-var import_react112 = __toESM(require("react"));
+var import_react120 = __toESM(require("react"));
 
 // app/modules/dms/dms-manager/messages.js
-var import_react111 = require("react"), import_jsx_dev_runtime91 = require("react/jsx-dev-runtime");
+var import_react119 = require("react"), import_jsx_dev_runtime97 = require("react/jsx-dev-runtime");
 function InvalidConfig({ config }) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime91.jsxDEV)("div", { children: [
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime97.jsxDEV)("div", { children: [
     " Invalid DMS Config :",
-    /* @__PURE__ */ (0, import_jsx_dev_runtime91.jsxDEV)("pre", { style: { background: "#dedede" }, children: JSON.stringify(config, null, 3) }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime97.jsxDEV)("pre", { style: { background: "#dedede" }, children: JSON.stringify(config, null, 3) }, void 0, !1, {
       fileName: "app/modules/dms/dms-manager/messages.js",
       lineNumber: 6,
       columnNumber: 4
@@ -11642,14 +15379,14 @@ function InvalidConfig({ config }) {
   }, this);
 }
 function NoRouteMatch({ path }) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime91.jsxDEV)("div", { children: [
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime97.jsxDEV)("div", { children: [
     " These aren't the droids you are looking for",
-    /* @__PURE__ */ (0, import_jsx_dev_runtime91.jsxDEV)("div", { className: "text-5xl", children: "404" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime97.jsxDEV)("div", { className: "text-5xl", children: "404" }, void 0, !1, {
       fileName: "app/modules/dms/dms-manager/messages.js",
       lineNumber: 16,
       columnNumber: 4
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime91.jsxDEV)("div", { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime97.jsxDEV)("div", { children: [
       "/",
       path
     ] }, void 0, !0, {
@@ -11665,26 +15402,26 @@ function NoRouteMatch({ path }) {
 }
 
 // app/modules/dms/dms-manager/index.js
-var import_jsx_dev_runtime92 = require("react/jsx-dev-runtime"), DmsManager = ({
+var import_jsx_dev_runtime98 = require("react/jsx-dev-runtime"), DmsManager = ({
   config,
   path = "",
   theme = default_theme_default
 }) => {
   if (!config.children || !validFormat(config.format))
-    return /* @__PURE__ */ (0, import_jsx_dev_runtime92.jsxDEV)(InvalidConfig, { config }, void 0, !1, {
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime98.jsxDEV)(InvalidConfig, { config }, void 0, !1, {
       fileName: "app/modules/dms/dms-manager/index.js",
       lineNumber: 15,
       columnNumber: 10
     }, this);
-  let enhancedFormat = import_react112.default.useMemo(
+  let enhancedFormat = import_react120.default.useMemo(
     () => enhanceFormat(config.format),
     [config.format]
   ), RenderView = getActiveView(config.children, path, enhancedFormat);
-  return RenderView ? /* @__PURE__ */ (0, import_jsx_dev_runtime92.jsxDEV)(theme_default2.Provider, { value: theme, children: RenderView }, void 0, !1, {
+  return RenderView ? /* @__PURE__ */ (0, import_jsx_dev_runtime98.jsxDEV)(theme_default2.Provider, { value: theme, children: RenderView }, void 0, !1, {
     fileName: "app/modules/dms/dms-manager/index.js",
     lineNumber: 36,
     columnNumber: 3
-  }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime92.jsxDEV)(NoRouteMatch, { path }, void 0, !1, {
+  }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime98.jsxDEV)(NoRouteMatch, { path }, void 0, !1, {
     fileName: "app/modules/dms/dms-manager/index.js",
     lineNumber: 30,
     columnNumber: 10
@@ -11692,14 +15429,14 @@ var import_jsx_dev_runtime92 = require("react/jsx-dev-runtime"), DmsManager = ({
 }, dms_manager_default = DmsManager;
 
 // app/modules/dms-custom/draft/index.js
-var import_react131 = require("react"), import_lodash43 = require("lodash.get");
+var import_react139 = require("react"), import_lodash47 = require("lodash.get");
 
 // app/modules/dms-custom/draft/editor/index.js
-var import_react129 = __toESM(require("react"));
+var import_react137 = __toESM(require("react"));
 
 // app/modules/dms-custom/draft/editor/utils/img-loader.js
-var import_react113 = __toESM(require("react")), import_jsx_dev_runtime93 = require("react/jsx-dev-runtime"), img_loader_default = (Component, options = {}) => {
-  class ImgLoaderWrapper extends import_react113.default.Component {
+var import_react121 = __toESM(require("react")), import_jsx_dev_runtime99 = require("react/jsx-dev-runtime"), img_loader_default = (Component, options = {}) => {
+  class ImgLoaderWrapper extends import_react121.default.Component {
     state = {
       loading: !1,
       message: ""
@@ -11754,7 +15491,7 @@ var import_react113 = __toESM(require("react")), import_jsx_dev_runtime93 = requ
     }
     render() {
       let { forwardRef, ...props } = this.props;
-      return /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)(
+      return /* @__PURE__ */ (0, import_jsx_dev_runtime99.jsxDEV)(
         Component,
         {
           ...props,
@@ -11775,7 +15512,7 @@ var import_react113 = __toESM(require("react")), import_jsx_dev_runtime93 = requ
       );
     }
   }
-  return import_react113.default.forwardRef((props, ref) => /* @__PURE__ */ (0, import_jsx_dev_runtime93.jsxDEV)(ImgLoaderWrapper, { ...props, forwardRef: ref }, void 0, !1, {
+  return import_react121.default.forwardRef((props, ref) => /* @__PURE__ */ (0, import_jsx_dev_runtime99.jsxDEV)(ImgLoaderWrapper, { ...props, forwardRef: ref }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/utils/img-loader.js",
     lineNumber: 113,
     columnNumber: 43
@@ -11783,9 +15520,9 @@ var import_react113 = __toESM(require("react")), import_jsx_dev_runtime93 = requ
 };
 
 // app/modules/dms-custom/draft/editor/utils/show-loading.js
-var import_react114 = __toESM(require("react")), import_jsx_dev_runtime94 = require("react/jsx-dev-runtime"), Loader = ({ color }) => /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)("svg", { width: "100", height: "100", children: [
-  /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)("path", { fill: color, d: `M31.6,3.5C5.9,13.6-6.6,42.7,3.5,68.4c10.1,25.7,39.2,38.3,64.9,28.1l-3.1-7.9c-21.3,8.4-45.4-2-53.8-23.3
-    c-8.4-21.3,2-45.4,23.3-53.8L31.6,3.5z`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)(
+var import_react122 = __toESM(require("react")), import_jsx_dev_runtime100 = require("react/jsx-dev-runtime"), Loader = ({ color: color2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)("svg", { width: "100", height: "100", children: [
+  /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)("path", { fill: color2, d: `M31.6,3.5C5.9,13.6-6.6,42.7,3.5,68.4c10.1,25.7,39.2,38.3,64.9,28.1l-3.1-7.9c-21.3,8.4-45.4-2-53.8-23.3
+    c-8.4-21.3,2-45.4,23.3-53.8L31.6,3.5z`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)(
     "animateTransform",
     {
       attributeName: "transform",
@@ -11809,8 +15546,8 @@ var import_react114 = __toESM(require("react")), import_jsx_dev_runtime94 = requ
     lineNumber: 5,
     columnNumber: 4
   }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)("path", { fill: color, d: `M42.3,39.6c5.7-4.3,13.9-3.1,18.1,2.7c4.3,5.7,3.1,13.9-2.7,18.1l4.1,5.5c8.8-6.5,10.6-19,4.1-27.7
-    c-6.5-8.8-19-10.6-27.7-4.1L42.3,39.6z`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)(
+  /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)("path", { fill: color2, d: `M42.3,39.6c5.7-4.3,13.9-3.1,18.1,2.7c4.3,5.7,3.1,13.9-2.7,18.1l4.1,5.5c8.8-6.5,10.6-19,4.1-27.7
+    c-6.5-8.8-19-10.6-27.7-4.1L42.3,39.6z`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)(
     "animateTransform",
     {
       attributeName: "transform",
@@ -11834,8 +15571,8 @@ var import_react114 = __toESM(require("react")), import_jsx_dev_runtime94 = requ
     lineNumber: 16,
     columnNumber: 4
   }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)("path", { fill: color, d: `M82,35.7C74.1,18,53.4,10.1,35.7,18S10.1,46.6,18,64.3l7.6-3.4c-6-13.5,0-29.3,13.5-35.3s29.3,0,35.3,13.5
-    L82,35.7z`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)(
+  /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)("path", { fill: color2, d: `M82,35.7C74.1,18,53.4,10.1,35.7,18S10.1,46.6,18,64.3l7.6-3.4c-6-13.5,0-29.3,13.5-35.3s29.3,0,35.3,13.5
+    L82,35.7z`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)(
     "animateTransform",
     {
       attributeName: "transform",
@@ -11863,21 +15600,21 @@ var import_react114 = __toESM(require("react")), import_jsx_dev_runtime94 = requ
   fileName: "app/modules/dms-custom/draft/editor/utils/show-loading.js",
   lineNumber: 4,
   columnNumber: 3
-}, this), ScalableLoading2 = ({ scale = 1, color = "#005bcc" }) => {
+}, this), ScalableLoading2 = ({ scale = 1, color: color2 = "#005bcc" }) => {
   let size = 100 * scale;
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)("div", { style: {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)("div", { style: {
     position: "relative",
     width: `${size}px`,
     height: `${size}px`,
     display: "flex",
     alignItems: "center",
     justifyContent: "center"
-  }, children: /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)("div", { style: {
+  }, children: /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)("div", { style: {
     display: "flex",
     transform: `scale(${scale}, ${scale})`,
     width: "100px",
     height: "100px"
-  }, children: /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)(Loader, { color }, void 0, !1, {
+  }, children: /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)(Loader, { color: color2 }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/utils/show-loading.js",
     lineNumber: 55,
     columnNumber: 9
@@ -11892,10 +15629,10 @@ var import_react114 = __toESM(require("react")), import_jsx_dev_runtime94 = requ
   }, this);
 }, show_loading_default = (Component, options = {}) => {
   let { position = "fixed" } = options;
-  return import_react114.default.forwardRef(({ children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)(import_jsx_dev_runtime94.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)(Component, { ...props, ref, children: [
-      children,
-      !props.loading || position !== "absolute" ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)(LoadingComponent, { ...options }, void 0, !1, {
+  return import_react122.default.forwardRef(({ children: children2, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)(import_jsx_dev_runtime100.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)(Component, { ...props, ref, children: [
+      children2,
+      !props.loading || position !== "absolute" ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)(LoadingComponent, { ...options }, void 0, !1, {
         fileName: "app/modules/dms-custom/draft/editor/utils/show-loading.js",
         lineNumber: 68,
         columnNumber: 11
@@ -11905,7 +15642,7 @@ var import_react114 = __toESM(require("react")), import_jsx_dev_runtime94 = requ
       lineNumber: 65,
       columnNumber: 7
     }, this),
-    !props.loading || position !== "fixed" ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)(LoadingComponent, { ...options }, void 0, !1, {
+    !props.loading || position !== "fixed" ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)(LoadingComponent, { ...options }, void 0, !1, {
       fileName: "app/modules/dms-custom/draft/editor/utils/show-loading.js",
       lineNumber: 72,
       columnNumber: 9
@@ -11915,12 +15652,12 @@ var import_react114 = __toESM(require("react")), import_jsx_dev_runtime94 = requ
     lineNumber: 64,
     columnNumber: 5
   }, this));
-}, LoadingComponent = import_react114.default.memo(
-  ({ color, position = "fixed", className = "", scale = 1 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)("div", { className: `
+}, LoadingComponent = import_react122.default.memo(
+  ({ color: color2, position = "fixed", className = "", scale = 1 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)("div", { className: `
     ${position} left-0 top-0 right-0 bottom-0
     flex justify-center items-center z-50 bg-black opacity-50
     ${className}
-  `, children: /* @__PURE__ */ (0, import_jsx_dev_runtime94.jsxDEV)(ScalableLoading2, { scale, color }, void 0, !1, {
+  `, children: /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)(ScalableLoading2, { scale, color: color2 }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/utils/show-loading.js",
     lineNumber: 84,
     columnNumber: 5
@@ -11938,10 +15675,10 @@ var import_draft_js9 = require("draft-js"), import_editor = __toESM(require("@dr
 var import_immutable = __toESM(require("immutable"));
 
 // app/modules/dms-custom/draft/editor/buttons/makeBlockDataButton.js
-var import_react117 = require("react"), import_draft_js = require("draft-js");
+var import_react125 = require("react"), import_draft_js = require("draft-js");
 
 // app/modules/dms-custom/draft/editor/buttons/button.js
-var import_react115 = require("react"), import_jsx_dev_runtime95 = require("react/jsx-dev-runtime"), EditorButton = ({ active, disabled, children, ...props }) => /* @__PURE__ */ (0, import_jsx_dev_runtime95.jsxDEV)(
+var import_react123 = require("react"), import_jsx_dev_runtime101 = require("react/jsx-dev-runtime"), EditorButton = ({ active, disabled, children: children2, ...props }) => /* @__PURE__ */ (0, import_jsx_dev_runtime101.jsxDEV)(
   "button",
   {
     ...props,
@@ -11949,7 +15686,7 @@ var import_react115 = require("react"), import_jsx_dev_runtime95 = require("reac
     tabIndex: -1,
     onMouseDown: (e) => e.preventDefault(),
     className: "px-1 first:rounded-l last:rounded-r focus:border-none focus:outline-none",
-    children
+    children: children2
   },
   void 0,
   !1,
@@ -11962,16 +15699,16 @@ var import_react115 = require("react"), import_jsx_dev_runtime95 = require("reac
 ), button_default = EditorButton;
 
 // app/modules/dms-custom/draft/editor/buttons/icons.js
-var import_react116 = require("react"), import_jsx_dev_runtime96 = require("react/jsx-dev-runtime"), Text = ({ children }) => /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("div", { className: "px-1 font-serif font-semibold", style: { fontSize: "1.25em" }, children }, void 0, !1, {
+var import_react124 = require("react"), import_jsx_dev_runtime102 = require("react/jsx-dev-runtime"), Text = ({ children: children2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("div", { className: "px-1 font-serif font-semibold", style: { fontSize: "1.25em" }, children: children2 }, void 0, !1, {
   fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
   lineNumber: 4,
   columnNumber: 3
-}, this), Icon2 = ({ children }) => /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("div", { className: "flex item-center justify-center px-1", children }, void 0, !1, {
+}, this), Icon2 = ({ children: children2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("div", { className: "flex item-center justify-center px-1", children: children2 }, void 0, !1, {
   fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
   lineNumber: 9,
   columnNumber: 3
 }, this), Icons = {
-  blockquote: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("span", { className: "fas fa-quote-right" }, void 0, !1, {
+  blockquote: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("span", { className: "fas fa-quote-right" }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 23,
     columnNumber: 11
@@ -11980,7 +15717,7 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
     lineNumber: 23,
     columnNumber: 5
   }, this),
-  "code-block": /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("span", { className: "fas fa-code" }, void 0, !1, {
+  "code-block": /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("span", { className: "fas fa-code" }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 34,
     columnNumber: 11
@@ -11989,22 +15726,22 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
     lineNumber: 34,
     columnNumber: 5
   }, this),
-  "header-one": /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Text, { children: "H1" }, void 0, !1, {
+  "header-one": /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Text, { children: "H1" }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 36,
     columnNumber: 17
   }, this),
-  "header-two": /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Text, { children: "H2" }, void 0, !1, {
+  "header-two": /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Text, { children: "H2" }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 37,
     columnNumber: 17
   }, this),
-  "header-three": /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Text, { children: "H3" }, void 0, !1, {
+  "header-three": /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Text, { children: "H3" }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 38,
     columnNumber: 19
   }, this),
-  "ordered-list-item": /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("span", { className: "fas fa-list-ol", style: { fontSize: "1.25em" } }, void 0, !1, {
+  "ordered-list-item": /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("span", { className: "fas fa-list-ol", style: { fontSize: "1.25em" } }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 48,
     columnNumber: 11
@@ -12013,7 +15750,7 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
     lineNumber: 48,
     columnNumber: 5
   }, this),
-  "unordered-list-item": /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("span", { className: "fas fa-list-ul", style: { fontSize: "1.25em" } }, void 0, !1, {
+  "unordered-list-item": /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("span", { className: "fas fa-list-ul", style: { fontSize: "1.25em" } }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 59,
     columnNumber: 11
@@ -12022,12 +15759,12 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
     lineNumber: 59,
     columnNumber: 5
   }, this),
-  BOLD: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Text, { children: "B" }, void 0, !1, {
+  BOLD: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Text, { children: "B" }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 66,
     columnNumber: 5
   }, this),
-  CODE: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("span", { className: "fas fa-code" }, void 0, !1, {
+  CODE: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("span", { className: "fas fa-code" }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 77,
     columnNumber: 11
@@ -12036,7 +15773,7 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
     lineNumber: 77,
     columnNumber: 5
   }, this),
-  ITALIC: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Text, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("i", { children: "I" }, void 0, !1, {
+  ITALIC: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Text, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("i", { children: "I" }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 91,
     columnNumber: 11
@@ -12045,7 +15782,7 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
     lineNumber: 91,
     columnNumber: 5
   }, this),
-  STRIKETHROUGH: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Text, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("strike", { children: "\xA0S\xA0" }, void 0, !1, {
+  STRIKETHROUGH: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Text, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("strike", { children: "\xA0S\xA0" }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 94,
     columnNumber: 11
@@ -12054,9 +15791,9 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
     lineNumber: 94,
     columnNumber: 5
   }, this),
-  SUBSCRIPT: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Text, { children: [
+  SUBSCRIPT: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Text, { children: [
     "x",
-    /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("sub", { children: "2" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("sub", { children: "2" }, void 0, !1, {
       fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
       lineNumber: 98,
       columnNumber: 8
@@ -12066,9 +15803,9 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
     lineNumber: 97,
     columnNumber: 5
   }, this),
-  SUPERSCRIPT: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Text, { children: [
+  SUPERSCRIPT: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Text, { children: [
     "x",
-    /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("sup", { children: "2" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("sup", { children: "2" }, void 0, !1, {
       fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
       lineNumber: 103,
       columnNumber: 8
@@ -12078,7 +15815,7 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
     lineNumber: 102,
     columnNumber: 5
   }, this),
-  UNDERLINE: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Text, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("u", { children: "U" }, void 0, !1, {
+  UNDERLINE: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Text, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("u", { children: "U" }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 107,
     columnNumber: 11
@@ -12087,7 +15824,7 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
     lineNumber: 107,
     columnNumber: 5
   }, this),
-  "text-left": /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("span", { className: "fas fa-align-left", style: { fontSize: "1.25em" } }, void 0, !1, {
+  "text-left": /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("span", { className: "fas fa-align-left", style: { fontSize: "1.25em" } }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 118,
     columnNumber: 11
@@ -12096,7 +15833,7 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
     lineNumber: 118,
     columnNumber: 5
   }, this),
-  "text-center": /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("span", { className: "fas fa-align-center", style: { fontSize: "1.25em" } }, void 0, !1, {
+  "text-center": /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("span", { className: "fas fa-align-center", style: { fontSize: "1.25em" } }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 129,
     columnNumber: 11
@@ -12105,7 +15842,7 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
     lineNumber: 129,
     columnNumber: 5
   }, this),
-  "text-right": /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("span", { className: "fas fa-align-right", style: { fontSize: "1.25em" } }, void 0, !1, {
+  "text-right": /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("span", { className: "fas fa-align-right", style: { fontSize: "1.25em" } }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 140,
     columnNumber: 11
@@ -12114,7 +15851,7 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
     lineNumber: 140,
     columnNumber: 5
   }, this),
-  "text-justify": /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("span", { className: "fas fa-align-justify", style: { fontSize: "1.25em" } }, void 0, !1, {
+  "text-justify": /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("span", { className: "fas fa-align-justify", style: { fontSize: "1.25em" } }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 143,
     columnNumber: 11
@@ -12123,7 +15860,7 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
     lineNumber: 143,
     columnNumber: 5
   }, this),
-  indent: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("span", { className: "fas fa-indent", style: { fontSize: "1.25em" } }, void 0, !1, {
+  indent: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("span", { className: "fas fa-indent", style: { fontSize: "1.25em" } }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 147,
     columnNumber: 11
@@ -12132,7 +15869,7 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
     lineNumber: 147,
     columnNumber: 5
   }, this),
-  outdent: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime96.jsxDEV)("span", { className: "fas fa-outdent", style: { fontSize: "1.25em" } }, void 0, !1, {
+  outdent: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)(Icon2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("span", { className: "fas fa-outdent", style: { fontSize: "1.25em" } }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/icons.js",
     lineNumber: 150,
     columnNumber: 11
@@ -12144,7 +15881,7 @@ var import_react116 = require("react"), import_jsx_dev_runtime96 = require("reac
 }, icons_default = Icons;
 
 // app/modules/dms-custom/draft/editor/buttons/makeBlockDataButton.js
-var import_jsx_dev_runtime97 = require("react/jsx-dev-runtime"), makeBlockDataButton = (dataType, buttonType, store) => () => {
+var import_jsx_dev_runtime103 = require("react/jsx-dev-runtime"), makeBlockDataButton = (dataType, buttonType, store) => () => {
   let {
     getEditorState,
     setEditorState
@@ -12162,7 +15899,7 @@ var import_jsx_dev_runtime97 = require("react/jsx-dev-runtime"), makeBlockDataBu
       )
     );
   };
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime97.jsxDEV)(button_default, { active: isActive(), onClick: click, children: icons_default[buttonType] }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime103.jsxDEV)(button_default, { active: isActive(), onClick: click, children: icons_default[buttonType] }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/makeBlockDataButton.js",
     lineNumber: 47,
     columnNumber: 7
@@ -12170,18 +15907,18 @@ var import_jsx_dev_runtime97 = require("react/jsx-dev-runtime"), makeBlockDataBu
 }, makeBlockDataButton_default = makeBlockDataButton;
 
 // app/modules/dms-custom/draft/editor/buttons/makeDataRangeButton.js
-var import_react118 = __toESM(require("react")), import_draft_js2 = require("draft-js");
-var import_jsx_dev_runtime98 = require("react/jsx-dev-runtime"), makeDataRangeButton = (dataType, buttonType, store, shift, max, min = 0) => () => {
+var import_react126 = __toESM(require("react")), import_draft_js2 = require("draft-js");
+var import_jsx_dev_runtime104 = require("react/jsx-dev-runtime"), makeDataRangeButton = (dataType, buttonType, store, shift, max, min = 0) => () => {
   let {
     getEditorState,
     setEditorState
-  } = store, editorState = getEditorState(), getStartData = import_react118.default.useCallback(
+  } = store, editorState = getEditorState(), getStartData = import_react126.default.useCallback(
     (contentState) => contentState.getBlockForKey(editorState.getSelection().getStartKey()).getData(),
     [editorState]
-  ), isDisabled = import_react118.default.useCallback(() => {
+  ), isDisabled = import_react126.default.useCallback(() => {
     let data = getStartData(editorState.getCurrentContent()), value = data.get(dataType) || 0;
     return value + shift < min || value + shift > max;
-  }, [getStartData, editorState]), click = import_react118.default.useCallback((e) => {
+  }, [getStartData, editorState]), click = import_react126.default.useCallback((e) => {
     e.preventDefault();
     let contentState = editorState.getCurrentContent(), selectionState = editorState.getSelection(), blockData = getStartData(contentState), value = blockData.get(dataType) || min;
     value = Math.max(min, Math.min(max, value + shift));
@@ -12197,7 +15934,7 @@ var import_jsx_dev_runtime98 = require("react/jsx-dev-runtime"), makeDataRangeBu
       )
     );
   }, [getStartData, editorState, setEditorState]);
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime98.jsxDEV)(button_default, { disabled: isDisabled(), onClick: click, children: icons_default[buttonType] }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime104.jsxDEV)(button_default, { disabled: isDisabled(), onClick: click, children: icons_default[buttonType] }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/makeDataRangeButton.js",
     lineNumber: 52,
     columnNumber: 7
@@ -12205,8 +15942,8 @@ var import_jsx_dev_runtime98 = require("react/jsx-dev-runtime"), makeDataRangeBu
 }, makeDataRangeButton_default = makeDataRangeButton;
 
 // app/modules/dms-custom/draft/editor/buttons/makeBlockStyleButton.js
-var import_react119 = require("react"), import_draft_js3 = require("draft-js");
-var import_jsx_dev_runtime99 = require("react/jsx-dev-runtime"), makeBlockStyleButton = (buttonType, store) => () => {
+var import_react127 = require("react"), import_draft_js3 = require("draft-js");
+var import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), makeBlockStyleButton = (buttonType, store) => () => {
   let {
     getEditorState,
     setEditorState
@@ -12215,7 +15952,7 @@ var import_jsx_dev_runtime99 = require("react/jsx-dev-runtime"), makeBlockStyleB
       import_draft_js3.RichUtils.toggleBlockType(editorState, buttonType)
     );
   };
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime99.jsxDEV)(
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)(
     button_default,
     {
       active: (() => editorState.getCurrentContent().getBlockForKey(editorState.getSelection().getStartKey()).getType() === buttonType)(),
@@ -12234,8 +15971,8 @@ var import_jsx_dev_runtime99 = require("react/jsx-dev-runtime"), makeBlockStyleB
 }, makeBlockStyleButton_default = makeBlockStyleButton;
 
 // app/modules/dms-custom/draft/editor/buttons/makeInlineStyleButton.js
-var import_react120 = require("react"), import_draft_js4 = require("draft-js");
-var import_jsx_dev_runtime100 = require("react/jsx-dev-runtime"), makeInlineStyleButton = (buttonType, store) => () => {
+var import_react128 = require("react"), import_draft_js4 = require("draft-js");
+var import_jsx_dev_runtime106 = require("react/jsx-dev-runtime"), makeInlineStyleButton = (buttonType, store) => () => {
   let {
     getEditorState,
     setEditorState
@@ -12244,7 +15981,7 @@ var import_jsx_dev_runtime100 = require("react/jsx-dev-runtime"), makeInlineStyl
       import_draft_js4.RichUtils.toggleInlineStyle(editorState, buttonType)
     );
   };
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime100.jsxDEV)(button_default, { active: (() => editorState.getCurrentInlineStyle().has(buttonType))(), onClick: click, children: icons_default[buttonType] }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime106.jsxDEV)(button_default, { active: (() => editorState.getCurrentInlineStyle().has(buttonType))(), onClick: click, children: icons_default[buttonType] }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/editor/buttons/makeInlineStyleButton.js",
     lineNumber: 27,
     columnNumber: 7
@@ -12256,7 +15993,7 @@ var ButtonsPlugin = () => {
   let store = {
     blockMap: import_immutable.default.OrderedMap()
   }, getBlockMap = (editorState) => {
-    let selection = editorState.getSelection(), startKey = selection.getStartKey(), endKey = selection.getEndKey(), found = !1;
+    let selection2 = editorState.getSelection(), startKey = selection2.getStartKey(), endKey = selection2.getEndKey(), found = !1;
     return editorState.getCurrentContent().getBlockMap().reduce((a, block) => {
       let key = block.getKey();
       return key === startKey && (found = !0), found && (a = a.set(key, block)), key === endKey && (found = !1), a;
@@ -12291,7 +16028,7 @@ var ButtonsPlugin = () => {
 }, buttons_default = ButtonsPlugin;
 
 // app/modules/dms-custom/draft/editor/toolbar/index.js
-var import_react121 = require("react"), import_jsx_dev_runtime101 = require("react/jsx-dev-runtime"), Separator = ({ ...props }) => /* @__PURE__ */ (0, import_jsx_dev_runtime101.jsxDEV)("div", { className: "border-r border-l mx-2 border-current", style: { borderColor: "currentColor" } }, void 0, !1, {
+var import_react129 = require("react"), import_jsx_dev_runtime107 = require("react/jsx-dev-runtime"), Separator = ({ ...props }) => /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "border-r border-l mx-2 border-current", style: { borderColor: "currentColor" } }, void 0, !1, {
   fileName: "app/modules/dms-custom/draft/editor/toolbar/index.js",
   lineNumber: 5,
   columnNumber: 3
@@ -12304,7 +16041,7 @@ var import_react121 = require("react"), import_jsx_dev_runtime101 = require("rea
     initialize: ({ getEditorState, setEditorState, getProps }) => {
       store.getEditorState = getEditorState, store.setEditorState = setEditorState;
     },
-    Toolbar: ({ children }) => /* @__PURE__ */ (0, import_jsx_dev_runtime101.jsxDEV)("div", { className: `absolute ${position}-0 left-0 w-full p-2 z-10 h-14`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime101.jsxDEV)("div", { className: `flex flex-${direction} shadow-md h-10 p-1 rounded w-full`, children }, void 0, !1, {
+    Toolbar: ({ children: children2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: `absolute ${position}-0 left-0 w-full p-2 z-10 h-14`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: `flex flex-${direction} shadow-md h-10 p-1 rounded w-full`, children: children2 }, void 0, !1, {
       fileName: "app/modules/dms-custom/draft/editor/toolbar/index.js",
       lineNumber: 18,
       columnNumber: 9
@@ -12318,11 +16055,11 @@ var import_react121 = require("react"), import_jsx_dev_runtime101 = require("rea
 }, toolbar_default = ToolbarPlugin;
 
 // app/modules/dms-custom/draft/editor/image/index.js
-var import_react122 = __toESM(require("react")), import_draft_js5 = require("draft-js"), import_jsx_dev_runtime102 = require("react/jsx-dev-runtime"), ImagePlugin = (options = {}) => {
+var import_react130 = __toESM(require("react")), import_draft_js5 = require("draft-js"), import_jsx_dev_runtime108 = require("react/jsx-dev-runtime"), ImagePlugin = (options = {}) => {
   let {
     wrappers = []
-  } = options, ImageBlock = import_react122.default.forwardRef(
-    ({ blockProps, compProps }, ref) => /* @__PURE__ */ (0, import_jsx_dev_runtime102.jsxDEV)("img", { src: blockProps.src, ...compProps, ref, alt: "" }, blockProps.key, !1, {
+  } = options, ImageBlock = import_react130.default.forwardRef(
+    ({ blockProps, compProps }, ref) => /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)("img", { src: blockProps.src, ...compProps, ref, alt: "" }, blockProps.key, !1, {
       fileName: "app/modules/dms-custom/draft/editor/image/index.js",
       lineNumber: 11,
       columnNumber: 5
@@ -12372,17 +16109,17 @@ var import_react122 = __toESM(require("react")), import_draft_js5 = require("dra
 }, image_default = ImagePlugin;
 
 // app/modules/dms-custom/draft/editor/linkify-it/index.js
-var import_react123 = require("react"), import_linkify_it = __toESM(require("linkify-it")), import_tlds = __toESM(require("tlds")), import_jsx_dev_runtime103 = require("react/jsx-dev-runtime"), linkify = (0, import_linkify_it.default)().tlds(import_tlds.default).add("ftp", null).set({ fuzzyIP: !0 }), Link16 = ({ store, options, decoratedText, children, ...props }) => {
+var import_react131 = require("react"), import_linkify_it = __toESM(require("linkify-it")), import_tlds = __toESM(require("tlds")), import_jsx_dev_runtime109 = require("react/jsx-dev-runtime"), linkify = (0, import_linkify_it.default)().tlds(import_tlds.default).add("ftp", null).set({ fuzzyIP: !0 }), Link17 = ({ store, options, decoratedText, children: children2, ...props }) => {
   let links2 = linkify.match(decoratedText), href = links2 && links2.pop().url, {
     target = "_blank"
   } = options;
-  return store.getReadOnly() ? /* @__PURE__ */ (0, import_jsx_dev_runtime103.jsxDEV)(
+  return store.getReadOnly() ? /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)(
     "a",
     {
       className: "text-blue-500 underline cursor-pointer",
       href,
       target,
-      children
+      children: children2
     },
     void 0,
     !1,
@@ -12392,19 +16129,19 @@ var import_react123 = require("react"), import_linkify_it = __toESM(require("lin
       columnNumber: 5
     },
     this
-  ) : /* @__PURE__ */ (0, import_jsx_dev_runtime103.jsxDEV)("div", { className: "inline-block relative hoverable", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime103.jsxDEV)("div", { className: "text-blue-500 underline cursor-pointer", children }, void 0, !1, {
+  ) : /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)("div", { className: "inline-block relative hoverable", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)("div", { className: "text-blue-500 underline cursor-pointer", children: children2 }, void 0, !1, {
       fileName: "app/modules/dms-custom/draft/editor/linkify-it/index.js",
       lineNumber: 26,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime103.jsxDEV)(
+    /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)(
       "div",
       {
         className: "read-only-link-tooltip show-on-hover show-on-bottom pb-1 px-2 bg-gray-200 absolute z-50 rounded",
         onClick: (e) => e.stopPropagation(),
         contentEditable: !1,
-        children: /* @__PURE__ */ (0, import_jsx_dev_runtime103.jsxDEV)(
+        children: /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)(
           "a",
           {
             className: "text-blue-500 underline cursor-pointer",
@@ -12448,7 +16185,7 @@ var import_react123 = require("react"), import_linkify_it = __toESM(require("lin
     decorators: [
       {
         strategy,
-        component: (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime103.jsxDEV)(Link16, { ...props, store, options }, void 0, !1, {
+        component: (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)(Link17, { ...props, store, options }, void 0, !1, {
           fileName: "app/modules/dms-custom/draft/editor/linkify-it/index.js",
           lineNumber: 53,
           columnNumber: 29
@@ -12459,17 +16196,17 @@ var import_react123 = require("react"), import_linkify_it = __toESM(require("lin
 }, linkify_it_default = linkifyitPlugin;
 
 // app/modules/dms-custom/draft/editor/super-sub-script/index.js
-var import_react124 = require("react"), import_jsx_dev_runtime104 = require("react/jsx-dev-runtime"), makeStrategy = (script) => (contentBlock, callback, contentState) => {
-  let characterList = contentBlock.getCharacterList(), start = null;
+var import_react132 = require("react"), import_jsx_dev_runtime110 = require("react/jsx-dev-runtime"), makeStrategy = (script) => (contentBlock, callback, contentState) => {
+  let characterList = contentBlock.getCharacterList(), start2 = null;
   characterList.forEach((c, i) => {
     let hasStyle = c.hasStyle(script);
-    hasStyle && start === null ? start = i : hasStyle || (start !== null && callback(start, i), start = null);
-  }), start !== null && callback(start, characterList.size);
+    hasStyle && start2 === null ? start2 = i : hasStyle || (start2 !== null && callback(start2, i), start2 = null);
+  }), start2 !== null && callback(start2, characterList.size);
 }, SuperSubScriptPlugin = () => ({
   decorators: [
     {
       strategy: makeStrategy("SUPERSCRIPT"),
-      component: (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime104.jsxDEV)("sup", { children: props.children }, void 0, !1, {
+      component: (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime110.jsxDEV)("sup", { children: props.children }, void 0, !1, {
         fileName: "app/modules/dms-custom/draft/editor/super-sub-script/index.js",
         lineNumber: 27,
         columnNumber: 27
@@ -12477,7 +16214,7 @@ var import_react124 = require("react"), import_jsx_dev_runtime104 = require("rea
     },
     {
       strategy: makeStrategy("SUBSCRIPT"),
-      component: (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime104.jsxDEV)("sub", { children: props.children }, void 0, !1, {
+      component: (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime110.jsxDEV)("sub", { children: props.children }, void 0, !1, {
         fileName: "app/modules/dms-custom/draft/editor/super-sub-script/index.js",
         lineNumber: 30,
         columnNumber: 27
@@ -12490,10 +16227,10 @@ var import_react124 = require("react"), import_jsx_dev_runtime104 = require("rea
 var import_draft_js6 = require("draft-js");
 
 // app/modules/dms-custom/draft/editor/positionable/wrapper.js
-var import_react126 = __toESM(require("react")), import_lodash41 = __toESM(require("lodash.throttle"));
+var import_react134 = __toESM(require("react")), import_lodash45 = __toESM(require("lodash.throttle"));
 
 // app/modules/dms-custom/draft/editor/utils/index.js
-var import_react125 = __toESM(require("react")), combineCompProps = (...props) => props.reduce((a, c) => {
+var import_react133 = __toESM(require("react")), combineCompProps = (...props) => props.reduce((a, c) => {
   for (let key in c)
     if (!(key in a))
       a[key] = c[key];
@@ -12518,15 +16255,15 @@ var import_react125 = __toESM(require("react")), combineCompProps = (...props) =
           break;
       }
   return a;
-}, {}), useSetRefs2 = (...refs) => import_react125.default.useCallback((node) => {
+}, {}), useSetRefs2 = (...refs) => import_react133.default.useCallback((node) => {
   [...refs].forEach((ref) => {
     !ref || (typeof ref == "function" ? ref(node) : ref.current = node);
   });
 }, [refs]);
 
 // app/modules/dms-custom/draft/editor/positionable/wrapper.js
-var import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), POSITIONS = ["block", "inline-block float-left mr-2", "block mx-auto", "inline-block float-right ml-2"], BUTTONS = [
-  /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)(
+var import_jsx_dev_runtime111 = require("react/jsx-dev-runtime"), POSITIONS = ["block", "inline-block float-left mr-2", "block mx-auto", "inline-block float-right ml-2"], BUTTONS = [
+  /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)(
     "svg",
     {
       viewBox: "0 0 24 24",
@@ -12534,12 +16271,12 @@ var import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), POSITIONS = ["
       width: "24",
       xmlns: "http://www.w3.org/2000/svg",
       children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)("path", { d: "M3,21 L21,21 L21,19 L3,19 L3,21 Z M3,3 L3,5 L21,5 L21,3 L3,3 Z M3,7 L3,17 L17,17 L17,7 L3,7 Z" }, void 0, !1, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)("path", { d: "M3,21 L21,21 L21,19 L3,19 L3,21 Z M3,3 L3,5 L21,5 L21,3 L3,3 Z M3,7 L3,17 L17,17 L17,7 L3,7 Z" }, void 0, !1, {
           fileName: "app/modules/dms-custom/draft/editor/positionable/wrapper.js",
           lineNumber: 13,
           columnNumber: 5
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)("path", { d: "M0 0h24v24H0z", fill: "none" }, void 0, !1, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)("path", { d: "M0 0h24v24H0z", fill: "none" }, void 0, !1, {
           fileName: "app/modules/dms-custom/draft/editor/positionable/wrapper.js",
           lineNumber: 14,
           columnNumber: 5
@@ -12555,7 +16292,7 @@ var import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), POSITIONS = ["
     },
     this
   ),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)(
+  /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)(
     "svg",
     {
       viewBox: "0 0 24 24",
@@ -12563,12 +16300,12 @@ var import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), POSITIONS = ["
       width: "24",
       xmlns: "http://www.w3.org/2000/svg",
       children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)("path", { d: "M21,15 L15,15 L15,17 L21,17 L21,15 Z M21,7 L15,7 L15,9 L21,9 L21,7 Z M15,13 L21,13 L21,11 L15,11 L15,13 Z M3,21 L21,21 L21,19 L3,19 L3,21 Z M3,3 L3,5 L21,5 L21,3 L3,3 Z M3,7 L3,17 L13,17 L13,7 L3,7 Z" }, void 0, !1, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)("path", { d: "M21,15 L15,15 L15,17 L21,17 L21,15 Z M21,7 L15,7 L15,9 L21,9 L21,7 Z M15,13 L21,13 L21,11 L15,11 L15,13 Z M3,21 L21,21 L21,19 L3,19 L3,21 Z M3,3 L3,5 L21,5 L21,3 L3,3 Z M3,7 L3,17 L13,17 L13,7 L3,7 Z" }, void 0, !1, {
           fileName: "app/modules/dms-custom/draft/editor/positionable/wrapper.js",
           lineNumber: 19,
           columnNumber: 5
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)("path", { d: "M0 0h24v24H0z", fill: "none" }, void 0, !1, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)("path", { d: "M0 0h24v24H0z", fill: "none" }, void 0, !1, {
           fileName: "app/modules/dms-custom/draft/editor/positionable/wrapper.js",
           lineNumber: 20,
           columnNumber: 5
@@ -12584,7 +16321,7 @@ var import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), POSITIONS = ["
     },
     this
   ),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)(
+  /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)(
     "svg",
     {
       viewBox: "0 0 24 24",
@@ -12592,12 +16329,12 @@ var import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), POSITIONS = ["
       width: "24",
       xmlns: "http://www.w3.org/2000/svg",
       children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)("path", { d: "M3,21 L21,21 L21,19 L3,19 L3,21 Z M3,3 L3,5 L21,5 L21,3 L3,3 Z M5,7 L5,17 L19,17 L19,7 L5,7 Z" }, void 0, !1, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)("path", { d: "M3,21 L21,21 L21,19 L3,19 L3,21 Z M3,3 L3,5 L21,5 L21,3 L3,3 Z M5,7 L5,17 L19,17 L19,7 L5,7 Z" }, void 0, !1, {
           fileName: "app/modules/dms-custom/draft/editor/positionable/wrapper.js",
           lineNumber: 25,
           columnNumber: 5
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)("path", { d: "M0 0h24v24H0z", fill: "none" }, void 0, !1, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)("path", { d: "M0 0h24v24H0z", fill: "none" }, void 0, !1, {
           fileName: "app/modules/dms-custom/draft/editor/positionable/wrapper.js",
           lineNumber: 26,
           columnNumber: 5
@@ -12613,7 +16350,7 @@ var import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), POSITIONS = ["
     },
     this
   ),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)(
+  /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)(
     "svg",
     {
       viewBox: "0 0 24 24",
@@ -12621,12 +16358,12 @@ var import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), POSITIONS = ["
       width: "24",
       xmlns: "http://www.w3.org/2000/svg",
       children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)("path", { d: "M9,15 L3,15 L3,17 L9,17 L9,15 Z M9,7 L3,7 L3,9 L9,9 L9,7 Z M3,13 L9,13 L9,11 L3,11 L3,13 Z M3,21 L21,21 L21,19 L3,19 L3,21 Z M3,3 L3,5 L21,5 L21,3 L3,3 Z M11,7 L11,17 L21,17 L21,7 L11,7 Z" }, void 0, !1, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)("path", { d: "M9,15 L3,15 L3,17 L9,17 L9,15 Z M9,7 L3,7 L3,9 L9,9 L9,7 Z M3,13 L9,13 L9,11 L3,11 L3,13 Z M3,21 L21,21 L21,19 L3,19 L3,21 Z M3,3 L3,5 L21,5 L21,3 L3,3 Z M11,7 L11,17 L21,17 L21,7 L11,7 Z" }, void 0, !1, {
           fileName: "app/modules/dms-custom/draft/editor/positionable/wrapper.js",
           lineNumber: 31,
           columnNumber: 5
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)("path", { d: "M0 0h24v24H0z", fill: "none" }, void 0, !1, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)("path", { d: "M0 0h24v24H0z", fill: "none" }, void 0, !1, {
           fileName: "app/modules/dms-custom/draft/editor/positionable/wrapper.js",
           lineNumber: 32,
           columnNumber: 5
@@ -12642,7 +16379,7 @@ var import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), POSITIONS = ["
     },
     this
   )
-], positionableWrapper = (store) => (Component) => import_react126.default.forwardRef(({ compProps = {}, ...props }, ref) => {
+], positionableWrapper = (store) => (Component) => import_react134.default.forwardRef(({ compProps = {}, ...props }, ref) => {
   let {
     block,
     contentState,
@@ -12652,7 +16389,7 @@ var import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), POSITIONS = ["
     position
   } = blockProps, handleClick = (e, p) => {
     e.preventDefault(), p !== position && (adjustPosition(block, contentState, p), setDisplay("none"));
-  }, figRef = import_react126.default.useRef(), compRef = import_react126.default.useRef(), [display, setDisplay] = import_react126.default.useState("none"), [pos, setPos] = import_react126.default.useState([0, 0]), _onMouseMove = import_react126.default.useCallback((e) => {
+  }, figRef = import_react134.default.useRef(), compRef = import_react134.default.useRef(), [display, setDisplay] = import_react134.default.useState("none"), [pos, setPos] = import_react134.default.useState([0, 0]), _onMouseMove = import_react134.default.useCallback((e) => {
     if (setDisplay("flex"), compRef.current) {
       let figRect = figRef.current.getBoundingClientRect(), compRect = compRef.current.getBoundingClientRect();
       setPos([
@@ -12660,11 +16397,11 @@ var import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), POSITIONS = ["
         compRect.width
       ]);
     }
-  }, [figRef, compRef]), onMouseMove = import_react126.default.useMemo(() => (0, import_lodash41.default)(_onMouseMove, 25), [_onMouseMove]), newCompProps = combineCompProps(
+  }, [figRef, compRef]), onMouseMove = import_react134.default.useMemo(() => (0, import_lodash45.default)(_onMouseMove, 25), [_onMouseMove]), newCompProps = combineCompProps(
     compProps,
     { className: POSITIONS[position] }
   );
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)(
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)(
     "figure",
     {
       ref: figRef,
@@ -12674,7 +16411,7 @@ var import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), POSITIONS = ["
         setDisplay("none"), onMouseMove.cancel();
       },
       children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)(
+        /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)(
           "div",
           {
             className: "absolute top-0 p-1 z-10 justify-center",
@@ -12684,7 +16421,7 @@ var import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), POSITIONS = ["
               width: `${pos[1]}px`
             },
             children: BUTTONS.map(
-              (b, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)(
+              (b, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)(
                 "button",
                 {
                   className: `
@@ -12715,7 +16452,7 @@ var import_jsx_dev_runtime105 = require("react/jsx-dev-runtime"), POSITIONS = ["
           },
           this
         ),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime105.jsxDEV)(
+        /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)(
           Component,
           {
             ref: useSetRefs2(ref, compRef),
@@ -12780,7 +16517,7 @@ var PositionablePlugin = () => {
 }, positionable_default = PositionablePlugin;
 
 // app/modules/dms-custom/draft/editor/stuff/index.js
-var import_react127 = require("react"), import_draft_js7 = require("draft-js"), import_immutable2 = __toESM(require("immutable")), import_jsx_dev_runtime106 = require("react/jsx-dev-runtime"), customStyleMap = {
+var import_react135 = require("react"), import_draft_js7 = require("draft-js"), import_immutable2 = __toESM(require("immutable")), import_jsx_dev_runtime112 = require("react/jsx-dev-runtime"), customStyleMap = {
   STRIKETHROUGH: {
     textDecoration: "line-through"
   }
@@ -12818,7 +16555,7 @@ var import_react127 = require("react"), import_draft_js7 = require("draft-js"), 
 }, myBlockRenderMap = import_immutable2.default.Map({
   blockquote: {
     element: "blockquote",
-    wrapper: /* @__PURE__ */ (0, import_jsx_dev_runtime106.jsxDEV)("div", { className: "rounded bg-gray-100 p-2 my-2" }, void 0, !1, {
+    wrapper: /* @__PURE__ */ (0, import_jsx_dev_runtime112.jsxDEV)("div", { className: "rounded bg-gray-100 p-2 my-2" }, void 0, !1, {
       fileName: "app/modules/dms-custom/draft/editor/stuff/index.js",
       lineNumber: 53,
       columnNumber: 14
@@ -12826,7 +16563,7 @@ var import_react127 = require("react"), import_draft_js7 = require("draft-js"), 
   },
   "code-block": {
     element: "pre",
-    wrapper: /* @__PURE__ */ (0, import_jsx_dev_runtime106.jsxDEV)("pre", { className: "border font-mono py-2 px-3 rounded bg-gray-50 my-2" }, void 0, !1, {
+    wrapper: /* @__PURE__ */ (0, import_jsx_dev_runtime112.jsxDEV)("pre", { className: "border font-mono py-2 px-3 rounded bg-gray-50 my-2" }, void 0, !1, {
       fileName: "app/modules/dms-custom/draft/editor/stuff/index.js",
       lineNumber: 57,
       columnNumber: 14
@@ -12834,7 +16571,7 @@ var import_react127 = require("react"), import_draft_js7 = require("draft-js"), 
   },
   atomic: {
     element: "figure",
-    wrapper: /* @__PURE__ */ (0, import_jsx_dev_runtime106.jsxDEV)("figure", { className: "relative z-10" }, void 0, !1, {
+    wrapper: /* @__PURE__ */ (0, import_jsx_dev_runtime112.jsxDEV)("figure", { className: "relative z-10" }, void 0, !1, {
       fileName: "app/modules/dms-custom/draft/editor/stuff/index.js",
       lineNumber: 61,
       columnNumber: 14
@@ -12846,7 +16583,7 @@ var import_react127 = require("react"), import_draft_js7 = require("draft-js"), 
   if (!hasListSelected(store.getEditorState()))
     return (0, import_draft_js7.getDefaultKeyBinding)(e);
   e.preventDefault();
-  let found = !1, direction = e.shiftKey ? -1 : 1, editorState = store.getEditorState(), contentState = editorState.getCurrentContent(), blockMap = contentState.getBlockMap(), selection = editorState.getSelection(), startKey = selection.getStartKey(), endKey = selection.getEndKey(), newBlockMap = blockMap.reduce((a, block) => {
+  let found = !1, direction = e.shiftKey ? -1 : 1, editorState = store.getEditorState(), contentState = editorState.getCurrentContent(), blockMap = contentState.getBlockMap(), selection2 = editorState.getSelection(), startKey = selection2.getStartKey(), endKey = selection2.getEndKey(), newBlockMap = blockMap.reduce((a, block) => {
     let depth = block.getDepth(), key = block.getKey();
     return key === startKey && (found = !0), found && (block = block.set("depth", Math.max(0, Math.min(4, depth + direction)))), key === endKey && (found = !1), a.set(block.getKey(), block);
   }, blockMap);
@@ -12857,7 +16594,7 @@ var import_react127 = require("react"), import_draft_js7 = require("draft-js"), 
         contentState.merge({ blockMap: newBlockMap }),
         "adjust-depth"
       ),
-      selection
+      selection2
     )
   );
 }, StuffPlugin = () => {
@@ -12877,8 +16614,8 @@ var import_react127 = require("react"), import_draft_js7 = require("draft-js"), 
 var import_draft_js8 = require("draft-js");
 
 // app/modules/dms-custom/draft/editor/resizable/wrapper.js
-var import_react128 = __toESM(require("react")), import_lodash42 = __toESM(require("lodash.throttle"));
-var import_jsx_dev_runtime107 = require("react/jsx-dev-runtime"), resizableWrapper = (store) => (Component) => import_react128.default.forwardRef(({ compProps = {}, ...props }, ref) => {
+var import_react136 = __toESM(require("react")), import_lodash46 = __toESM(require("lodash.throttle"));
+var import_jsx_dev_runtime113 = require("react/jsx-dev-runtime"), resizableWrapper = (store) => (Component) => import_react136.default.forwardRef(({ compProps = {}, ...props }, ref) => {
   let {
     block,
     contentState,
@@ -12886,23 +16623,23 @@ var import_jsx_dev_runtime107 = require("react/jsx-dev-runtime"), resizableWrapp
   } = props, {
     adjustWidth,
     width = null
-  } = blockProps, compRef = import_react128.default.useRef(), [hovering, setHovering] = import_react128.default.useState(!1), [canResize, setCanResize] = import_react128.default.useState(0), [resizing, setResizing] = import_react128.default.useState(0), [screenX, setScreenX] = import_react128.default.useState(0), _onResize = import_react128.default.useCallback((e) => {
+  } = blockProps, compRef = import_react136.default.useRef(), [hovering, setHovering] = import_react136.default.useState(!1), [canResize, setCanResize] = import_react136.default.useState(0), [resizing, setResizing] = import_react136.default.useState(0), [screenX, setScreenX] = import_react136.default.useState(0), _onResize = import_react136.default.useCallback((e) => {
     if (e.preventDefault(), compRef.current && resizing) {
       let compRect = compRef.current.getBoundingClientRect(), diff = screenX - e.screenX, width2 = compRect.width - diff * resizing;
       setScreenX(e.screenX), adjustWidth(block, contentState, width2);
     }
-  }, [compRef, resizing, screenX, adjustWidth, block, contentState]), onResize = import_react128.default.useMemo(() => (0, import_lodash42.default)(_onResize, 25), [_onResize]), onMouseUp = import_react128.default.useCallback((e) => {
+  }, [compRef, resizing, screenX, adjustWidth, block, contentState]), onResize = import_react136.default.useMemo(() => (0, import_lodash46.default)(_onResize, 25), [_onResize]), onMouseUp = import_react136.default.useCallback((e) => {
     setResizing(0);
   }, []);
-  import_react128.default.useEffect(() => (document.addEventListener("mousemove", onResize), document.addEventListener("mouseup", onMouseUp), () => {
+  import_react136.default.useEffect(() => (document.addEventListener("mousemove", onResize), document.addEventListener("mouseup", onMouseUp), () => {
     document.removeEventListener("mousemove", onResize), document.removeEventListener("mouseup", onMouseUp);
   }), [onResize, onMouseUp]);
-  let onMouseMove = import_react128.default.useCallback((e) => {
+  let onMouseMove = import_react136.default.useCallback((e) => {
     if (setHovering(!0), compRef.current) {
       let compRect = compRef.current.getBoundingClientRect();
       e.clientX >= compRect.x && e.clientX <= compRect.x + 20 ? setCanResize(-1) : e.clientX >= compRect.x + compRect.width - 20 && e.clientX <= compRect.x + compRect.width ? setCanResize(1) : setCanResize(0);
     }
-  }, [compRef]), onMouseDown = import_react128.default.useCallback((e) => {
+  }, [compRef]), onMouseDown = import_react136.default.useCallback((e) => {
     canResize && (e.preventDefault(), setResizing(canResize), setScreenX(e.screenX));
   }, [canResize]), newCompProps = combineCompProps(
     compProps,
@@ -12915,13 +16652,13 @@ var import_jsx_dev_runtime107 = require("react/jsx-dev-runtime"), resizableWrapp
       onMouseDown
     }
   );
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime113.jsxDEV)(
     "figure",
     {
       className: "relative",
       onMouseMove: store.getReadOnly() ? null : onMouseMove,
       onMouseOut: (e) => setHovering(!1),
-      children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
+      children: /* @__PURE__ */ (0, import_jsx_dev_runtime113.jsxDEV)(
         Component,
         {
           ref: useSetRefs2(ref, compRef),
@@ -12985,7 +16722,7 @@ var ResizablePlugin = () => {
 }, resizable_default = ResizablePlugin;
 
 // app/modules/dms-custom/draft/editor/index.js
-var import_jsx_dev_runtime108 = require("react/jsx-dev-runtime"), buttonPlugin = buttons_default(), {
+var import_jsx_dev_runtime114 = require("react/jsx-dev-runtime"), buttonPlugin = buttons_default(), {
   BlockQuoteButton,
   CodeBlockButton,
   HeaderOneButton,
@@ -13023,7 +16760,7 @@ var import_jsx_dev_runtime108 = require("react/jsx-dev-runtime"), buttonPlugin =
 ], decorator = new import_draft_js9.CompositeDecorator(
   linkItPlugin.decorators
 ), createEmpty = () => import_draft_js9.EditorState.createEmpty(decorator);
-var MyEditor = class extends import_react129.default.Component {
+var MyEditor = class extends import_react137.default.Component {
   constructor(props, ...args) {
     super(props, ...args), this.state = {
       hasFocus: !1
@@ -13043,7 +16780,7 @@ var MyEditor = class extends import_react129.default.Component {
   handleChange(editorState) {
     this.setState({ editorState }), this.props.onChange(editorState);
   }
-  handleDroppedFiles(selection, files, { getEditorState }) {
+  handleDroppedFiles(selection2, files, { getEditorState }) {
     if (this.props.disabled || !files.length)
       return "not-handled";
     let file = files[0];
@@ -13058,13 +16795,13 @@ var MyEditor = class extends import_react129.default.Component {
     this.setState((state) => ({ hasFocus: !1 })), typeof this.props.onBlur == "function" && this.props.onBlur(e);
   }
   render() {
-    return /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(
       EditorWrapper,
       {
         id: this.props.id,
         hasFocus: this.state.hasFocus,
         children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)("div", { className: "px-2 pb-2 flow-root", children: /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(
+          /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)("div", { className: "px-2 pb-2 flow-root", children: /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(
             import_editor.default,
             {
               editorKey: "foobar",
@@ -13092,123 +16829,123 @@ var MyEditor = class extends import_react129.default.Component {
             lineNumber: 180,
             columnNumber: 9
           }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(Toolbar, { children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(BoldButton, {}, void 0, !1, {
+          /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(Toolbar, { children: [
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(BoldButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 196,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(ItalicButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(ItalicButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 197,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(StrikeThroughButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(StrikeThroughButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 198,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(UnderlineButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(UnderlineButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 199,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(SubScriptButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(SubScriptButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 200,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(SuperScriptButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(SuperScriptButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 201,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(CodeButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(CodeButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 202,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(Separator2, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(Separator2, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 204,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(HeaderOneButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(HeaderOneButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 206,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(HeaderTwoButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(HeaderTwoButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 207,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(HeaderThreeButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(HeaderThreeButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 208,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(Separator2, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(Separator2, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 210,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(BlockQuoteButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(BlockQuoteButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 212,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(CodeBlockButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(CodeBlockButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 213,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(OrderedListButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(OrderedListButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 214,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(UnorderedListButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(UnorderedListButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 215,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(Separator2, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(Separator2, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 217,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(LeftAlignButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(LeftAlignButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 219,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(CenterAlignButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(CenterAlignButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 220,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(JustifyAlignButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(JustifyAlignButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 221,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(RightAlignButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(RightAlignButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 222,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(Separator2, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(Separator2, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 224,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(TextOutdentButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(TextOutdentButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 226,
               columnNumber: 11
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)(TextIndentButton, {}, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)(TextIndentButton, {}, void 0, !1, {
               fileName: "app/modules/dms-custom/draft/editor/index.js",
               lineNumber: 227,
               columnNumber: 11
@@ -13241,17 +16978,17 @@ __publicField(MyEditor, "defaultProps", {
 var LoadingOptions = {
   position: "absolute",
   className: "rounded"
-}, editor_default = img_loader_default(show_loading_default(MyEditor, LoadingOptions)), EditorWrapper = ({ children, hasFocus, id: id2, ...props }) => /* @__PURE__ */ (0, import_jsx_dev_runtime108.jsxDEV)("div", { className: `pt-16 relative rounded draft-js-editor
+}, editor_default = img_loader_default(show_loading_default(MyEditor, LoadingOptions)), EditorWrapper = ({ children: children2, hasFocus, id: id3, ...props }) => /* @__PURE__ */ (0, import_jsx_dev_runtime114.jsxDEV)("div", { className: `pt-16 relative rounded draft-js-editor
         w-full
-      `, ...props, children }, void 0, !1, {
+      `, ...props, children: children2 }, void 0, !1, {
   fileName: "app/modules/dms-custom/draft/editor/index.js",
   lineNumber: 244,
   columnNumber: 5
 }, this);
 
 // app/modules/dms-custom/draft/editor/editor.read-only.js
-var import_react130 = require("react"), import_draft_js10 = require("draft-js"), import_editor2 = __toESM(require("@draft-js-plugins/editor"));
-var import_jsx_dev_runtime109 = require("react/jsx-dev-runtime"), positionablePlugin2 = positionable_default(), resizablePlugin2 = resizable_default(), imagePlugin2 = image_default({
+var import_react138 = require("react"), import_draft_js10 = require("draft-js"), import_editor2 = __toESM(require("@draft-js-plugins/editor"));
+var import_jsx_dev_runtime115 = require("react/jsx-dev-runtime"), positionablePlugin2 = positionable_default(), resizablePlugin2 = resizable_default(), imagePlugin2 = image_default({
   wrappers: [
     positionablePlugin2.wrapper,
     resizablePlugin2.wrapper
@@ -13266,7 +17003,7 @@ var import_jsx_dev_runtime109 = require("react/jsx-dev-runtime"), positionablePl
   stuff_default()
 ], decorator2 = new import_draft_js10.CompositeDecorator(
   linkItPlugin2.decorators
-), ReadOnlyEditor = ({ spellCheck = !0, isRaw = !0, value }) => value ? /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)("div", { className: "draft-js-editor read-only-editor flow-root", children: /* @__PURE__ */ (0, import_jsx_dev_runtime109.jsxDEV)(
+), ReadOnlyEditor = ({ spellCheck = !0, isRaw = !0, value }) => value ? /* @__PURE__ */ (0, import_jsx_dev_runtime115.jsxDEV)("div", { className: "draft-js-editor read-only-editor flow-root", children: /* @__PURE__ */ (0, import_jsx_dev_runtime115.jsxDEV)(
   import_editor2.default,
   {
     editorKey: "foobar",
@@ -13292,7 +17029,7 @@ var import_jsx_dev_runtime109 = require("react/jsx-dev-runtime"), positionablePl
 }, this) : null, editor_read_only_default = ReadOnlyEditor;
 
 // app/modules/dms-custom/draft/index.js
-var import_draft_js11 = require("draft-js"), import_jsx_dev_runtime110 = require("react/jsx-dev-runtime");
+var import_draft_js11 = require("draft-js"), import_jsx_dev_runtime116 = require("react/jsx-dev-runtime");
 function isJson(str) {
   try {
     JSON.parse(str);
@@ -13303,7 +17040,7 @@ function isJson(str) {
 }
 var Edit6 = ({ value, onChange }) => {
   let data = value ? isJson(value) ? JSON.parse(value) : value : createEmpty();
-  return value && (data = import_draft_js11.EditorState.createWithContent((0, import_draft_js11.convertFromRaw)(data))), /* @__PURE__ */ (0, import_jsx_dev_runtime110.jsxDEV)("div", { className: "w-full relative", children: /* @__PURE__ */ (0, import_jsx_dev_runtime110.jsxDEV)(
+  return value && (data = import_draft_js11.EditorState.createWithContent((0, import_draft_js11.convertFromRaw)(data))), /* @__PURE__ */ (0, import_jsx_dev_runtime116.jsxDEV)("div", { className: "w-full relative", children: /* @__PURE__ */ (0, import_jsx_dev_runtime116.jsxDEV)(
     editor_default,
     {
       editorKey: "foobar",
@@ -13333,7 +17070,7 @@ Edit6.settings = {
 };
 var View4 = ({ value }) => {
   let data = value ? isJson(value) ? JSON.parse(value) : value : createEmpty();
-  return value && (data = import_draft_js11.EditorState.createWithContent((0, import_draft_js11.convertFromRaw)(data))), /* @__PURE__ */ (0, import_jsx_dev_runtime110.jsxDEV)("div", { className: "relative w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime110.jsxDEV)(editor_read_only_default, { value: data }, void 0, !1, {
+  return value && (data = import_draft_js11.EditorState.createWithContent((0, import_draft_js11.convertFromRaw)(data))), /* @__PURE__ */ (0, import_jsx_dev_runtime116.jsxDEV)("div", { className: "relative w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime116.jsxDEV)(editor_read_only_default, { value: data }, void 0, !1, {
     fileName: "app/modules/dms-custom/draft/index.js",
     lineNumber: 56,
     columnNumber: 13
@@ -13348,9 +17085,9 @@ var View4 = ({ value }) => {
 };
 
 // app/routes/__dms/blog/$.jsx
-var import_jsx_dev_runtime111 = require("react/jsx-dev-runtime");
+var import_jsx_dev_runtime117 = require("react/jsx-dev-runtime");
 registerDataType("richtext", draft_default);
-async function loader9({ request, params }) {
+async function loader10({ request, params }) {
   return {
     data: await dmsDataLoader(blog_config_default, params["*"]),
     user: await checkAuth(request)
@@ -13361,8 +17098,8 @@ async function action5({ request, params }) {
   return dmsDataEditor(blog_config_default, JSON.parse(form.get("data")), params["*"]);
 }
 function DMS() {
-  let params = (0, import_react133.useParams)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)(
+  let params = (0, import_react141.useParams)();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime117.jsxDEV)(
     dms_manager_default,
     {
       path: params["*"] || "",
@@ -13379,23 +17116,23 @@ function DMS() {
   );
 }
 function ErrorBoundary2({ error }) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)("div", { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)("h1", { children: "DMS Error ErrorBoundary" }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime117.jsxDEV)("div", { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime117.jsxDEV)("h1", { children: "DMS Error ErrorBoundary" }, void 0, !1, {
       fileName: "app/routes/__dms/blog/$.jsx",
       lineNumber: 47,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)("p", { children: error.message }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime117.jsxDEV)("p", { children: error.message }, void 0, !1, {
       fileName: "app/routes/__dms/blog/$.jsx",
       lineNumber: 48,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)("p", { children: "The stack trace is:" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime117.jsxDEV)("p", { children: "The stack trace is:" }, void 0, !1, {
       fileName: "app/routes/__dms/blog/$.jsx",
       lineNumber: 49,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime111.jsxDEV)("pre", { children: error.stack }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime117.jsxDEV)("pre", { children: error.stack }, void 0, !1, {
       fileName: "app/routes/__dms/blog/$.jsx",
       lineNumber: 50,
       columnNumber: 7
@@ -13413,12 +17150,12 @@ __export(__exports2, {
   ErrorBoundary: () => ErrorBoundary3,
   action: () => action6,
   default: () => DMS2,
-  loader: () => loader10
+  loader: () => loader11
 });
-var import_react134 = require("react"), import_react135 = require("@remix-run/react");
-var import_jsx_dev_runtime112 = require("react/jsx-dev-runtime");
+var import_react142 = require("react"), import_react143 = require("@remix-run/react");
+var import_jsx_dev_runtime118 = require("react/jsx-dev-runtime");
 registerDataType("richtext", draft_default);
-async function loader10({ request, params }) {
+async function loader11({ request, params }) {
   return console.log("loader", params["*"]), {
     data: await dmsDataLoader(siteConfig, params["*"]),
     user: await checkAuth(request)
@@ -13429,8 +17166,8 @@ async function action6({ request, params }) {
   return dmsDataEditor(siteConfig, JSON.parse(form.get("data")), params["*"]);
 }
 function DMS2() {
-  let params = (0, import_react135.useParams)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime112.jsxDEV)(
+  let params = (0, import_react143.useParams)();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime118.jsxDEV)(
     dms_manager_default,
     {
       path: params["*"] || "",
@@ -13447,23 +17184,23 @@ function DMS2() {
   );
 }
 function ErrorBoundary3({ error }) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime112.jsxDEV)("div", { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime112.jsxDEV)("h1", { children: "DMS Error ErrorBoundary" }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime118.jsxDEV)("div", { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime118.jsxDEV)("h1", { children: "DMS Error ErrorBoundary" }, void 0, !1, {
       fileName: "app/routes/__dms/site/$.jsx",
       lineNumber: 50,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime112.jsxDEV)("p", { children: error.message }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime118.jsxDEV)("p", { children: error.message }, void 0, !1, {
       fileName: "app/routes/__dms/site/$.jsx",
       lineNumber: 51,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime112.jsxDEV)("p", { children: "The stack trace is:" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime118.jsxDEV)("p", { children: "The stack trace is:" }, void 0, !1, {
       fileName: "app/routes/__dms/site/$.jsx",
       lineNumber: 52,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime112.jsxDEV)("pre", { children: error.stack }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime118.jsxDEV)("pre", { children: error.stack }, void 0, !1, {
       fileName: "app/routes/__dms/site/$.jsx",
       lineNumber: 53,
       columnNumber: 7
@@ -13480,15 +17217,15 @@ var jokes_exports = {};
 __export(jokes_exports, {
   default: () => JokesRoute
 });
-var import_react136 = require("@remix-run/react"), import_jsx_dev_runtime113 = require("react/jsx-dev-runtime");
+var import_react144 = require("@remix-run/react"), import_jsx_dev_runtime119 = require("react/jsx-dev-runtime");
 function JokesRoute() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime113.jsxDEV)("div", { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime113.jsxDEV)("h1", { children: "J\u{1F92A}KES" }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime119.jsxDEV)("div", { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime119.jsxDEV)("h1", { children: "J\u{1F92A}KES" }, void 0, !1, {
       fileName: "app/routes/jokes.jsx",
       lineNumber: 6,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime113.jsxDEV)("main", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime113.jsxDEV)(import_react136.Outlet, {}, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime119.jsxDEV)("main", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime119.jsxDEV)(import_react144.Outlet, {}, void 0, !1, {
       fileName: "app/routes/jokes.jsx",
       lineNumber: 8,
       columnNumber: 9
@@ -13505,7 +17242,7 @@ function JokesRoute() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "36885acb", entry: { module: "/build/entry.client-WJUBV3PA.js", imports: ["/build/_shared/chunk-WYR7HYP4.js", "/build/_shared/chunk-D2RKXKO2.js", "/build/_shared/chunk-JE7OEZ56.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-ZWDTWE5G.js", imports: ["/build/_shared/chunk-UYMPMEKQ.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-GIQZCW7X.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth": { id: "routes/__auth", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__auth-LKPIWILO.js", imports: ["/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/login": { id: "routes/__auth/login", parentId: "routes/__auth", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/login-26TXP6SJ.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/logout": { id: "routes/__auth/logout", parentId: "routes/__auth", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/logout-LADMCKIU.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama": { id: "routes/__dama", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dama-7ZFRYS44.js", imports: ["/build/_shared/chunk-W5JX2GWS.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/index.(cat)": { id: "routes/__dama/index.(cat)", parentId: "routes/__dama", path: "cat?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/index.(cat)-EJKBWOLK.js", imports: ["/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dama/source/$sourceId.($page)/($viewId)": { id: "routes/__dama/source/$sourceId.($page)/($viewId)", parentId: "routes/__dama", path: "source/:sourceId/:page?/:viewId?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/($viewId)-X3CO5CDP.js", imports: ["/build/_shared/chunk-4E5QJBDL.js", "/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-UYMPMEKQ.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-GIQZCW7X.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/index": { id: "routes/__dama/source/$sourceId.($page)/index", parentId: "routes/__dama", path: "source/:sourceId/:page?", index: !0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/index-H3LP3M6M.js", imports: ["/build/_shared/chunk-4E5QJBDL.js", "/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-UYMPMEKQ.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-GIQZCW7X.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/create": { id: "routes/__dama/source/create", parentId: "routes/__dama", path: "source/create", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/create-ZBMWPQNB.js", imports: ["/build/_shared/chunk-4E5QJBDL.js", "/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-UYMPMEKQ.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-GIQZCW7X.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/delete/$sourceId": { id: "routes/__dama/source/delete/$sourceId", parentId: "routes/__dama", path: "source/delete/:sourceId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/delete/$sourceId-EE42SDB4.js", imports: ["/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/view/delete/$viewId": { id: "routes/__dama/view/delete/$viewId", parentId: "routes/__dama", path: "view/delete/:viewId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/view/delete/$viewId-BMSJAV4R.js", imports: ["/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms": { id: "routes/__dms", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dms-6FC7N2FQ.js", imports: ["/build/_shared/chunk-W5JX2GWS.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/blog/$": { id: "routes/__dms/blog/$", parentId: "routes/__dms", path: "blog/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/$-OYOKY2IB.js", imports: ["/build/_shared/chunk-SAZYP75I.js", "/build/_shared/chunk-FKLGJNMH.js", "/build/_shared/chunk-3JTQ5K4T.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-GIQZCW7X.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/blog/blog.config": { id: "routes/__dms/blog/blog.config", parentId: "routes/__dms", path: "blog/blog/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/blog.config-6DOENPZY.js", imports: ["/build/_shared/chunk-FKLGJNMH.js", "/build/_shared/chunk-3JTQ5K4T.js", "/build/_shared/chunk-GIQZCW7X.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/site/$": { id: "routes/__dms/site/$", parentId: "routes/__dms", path: "site/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/$-OTLAS4Z3.js", imports: ["/build/_shared/chunk-SAZYP75I.js", "/build/_shared/chunk-3JTQ5K4T.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-GIQZCW7X.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/site/site.config": { id: "routes/__dms/site/site.config", parentId: "routes/__dms", path: "site/site/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/site.config-OG7I4IWH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jokes": { id: "routes/jokes", parentId: "root", path: "jokes", index: void 0, caseSensitive: void 0, module: "/build/routes/jokes-DORUQXRR.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-36885ACB.js" };
+var assets_manifest_default = { version: "d6dc3382", entry: { module: "/build/entry.client-J7LEZB52.js", imports: ["/build/_shared/chunk-D7GMNCCO.js", "/build/_shared/chunk-WYUUNUBT.js", "/build/_shared/chunk-JE7OEZ56.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-AOUVGPWY.js", imports: ["/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth": { id: "routes/__auth", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__auth-EGTHANL2.js", imports: ["/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/login": { id: "routes/__auth/login", parentId: "routes/__auth", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/login-ZXIQ5SVP.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/logout": { id: "routes/__auth/logout", parentId: "routes/__auth", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/logout-LADMCKIU.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama": { id: "routes/__dama", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dama-6VZRNNVY.js", imports: ["/build/_shared/chunk-5E2BWMEK.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/datasources": { id: "routes/__dama/datasources", parentId: "routes/__dama", path: "datasources", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/datasources-4TJDR4PT.js", imports: ["/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dama/index.(cat)": { id: "routes/__dama/index.(cat)", parentId: "routes/__dama", path: "cat?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/index.(cat)-TW2DD77X.js", imports: ["/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/($viewId)": { id: "routes/__dama/source/$sourceId.($page)/($viewId)", parentId: "routes/__dama", path: "source/:sourceId/:page?/:viewId?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/($viewId)-62BUGHM4.js", imports: ["/build/_shared/chunk-4ZX3IY2A.js", "/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/index": { id: "routes/__dama/source/$sourceId.($page)/index", parentId: "routes/__dama", path: "source/:sourceId/:page?", index: !0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/index-DDER2RDM.js", imports: ["/build/_shared/chunk-4ZX3IY2A.js", "/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/create": { id: "routes/__dama/source/create", parentId: "routes/__dama", path: "source/create", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/create-5MLM3S6Q.js", imports: ["/build/_shared/chunk-4ZX3IY2A.js", "/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/delete/$sourceId": { id: "routes/__dama/source/delete/$sourceId", parentId: "routes/__dama", path: "source/delete/:sourceId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/delete/$sourceId-K3HPAPI3.js", imports: ["/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/view/delete/$viewId": { id: "routes/__dama/view/delete/$viewId", parentId: "routes/__dama", path: "view/delete/:viewId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/view/delete/$viewId-EH4U3UJB.js", imports: ["/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms": { id: "routes/__dms", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dms-HEBQM6KD.js", imports: ["/build/_shared/chunk-5E2BWMEK.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/blog/$": { id: "routes/__dms/blog/$", parentId: "routes/__dms", path: "blog/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/$-X5SAHTTU.js", imports: ["/build/_shared/chunk-C6UXUCNG.js", "/build/_shared/chunk-Q5BFZBRU.js", "/build/_shared/chunk-KL2XXNDP.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/blog/blog.config": { id: "routes/__dms/blog/blog.config", parentId: "routes/__dms", path: "blog/blog/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/blog.config-RP2DM2JK.js", imports: ["/build/_shared/chunk-Q5BFZBRU.js", "/build/_shared/chunk-KL2XXNDP.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/site/$": { id: "routes/__dms/site/$", parentId: "routes/__dms", path: "site/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/$-BJOTYGBY.js", imports: ["/build/_shared/chunk-C6UXUCNG.js", "/build/_shared/chunk-KL2XXNDP.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/site/site.config": { id: "routes/__dms/site/site.config", parentId: "routes/__dms", path: "site/site/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/site.config-OG7I4IWH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jokes": { id: "routes/jokes", parentId: "root", path: "jokes", index: void 0, caseSensitive: void 0, module: "/build/routes/jokes-6TKEJWLG.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-D6DC3382.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { v2_meta: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {
@@ -13588,6 +17325,14 @@ var assetsBuildDirectory = "public/build", future = { v2_meta: !1 }, publicPath 
     index: void 0,
     caseSensitive: void 0,
     module: create_exports
+  },
+  "routes/__dama/datasources": {
+    id: "routes/__dama/datasources",
+    parentId: "routes/__dama",
+    path: "datasources",
+    index: void 0,
+    caseSensitive: void 0,
+    module: datasources_exports
   },
   "routes/__dama/index.(cat)": {
     id: "routes/__dama/index.(cat)",
