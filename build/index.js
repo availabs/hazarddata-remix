@@ -10507,7 +10507,7 @@ __export(index_cat_exports, {
 var import_react96 = __toESM(require("react"));
 var import_react97 = require("@remix-run/react"), import_lodash36 = __toESM(require("lodash.get"));
 
-// app/modules/avl-graph/src/BarGraph.js
+// app/modules/avl-graph-modified/src/BarGraph.js
 var import_react95 = __toESM(require("react"));
 
 // node_modules/d3-array/src/ascending.js
@@ -12283,10 +12283,10 @@ function select_default2(selector) {
   return typeof selector == "string" ? new Selection([[document.querySelector(selector)]], [document.documentElement]) : new Selection([[selector]], root);
 }
 
-// app/modules/avl-graph/src/BarGraph.js
+// app/modules/avl-graph-modified/src/BarGraph.js
 var import_deepequal2 = require("deepequal"), import_lodash35 = __toESM(require("lodash.get"));
 
-// app/modules/avl-graph/src/components/AxisBottom.js
+// app/modules/avl-graph-modified/src/components/AxisBottom.js
 var import_react90 = __toESM(require("react"));
 
 // node_modules/d3-dispatch/src/dispatch.js
@@ -13102,7 +13102,7 @@ function axisLeft(scale) {
   return axis(left, scale);
 }
 
-// app/modules/avl-graph/src/components/AxisBottom.js
+// app/modules/avl-graph-modified/src/components/AxisBottom.js
 var import_jsx_dev_runtime75 = require("react/jsx-dev-runtime"), AxisBottom = (props) => {
   let {
     adjustedWidth,
@@ -13148,7 +13148,7 @@ var import_jsx_dev_runtime75 = require("react/jsx-dev-runtime"), AxisBottom = (p
       tickDensity
     ]
   ), /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("g", { ref }, void 0, !1, {
-    fileName: "app/modules/avl-graph/src/components/AxisBottom.js",
+    fileName: "app/modules/avl-graph-modified/src/components/AxisBottom.js",
     lineNumber: 30,
     columnNumber: 10
   }, this);
@@ -13202,7 +13202,7 @@ var import_jsx_dev_runtime75 = require("react/jsx-dev-runtime"), AxisBottom = (p
   group.selectAll("g.axis").data(domain.length ? ["axis-bottom"] : []).join("g").attr("class", "axis axis-bottom").classed("secondary", secondary).transition(transition2).call(axisBottom2), group.selectAll("text.axis-label").data(domain.length && Boolean(label) ? [label] : []).join("text").attr("class", "axis-label axis-label-bottom").style("transform", `translate(${adjustedWidth * 0.5}px, ${bottom2 - 9}px)`).attr("text-anchor", "middle").attr("fill", "currentColor").attr("font-size", "1rem").text((d) => d);
 };
 
-// app/modules/avl-graph/src/components/AxisLeft.js
+// app/modules/avl-graph-modified/src/components/AxisLeft.js
 var import_react91 = __toESM(require("react"));
 var import_jsx_dev_runtime76 = require("react/jsx-dev-runtime"), AxisLeft = (props) => {
   let {
@@ -13252,7 +13252,7 @@ var import_jsx_dev_runtime76 = require("react/jsx-dev-runtime"), AxisLeft = (pro
       tickValues
     ]
   ), /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("g", { ref }, void 0, !1, {
-    fileName: "app/modules/avl-graph/src/components/AxisLeft.js",
+    fileName: "app/modules/avl-graph-modified/src/components/AxisLeft.js",
     lineNumber: 31,
     columnNumber: 10
   }, this);
@@ -13299,7 +13299,7 @@ var import_jsx_dev_runtime76 = require("react/jsx-dev-runtime"), AxisLeft = (pro
   );
 };
 
-// app/modules/avl-graph/src/components/AxisRight.js
+// app/modules/avl-graph-modified/src/components/AxisRight.js
 var import_react92 = __toESM(require("react"));
 var import_jsx_dev_runtime77 = require("react/jsx-dev-runtime"), AxisRight = (props) => {
   let {
@@ -13346,7 +13346,7 @@ var import_jsx_dev_runtime77 = require("react/jsx-dev-runtime"), AxisRight = (pr
       ticks2
     ]
   ), /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)("g", { ref }, void 0, !1, {
-    fileName: "app/modules/avl-graph/src/components/AxisRight.js",
+    fileName: "app/modules/avl-graph-modified/src/components/AxisRight.js",
     lineNumber: 30,
     columnNumber: 10
   }, this);
@@ -13391,7 +13391,7 @@ var import_jsx_dev_runtime77 = require("react/jsx-dev-runtime"), AxisRight = (pr
   );
 };
 
-// app/modules/avl-graph/src/components/HoverCompContainer.js
+// app/modules/avl-graph-modified/src/components/HoverCompContainer.js
 var import_react93 = __toESM(require("react")), import_lodash33 = __toESM(require("lodash.throttle")), import_jsx_dev_runtime78 = require("react/jsx-dev-runtime"), getTranslate2 = ({ pos, svgWidth, svgHeight, margin, position }) => {
   let [x, y] = pos;
   switch (position) {
@@ -13437,7 +13437,7 @@ var import_react93 = __toESM(require("react")), import_lodash33 = __toESM(requir
   void 0,
   !1,
   {
-    fileName: "app/modules/avl-graph/src/components/HoverCompContainer.js",
+    fileName: "app/modules/avl-graph-modified/src/components/HoverCompContainer.js",
     lineNumber: 42,
     columnNumber: 3
   },
@@ -13489,7 +13489,7 @@ var import_react93 = __toESM(require("react")), import_lodash33 = __toESM(requir
   };
 };
 
-// app/modules/avl-graph/src/utils/index.js
+// app/modules/avl-graph-modified/src/utils/index.js
 var import_react94 = __toESM(require("react")), import_deepequal = __toESM(require("deepequal")), import_lodash34 = __toESM(require("lodash.get"));
 var DEFAULT_COLORS = getColorRange(12, "Set3"), getColorFunc = (colors) => {
   if (typeof colors == "function")
@@ -13517,7 +13517,7 @@ var useShouldComponentUpdate = (props) => {
   }, [props]), ShouldComponentUpdate;
 };
 
-// app/modules/avl-graph/src/BarGraph.js
+// app/modules/avl-graph-modified/src/BarGraph.js
 var import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), DefaultHoverComp2 = ({ data, keys, indexFormat, keyFormat, valueFormat }) => {
   let theme = useTheme();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: `
@@ -13526,7 +13526,7 @@ var import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), DefaultHoverCom
       ${theme.accent1}
     `, children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: "font-bold text-lg leading-6 border-b-2 mb-1 pl-2", children: indexFormat((0, import_lodash35.default)(data, "index", null)) }, void 0, !1, {
-      fileName: "app/modules/avl-graph/src/BarGraph.js",
+      fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
       lineNumber: 41,
       columnNumber: 7
     }, this),
@@ -13546,7 +13546,7 @@ var import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), DefaultHoverCom
         void 0,
         !1,
         {
-          fileName: "app/modules/avl-graph/src/BarGraph.js",
+          fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
           lineNumber: 51,
           columnNumber: 13
         },
@@ -13556,43 +13556,43 @@ var import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), DefaultHoverCom
         keyFormat(key),
         ":"
       ] }, void 0, !0, {
-        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
         lineNumber: 56,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: "text-right flex-1", children: valueFormat((0, import_lodash35.default)(data, ["data", key], 0)) }, void 0, !1, {
-        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
         lineNumber: 59,
         columnNumber: 13
       }, this)
     ] }, key, !0, {
-      fileName: "app/modules/avl-graph/src/BarGraph.js",
+      fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
       lineNumber: 47,
       columnNumber: 11
     }, this)),
     keys.length <= 1 ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: "flex pr-2", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: "w-5 mr-2" }, void 0, !1, {
-        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
         lineNumber: 67,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: "mr-4 pl-2", children: "Total:" }, void 0, !1, {
-        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
         lineNumber: 68,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)("div", { className: "flex-1 text-right", children: valueFormat(keys.reduce((a, c) => a + (0, import_lodash35.default)(data, ["data", c], 0), 0)) }, void 0, !1, {
-        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
         lineNumber: 71,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
-      fileName: "app/modules/avl-graph/src/BarGraph.js",
+      fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
       lineNumber: 66,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
-    fileName: "app/modules/avl-graph/src/BarGraph.js",
+    fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
     lineNumber: 36,
     columnNumber: 5
   }, this);
@@ -13761,7 +13761,7 @@ var import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), DefaultHoverCom
           void 0,
           !1,
           {
-            fileName: "app/modules/avl-graph/src/BarGraph.js",
+            fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
             lineNumber: 354,
             columnNumber: 15
           },
@@ -13779,7 +13779,7 @@ var import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), DefaultHoverCom
           void 0,
           !1,
           {
-            fileName: "app/modules/avl-graph/src/BarGraph.js",
+            fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
             lineNumber: 361,
             columnNumber: 15
           },
@@ -13797,14 +13797,14 @@ var import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), DefaultHoverCom
           void 0,
           !1,
           {
-            fileName: "app/modules/avl-graph/src/BarGraph.js",
+            fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
             lineNumber: 368,
             columnNumber: 15
           },
           this
         ) : null
       ] }, void 0, !0, {
-        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
         lineNumber: 352,
         columnNumber: 11
       }, this) : null,
@@ -13824,7 +13824,7 @@ var import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), DefaultHoverCom
               id3,
               !1,
               {
-                fileName: "app/modules/avl-graph/src/BarGraph.js",
+                fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
                 lineNumber: 379,
                 columnNumber: 15
               },
@@ -13835,14 +13835,14 @@ var import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), DefaultHoverCom
         void 0,
         !1,
         {
-          fileName: "app/modules/avl-graph/src/BarGraph.js",
+          fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
           lineNumber: 376,
           columnNumber: 9
         },
         this
       )
     ] }, void 0, !0, {
-      fileName: "app/modules/avl-graph/src/BarGraph.js",
+      fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
       lineNumber: 350,
       columnNumber: 7
     }, this),
@@ -13864,7 +13864,7 @@ var import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), DefaultHoverCom
           void 0,
           !1,
           {
-            fileName: "app/modules/avl-graph/src/BarGraph.js",
+            fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
             lineNumber: 393,
             columnNumber: 11
           },
@@ -13874,14 +13874,14 @@ var import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), DefaultHoverCom
       void 0,
       !1,
       {
-        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
         lineNumber: 387,
         columnNumber: 7
       },
       this
     )
   ] }, void 0, !0, {
-    fileName: "app/modules/avl-graph/src/BarGraph.js",
+    fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
     lineNumber: 348,
     columnNumber: 5
   }, this);
@@ -13917,7 +13917,7 @@ var import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), DefaultHoverCom
     void 0,
     !1,
     {
-      fileName: "app/modules/avl-graph/src/BarGraph.js",
+      fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
       lineNumber: 452,
       columnNumber: 5
     },
@@ -13939,14 +13939,14 @@ var import_jsx_dev_runtime79 = require("react/jsx-dev-runtime"), DefaultHoverCom
       key,
       !1,
       {
-        fileName: "app/modules/avl-graph/src/BarGraph.js",
+        fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
         lineNumber: 476,
         columnNumber: 11
       },
       this
     )
   ) }, void 0, !1, {
-    fileName: "app/modules/avl-graph/src/BarGraph.js",
+    fileName: "app/modules/avl-graph-modified/src/BarGraph.js",
     lineNumber: 474,
     columnNumber: 5
   }, this);
@@ -17242,7 +17242,7 @@ function JokesRoute() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "d6dc3382", entry: { module: "/build/entry.client-J7LEZB52.js", imports: ["/build/_shared/chunk-D7GMNCCO.js", "/build/_shared/chunk-WYUUNUBT.js", "/build/_shared/chunk-JE7OEZ56.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-AOUVGPWY.js", imports: ["/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth": { id: "routes/__auth", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__auth-EGTHANL2.js", imports: ["/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/login": { id: "routes/__auth/login", parentId: "routes/__auth", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/login-ZXIQ5SVP.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/logout": { id: "routes/__auth/logout", parentId: "routes/__auth", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/logout-LADMCKIU.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama": { id: "routes/__dama", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dama-6VZRNNVY.js", imports: ["/build/_shared/chunk-5E2BWMEK.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/datasources": { id: "routes/__dama/datasources", parentId: "routes/__dama", path: "datasources", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/datasources-4TJDR4PT.js", imports: ["/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dama/index.(cat)": { id: "routes/__dama/index.(cat)", parentId: "routes/__dama", path: "cat?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/index.(cat)-TW2DD77X.js", imports: ["/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/($viewId)": { id: "routes/__dama/source/$sourceId.($page)/($viewId)", parentId: "routes/__dama", path: "source/:sourceId/:page?/:viewId?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/($viewId)-62BUGHM4.js", imports: ["/build/_shared/chunk-4ZX3IY2A.js", "/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/index": { id: "routes/__dama/source/$sourceId.($page)/index", parentId: "routes/__dama", path: "source/:sourceId/:page?", index: !0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/index-DDER2RDM.js", imports: ["/build/_shared/chunk-4ZX3IY2A.js", "/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/create": { id: "routes/__dama/source/create", parentId: "routes/__dama", path: "source/create", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/create-5MLM3S6Q.js", imports: ["/build/_shared/chunk-4ZX3IY2A.js", "/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/delete/$sourceId": { id: "routes/__dama/source/delete/$sourceId", parentId: "routes/__dama", path: "source/delete/:sourceId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/delete/$sourceId-K3HPAPI3.js", imports: ["/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/view/delete/$viewId": { id: "routes/__dama/view/delete/$viewId", parentId: "routes/__dama", path: "view/delete/:viewId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/view/delete/$viewId-EH4U3UJB.js", imports: ["/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms": { id: "routes/__dms", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dms-HEBQM6KD.js", imports: ["/build/_shared/chunk-5E2BWMEK.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/blog/$": { id: "routes/__dms/blog/$", parentId: "routes/__dms", path: "blog/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/$-X5SAHTTU.js", imports: ["/build/_shared/chunk-C6UXUCNG.js", "/build/_shared/chunk-Q5BFZBRU.js", "/build/_shared/chunk-KL2XXNDP.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/blog/blog.config": { id: "routes/__dms/blog/blog.config", parentId: "routes/__dms", path: "blog/blog/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/blog.config-RP2DM2JK.js", imports: ["/build/_shared/chunk-Q5BFZBRU.js", "/build/_shared/chunk-KL2XXNDP.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/site/$": { id: "routes/__dms/site/$", parentId: "routes/__dms", path: "site/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/$-BJOTYGBY.js", imports: ["/build/_shared/chunk-C6UXUCNG.js", "/build/_shared/chunk-KL2XXNDP.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/site/site.config": { id: "routes/__dms/site/site.config", parentId: "routes/__dms", path: "site/site/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/site.config-OG7I4IWH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jokes": { id: "routes/jokes", parentId: "root", path: "jokes", index: void 0, caseSensitive: void 0, module: "/build/routes/jokes-6TKEJWLG.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-D6DC3382.js" };
+var assets_manifest_default = { version: "9790a2b9", entry: { module: "/build/entry.client-J7LEZB52.js", imports: ["/build/_shared/chunk-D7GMNCCO.js", "/build/_shared/chunk-WYUUNUBT.js", "/build/_shared/chunk-JE7OEZ56.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-AOUVGPWY.js", imports: ["/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth": { id: "routes/__auth", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__auth-EGTHANL2.js", imports: ["/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/login": { id: "routes/__auth/login", parentId: "routes/__auth", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/login-ZXIQ5SVP.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/logout": { id: "routes/__auth/logout", parentId: "routes/__auth", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/logout-LADMCKIU.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama": { id: "routes/__dama", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dama-6VZRNNVY.js", imports: ["/build/_shared/chunk-5E2BWMEK.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/datasources": { id: "routes/__dama/datasources", parentId: "routes/__dama", path: "datasources", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/datasources-4TJDR4PT.js", imports: ["/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dama/index.(cat)": { id: "routes/__dama/index.(cat)", parentId: "routes/__dama", path: "cat?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/index.(cat)-URZZGGQB.js", imports: ["/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/($viewId)": { id: "routes/__dama/source/$sourceId.($page)/($viewId)", parentId: "routes/__dama", path: "source/:sourceId/:page?/:viewId?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/($viewId)-62BUGHM4.js", imports: ["/build/_shared/chunk-4ZX3IY2A.js", "/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/index": { id: "routes/__dama/source/$sourceId.($page)/index", parentId: "routes/__dama", path: "source/:sourceId/:page?", index: !0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/index-DDER2RDM.js", imports: ["/build/_shared/chunk-4ZX3IY2A.js", "/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/create": { id: "routes/__dama/source/create", parentId: "routes/__dama", path: "source/create", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/create-5MLM3S6Q.js", imports: ["/build/_shared/chunk-4ZX3IY2A.js", "/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/delete/$sourceId": { id: "routes/__dama/source/delete/$sourceId", parentId: "routes/__dama", path: "source/delete/:sourceId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/delete/$sourceId-K3HPAPI3.js", imports: ["/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/view/delete/$viewId": { id: "routes/__dama/view/delete/$viewId", parentId: "routes/__dama", path: "view/delete/:viewId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/view/delete/$viewId-EH4U3UJB.js", imports: ["/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms": { id: "routes/__dms", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dms-HEBQM6KD.js", imports: ["/build/_shared/chunk-5E2BWMEK.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/blog/$": { id: "routes/__dms/blog/$", parentId: "routes/__dms", path: "blog/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/$-X5SAHTTU.js", imports: ["/build/_shared/chunk-C6UXUCNG.js", "/build/_shared/chunk-Q5BFZBRU.js", "/build/_shared/chunk-KL2XXNDP.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/blog/blog.config": { id: "routes/__dms/blog/blog.config", parentId: "routes/__dms", path: "blog/blog/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/blog.config-RP2DM2JK.js", imports: ["/build/_shared/chunk-Q5BFZBRU.js", "/build/_shared/chunk-KL2XXNDP.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/site/$": { id: "routes/__dms/site/$", parentId: "routes/__dms", path: "site/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/$-BJOTYGBY.js", imports: ["/build/_shared/chunk-C6UXUCNG.js", "/build/_shared/chunk-KL2XXNDP.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/site/site.config": { id: "routes/__dms/site/site.config", parentId: "routes/__dms", path: "site/site/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/site.config-OG7I4IWH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jokes": { id: "routes/jokes", parentId: "root", path: "jokes", index: void 0, caseSensitive: void 0, module: "/build/routes/jokes-6TKEJWLG.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-9790A2B9.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { v2_meta: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

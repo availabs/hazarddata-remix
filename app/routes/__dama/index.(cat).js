@@ -3,7 +3,7 @@ import {falcor} from '~/utils/falcor.server'
 import {SourceAttributes, ViewAttributes, getAttributes, pgEnv} from '~/modules/data-manager/attributes'
 import {useLoaderData, Link} from "@remix-run/react";
 import get from 'lodash.get'
-import {BarGraph, generateTestBarData} from "~/modules/avl-graph/src/BarGraph";
+import {BarGraph, generateTestBarData} from "~/modules/avl-graph-modified/src/BarGraph";
 
 const getViews = (sourceId, falcorCache) => Object.values(
     get(
