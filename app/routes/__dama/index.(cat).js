@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {falcor} from '~/utils/falcor.server'
-import {SourceAttributes, ViewAttributes, getAttributes, pgEnv} from '~/modules/data-manager/attributes'
+import {SourceAttributes, ViewAttributes, getAttributes, pgEnv, hazardsMeta} from '~/modules/data-manager/attributes'
 import {useLoaderData, Link} from "@remix-run/react";
 import get from 'lodash.get'
 import {BarGraph, generateTestBarData} from "~/modules/avl-graph-modified/src/BarGraph";
@@ -24,9 +24,7 @@ const getViews = (sourceId, falcorCache) => Object.values(
 export async function loader({request}) {
 
     // get latest view of hlr, nri, and enhanced_ncei
-    // chart 1: enhanced ncei: $loss X year; stacked by nri_type
-    // chart 2: EAL hlr
-    // chart 3: EAL nri
+    // fetch meta for each view, show which views it depends upon, provide links to those views.
     const hlrSourceId = 218,
         enhancedNCEIhlrSourceId = 198;
     const lengthPath = ["dama", pgEnv, "sources", "byId", [hlrSourceId, enhancedNCEIhlrSourceId], "views", "length"];
@@ -56,14 +54,32 @@ export async function loader({request}) {
     const sourceData = await falcor.get(
         ['hlr', pgEnv, 'source', hlrSourceId, 'view', ltsHlrView, 'eal'],
         ['nri', 'totals', 'detailed', 'all'],
-        ['ncei_storm_events_enhanced', pgEnv, 'source', enhancedNCEIhlrSourceId, 'view', ltsEnhancedNCEIView, 'lossByYearByType']
+        ['ncei_storm_events_enhanced', pgEnv, 'source', enhancedNCEIhlrSourceId, 'view', ltsEnhancedNCEIView, 'lossByYearByType'],
+        ['dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', [ltsHlrView, ltsEnhancedNCEIView]]
     );
-    console.log(['ncei_storm_events_enhanced', pgEnv, 'source', enhancedNCEIhlrSourceId, 'view', ltsEnhancedNCEIView, 'lossByYearByType'])
+
+    const tmpSrcIds = [];
+
+    Object.keys(get(sourceData, ['json', 'dama', pgEnv, 'viewDependencySubgraphs', 'byViewId'], {}))
+        .forEach(viewId => {
+            tmpSrcIds.push(
+                ...get(sourceData, ['json', 'dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', viewId, 'dependencies'], [])
+                .map(d => d.source_id)
+                .filter(d => d)
+            );
+        });
+    const srcMeta = await falcor.get(['dama', pgEnv, 'sources', 'byId', tmpSrcIds, 'attributes', 'type']);
+
     return {
+        dama: get(sourceData, ['json', 'dama', pgEnv, 'viewDependencySubgraphs', 'byViewId']),
         avail: get(sourceData, ['json', 'hlr', pgEnv, 'source', hlrSourceId, 'view', ltsHlrView, 'eal'], [])
             .filter(d => !['Heavy Rain', 'Freezing Fog'].includes(d.nri_category)),
+        availLTSViewId: ltsHlrView,
+        enhancedNCEILTSViewId: ltsEnhancedNCEIView,
         nri: get(sourceData, ['json', 'nri', 'totals', 'detailed', 'all', 0], []),
-        enhancedNCEILoss: get(sourceData, ['json', 'ncei_storm_events_enhanced', pgEnv, 'source', enhancedNCEIhlrSourceId, 'view', ltsEnhancedNCEIView, 'lossByYearByType'], [])
+        enhancedNCEILoss: get(sourceData, ['json', 'ncei_storm_events_enhanced', pgEnv, 'source', enhancedNCEIhlrSourceId, 'view', ltsEnhancedNCEIView, 'lossByYearByType'], []),
+        srcMeta: get(srcMeta, ['json', 'dama', pgEnv, 'sources', 'byId'])
+
     };
 
 }
@@ -113,15 +129,13 @@ const HoverComp = ({data, keys, indexFormat, keyFormat, valueFormat}) => {
     )
 }
 
-const fnum = d => parseInt(d).toLocaleString();
-
 const fnumIndex = (d) => {
     if (d >= 1000000000) {
-        return `${d / 1000000000} B`
+        return `${parseInt(d / 1000000000)} B`
     } else if (d >= 1000000) {
-        return `${d / 1000000} M`
+        return `${parseInt(d / 1000000)} M`
     } else if (d >= 1000) {
-        return `${d / 1000} K`
+        return `${parseInt(d / 1000)} K`
     } else {
         return `${d}`
     }
@@ -147,8 +161,10 @@ const reformatNRI = (data = {}) => React.useMemo(() => {
 const reformatEnhancedNCEI = (data = {}) => React.useMemo(() => {
     const formattedData = [];
     const nri_categories = new Set();
-    console.log('data', data)
-    data.forEach(row => {
+
+    data
+        .filter(d => d.year >= 1996)
+        .forEach(row => {
         nri_categories.add(row.event_type_formatted)
         const tmpExisting = formattedData.find(f => f.year === row.year);
         if(tmpExisting){
@@ -160,55 +176,87 @@ const reformatEnhancedNCEI = (data = {}) => React.useMemo(() => {
     return {formattedData, nri_categories: [...nri_categories]};
 }, [data])
 
+const RenderViewDependencies = ({dama, srcMeta, viewId}) => (
+    get(get(dama, [viewId, 'dependencies'], [])
+        .find(d => d.view_id === viewId), ['view_dependencies'], [])
+        .map(id => {
+            const tmpSrcId = get(get(dama, [viewId, 'dependencies'], [])
+                                .find(d => d.view_id === id), 'source_id')
+            return <Link to={`/sources/${tmpSrcId}/views/${id}`} className={'p-2'}>{get(srcMeta, [tmpSrcId, 'attributes', 'type'], id)}</Link>
+        })
+)
+
+const RenderRangeSlider = ({range, from, setFrom, to, setTo}) => {
+    console.log('rangeSlider', from, to)
+}
+
 export default function SourceThumb({source}) {
-    const {avail, nri, enhancedNCEILoss} = useLoaderData();
+    const {avail, nri, enhancedNCEILoss, dama, availLTSViewId, enhancedNCEILTSViewId, srcMeta} = useLoaderData();
     const reformattedNRI = reformatNRI(nri);
     const {formattedData: reformattedEnhancedNCEI, nri_categories} = reformatEnhancedNCEI(enhancedNCEILoss);
-    console.log('ncei', reformattedEnhancedNCEI, avail);
+    const range = [...new Set(reformattedEnhancedNCEI.map(d => d.year))].sort((a, b) => a - b);
+    const [from, setFrom] = React.useState(range[0]);
+    const [to, setTo] = React.useState(range[range.length - 1]);
+    const blockClasses = `w-full p-4 my-1 block border flex flex-col`
+    // legend, colors
+
     return (
         <>
-            <div className='w-full p-4 bg-white my-1 block border shadow flex flex-col' style={{height: '500px'}}>
-                <label className={'text-lg'}>EALs (AVAIL) </label>
-                <label className={'text-sm'}>using: </label>
-                <BarGraph
-                    data={avail}
-                    keys={['swd_buildings', 'swd_crop', 'swd_population']}
-                    indexBy={'nri_category'}
-                    axisBottom={d => d}
-                    axisLeft={{format: fnumIndex}}
-                    hoverComp={{
-                        HoverComp: HoverComp,
-                        valueFormat: fnum
-                    }}
-                />
+            <div className={'flex grid grid-cols-9 text-white'}>
+                {
+                    Object.keys(hazardsMeta)
+                        .map(key => <div style={{height: '50px', width: '120px', backgroundColor: hazardsMeta[key].color, textAlign: 'center'}}>
+                           <span className={'align-middle m-4'} >{key}</span>
+                        </div>)
+                }
             </div>
-            <div className='w-full p-4 bg-white my-1 block border shadow flex flex-col' style={{height: '500px'}}>
-                <label className={'text-lg'}>EALs (NRI) </label>
-                <label className={'text-sm'}>using: </label>
-                <BarGraph
-                    data={reformattedNRI}
-                    keys={['buildings', 'crop', 'population']}
-                    indexBy={'nri_category'}
-                    axisBottom={d => d}
-                    axisLeft={{format: fnumIndex}}
-                    hoverComp={{
-                        HoverComp: HoverComp,
-                        valueFormat: fnum
-                    }}
-                />
-            </div>
-            <div className='w-full p-4 bg-white my-1 block border shadow flex flex-col' style={{height: '500px'}}>
-                <label className={'text-lg'}>EALs (NRI) </label>
-                <label className={'text-sm'}>using: </label>
+            <div className={blockClasses} style={{height: '500px'}}>
+                <label className={'text-lg'}> NCEI Losses </label>
+                <label className={'text-sm'}>using: <RenderViewDependencies dama={dama} srcMeta={srcMeta} viewId={enhancedNCEILTSViewId}/></label>
+                <RenderRangeSlider range={range} from={from} to={to} setFrom={setFrom} setTo={setTo} />
                 <BarGraph
                     data={reformattedEnhancedNCEI}
                     keys={nri_categories}
                     indexBy={'year'}
                     axisBottom={d => d}
-                    axisLeft={{format: fnumIndex}}
+                    axisLeft={{format: fnumIndex, gridLineOpacity: 1, gridLineColor: '#9d9c9c'}}
+                    paddingInner={0.05}
+                    colors={(value, ii, d, key) => hazardsMeta[key].color}
                     hoverComp={{
                         HoverComp: HoverComp,
-                        valueFormat: fnum
+                        valueFormat: fnumIndex,
+                        keyFormat: d => hazardsMeta[d].name
+                    }}
+                />
+            </div>
+            <div className={blockClasses} style={{height: '500px'}}>
+                <label className={'text-lg'}>EALs (AVAIL) </label>
+                <label className={'text-sm'}>using: <RenderViewDependencies dama={dama} srcMeta={srcMeta} viewId={availLTSViewId}/></label>
+                <BarGraph
+                    data={avail}
+                    keys={['swd_buildings', 'swd_crop', 'swd_population']}
+                    indexBy={'nri_category'}
+                    axisBottom={d => d}
+                    axisLeft={{format: fnumIndex, gridLineOpacity: 1, gridLineColor: '#9d9c9c'}}
+                    paddingInner={0.05}
+                    hoverComp={{
+                        HoverComp: HoverComp,
+                        valueFormat: fnumIndex
+                    }}
+                />
+            </div>
+            <div className={blockClasses} style={{height: '500px'}}>
+                <label className={'text-lg'}>EALs (NRI) </label>
+                <BarGraph
+                    data={reformattedNRI}
+                    keys={['buildings', 'crop', 'population']}
+                    indexBy={'nri_category'}
+                    axisBottom={d => d}
+                    axisLeft={{format: fnumIndex, gridLineOpacity: 1, gridLineColor: '#9d9c9c'}}
+                    paddingInner={0.05}
+                    hoverComp={{
+                        HoverComp: HoverComp,
+                        valueFormat: fnumIndex
                     }}
                 />
             </div>

@@ -7,7 +7,7 @@ import { axisLeft as d3AxisLeft } from "d3-axis"
 
 export const AxisLeft = props => {
   const {
-    adjustedWidth, adjustedHeight, showGridLines = true,
+    adjustedWidth, adjustedHeight, showGridLines = true, gridLineOpacity = 1, gridLineColor = '#000',
     domain, scale, format, type = "linear",
     secondary, label, margin, ticks = 10, tickValues
   } = props;
@@ -20,7 +20,7 @@ export const AxisLeft = props => {
         adjustedWidth, adjustedHeight,
         domain, scale, type, format,
         secondary, label, margin,
-        ticks, tickValues, showGridLines
+        ticks, tickValues, showGridLines, gridLineOpacity, gridLineColor
       );
     }
   }, [adjustedWidth, adjustedHeight, showGridLines,
@@ -36,7 +36,7 @@ const renderAxisLeft = (ref,
                         adjustedHeight,
                         domain, scale, type, format,
                         secondary, label,
-                        margin, ticks, tickValues, showGridLines) => {
+                        margin, ticks, tickValues, showGridLines, gridLineOpacity, gridLineColor) => {
 
   const { left, top } = margin;
 
@@ -50,6 +50,14 @@ const renderAxisLeft = (ref,
 
   const axisLeft = d3AxisLeft(scale)
     .tickFormat(format);
+
+    // d3select(ref).each(function(d,i){
+    //     var tick = d3select(this);
+    //
+    //     tick.attr("stroke", 'red')
+    //         .attr("stroke-opacity", 1);
+    // });
+
   if (tickValues) {
     axisLeft.tickValues(tickValues);
   }
@@ -111,7 +119,11 @@ const renderAxisLeft = (ref,
       .attr("class", "axis axis-left")
         .classed("secondary", secondary)
         .transition(transition)
-        .call(axisLeft);
+        .call(axisLeft)
+      .call(g => g.selectAll(".tick line")
+          .attr("stroke", gridLineColor)
+          .attr("stroke-opacity", gridLineOpacity)
+      );
 
   group.selectAll("text.axis-label")
     .data(domain.length && Boolean(label) ? [label] : [])
@@ -121,7 +133,7 @@ const renderAxisLeft = (ref,
         `translate(${ -left + 20 }px, ${ adjustedHeight * 0.5 }px) rotate(-90deg)`
       )
       .attr("text-anchor", "middle")
-      .attr("fill", "currentColor")
+      .attr("fill", gridLineColor)
       .attr("font-size", "1rem")
       .text(d => d);
 
@@ -145,8 +157,8 @@ const renderAxisLeft = (ref,
         .attr("x2", adjustedWidth)
         .attr("y1", gridEnter)
         .attr("y2", gridEnter)
-        .attr("stroke", "currentColor")
-        // .attr("stroke-opacity", 0.5)
+        .attr("stroke", gridLineColor)
+        .attr("stroke-opacity", gridLineOpacity)
           .call(enter => enter
             .transition(transition)
               .attr("y1", d => scale(d) + 0.5)
@@ -154,8 +166,8 @@ const renderAxisLeft = (ref,
           ),
       update => update
         .call(update => update
-          .attr("stroke", "currentColor")
-          // .attr("stroke-opacity", 0.5)
+          .attr("stroke", gridLineColor)
+          .attr("stroke-opacity", gridLineOpacity)
           .transition(transition)
             .attr("x2", adjustedWidth)
             .attr("y1", d => scale(d) + 0.5)

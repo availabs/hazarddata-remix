@@ -3734,7 +3734,7 @@ var import_jsx_dev_runtime30 = require("react/jsx-dev-runtime"), FalcorContext =
 };
 
 // app/styles/app.css
-var app_default = "/build/_assets/app-K2YGGATW.css";
+var app_default = "/build/_assets/app-3KPBKCS6.css";
 
 // app/theme.js
 var ppdaf = () => {
@@ -4737,7 +4737,7 @@ function Index2() {
   let user = (0, import_react40.useLoaderData)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime35.jsxDEV)("div", { className: "", children: /* @__PURE__ */ (0, import_jsx_dev_runtime35.jsxDEV)("div", { className: "bg-gray-100 p-1 text-gray-500 min-h-screen", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime35.jsxDEV)("div", { className: "flex p-1 text-gray-800 border-b w-full", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime35.jsxDEV)(import_react40.NavLink, { to: "/", className: "p-4", children: "Home" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime35.jsxDEV)(import_react40.NavLink, { to: "/", className: "p-4", children: "HAZARDS.ORG" }, void 0, !1, {
         fileName: "app/routes/__dama.jsx",
         lineNumber: 21,
         columnNumber: 11
@@ -4775,7 +4775,7 @@ function Index2() {
       columnNumber: 9
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime35.jsxDEV)("div", { className: "max-w-5xl mx-auto", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime35.jsxDEV)("div", { className: "w-full border-b p-2", children: "breadcrumbs" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime35.jsxDEV)("div", { className: "w-full border-b p-2" }, void 0, !1, {
         fileName: "app/routes/__dama.jsx",
         lineNumber: 36,
         columnNumber: 11
@@ -4850,6 +4850,26 @@ var SourceAttributes = {
   return typeof v.value < "u" ? out[k] = v.value : out[k] = v, out;
 }, {});
 var pgEnv = "hazmit_dama";
+var hazardsMeta = {
+  hail: { color: "#027B8E", name: "Hail" },
+  winterweat: { color: "#76c8c8", name: "Snow Storm" },
+  icestorm: { color: "#98d1d1", name: "Ice Storm" },
+  coldwave: { color: "#badbdb", name: "Coldwave" },
+  coastal: { color: "#54bebe", name: "Coastal Hazards" },
+  riverine: { color: "#115f9a", name: "Flooding" },
+  tsunami: { color: "#5e569b", name: "Tsunami/Seiche" },
+  avalanche: { color: "#776bcd", name: "Avalanche" },
+  tornado: { color: "#9080ff", name: "Tornado" },
+  lightning: { color: "#beb9db", name: "Lightning" },
+  wildfire: { color: "#ff1a40", name: "Wildfire" },
+  heatwave: { color: "#ff571a", name: "Heat Wave" },
+  volcano: { color: "#FF8066", name: "Volcano" },
+  landslide: { color: "#786028", name: "Landslide" },
+  earthquake: { color: "#a57c1b", name: "Earthquake" },
+  drought: { color: "#d2980d", name: "Drought" },
+  hurricane: { color: "#ffb400", name: "Hurricane" },
+  wind: { color: "#dedad2", name: "Wind" }
+};
 
 // app/modules/data-manager/data-types/default/Overview.js
 var import_react41 = __toESM(require("react"));
@@ -5228,7 +5248,7 @@ var checkApiResponse = async (res) => {
 };
 
 // app/modules/data-manager/data-types/default/Views.js
-var import_react45 = require("@remix-run/react"), import_react46 = require("react"), import_jsx_dev_runtime39 = require("react/jsx-dev-runtime"), DeleteButton = ({ text, viewId }) => /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(
+var import_react45 = require("@remix-run/react"), import_react46 = require("react"), import_react_router_dom5 = require("react-router-dom"), import_jsx_dev_runtime39 = require("react/jsx-dev-runtime"), DeleteButton = ({ text, viewId }) => /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(
   import_react45.Link,
   {
     className: "bg-red-50 hover:bg-red-400 hover:text-white p-2",
@@ -5239,11 +5259,30 @@ var import_react45 = require("@remix-run/react"), import_react46 = require("reac
   !1,
   {
     fileName: "app/modules/data-manager/data-types/default/Views.js",
-    lineNumber: 9,
+    lineNumber: 10,
     columnNumber: 5
   },
   this
-), RenderValue = ({ value, isLink, source_id }) => {
+), MakeAuthoritativeButton = ({ text, viewId }) => {
+  let navigate = (0, import_react_router_dom5.useNavigate)(), fetcher = (0, import_react45.useFetcher)();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(
+    "button",
+    {
+      className: "bg-red-50 hover:bg-red-400 hover:text-white p-2",
+      onClick: async () => {
+      },
+      children: "Make Authoritative"
+    },
+    void 0,
+    !1,
+    {
+      fileName: "app/modules/data-manager/data-types/default/Views.js",
+      lineNumber: 21,
+      columnNumber: 9
+    },
+    this
+  );
+}, RenderValue = ({ value, isLink, source_id }) => {
   let processedValue = typeof value == "object" ? "" : value;
   return isLink ? /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(import_react45.Link, { to: `/source/${source_id}/views/${value}`, children: [
     " ",
@@ -5251,28 +5290,28 @@ var import_react45 = require("@remix-run/react"), import_react46 = require("reac
     " "
   ] }, void 0, !0, {
     fileName: "app/modules/data-manager/data-types/default/Views.js",
-    lineNumber: 18,
+    lineNumber: 36,
     columnNumber: 21
   }, this) : processedValue;
 }, Views = ({ source, views, user, falcor: falcor3 }) => (console.log(source), /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("div", { children: [
-  /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("div", { className: "py-4 sm:py-2 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6 border-b-2", children: ["view_id", "version", "last_updated", "_modified_timestamp"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("dt", { className: "text-sm font-medium text-gray-600", children: key }, key, !1, {
+  /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("div", { className: "py-4 sm:py-2 sm:grid sm:grid-cols-6 sm:gap-4 sm:px-6 border-b-2", children: ["view_id", "version", "last_updated", "_modified_timestamp"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("dt", { className: "text-sm font-medium text-gray-600", children: key }, key, !1, {
     fileName: "app/modules/data-manager/data-types/default/Views.js",
-    lineNumber: 34,
+    lineNumber: 52,
     columnNumber: 29
   }, this)) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/default/Views.js",
-    lineNumber: 30,
+    lineNumber: 48,
     columnNumber: 13
   }, this),
   /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("div", { className: "border-t border-gray-200 px-4 py-5 sm:p-0 overflow-auto h-[700px]", children: /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: views.map(
-    (view, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("div", { className: "py-4 sm:py-5 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6", children: [
+    (view, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("div", { className: "py-4 sm:py-5 sm:grid sm:grid-cols-6 sm:gap-4 sm:px-6", children: [
       ["view_id", "version", "last_updated", "_modified_timestamp"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(
         "dd",
         {
           className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle",
           children: /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(RenderValue, { value: view[key], isLink: key === "view_id", source_id: source.source_id }, void 0, !1, {
             fileName: "app/modules/data-manager/data-types/default/Views.js",
-            lineNumber: 53,
+            lineNumber: 71,
             columnNumber: 57
           }, this)
         },
@@ -5280,37 +5319,46 @@ var import_react45 = require("@remix-run/react"), import_react46 = require("reac
         !1,
         {
           fileName: "app/modules/data-manager/data-types/default/Views.js",
-          lineNumber: 51,
+          lineNumber: 69,
           columnNumber: 53
         },
         this
       )),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 flex justify-end", children: /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(DeleteButton, { text: "delete", viewId: view.view_id }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 flex justify-end", children: /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(MakeAuthoritativeButton, { viewId: view.view_id }, void 0, !1, {
         fileName: "app/modules/data-manager/data-types/default/Views.js",
-        lineNumber: 58,
+        lineNumber: 76,
         columnNumber: 45
       }, this) }, void 0, !1, {
         fileName: "app/modules/data-manager/data-types/default/Views.js",
-        lineNumber: 57,
+        lineNumber: 75,
+        columnNumber: 41
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 flex justify-end", children: /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(DeleteButton, { text: "delete", viewId: view.view_id }, void 0, !1, {
+        fileName: "app/modules/data-manager/data-types/default/Views.js",
+        lineNumber: 79,
+        columnNumber: 45
+      }, this) }, void 0, !1, {
+        fileName: "app/modules/data-manager/data-types/default/Views.js",
+        lineNumber: 78,
         columnNumber: 41
       }, this)
     ] }, i, !0, {
       fileName: "app/modules/data-manager/data-types/default/Views.js",
-      lineNumber: 47,
+      lineNumber: 65,
       columnNumber: 37
     }, this)
   ) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/default/Views.js",
-    lineNumber: 41,
+    lineNumber: 59,
     columnNumber: 17
   }, this) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/default/Views.js",
-    lineNumber: 40,
+    lineNumber: 58,
     columnNumber: 13
   }, this)
 ] }, void 0, !0, {
   fileName: "app/modules/data-manager/data-types/default/Views.js",
-  lineNumber: 29,
+  lineNumber: 47,
   columnNumber: 9
 }, this)), Views_default = Views;
 
@@ -7416,7 +7464,7 @@ var import_react59 = require("react");
 
 // app/modules/data-manager/data-types/ncei_storm_events/create.js
 var import_react58 = __toESM(require("react"));
-var import_react_router_dom5 = require("react-router-dom"), import_jsx_dev_runtime49 = require("react/jsx-dev-runtime"), CallServer = async ({ rtPfx, source, etlContextId, userId, newVersion, navigate }) => {
+var import_react_router_dom6 = require("react-router-dom"), import_jsx_dev_runtime49 = require("react/jsx-dev-runtime"), CallServer = async ({ rtPfx, source, etlContextId, userId, newVersion, navigate }) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "ncei_storm_events");
   console.log("calling server?", etlContextId);
   let view = await submitViewMeta(
@@ -7435,7 +7483,7 @@ var import_react_router_dom5 = require("react-router-dom"), import_jsx_dev_runti
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), console.log("res", await stgLyrDataRes.json()), navigate(`/source/${src.source_id}/views`);
 }, Create2 = ({ source, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom5.useNavigate)(), [etlContextId, setEtlContextId] = import_react58.default.useState();
+  let navigate = (0, import_react_router_dom6.useNavigate)(), [etlContextId, setEtlContextId] = import_react58.default.useState();
   console.log("src", source);
   let rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react58.default.useEffect(() => {
@@ -7741,7 +7789,7 @@ var import_react61 = require("react");
 
 // app/modules/data-manager/data-types/ncei_storm_events_enhanced/create.js
 var import_react60 = __toESM(require("react")), import_lodash20 = __toESM(require("lodash.get"));
-var import_react_router_dom6 = require("react-router-dom"), import_jsx_dev_runtime51 = require("react/jsx-dev-runtime"), CallServer2 = async ({ rtPfx, source, etlContextId, userId, viewNCEI = {}, viewZTC = {}, viewCousubs = {}, viewTract = {} }, newVersion, navigate) => {
+var import_react_router_dom7 = require("react-router-dom"), import_jsx_dev_runtime51 = require("react/jsx-dev-runtime"), CallServer2 = async ({ rtPfx, source, etlContextId, userId, viewNCEI = {}, viewZTC = {}, viewCousubs = {}, viewTract = {} }, newVersion, navigate) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "ncei_storm_events_enhanced");
   console.log("calling server?", etlContextId, src);
   let view = await submitViewMeta({
@@ -7834,7 +7882,7 @@ var import_react_router_dom6 = require("react-router-dom"), import_jsx_dev_runti
   lineNumber: 50,
   columnNumber: 9
 }, this), Create3 = ({ source, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom6.useNavigate)(), [etlContextId, setEtlContextId] = import_react60.default.useState(), [viewZTC, setViewZTC] = import_react60.default.useState(), [viewCousubs, setViewCousubs] = import_react60.default.useState(), [viewTract, setViewTract] = import_react60.default.useState(), [viewNCEI, setViewNCEI] = import_react60.default.useState(), [versionsZTC, setVersionsZTC] = import_react60.default.useState({ sources: [], views: [] }), [versionsCousubs, setVersionsCousubs] = import_react60.default.useState({ sources: [], views: [] }), [versionsTract, setVersionsTract] = import_react60.default.useState({ sources: [], views: [] }), [versionsNCEI, setVersionsNCEI] = import_react60.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  let navigate = (0, import_react_router_dom7.useNavigate)(), [etlContextId, setEtlContextId] = import_react60.default.useState(), [viewZTC, setViewZTC] = import_react60.default.useState(), [viewCousubs, setViewCousubs] = import_react60.default.useState(), [viewTract, setViewTract] = import_react60.default.useState(), [viewNCEI, setViewNCEI] = import_react60.default.useState(), [versionsZTC, setVersionsZTC] = import_react60.default.useState({ sources: [], views: [] }), [versionsCousubs, setVersionsCousubs] = import_react60.default.useState({ sources: [], views: [] }), [versionsTract, setVersionsTract] = import_react60.default.useState({ sources: [], views: [] }), [versionsNCEI, setVersionsNCEI] = import_react60.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react60.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
@@ -8199,7 +8247,7 @@ var import_react63 = require("react");
 
 // app/modules/data-manager/data-types/zone_to_county/create.js
 var import_react62 = __toESM(require("react"));
-var import_react_router_dom7 = require("react-router-dom"), import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), CallServer3 = async ({ rtPfx, source, etlContextId, userId, newVersion, navigate }) => {
+var import_react_router_dom8 = require("react-router-dom"), import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), CallServer3 = async ({ rtPfx, source, etlContextId, userId, newVersion, navigate }) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "zone_to_county");
   console.log("src?", src);
   let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
@@ -8209,7 +8257,7 @@ var import_react_router_dom7 = require("react-router-dom"), import_jsx_dev_runti
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), navigate(`/source/${src.source_id}/views`);
 }, Create4 = ({ source, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom7.useNavigate)(), [etlContextId, setEtlContextId] = import_react62.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  let navigate = (0, import_react_router_dom8.useNavigate)(), [etlContextId, setEtlContextId] = import_react62.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react62.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
@@ -8265,7 +8313,7 @@ var import_react65 = require("react"), import_lodash22 = require("lodash.get");
 
 // app/modules/data-manager/data-types/tiger_2017/create.js
 var import_react64 = __toESM(require("react"));
-var import_react_router_dom8 = require("react-router-dom"), import_jsx_dev_runtime55 = require("react/jsx-dev-runtime"), CallServer4 = async ({ rtPfx, source, etlContextId, userId, tigerTable, newVersion, navigate }) => {
+var import_react_router_dom9 = require("react-router-dom"), import_jsx_dev_runtime55 = require("react/jsx-dev-runtime"), CallServer4 = async ({ rtPfx, source, etlContextId, userId, tigerTable, newVersion, navigate }) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, `tl_${tigerTable.toLowerCase()}`);
   console.log("src?", src);
   let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
@@ -8339,7 +8387,7 @@ var import_react_router_dom8 = require("react-router-dom"), import_jsx_dev_runti
   columnNumber: 9
 }, this), Create5 = ({ source, user, newVersion }) => {
   console.log(user);
-  let navigate = (0, import_react_router_dom8.useNavigate)(), [etlContextId, setEtlContextId] = import_react64.default.useState(), [tigerTable, setTigerTable] = import_react64.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  let navigate = (0, import_react_router_dom9.useNavigate)(), [etlContextId, setEtlContextId] = import_react64.default.useState(), [tigerTable, setTigerTable] = import_react64.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return console.log("comes here"), import_react64.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
@@ -8410,7 +8458,7 @@ var import_react67 = require("react");
 
 // app/modules/data-manager/data-types/open_fema_data/create.js
 var import_react66 = __toESM(require("react"));
-var import_react_router_dom9 = require("react-router-dom"), import_jsx_dev_runtime57 = require("react/jsx-dev-runtime"), datasets = [
+var import_react_router_dom10 = require("react-router-dom"), import_jsx_dev_runtime57 = require("react/jsx-dev-runtime"), datasets = [
   "disaster_declarations_summaries_v2",
   "fema_web_disaster_declarations_v1",
   "fema_web_disaster_summaries_v1",
@@ -8497,7 +8545,7 @@ var import_react_router_dom9 = require("react-router-dom"), import_jsx_dev_runti
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), navigate(`/source/${src.source_id}/views`);
 }, Create6 = ({ source, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom9.useNavigate)(), [etlContextId, setEtlContextId] = import_react66.default.useState(), [table, setTable] = import_react66.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  let navigate = (0, import_react_router_dom10.useNavigate)(), [etlContextId, setEtlContextId] = import_react66.default.useState(), [table, setTable] = import_react66.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react66.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
@@ -8557,7 +8605,7 @@ var import_react69 = require("react");
 
 // app/modules/data-manager/data-types/usda/create.js
 var import_react68 = __toESM(require("react"));
-var import_react_router_dom10 = require("react-router-dom"), import_jsx_dev_runtime59 = require("react/jsx-dev-runtime"), CallServer6 = async ({ rtPfx, source, etlContextId, userId, table, newVersion, navigate }) => {
+var import_react_router_dom11 = require("react-router-dom"), import_jsx_dev_runtime59 = require("react/jsx-dev-runtime"), CallServer6 = async ({ rtPfx, source, etlContextId, userId, table, newVersion, navigate }) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, table);
   console.log("src?", src);
   let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
@@ -8567,7 +8615,7 @@ var import_react_router_dom10 = require("react-router-dom"), import_jsx_dev_runt
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), navigate(`/source/${src.source_id}/views`);
 }, Create7 = ({ source, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom10.useNavigate)(), [etlContextId, setEtlContextId] = import_react68.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  let navigate = (0, import_react_router_dom11.useNavigate)(), [etlContextId, setEtlContextId] = import_react68.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react68.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
@@ -8624,7 +8672,7 @@ var import_react71 = require("react");
 
 // app/modules/data-manager/data-types/sba/create.js
 var import_react70 = __toESM(require("react"));
-var import_react_router_dom11 = require("react-router-dom"), import_jsx_dev_runtime61 = require("react/jsx-dev-runtime"), CallServer7 = async ({ rtPfx, source, etlContextId, userId, table, newVersion, navigate }) => {
+var import_react_router_dom12 = require("react-router-dom"), import_jsx_dev_runtime61 = require("react/jsx-dev-runtime"), CallServer7 = async ({ rtPfx, source, etlContextId, userId, table, newVersion, navigate }) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, table);
   console.log("src?", src);
   let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
@@ -8634,7 +8682,7 @@ var import_react_router_dom11 = require("react-router-dom"), import_jsx_dev_runt
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), navigate(`/source/${src.source_id}/views`);
 }, Create8 = ({ source, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom11.useNavigate)(), [etlContextId, setEtlContextId] = import_react70.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  let navigate = (0, import_react_router_dom12.useNavigate)(), [etlContextId, setEtlContextId] = import_react70.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react70.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
@@ -8691,7 +8739,7 @@ var import_react73 = require("react");
 
 // app/modules/data-manager/data-types/nri/create.js
 var import_react72 = __toESM(require("react"));
-var import_react_router_dom12 = require("react-router-dom"), import_jsx_dev_runtime63 = require("react/jsx-dev-runtime"), CallServer8 = async ({ rtPfx, source, etlContextId, userId, table, newVersion, navigate }) => {
+var import_react_router_dom13 = require("react-router-dom"), import_jsx_dev_runtime63 = require("react/jsx-dev-runtime"), CallServer8 = async ({ rtPfx, source, etlContextId, userId, table, newVersion, navigate }) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, table);
   console.log("src?", src);
   let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
@@ -8701,7 +8749,7 @@ var import_react_router_dom12 = require("react-router-dom"), import_jsx_dev_runt
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), navigate(`/source/${src.source_id}/views`);
 }, Create9 = ({ source, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom12.useNavigate)(), [etlContextId, setEtlContextId] = import_react72.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  let navigate = (0, import_react_router_dom13.useNavigate)(), [etlContextId, setEtlContextId] = import_react72.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react72.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
@@ -8758,7 +8806,7 @@ var import_react75 = require("react");
 
 // app/modules/data-manager/data-types/per_basis_swd/create.js
 var import_react74 = __toESM(require("react")), import_lodash23 = __toESM(require("lodash.get"));
-var import_react_router_dom13 = require("react-router-dom"), import_jsx_dev_runtime65 = require("react/jsx-dev-runtime"), CallServer9 = async ({ rtPfx, source, etlContextId, userId, viewNCEI = {}, viewNRI = {}, newVersion, navigate }) => {
+var import_react_router_dom14 = require("react-router-dom"), import_jsx_dev_runtime65 = require("react/jsx-dev-runtime"), CallServer9 = async ({ rtPfx, source, etlContextId, userId, viewNCEI = {}, viewNRI = {}, newVersion, navigate }) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "per_basis");
   console.log("calling server?", etlContextId, src);
   let view = await submitViewMeta({
@@ -8849,7 +8897,7 @@ var import_react_router_dom13 = require("react-router-dom"), import_jsx_dev_runt
   lineNumber: 43,
   columnNumber: 9
 }, this), Create10 = ({ source, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom13.useNavigate)(), [etlContextId, setEtlContextId] = import_react74.default.useState();
+  let navigate = (0, import_react_router_dom14.useNavigate)(), [etlContextId, setEtlContextId] = import_react74.default.useState();
   console.log("this loads", newVersion);
   let [viewNCEI, setViewNCEI] = import_react74.default.useState(), [viewNRI, setViewNRI] = import_react74.default.useState(), [versionsNCEI, setVersionsNCEI] = import_react74.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react74.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react74.default.useEffect(() => {
@@ -9254,7 +9302,7 @@ var import_lodash24 = __toESM(require("lodash.get")), import_jsx_dev_runtime66 =
 var import_react77 = require("react");
 
 // app/modules/data-manager/data-types/hlr/create.js
-var import_react76 = __toESM(require("react")), import_react_router_dom14 = require("react-router-dom");
+var import_react76 = __toESM(require("react")), import_react_router_dom15 = require("react-router-dom");
 var import_lodash25 = __toESM(require("lodash.get"));
 var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = async ({ rtPfx, source, etlContextId, userId, newVersion, navigate, viewPB = {}, viewNRI = {}, viewState = {}, viewCounty = {}, viewNCEI = {} }) => {
   let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "hlr");
@@ -9350,7 +9398,7 @@ var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = 
   lineNumber: 53,
   columnNumber: 9
 }, this), Create11 = ({ source, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom14.useNavigate)(), [etlContextId, setEtlContextId] = import_react76.default.useState(), [viewPB, setViewPB] = import_react76.default.useState(), [viewNRI, setViewNRI] = import_react76.default.useState(), [viewState, setViewState] = import_react76.default.useState(), [viewCounty, setViewCounty] = import_react76.default.useState(), [viewNCEI, setViewNCEI] = import_react76.default.useState(), [versionsPB, setVersionsPB] = import_react76.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react76.default.useState({ sources: [], views: [] }), [versionsState, setVersionsState] = import_react76.default.useState({ sources: [], views: [] }), [versionsCounty, setVersionsCounty] = import_react76.default.useState({ sources: [], views: [] }), [versionsNCEI, setVersionsNCEI] = import_react76.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  let navigate = (0, import_react_router_dom15.useNavigate)(), [etlContextId, setEtlContextId] = import_react76.default.useState(), [viewPB, setViewPB] = import_react76.default.useState(), [viewNRI, setViewNRI] = import_react76.default.useState(), [viewState, setViewState] = import_react76.default.useState(), [viewCounty, setViewCounty] = import_react76.default.useState(), [viewNCEI, setViewNCEI] = import_react76.default.useState(), [versionsPB, setVersionsPB] = import_react76.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react76.default.useState({ sources: [], views: [] }), [versionsState, setVersionsState] = import_react76.default.useState({ sources: [], views: [] }), [versionsCounty, setVersionsCounty] = import_react76.default.useState({ sources: [], views: [] }), [versionsNCEI, setVersionsNCEI] = import_react76.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react76.default.useEffect(() => {
     async function fetchData() {
       let etl = await newETL({ rtPfx, setEtlContextId });
@@ -9930,7 +9978,7 @@ __export(sourceId_exports2, {
 });
 var import_react82 = require("react");
 var import_react83 = require("@remix-run/react"), import_lodash29 = __toESM(require("lodash.get"));
-var import_react_router_dom15 = require("react-router-dom"), import_jsx_dev_runtime71 = require("react/jsx-dev-runtime");
+var import_react_router_dom16 = require("react-router-dom"), import_jsx_dev_runtime71 = require("react/jsx-dev-runtime");
 async function loader5({ params, request }) {
   let { sourceId } = params, data = await falcor2.get(
     ["dama", pgEnv, "sources", "byId", sourceId, "dependents"],
@@ -9943,7 +9991,7 @@ async function loader5({ params, request }) {
   };
 }
 var DeleteButton2 = ({ text, sourceId }) => {
-  let navigate = (0, import_react_router_dom15.useNavigate)();
+  let navigate = (0, import_react_router_dom16.useNavigate)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(
     "button",
     {
@@ -10060,7 +10108,7 @@ __export(viewId_exports2, {
   default: () => Popup2,
   loader: () => loader6
 });
-var import_react84 = require("react"), import_react_router_dom16 = require("react-router-dom");
+var import_react84 = require("react"), import_react_router_dom17 = require("react-router-dom");
 var import_react85 = require("@remix-run/react"), import_lodash30 = __toESM(require("lodash.get"));
 var import_jsx_dev_runtime72 = require("react/jsx-dev-runtime");
 async function loader6({ params, request }) {
@@ -10075,7 +10123,7 @@ async function loader6({ params, request }) {
   };
 }
 var DeleteButton3 = ({ text, viewId, sourceId }) => {
-  let navigate = (0, import_react_router_dom16.useNavigate)(), fetcher = (0, import_react85.useFetcher)();
+  let navigate = (0, import_react_router_dom17.useNavigate)(), fetcher = (0, import_react85.useFetcher)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime72.jsxDEV)(
     "button",
     {
@@ -13209,6 +13257,8 @@ var import_jsx_dev_runtime76 = require("react/jsx-dev-runtime"), AxisLeft = (pro
     adjustedWidth,
     adjustedHeight,
     showGridLines = !0,
+    gridLineOpacity = 1,
+    gridLineColor = "#000",
     domain,
     scale,
     format: format2,
@@ -13234,7 +13284,9 @@ var import_jsx_dev_runtime76 = require("react/jsx-dev-runtime"), AxisLeft = (pro
         margin,
         ticks2,
         tickValues,
-        showGridLines
+        showGridLines,
+        gridLineOpacity,
+        gridLineColor
       );
     },
     [
@@ -13256,7 +13308,7 @@ var import_jsx_dev_runtime76 = require("react/jsx-dev-runtime"), AxisLeft = (pro
     lineNumber: 31,
     columnNumber: 10
   }, this);
-}, renderAxisLeft = (ref, adjustedWidth, adjustedHeight, domain, scale, type, format2, secondary, label, margin, ticks2, tickValues, showGridLines) => {
+}, renderAxisLeft = (ref, adjustedWidth, adjustedHeight, domain, scale, type, format2, secondary, label, margin, ticks2, tickValues, showGridLines, gridLineOpacity, gridLineColor) => {
   let { left: left2, top: top2 } = margin, axisLeft2 = axisLeft(scale).tickFormat(format2);
   tickValues ? axisLeft2.tickValues(tickValues) : axisLeft2.ticks(ticks2);
   let transition2 = transition().duration(1e3), group = select_default2(ref).selectAll("g.animated-group").data(["animated-group"]).join(
@@ -13280,18 +13332,20 @@ var import_jsx_dev_runtime76 = require("react/jsx-dev-runtime"), AxisLeft = (pro
       (exit2) => exit2.transition(transition2).style("transform", `translateY(${adjustedHeight}px) scale(0, 0)`).remove()
     )
   );
-  if (group.selectAll("g.axis").data(domain.length ? ["axis-left"] : []).join("g").attr("class", "axis axis-left").classed("secondary", secondary).transition(transition2).call(axisLeft2), group.selectAll("text.axis-label").data(domain.length && Boolean(label) ? [label] : []).join("text").attr("class", "axis-label axis-label-left").style(
+  if (group.selectAll("g.axis").data(domain.length ? ["axis-left"] : []).join("g").attr("class", "axis axis-left").classed("secondary", secondary).transition(transition2).call(axisLeft2).call(
+    (g) => g.selectAll(".tick line").attr("stroke", gridLineColor).attr("stroke-opacity", gridLineOpacity)
+  ), group.selectAll("text.axis-label").data(domain.length && Boolean(label) ? [label] : []).join("text").attr("class", "axis-label axis-label-left").style(
     "transform",
     `translate(${-left2 + 20}px, ${adjustedHeight * 0.5}px) rotate(-90deg)`
-  ).attr("text-anchor", "middle").attr("fill", "currentColor").attr("font-size", "1rem").text((d) => d), type !== "linear" || !showGridLines)
+  ).attr("text-anchor", "middle").attr("fill", gridLineColor).attr("font-size", "1rem").text((d) => d), type !== "linear" || !showGridLines)
     return;
   let gridLines = group.selectAll("line.grid-line"), numGridLines = gridLines.size(), numTicks = scale.ticks(ticks2).length, gridEnter = numGridLines && numGridLines < numTicks ? scale(domain[1] * 1.5) : scale(0), gridExit = scale(domain[1] * 1.5);
   gridLines.data(domain.length ? scale.ticks(ticks2) : []).join(
-    (enter) => enter.append("line").attr("class", "grid-line").attr("x1", 0).attr("x2", adjustedWidth).attr("y1", gridEnter).attr("y2", gridEnter).attr("stroke", "currentColor").call(
+    (enter) => enter.append("line").attr("class", "grid-line").attr("x1", 0).attr("x2", adjustedWidth).attr("y1", gridEnter).attr("y2", gridEnter).attr("stroke", gridLineColor).attr("stroke-opacity", gridLineOpacity).call(
       (enter2) => enter2.transition(transition2).attr("y1", (d) => scale(d) + 0.5).attr("y2", (d) => scale(d) + 0.5)
     ),
     (update) => update.call(
-      (update2) => update2.attr("stroke", "currentColor").transition(transition2).attr("x2", adjustedWidth).attr("y1", (d) => scale(d) + 0.5).attr("y2", (d) => scale(d) + 0.5)
+      (update2) => update2.attr("stroke", gridLineColor).attr("stroke-opacity", gridLineOpacity).transition(transition2).attr("x2", adjustedWidth).attr("y1", (d) => scale(d) + 0.5).attr("y2", (d) => scale(d) + 0.5)
     ),
     (exit) => exit.call(
       (exit2) => exit2.transition(transition2).attr("y1", gridExit).attr("y2", gridExit).remove()
@@ -13999,12 +14053,23 @@ async function loader8({ request }) {
   let falcorCache = falcor2.getCache(), hlrViews = getViews(218, falcorCache), enhancedNCEIViews = getViews(198, falcorCache), ltsHlrView = hlrViews[0].view_id, ltsEnhancedNCEIView = enhancedNCEIViews[0].view_id, sourceData = await falcor2.get(
     ["hlr", pgEnv, "source", 218, "view", ltsHlrView, "eal"],
     ["nri", "totals", "detailed", "all"],
-    ["ncei_storm_events_enhanced", pgEnv, "source", 198, "view", ltsEnhancedNCEIView, "lossByYearByType"]
-  );
-  return console.log(["ncei_storm_events_enhanced", pgEnv, "source", 198, "view", ltsEnhancedNCEIView, "lossByYearByType"]), {
+    ["ncei_storm_events_enhanced", pgEnv, "source", 198, "view", ltsEnhancedNCEIView, "lossByYearByType"],
+    ["dama", pgEnv, "viewDependencySubgraphs", "byViewId", [ltsHlrView, ltsEnhancedNCEIView]]
+  ), tmpSrcIds = [];
+  Object.keys((0, import_lodash36.default)(sourceData, ["json", "dama", pgEnv, "viewDependencySubgraphs", "byViewId"], {})).forEach((viewId) => {
+    tmpSrcIds.push(
+      ...(0, import_lodash36.default)(sourceData, ["json", "dama", pgEnv, "viewDependencySubgraphs", "byViewId", viewId, "dependencies"], []).map((d) => d.source_id).filter((d) => d)
+    );
+  });
+  let srcMeta = await falcor2.get(["dama", pgEnv, "sources", "byId", tmpSrcIds, "attributes", "type"]);
+  return {
+    dama: (0, import_lodash36.default)(sourceData, ["json", "dama", pgEnv, "viewDependencySubgraphs", "byViewId"]),
     avail: (0, import_lodash36.default)(sourceData, ["json", "hlr", pgEnv, "source", 218, "view", ltsHlrView, "eal"], []).filter((d) => !["Heavy Rain", "Freezing Fog"].includes(d.nri_category)),
+    availLTSViewId: ltsHlrView,
+    enhancedNCEILTSViewId: ltsEnhancedNCEIView,
     nri: (0, import_lodash36.default)(sourceData, ["json", "nri", "totals", "detailed", "all", 0], []),
-    enhancedNCEILoss: (0, import_lodash36.default)(sourceData, ["json", "ncei_storm_events_enhanced", pgEnv, "source", 198, "view", ltsEnhancedNCEIView, "lossByYearByType"], [])
+    enhancedNCEILoss: (0, import_lodash36.default)(sourceData, ["json", "ncei_storm_events_enhanced", pgEnv, "source", 198, "view", ltsEnhancedNCEIView, "lossByYearByType"], []),
+    srcMeta: (0, import_lodash36.default)(srcMeta, ["json", "dama", pgEnv, "sources", "byId"])
   };
 }
 var HoverComp2 = ({ data, keys, indexFormat, keyFormat, valueFormat }) => /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: `
@@ -14012,7 +14077,7 @@ var HoverComp2 = ({ data, keys, indexFormat, keyFormat, valueFormat }) => /* @__
       ${keys.length <= 1 ? "pb-2" : "pb-1"}`, children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "font-bold text-lg leading-6 border-b-2 mb-1 pl-2", children: indexFormat((0, import_lodash36.default)(data, "index", null)) }, void 0, !1, {
     fileName: "app/routes/__dama/index.(cat).js",
-    lineNumber: 76,
+    lineNumber: 92,
     columnNumber: 13
   }, this),
   keys.slice().filter((key) => data.key === key).reverse().map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: `
@@ -14032,7 +14097,7 @@ var HoverComp2 = ({ data, keys, indexFormat, keyFormat, valueFormat }) => /* @__
       !1,
       {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 87,
+        lineNumber: 103,
         columnNumber: 25
       },
       this
@@ -14042,45 +14107,45 @@ var HoverComp2 = ({ data, keys, indexFormat, keyFormat, valueFormat }) => /* @__
       ":"
     ] }, void 0, !0, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 92,
+      lineNumber: 108,
       columnNumber: 25
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "text-right flex-1", children: valueFormat((0, import_lodash36.default)(data, ["data", key], 0)) }, void 0, !1, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 95,
+      lineNumber: 111,
       columnNumber: 25
     }, this)
   ] }, key, !0, {
     fileName: "app/routes/__dama/index.(cat).js",
-    lineNumber: 83,
+    lineNumber: 99,
     columnNumber: 21
   }, this)),
   keys.length <= 1 ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "flex pr-2", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "w-5 mr-2" }, void 0, !1, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 103,
+      lineNumber: 119,
       columnNumber: 21
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "mr-4 pl-2", children: "Total:" }, void 0, !1, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 104,
+      lineNumber: 120,
       columnNumber: 21
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "flex-1 text-right", children: valueFormat(keys.reduce((a, c) => a + (0, import_lodash36.default)(data, ["data", c], 0), 0)) }, void 0, !1, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 107,
+      lineNumber: 123,
       columnNumber: 21
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/__dama/index.(cat).js",
-    lineNumber: 102,
+    lineNumber: 118,
     columnNumber: 17
   }, this)
 ] }, void 0, !0, {
   fileName: "app/routes/__dama/index.(cat).js",
-  lineNumber: 73,
+  lineNumber: 89,
   columnNumber: 9
-}, this), fnum3 = (d) => parseInt(d).toLocaleString(), fnumIndex = (d) => d >= 1e9 ? `${d / 1e9} B` : d >= 1e6 ? `${d / 1e6} M` : d >= 1e3 ? `${d / 1e3} K` : `${d}`, reformatNRI = (data = {}) => import_react96.default.useMemo(() => {
+}, this), fnumIndex = (d) => d >= 1e9 ? `${parseInt(d / 1e9)} B` : d >= 1e6 ? `${parseInt(d / 1e6)} M` : d >= 1e3 ? `${parseInt(d / 1e3)} K` : `${d}`, reformatNRI = (data = {}) => import_react96.default.useMemo(() => {
   let formattedData = [];
   return Object.keys(data).filter((key) => key !== "group_by" && key.includes("_")).forEach((key) => {
     let [nri_category, ctype] = key.split("_"), tmpExisting = formattedData.find((f) => f.nri_category === nri_category);
@@ -14088,100 +14153,58 @@ var HoverComp2 = ({ data, keys, indexFormat, keyFormat, valueFormat }) => /* @__
   }), formattedData;
 }, [data]), reformatEnhancedNCEI = (data = {}) => import_react96.default.useMemo(() => {
   let formattedData = [], nri_categories = /* @__PURE__ */ new Set();
-  return console.log("data", data), data.forEach((row) => {
+  return data.filter((d) => d.year >= 1996).forEach((row) => {
     nri_categories.add(row.event_type_formatted);
     let tmpExisting = formattedData.find((f) => f.year === row.year);
     tmpExisting ? tmpExisting[row.event_type_formatted] = parseInt(row.total_damage) : formattedData.push({ year: row.year, [row.event_type_formatted]: parseInt(row.total_damage) });
   }), { formattedData, nri_categories: [...nri_categories] };
-}, [data]);
+}, [data]), RenderViewDependencies = ({ dama, srcMeta, viewId }) => (0, import_lodash36.default)((0, import_lodash36.default)(dama, [viewId, "dependencies"], []).find((d) => d.view_id === viewId), ["view_dependencies"], []).map((id3) => {
+  let tmpSrcId = (0, import_lodash36.default)((0, import_lodash36.default)(dama, [viewId, "dependencies"], []).find((d) => d.view_id === id3), "source_id");
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(import_react97.Link, { to: `/sources/${tmpSrcId}/views/${id3}`, className: "p-2", children: (0, import_lodash36.default)(srcMeta, [tmpSrcId, "attributes", "type"], id3) }, void 0, !1, {
+    fileName: "app/routes/__dama/index.(cat).js",
+    lineNumber: 185,
+    columnNumber: 20
+  }, this);
+}), RenderRangeSlider = ({ range: range2, from, setFrom, to, setTo }) => {
+  console.log("rangeSlider", from, to);
+};
 function SourceThumb2({ source }) {
-  let { avail, nri, enhancedNCEILoss } = (0, import_react97.useLoaderData)(), reformattedNRI = reformatNRI(nri), { formattedData: reformattedEnhancedNCEI, nri_categories } = reformatEnhancedNCEI(enhancedNCEILoss);
-  return console.log("ncei", reformattedEnhancedNCEI, avail), /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(import_jsx_dev_runtime80.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "w-full p-4 bg-white my-1 block border shadow flex flex-col", style: { height: "500px" }, children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-lg", children: "EALs (AVAIL) " }, void 0, !1, {
-        fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 171,
-        columnNumber: 17
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-sm", children: "using: " }, void 0, !1, {
-        fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 172,
-        columnNumber: 17
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
-        BarGraph,
-        {
-          data: avail,
-          keys: ["swd_buildings", "swd_crop", "swd_population"],
-          indexBy: "nri_category",
-          axisBottom: (d) => d,
-          axisLeft: { format: fnumIndex },
-          hoverComp: {
-            HoverComp: HoverComp2,
-            valueFormat: fnum3
-          }
-        },
-        void 0,
-        !1,
-        {
-          fileName: "app/routes/__dama/index.(cat).js",
-          lineNumber: 173,
-          columnNumber: 17
-        },
-        this
-      )
-    ] }, void 0, !0, {
+  let { avail, nri, enhancedNCEILoss, dama, availLTSViewId, enhancedNCEILTSViewId, srcMeta } = (0, import_react97.useLoaderData)(), reformattedNRI = reformatNRI(nri), { formattedData: reformattedEnhancedNCEI, nri_categories } = reformatEnhancedNCEI(enhancedNCEILoss), range2 = [...new Set(reformattedEnhancedNCEI.map((d) => d.year))].sort((a, b) => a - b), [from, setFrom] = import_react96.default.useState(range2[0]), [to, setTo] = import_react96.default.useState(range2[range2.length - 1]), blockClasses = "w-full p-4 my-1 block border flex flex-col";
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(import_jsx_dev_runtime80.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "flex grid grid-cols-9 text-white", children: Object.keys(hazardsMeta).map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { style: { height: "50px", width: "120px", backgroundColor: hazardsMeta[key].color, textAlign: "center" }, children: /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("span", { className: "align-middle m-4", children: key }, void 0, !1, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 170,
+      lineNumber: 209,
+      columnNumber: 28
+    }, this) }, void 0, !1, {
+      fileName: "app/routes/__dama/index.(cat).js",
+      lineNumber: 208,
+      columnNumber: 37
+    }, this)) }, void 0, !1, {
+      fileName: "app/routes/__dama/index.(cat).js",
+      lineNumber: 205,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "w-full p-4 bg-white my-1 block border shadow flex flex-col", style: { height: "500px" }, children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-lg", children: "EALs (NRI) " }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: blockClasses, style: { height: "500px" }, children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-lg", children: " NCEI Losses " }, void 0, !1, {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 186,
+        lineNumber: 214,
         columnNumber: 17
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-sm", children: "using: " }, void 0, !1, {
-        fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 187,
-        columnNumber: 17
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
-        BarGraph,
-        {
-          data: reformattedNRI,
-          keys: ["buildings", "crop", "population"],
-          indexBy: "nri_category",
-          axisBottom: (d) => d,
-          axisLeft: { format: fnumIndex },
-          hoverComp: {
-            HoverComp: HoverComp2,
-            valueFormat: fnum3
-          }
-        },
-        void 0,
-        !1,
-        {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-sm", children: [
+        "using: ",
+        /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(RenderViewDependencies, { dama, srcMeta, viewId: enhancedNCEILTSViewId }, void 0, !1, {
           fileName: "app/routes/__dama/index.(cat).js",
-          lineNumber: 188,
-          columnNumber: 17
-        },
-        this
-      )
-    ] }, void 0, !0, {
-      fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 185,
-      columnNumber: 13
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "w-full p-4 bg-white my-1 block border shadow flex flex-col", style: { height: "500px" }, children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-lg", children: "EALs (NRI) " }, void 0, !1, {
+          lineNumber: 215,
+          columnNumber: 53
+        }, this)
+      ] }, void 0, !0, {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 201,
+        lineNumber: 215,
         columnNumber: 17
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-sm", children: "using: " }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(RenderRangeSlider, { range: range2, from, to, setFrom, setTo }, void 0, !1, {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 202,
+        lineNumber: 216,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
@@ -14191,29 +14214,112 @@ function SourceThumb2({ source }) {
           keys: nri_categories,
           indexBy: "year",
           axisBottom: (d) => d,
-          axisLeft: { format: fnumIndex },
+          axisLeft: { format: fnumIndex, gridLineOpacity: 1, gridLineColor: "#9d9c9c" },
+          paddingInner: 0.05,
+          colors: (value, ii, d, key) => hazardsMeta[key].color,
           hoverComp: {
             HoverComp: HoverComp2,
-            valueFormat: fnum3
+            valueFormat: fnumIndex,
+            keyFormat: (d) => hazardsMeta[d].name
           }
         },
         void 0,
         !1,
         {
           fileName: "app/routes/__dama/index.(cat).js",
-          lineNumber: 203,
+          lineNumber: 217,
           columnNumber: 17
         },
         this
       )
     ] }, void 0, !0, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 200,
+      lineNumber: 213,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: blockClasses, style: { height: "500px" }, children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-lg", children: "EALs (AVAIL) " }, void 0, !1, {
+        fileName: "app/routes/__dama/index.(cat).js",
+        lineNumber: 233,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-sm", children: [
+        "using: ",
+        /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(RenderViewDependencies, { dama, srcMeta, viewId: availLTSViewId }, void 0, !1, {
+          fileName: "app/routes/__dama/index.(cat).js",
+          lineNumber: 234,
+          columnNumber: 53
+        }, this)
+      ] }, void 0, !0, {
+        fileName: "app/routes/__dama/index.(cat).js",
+        lineNumber: 234,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
+        BarGraph,
+        {
+          data: avail,
+          keys: ["swd_buildings", "swd_crop", "swd_population"],
+          indexBy: "nri_category",
+          axisBottom: (d) => d,
+          axisLeft: { format: fnumIndex, gridLineOpacity: 1, gridLineColor: "#9d9c9c" },
+          paddingInner: 0.05,
+          hoverComp: {
+            HoverComp: HoverComp2,
+            valueFormat: fnumIndex
+          }
+        },
+        void 0,
+        !1,
+        {
+          fileName: "app/routes/__dama/index.(cat).js",
+          lineNumber: 235,
+          columnNumber: 17
+        },
+        this
+      )
+    ] }, void 0, !0, {
+      fileName: "app/routes/__dama/index.(cat).js",
+      lineNumber: 232,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: blockClasses, style: { height: "500px" }, children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-lg", children: "EALs (NRI) " }, void 0, !1, {
+        fileName: "app/routes/__dama/index.(cat).js",
+        lineNumber: 249,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
+        BarGraph,
+        {
+          data: reformattedNRI,
+          keys: ["buildings", "crop", "population"],
+          indexBy: "nri_category",
+          axisBottom: (d) => d,
+          axisLeft: { format: fnumIndex, gridLineOpacity: 1, gridLineColor: "#9d9c9c" },
+          paddingInner: 0.05,
+          hoverComp: {
+            HoverComp: HoverComp2,
+            valueFormat: fnumIndex
+          }
+        },
+        void 0,
+        !1,
+        {
+          fileName: "app/routes/__dama/index.(cat).js",
+          lineNumber: 250,
+          columnNumber: 17
+        },
+        this
+      )
+    ] }, void 0, !0, {
+      fileName: "app/routes/__dama/index.(cat).js",
+      lineNumber: 248,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/__dama/index.(cat).js",
-    lineNumber: 169,
+    lineNumber: 204,
     columnNumber: 9
   }, this);
 }
@@ -17242,7 +17348,7 @@ function JokesRoute() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "9790a2b9", entry: { module: "/build/entry.client-J7LEZB52.js", imports: ["/build/_shared/chunk-D7GMNCCO.js", "/build/_shared/chunk-WYUUNUBT.js", "/build/_shared/chunk-JE7OEZ56.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-AOUVGPWY.js", imports: ["/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth": { id: "routes/__auth", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__auth-EGTHANL2.js", imports: ["/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/login": { id: "routes/__auth/login", parentId: "routes/__auth", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/login-ZXIQ5SVP.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/logout": { id: "routes/__auth/logout", parentId: "routes/__auth", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/logout-LADMCKIU.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama": { id: "routes/__dama", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dama-6VZRNNVY.js", imports: ["/build/_shared/chunk-5E2BWMEK.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/datasources": { id: "routes/__dama/datasources", parentId: "routes/__dama", path: "datasources", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/datasources-4TJDR4PT.js", imports: ["/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dama/index.(cat)": { id: "routes/__dama/index.(cat)", parentId: "routes/__dama", path: "cat?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/index.(cat)-URZZGGQB.js", imports: ["/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/($viewId)": { id: "routes/__dama/source/$sourceId.($page)/($viewId)", parentId: "routes/__dama", path: "source/:sourceId/:page?/:viewId?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/($viewId)-62BUGHM4.js", imports: ["/build/_shared/chunk-4ZX3IY2A.js", "/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/index": { id: "routes/__dama/source/$sourceId.($page)/index", parentId: "routes/__dama", path: "source/:sourceId/:page?", index: !0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/index-DDER2RDM.js", imports: ["/build/_shared/chunk-4ZX3IY2A.js", "/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/create": { id: "routes/__dama/source/create", parentId: "routes/__dama", path: "source/create", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/create-5MLM3S6Q.js", imports: ["/build/_shared/chunk-4ZX3IY2A.js", "/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-GF7PZWMX.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/delete/$sourceId": { id: "routes/__dama/source/delete/$sourceId", parentId: "routes/__dama", path: "source/delete/:sourceId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/delete/$sourceId-K3HPAPI3.js", imports: ["/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/view/delete/$viewId": { id: "routes/__dama/view/delete/$viewId", parentId: "routes/__dama", path: "view/delete/:viewId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/view/delete/$viewId-EH4U3UJB.js", imports: ["/build/_shared/chunk-A4CIJ2MJ.js", "/build/_shared/chunk-FBJVWVF5.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms": { id: "routes/__dms", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dms-HEBQM6KD.js", imports: ["/build/_shared/chunk-5E2BWMEK.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/blog/$": { id: "routes/__dms/blog/$", parentId: "routes/__dms", path: "blog/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/$-X5SAHTTU.js", imports: ["/build/_shared/chunk-C6UXUCNG.js", "/build/_shared/chunk-Q5BFZBRU.js", "/build/_shared/chunk-KL2XXNDP.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/blog/blog.config": { id: "routes/__dms/blog/blog.config", parentId: "routes/__dms", path: "blog/blog/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/blog.config-RP2DM2JK.js", imports: ["/build/_shared/chunk-Q5BFZBRU.js", "/build/_shared/chunk-KL2XXNDP.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/site/$": { id: "routes/__dms/site/$", parentId: "routes/__dms", path: "site/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/$-BJOTYGBY.js", imports: ["/build/_shared/chunk-C6UXUCNG.js", "/build/_shared/chunk-KL2XXNDP.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-SFDK5MNV.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/site/site.config": { id: "routes/__dms/site/site.config", parentId: "routes/__dms", path: "site/site/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/site.config-OG7I4IWH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jokes": { id: "routes/jokes", parentId: "root", path: "jokes", index: void 0, caseSensitive: void 0, module: "/build/routes/jokes-6TKEJWLG.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-9790A2B9.js" };
+var assets_manifest_default = { version: "43627a81", entry: { module: "/build/entry.client-FJG22HTJ.js", imports: ["/build/_shared/chunk-SKDUM77D.js", "/build/_shared/chunk-IPSTRILN.js", "/build/_shared/chunk-JE7OEZ56.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-H6VITTBH.js", imports: ["/build/_shared/chunk-6BLS5ORW.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth": { id: "routes/__auth", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__auth-2AXIEISG.js", imports: ["/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/login": { id: "routes/__auth/login", parentId: "routes/__auth", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/login-ZZZYBLMT.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/logout": { id: "routes/__auth/logout", parentId: "routes/__auth", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/logout-LADMCKIU.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama": { id: "routes/__dama", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dama-ZDLVPIBR.js", imports: ["/build/_shared/chunk-IY7B3ZG6.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/datasources": { id: "routes/__dama/datasources", parentId: "routes/__dama", path: "datasources", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/datasources-2SQ5ZJX5.js", imports: ["/build/_shared/chunk-EZ46I2QU.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dama/index.(cat)": { id: "routes/__dama/index.(cat)", parentId: "routes/__dama", path: "cat?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/index.(cat)-FWCLBMKF.js", imports: ["/build/_shared/chunk-EZ46I2QU.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/($viewId)": { id: "routes/__dama/source/$sourceId.($page)/($viewId)", parentId: "routes/__dama", path: "source/:sourceId/:page?/:viewId?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/($viewId)-46SLXOID.js", imports: ["/build/_shared/chunk-LS4XDJMC.js", "/build/_shared/chunk-XPYJ3XEK.js", "/build/_shared/chunk-EZ46I2QU.js", "/build/_shared/chunk-6BLS5ORW.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/index": { id: "routes/__dama/source/$sourceId.($page)/index", parentId: "routes/__dama", path: "source/:sourceId/:page?", index: !0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/index-OHPWSGR3.js", imports: ["/build/_shared/chunk-LS4XDJMC.js", "/build/_shared/chunk-XPYJ3XEK.js", "/build/_shared/chunk-EZ46I2QU.js", "/build/_shared/chunk-6BLS5ORW.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/create": { id: "routes/__dama/source/create", parentId: "routes/__dama", path: "source/create", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/create-WCPG2IWF.js", imports: ["/build/_shared/chunk-LS4XDJMC.js", "/build/_shared/chunk-XPYJ3XEK.js", "/build/_shared/chunk-EZ46I2QU.js", "/build/_shared/chunk-6BLS5ORW.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/delete/$sourceId": { id: "routes/__dama/source/delete/$sourceId", parentId: "routes/__dama", path: "source/delete/:sourceId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/delete/$sourceId-PPJTTMCE.js", imports: ["/build/_shared/chunk-XPYJ3XEK.js", "/build/_shared/chunk-EZ46I2QU.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/view/delete/$viewId": { id: "routes/__dama/view/delete/$viewId", parentId: "routes/__dama", path: "view/delete/:viewId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/view/delete/$viewId-2NZRLKVJ.js", imports: ["/build/_shared/chunk-XPYJ3XEK.js", "/build/_shared/chunk-EZ46I2QU.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms": { id: "routes/__dms", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dms-CLLUBRKF.js", imports: ["/build/_shared/chunk-IY7B3ZG6.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/blog/$": { id: "routes/__dms/blog/$", parentId: "routes/__dms", path: "blog/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/$-EQ3WAEKY.js", imports: ["/build/_shared/chunk-LHPXR27Q.js", "/build/_shared/chunk-NPMHNGBU.js", "/build/_shared/chunk-YGC6VXHF.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/blog/blog.config": { id: "routes/__dms/blog/blog.config", parentId: "routes/__dms", path: "blog/blog/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/blog.config-NHDMQUW6.js", imports: ["/build/_shared/chunk-NPMHNGBU.js", "/build/_shared/chunk-YGC6VXHF.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/site/$": { id: "routes/__dms/site/$", parentId: "routes/__dms", path: "site/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/$-TBSSH6F4.js", imports: ["/build/_shared/chunk-LHPXR27Q.js", "/build/_shared/chunk-YGC6VXHF.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/site/site.config": { id: "routes/__dms/site/site.config", parentId: "routes/__dms", path: "site/site/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/site.config-OG7I4IWH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jokes": { id: "routes/jokes", parentId: "root", path: "jokes", index: void 0, caseSensitive: void 0, module: "/build/routes/jokes-MU3ISIOW.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-43627A81.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { v2_meta: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

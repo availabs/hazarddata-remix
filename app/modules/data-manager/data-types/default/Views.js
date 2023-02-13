@@ -1,9 +1,10 @@
 import {deleteView} from "~/modules/data-manager/data-types/utils/utils";
 import {DAMA_HOST} from "~/config";
 import {pgEnv} from "~/modules/data-manager/attributes";
-import {Link} from "@remix-run/react";
+import {Link, useFetcher} from "@remix-run/react";
 //import { useRevalidator } from "@remix-run/react";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 
 const DeleteButton = ({text, viewId}) => (
     <Link className={'bg-red-50 hover:bg-red-400 hover:text-white p-2'} to={`/view/delete/${viewId}`}
@@ -11,6 +12,23 @@ const DeleteButton = ({text, viewId}) => (
         {text}
     </Link>
 )
+
+const MakeAuthoritativeButton = ({text, viewId}) => {
+    const navigate = useNavigate();
+    const fetcher = useFetcher();
+
+    return (
+        <button
+            className={'bg-red-50 hover:bg-red-400 hover:text-white p-2'}
+            onClick={async () => {
+
+            }
+            } >
+
+            Make Authoritative
+        </button>
+    )
+}
 
 const RenderValue = ({value, isLink, source_id}) => {
     const processedValue = typeof value === 'object' ? '' : value;
@@ -27,7 +45,7 @@ const Views = ({source, views, user, falcor}) => {
     })*/
     return (
         <div>
-            <div className="py-4 sm:py-2 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6 border-b-2">
+            <div className="py-4 sm:py-2 sm:grid sm:grid-cols-6 sm:gap-4 sm:px-6 border-b-2">
                 {
                     ['view_id', 'version', 'last_updated', '_modified_timestamp']
                         .map(key => (
@@ -44,7 +62,7 @@ const Views = ({source, views, user, falcor}) => {
                         views
                             .map((view, i) => (
 
-                                    <div key={i} className="py-4 sm:py-5 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6">
+                                    <div key={i} className="py-4 sm:py-5 sm:grid sm:grid-cols-6 sm:gap-4 sm:px-6">
                                         {
                                             ['view_id', 'version', 'last_updated', '_modified_timestamp']
                                                 .map(key => (
@@ -54,6 +72,9 @@ const Views = ({source, views, user, falcor}) => {
                                                     </dd>
                                                 ))
                                         }
+                                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 flex justify-end">
+                                            <MakeAuthoritativeButton viewId={view.view_id}/>
+                                        </dd>
                                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 flex justify-end">
                                             <DeleteButton text={'delete'} viewId={view.view_id}/>
                                         </dd>
