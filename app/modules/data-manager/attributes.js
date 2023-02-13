@@ -140,3 +140,10 @@ export const hazardsMeta = {
   'wind':{color: '#dedad2', name:'Wind'},
 };
 
+export const ctypeColors = {
+  buildings: '#54bebe',
+  population: '#115f9a',
+  crop: '#ffb400'
+
+}
+

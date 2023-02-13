@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {falcor} from '~/utils/falcor.server'
-import {SourceAttributes, ViewAttributes, getAttributes, pgEnv, hazardsMeta} from '~/modules/data-manager/attributes'
+import {SourceAttributes, ViewAttributes, getAttributes, pgEnv, hazardsMeta, ctypeColors} from '~/modules/data-manager/attributes'
 import {useLoaderData, Link} from "@remix-run/react";
 import get from 'lodash.get'
 import {BarGraph, generateTestBarData} from "~/modules/avl-graph-modified/src/BarGraph";
@@ -182,13 +182,28 @@ const RenderViewDependencies = ({dama, srcMeta, viewId}) => (
         .map(id => {
             const tmpSrcId = get(get(dama, [viewId, 'dependencies'], [])
                                 .find(d => d.view_id === id), 'source_id')
-            return <Link to={`/sources/${tmpSrcId}/views/${id}`} className={'p-2'}>{get(srcMeta, [tmpSrcId, 'attributes', 'type'], id)}</Link>
+            return <Link key={id} to={`/sources/${tmpSrcId}/views/${id}`} className={'p-2'}>{get(srcMeta, [tmpSrcId, 'attributes', 'type'], id)}</Link>
         })
 )
 
-const RenderRangeSlider = ({range, from, setFrom, to, setTo}) => {
-    console.log('rangeSlider', from, to)
-}
+const RenderLegend = () =>
+     (
+        <div className={'flex grid grid-cols-6'}>
+            {
+                Object.keys(hazardsMeta)
+                    .map(key =>
+                        <div className={'mb-1 pb-1 pl-1 flex'} key={key}>
+                            <div className={'rounded-full'}
+                                style={{
+                                height: '20px',
+                                width: '20px',
+                                backgroundColor: hazardsMeta[key].color
+                            }} />
+                            <span className={'pl-2'}>{hazardsMeta[key].name}</span>
+                        </div>)
+            }
+        </div>
+    )
 
 export default function SourceThumb({source}) {
     const {avail, nri, enhancedNCEILoss, dama, availLTSViewId, enhancedNCEILTSViewId, srcMeta} = useLoaderData();
@@ -202,19 +217,12 @@ export default function SourceThumb({source}) {
 
     return (
         <>
-            <div className={'flex grid grid-cols-9 text-white'}>
-                {
-                    Object.keys(hazardsMeta)
-                        .map(key => <div style={{height: '50px', width: '120px', backgroundColor: hazardsMeta[key].color, textAlign: 'center'}}>
-                           <span className={'align-middle m-4'} >{key}</span>
-                        </div>)
-                }
-            </div>
-            <div className={blockClasses} style={{height: '500px'}}>
-                <label className={'text-lg'}> NCEI Losses </label>
-                <label className={'text-sm'}>using: <RenderViewDependencies dama={dama} srcMeta={srcMeta} viewId={enhancedNCEILTSViewId}/></label>
-                <RenderRangeSlider range={range} from={from} to={to} setFrom={setFrom} setTo={setTo} />
+            <div className={blockClasses} style={{height: '600px'}}>
+                <label key={'nceiLossesTitle'} className={'text-lg'}> NCEI Losses </label>
+                <label key={'nceiLossesDeps'} className={'text-sm mb-2'}>using: <RenderViewDependencies dama={dama} srcMeta={srcMeta} viewId={enhancedNCEILTSViewId}/></label>
+                <RenderLegend />
                 <BarGraph
+                    key={'nceiLosses'}
                     data={reformattedEnhancedNCEI}
                     keys={nri_categories}
                     indexBy={'year'}
@@ -230,15 +238,17 @@ export default function SourceThumb({source}) {
                 />
             </div>
             <div className={blockClasses} style={{height: '500px'}}>
-                <label className={'text-lg'}>EALs (AVAIL) </label>
-                <label className={'text-sm'}>using: <RenderViewDependencies dama={dama} srcMeta={srcMeta} viewId={availLTSViewId}/></label>
+                <label key={'ealsAvailTitle'} className={'text-lg'}>EALs (AVAIL) </label>
+                <label key={'ealsAvailDeps'} className={'text-sm'}>using: <RenderViewDependencies dama={dama} srcMeta={srcMeta} viewId={availLTSViewId}/></label>
                 <BarGraph
+                    key={'ealsAvail'}
                     data={avail}
                     keys={['swd_buildings', 'swd_crop', 'swd_population']}
                     indexBy={'nri_category'}
                     axisBottom={d => d}
                     axisLeft={{format: fnumIndex, gridLineOpacity: 1, gridLineColor: '#9d9c9c'}}
                     paddingInner={0.05}
+                    colors={(value, ii, d, key) => ctypeColors[key.split('_')[1]]}
                     hoverComp={{
                         HoverComp: HoverComp,
                         valueFormat: fnumIndex
@@ -246,14 +256,16 @@ export default function SourceThumb({source}) {
                 />
             </div>
             <div className={blockClasses} style={{height: '500px'}}>
-                <label className={'text-lg'}>EALs (NRI) </label>
+                <label key={'ealsNriTitle'} className={'text-lg'}>EALs (NRI) </label>
                 <BarGraph
+                    key={'ealsNri'}
                     data={reformattedNRI}
                     keys={['buildings', 'crop', 'population']}
                     indexBy={'nri_category'}
                     axisBottom={d => d}
                     axisLeft={{format: fnumIndex, gridLineOpacity: 1, gridLineColor: '#9d9c9c'}}
                     paddingInner={0.05}
+                    colors={(value, ii, d, key) => ctypeColors[key]}
                     hoverComp={{
                         HoverComp: HoverComp,
                         valueFormat: fnumIndex

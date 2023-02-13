@@ -4869,6 +4869,10 @@ var hazardsMeta = {
   drought: { color: "#d2980d", name: "Drought" },
   hurricane: { color: "#ffb400", name: "Hurricane" },
   wind: { color: "#dedad2", name: "Wind" }
+}, ctypeColors = {
+  buildings: "#54bebe",
+  population: "#115f9a",
+  crop: "#ffb400"
 };
 
 // app/modules/data-manager/data-types/default/Overview.js
@@ -14160,51 +14164,69 @@ var HoverComp2 = ({ data, keys, indexFormat, keyFormat, valueFormat }) => /* @__
   }), { formattedData, nri_categories: [...nri_categories] };
 }, [data]), RenderViewDependencies = ({ dama, srcMeta, viewId }) => (0, import_lodash36.default)((0, import_lodash36.default)(dama, [viewId, "dependencies"], []).find((d) => d.view_id === viewId), ["view_dependencies"], []).map((id3) => {
   let tmpSrcId = (0, import_lodash36.default)((0, import_lodash36.default)(dama, [viewId, "dependencies"], []).find((d) => d.view_id === id3), "source_id");
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(import_react97.Link, { to: `/sources/${tmpSrcId}/views/${id3}`, className: "p-2", children: (0, import_lodash36.default)(srcMeta, [tmpSrcId, "attributes", "type"], id3) }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(import_react97.Link, { to: `/sources/${tmpSrcId}/views/${id3}`, className: "p-2", children: (0, import_lodash36.default)(srcMeta, [tmpSrcId, "attributes", "type"], id3) }, id3, !1, {
     fileName: "app/routes/__dama/index.(cat).js",
     lineNumber: 185,
     columnNumber: 20
   }, this);
-}), RenderRangeSlider = ({ range: range2, from, setFrom, to, setTo }) => {
-  console.log("rangeSlider", from, to);
-};
+}), RenderLegend = () => /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "flex grid grid-cols-6", children: Object.keys(hazardsMeta).map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "mb-1 pb-1 pl-1 flex", children: [
+  /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
+    "div",
+    {
+      className: "rounded-full",
+      style: {
+        height: "20px",
+        width: "20px",
+        backgroundColor: hazardsMeta[key].color
+      }
+    },
+    void 0,
+    !1,
+    {
+      fileName: "app/routes/__dama/index.(cat).js",
+      lineNumber: 196,
+      columnNumber: 29
+    },
+    this
+  ),
+  /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("span", { className: "pl-2", children: hazardsMeta[key].name }, void 0, !1, {
+    fileName: "app/routes/__dama/index.(cat).js",
+    lineNumber: 202,
+    columnNumber: 29
+  }, this)
+] }, key, !0, {
+  fileName: "app/routes/__dama/index.(cat).js",
+  lineNumber: 195,
+  columnNumber: 25
+}, this)) }, void 0, !1, {
+  fileName: "app/routes/__dama/index.(cat).js",
+  lineNumber: 191,
+  columnNumber: 9
+}, this);
 function SourceThumb2({ source }) {
   let { avail, nri, enhancedNCEILoss, dama, availLTSViewId, enhancedNCEILTSViewId, srcMeta } = (0, import_react97.useLoaderData)(), reformattedNRI = reformatNRI(nri), { formattedData: reformattedEnhancedNCEI, nri_categories } = reformatEnhancedNCEI(enhancedNCEILoss), range2 = [...new Set(reformattedEnhancedNCEI.map((d) => d.year))].sort((a, b) => a - b), [from, setFrom] = import_react96.default.useState(range2[0]), [to, setTo] = import_react96.default.useState(range2[range2.length - 1]), blockClasses = "w-full p-4 my-1 block border flex flex-col";
   return /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(import_jsx_dev_runtime80.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: "flex grid grid-cols-9 text-white", children: Object.keys(hazardsMeta).map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { style: { height: "50px", width: "120px", backgroundColor: hazardsMeta[key].color, textAlign: "center" }, children: /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("span", { className: "align-middle m-4", children: key }, void 0, !1, {
-      fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 209,
-      columnNumber: 28
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 208,
-      columnNumber: 37
-    }, this)) }, void 0, !1, {
-      fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 205,
-      columnNumber: 13
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: blockClasses, style: { height: "500px" }, children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-lg", children: " NCEI Losses " }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: blockClasses, style: { height: "600px" }, children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-lg", children: " NCEI Losses " }, "nceiLossesTitle", !1, {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 214,
+        lineNumber: 221,
         columnNumber: 17
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-sm", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-sm mb-2", children: [
         "using: ",
         /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(RenderViewDependencies, { dama, srcMeta, viewId: enhancedNCEILTSViewId }, void 0, !1, {
           fileName: "app/routes/__dama/index.(cat).js",
-          lineNumber: 215,
-          columnNumber: 53
+          lineNumber: 222,
+          columnNumber: 81
         }, this)
-      ] }, void 0, !0, {
+      ] }, "nceiLossesDeps", !0, {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 215,
+        lineNumber: 222,
         columnNumber: 17
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(RenderRangeSlider, { range: range2, from, to, setFrom, setTo }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(RenderLegend, {}, void 0, !1, {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 216,
+        lineNumber: 223,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
@@ -14223,36 +14245,36 @@ function SourceThumb2({ source }) {
             keyFormat: (d) => hazardsMeta[d].name
           }
         },
-        void 0,
+        "nceiLosses",
         !1,
         {
           fileName: "app/routes/__dama/index.(cat).js",
-          lineNumber: 217,
+          lineNumber: 224,
           columnNumber: 17
         },
         this
       )
     ] }, void 0, !0, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 213,
+      lineNumber: 220,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: blockClasses, style: { height: "500px" }, children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-lg", children: "EALs (AVAIL) " }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-lg", children: "EALs (AVAIL) " }, "ealsAvailTitle", !1, {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 233,
+        lineNumber: 241,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-sm", children: [
         "using: ",
         /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(RenderViewDependencies, { dama, srcMeta, viewId: availLTSViewId }, void 0, !1, {
           fileName: "app/routes/__dama/index.(cat).js",
-          lineNumber: 234,
-          columnNumber: 53
+          lineNumber: 242,
+          columnNumber: 75
         }, this)
-      ] }, void 0, !0, {
+      ] }, "ealsAvailDeps", !0, {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 234,
+        lineNumber: 242,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
@@ -14264,29 +14286,30 @@ function SourceThumb2({ source }) {
           axisBottom: (d) => d,
           axisLeft: { format: fnumIndex, gridLineOpacity: 1, gridLineColor: "#9d9c9c" },
           paddingInner: 0.05,
+          colors: (value, ii, d, key) => ctypeColors[key.split("_")[1]],
           hoverComp: {
             HoverComp: HoverComp2,
             valueFormat: fnumIndex
           }
         },
-        void 0,
+        "ealsAvail",
         !1,
         {
           fileName: "app/routes/__dama/index.(cat).js",
-          lineNumber: 235,
+          lineNumber: 243,
           columnNumber: 17
         },
         this
       )
     ] }, void 0, !0, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 232,
+      lineNumber: 240,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("div", { className: blockClasses, style: { height: "500px" }, children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-lg", children: "EALs (NRI) " }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)("label", { className: "text-lg", children: "EALs (NRI) " }, "ealsNriTitle", !1, {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 249,
+        lineNumber: 259,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime80.jsxDEV)(
@@ -14298,28 +14321,29 @@ function SourceThumb2({ source }) {
           axisBottom: (d) => d,
           axisLeft: { format: fnumIndex, gridLineOpacity: 1, gridLineColor: "#9d9c9c" },
           paddingInner: 0.05,
+          colors: (value, ii, d, key) => ctypeColors[key],
           hoverComp: {
             HoverComp: HoverComp2,
             valueFormat: fnumIndex
           }
         },
-        void 0,
+        "ealsNri",
         !1,
         {
           fileName: "app/routes/__dama/index.(cat).js",
-          lineNumber: 250,
+          lineNumber: 260,
           columnNumber: 17
         },
         this
       )
     ] }, void 0, !0, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 248,
+      lineNumber: 258,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/__dama/index.(cat).js",
-    lineNumber: 204,
+    lineNumber: 219,
     columnNumber: 9
   }, this);
 }
@@ -17348,7 +17372,7 @@ function JokesRoute() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "43627a81", entry: { module: "/build/entry.client-FJG22HTJ.js", imports: ["/build/_shared/chunk-SKDUM77D.js", "/build/_shared/chunk-IPSTRILN.js", "/build/_shared/chunk-JE7OEZ56.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-H6VITTBH.js", imports: ["/build/_shared/chunk-6BLS5ORW.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth": { id: "routes/__auth", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__auth-2AXIEISG.js", imports: ["/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/login": { id: "routes/__auth/login", parentId: "routes/__auth", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/login-ZZZYBLMT.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/logout": { id: "routes/__auth/logout", parentId: "routes/__auth", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/logout-LADMCKIU.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama": { id: "routes/__dama", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dama-ZDLVPIBR.js", imports: ["/build/_shared/chunk-IY7B3ZG6.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/datasources": { id: "routes/__dama/datasources", parentId: "routes/__dama", path: "datasources", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/datasources-2SQ5ZJX5.js", imports: ["/build/_shared/chunk-EZ46I2QU.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dama/index.(cat)": { id: "routes/__dama/index.(cat)", parentId: "routes/__dama", path: "cat?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/index.(cat)-FWCLBMKF.js", imports: ["/build/_shared/chunk-EZ46I2QU.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/($viewId)": { id: "routes/__dama/source/$sourceId.($page)/($viewId)", parentId: "routes/__dama", path: "source/:sourceId/:page?/:viewId?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/($viewId)-46SLXOID.js", imports: ["/build/_shared/chunk-LS4XDJMC.js", "/build/_shared/chunk-XPYJ3XEK.js", "/build/_shared/chunk-EZ46I2QU.js", "/build/_shared/chunk-6BLS5ORW.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/index": { id: "routes/__dama/source/$sourceId.($page)/index", parentId: "routes/__dama", path: "source/:sourceId/:page?", index: !0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/index-OHPWSGR3.js", imports: ["/build/_shared/chunk-LS4XDJMC.js", "/build/_shared/chunk-XPYJ3XEK.js", "/build/_shared/chunk-EZ46I2QU.js", "/build/_shared/chunk-6BLS5ORW.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/create": { id: "routes/__dama/source/create", parentId: "routes/__dama", path: "source/create", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/create-WCPG2IWF.js", imports: ["/build/_shared/chunk-LS4XDJMC.js", "/build/_shared/chunk-XPYJ3XEK.js", "/build/_shared/chunk-EZ46I2QU.js", "/build/_shared/chunk-6BLS5ORW.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/delete/$sourceId": { id: "routes/__dama/source/delete/$sourceId", parentId: "routes/__dama", path: "source/delete/:sourceId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/delete/$sourceId-PPJTTMCE.js", imports: ["/build/_shared/chunk-XPYJ3XEK.js", "/build/_shared/chunk-EZ46I2QU.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/view/delete/$viewId": { id: "routes/__dama/view/delete/$viewId", parentId: "routes/__dama", path: "view/delete/:viewId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/view/delete/$viewId-2NZRLKVJ.js", imports: ["/build/_shared/chunk-XPYJ3XEK.js", "/build/_shared/chunk-EZ46I2QU.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms": { id: "routes/__dms", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dms-CLLUBRKF.js", imports: ["/build/_shared/chunk-IY7B3ZG6.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/blog/$": { id: "routes/__dms/blog/$", parentId: "routes/__dms", path: "blog/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/$-EQ3WAEKY.js", imports: ["/build/_shared/chunk-LHPXR27Q.js", "/build/_shared/chunk-NPMHNGBU.js", "/build/_shared/chunk-YGC6VXHF.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/blog/blog.config": { id: "routes/__dms/blog/blog.config", parentId: "routes/__dms", path: "blog/blog/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/blog.config-NHDMQUW6.js", imports: ["/build/_shared/chunk-NPMHNGBU.js", "/build/_shared/chunk-YGC6VXHF.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/site/$": { id: "routes/__dms/site/$", parentId: "routes/__dms", path: "site/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/$-TBSSH6F4.js", imports: ["/build/_shared/chunk-LHPXR27Q.js", "/build/_shared/chunk-YGC6VXHF.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-PUPM6LHF.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/site/site.config": { id: "routes/__dms/site/site.config", parentId: "routes/__dms", path: "site/site/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/site.config-OG7I4IWH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jokes": { id: "routes/jokes", parentId: "root", path: "jokes", index: void 0, caseSensitive: void 0, module: "/build/routes/jokes-MU3ISIOW.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-43627A81.js" };
+var assets_manifest_default = { version: "3953817e", entry: { module: "/build/entry.client-PEJTVJ2F.js", imports: ["/build/_shared/chunk-Y4FP2WQT.js", "/build/_shared/chunk-AX3AIEI4.js", "/build/_shared/chunk-JE7OEZ56.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-UP6EKJLL.js", imports: ["/build/_shared/chunk-L672PVKI.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-6TRVSBDH.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth": { id: "routes/__auth", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__auth-THIGUZ36.js", imports: ["/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/login": { id: "routes/__auth/login", parentId: "routes/__auth", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/login-35S3JXUS.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/logout": { id: "routes/__auth/logout", parentId: "routes/__auth", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/logout-LADMCKIU.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama": { id: "routes/__dama", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dama-GTHFXUFN.js", imports: ["/build/_shared/chunk-SRN2T35Y.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/datasources": { id: "routes/__dama/datasources", parentId: "routes/__dama", path: "datasources", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/datasources-XFYMGPS2.js", imports: ["/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dama/index.(cat)": { id: "routes/__dama/index.(cat)", parentId: "routes/__dama", path: "cat?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/index.(cat)-T62VTLW3.js", imports: ["/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-6TRVSBDH.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/($viewId)": { id: "routes/__dama/source/$sourceId.($page)/($viewId)", parentId: "routes/__dama", path: "source/:sourceId/:page?/:viewId?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/($viewId)-6HB5IB7O.js", imports: ["/build/_shared/chunk-D2ICCRBE.js", "/build/_shared/chunk-7NMS5LSB.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-L672PVKI.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-6TRVSBDH.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/index": { id: "routes/__dama/source/$sourceId.($page)/index", parentId: "routes/__dama", path: "source/:sourceId/:page?", index: !0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/index-TDSL7H34.js", imports: ["/build/_shared/chunk-D2ICCRBE.js", "/build/_shared/chunk-7NMS5LSB.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-L672PVKI.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-6TRVSBDH.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/create": { id: "routes/__dama/source/create", parentId: "routes/__dama", path: "source/create", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/create-IFUKYVHX.js", imports: ["/build/_shared/chunk-D2ICCRBE.js", "/build/_shared/chunk-7NMS5LSB.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-L672PVKI.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-6TRVSBDH.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/delete/$sourceId": { id: "routes/__dama/source/delete/$sourceId", parentId: "routes/__dama", path: "source/delete/:sourceId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/delete/$sourceId-AZUYPTFH.js", imports: ["/build/_shared/chunk-7NMS5LSB.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/view/delete/$viewId": { id: "routes/__dama/view/delete/$viewId", parentId: "routes/__dama", path: "view/delete/:viewId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/view/delete/$viewId-WSIPCWNF.js", imports: ["/build/_shared/chunk-7NMS5LSB.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms": { id: "routes/__dms", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dms-IDLUUATK.js", imports: ["/build/_shared/chunk-SRN2T35Y.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/blog/$": { id: "routes/__dms/blog/$", parentId: "routes/__dms", path: "blog/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/$-FB6XGJ6Z.js", imports: ["/build/_shared/chunk-EGKVC64H.js", "/build/_shared/chunk-6QKMKL6S.js", "/build/_shared/chunk-WWZN2ML2.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-6TRVSBDH.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/blog/blog.config": { id: "routes/__dms/blog/blog.config", parentId: "routes/__dms", path: "blog/blog/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/blog.config-TX5EJNLJ.js", imports: ["/build/_shared/chunk-6QKMKL6S.js", "/build/_shared/chunk-WWZN2ML2.js", "/build/_shared/chunk-6TRVSBDH.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/site/$": { id: "routes/__dms/site/$", parentId: "routes/__dms", path: "site/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/$-IV32R6PN.js", imports: ["/build/_shared/chunk-EGKVC64H.js", "/build/_shared/chunk-WWZN2ML2.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-6TRVSBDH.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/site/site.config": { id: "routes/__dms/site/site.config", parentId: "routes/__dms", path: "site/site/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/site.config-OG7I4IWH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jokes": { id: "routes/jokes", parentId: "root", path: "jokes", index: void 0, caseSensitive: void 0, module: "/build/routes/jokes-ZQNCEMXS.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-3953817E.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { v2_meta: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {
