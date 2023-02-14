@@ -1,134 +1,142 @@
-import React, { useState, useMemo } from 'react'
-import { falcor } from '~/utils/falcor.server'
-import { TopNav } from '~/modules/avl-components/src'
-import { SourceAttributes, ViewAttributes, getAttributes, pgEnv} from '~/modules/data-manager/attributes'
-import { Pages, DataTypes } from '~/modules/data-manager/data-types'
-import { useLoaderData, Link, useParams, useOutletContext } from "@remix-run/react";
+import React, {useState, useMemo} from 'react'
+import {falcor} from '~/utils/falcor.server'
+import {TopNav} from '~/modules/avl-components/src'
+import {SourceAttributes, ViewAttributes, getAttributes, pgEnv} from '~/modules/data-manager/attributes'
+import {Pages, DataTypes} from '~/modules/data-manager/data-types'
+import {useLoaderData, Link, useParams, useOutletContext} from "@remix-run/react";
 
 import get from 'lodash.get'
 
-export async function loader ({ params, request }) {
-  const { sourceId } = params
-  
-  const lengthPath = ["dama", pgEnv, "sources","byId",sourceId,"views","length"]
-  const resp = await falcor.get(lengthPath);
-  let data =  await falcor.get(
-    [
-      "dama", pgEnv, "sources","byId",sourceId,"views","byIndex",
-      {from:0, to:  get(resp.json, lengthPath, 0)-1},
-      "attributes",Object.values(ViewAttributes)
-    ],
-    [
-      "dama", pgEnv, "sources","byId",sourceId,
-      "attributes",Object.values(SourceAttributes)
-    ],
-      [
-      "dama", pgEnv, "sources", "byId", sourceId, 'meta'
-    ]
-  )
-  
-  const falcorCache = falcor.getCache();
+export async function loader({params, request}) {
+    const {viewId} = params;
 
-  return {
-      falcorCache,
-      data,
-    views:  Object.values(
-        get(
-          falcorCache,
-          ["dama", pgEnv, "sources","byId", sourceId,"views","byIndex",],
-          {}
-        )
-      )
-      .map(v => getAttributes(
-          get(
-            falcorCache,
-            v.value,
-            {'attributes': {}}
-          )['attributes']
-        )
-      ),
-    source: getAttributes(
-      get(
-        falcorCache,
-        ["dama", pgEnv,'sources','byId', sourceId],
-        {'attributes': {}}
-      )['attributes']
-    ),
-      meta:
-      get(
-        falcorCache,
-        ["dama", pgEnv,'sources', "byId", sourceId, 'meta', 'value'],
-        {}
-      )
+    const depData = await falcor.get(['dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', viewId]);
 
-  }
-}
+    // collect all dependency sources, fetch meta for them.
+    const tmpSrcIds = [];
+    const tmpViewIds = [];
+    Object.keys(get(depData, ['json', 'dama', pgEnv, 'viewDependencySubgraphs', 'byViewId'], {}))
+        .forEach(viewId => {
+            tmpSrcIds.push(
+                ...get(depData, ['json', 'dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', viewId, 'dependencies'], [])
+                    .map(d => d.source_id)
+                    .filter(d => d)
+            );
+            tmpViewIds.push(
+                ...get(depData, ['json', 'dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', viewId, 'dependencies'], [])
+                    .map(d => d.view_id)
+                    .filter(d => d)
+            );
+        });
 
-export const action = async ({ request, params }) => {
-    const { sourceId } = params
-  console.log('gonna invalidate sources length');
-  const fd = await request.formData();
-  // console.log('fd', fd, params, request.target)
-  // await falcor.invalidate(["dama", pgEnv, "sources", "length"]);
-  // await falcor.invalidate(["dama", pgEnv,'sources','byId', sourceId],);
-  const res = await falcor.call(["dama", pgEnv, "sources","byId",sourceId,"views","invalidate"]);
-  // console.log('res?', res)
-  // const data = await request.json();
-  // let jsonData = json({ data });
+    await falcor.get(['dama', pgEnv, 'sources', 'byId', tmpSrcIds, 'attributes', ['type', 'name']]);
+
+    await falcor.get(['dama', pgEnv, 'views', 'byId', tmpViewIds, 'attributes', ['version', '_modified_timestamp', 'last_updated']]);
+
+    // fin
     const falcorCache = falcor.getCache();
 
-  // console.log('I am gonna action',data, 'params', params);
-  return {falcorCache};
+    return {
+        dependencies: get(falcorCache, ['dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', viewId, 'value'], {}),
+        srcMeta: get(falcorCache, ['dama', pgEnv, 'sources', 'byId']),
+        viewMeta: get(falcorCache, ['dama', pgEnv, 'views', 'byId']),
+    }
 }
 
+// authoratative routes(copies) for viewIds on home page
+// changelog.md for changes, and versionId goes in meta. start with ncei enhanced. nri cat mapping. coastal maps to hurricanes too.
+// make authoratative button
+// make EALs come close to old data; compare ncei raw with mars raw.
+
+// authoratative version auto selected in version dropdown.
+// authoratative version always bold? or has an identifier.
+
+// create EAL source
+// create a page that pulls from a falcor route that takes in EAL viewId, and pulls all the dependencies, and rns a complex sql using them.
+
+const RenderDeps = ({dependencies, viewId, srcMeta, viewMeta}) => (
+    <div className='w-full p-4 bg-white shadow mb-4'>
+        <label className={'text-lg'}>Dependencies</label>
+        <div className="py-4 sm:py-2 mt-2 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6 border-b-2">
+            {
+                ['Source Name', 'Type', 'Version', 'Last Updated']
+                    .map(key => (
+                        <dt key={key} className="text-sm font-medium text-gray-600">
+                            {key}
+                        </dt>
+                    ))
+            }
+        </div>
+        <dl className="sm:divide-y sm:divide-gray-200">
+            {
+                dependencies.dependencies
+                    .filter(d => d.view_id.toString() !== viewId.toString())
+                    .map((d, i) => (
+                            <div key={i} className="py-4 sm:py-5 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6">
+                                <dd key={i} className="mt-1 text-sm text-gray-900 sm:mt-0 align-middle">
+                                    <Link to={`/source/${d.source_id}/overview`}>
+                                        {get(srcMeta, [d.source_id, 'attributes', 'name'])}
+                                    </Link>
+                                </dd>
+
+                                <dd key={i} className="mt-1 text-sm text-gray-900 sm:mt-0 align-middle">
+                                    <Link to={`/source/${d.source_id}/overview`}>
+                                        {get(srcMeta, [d.source_id, 'attributes', 'type'])}
+                                    </Link>
+                                </dd>
+
+                                <dd key={i} className="mt-1 text-sm text-gray-900 sm:mt-0 align-middle">
+                                    <Link to={`/source/${d.source_id}/views/${d.view_id}`}>
+                                        {get(viewMeta, [d.view_id, 'attributes', 'version'])}
+                                    </Link>
+                                </dd>
+
+                                <dd key={i} className="mt-1 text-sm text-gray-900 sm:mt-0 align-middle">
+                                    <Link to={`/source/${d.source_id}/views/${d.view_id}`}>
+                                        {typeof get(viewMeta, [d.view_id, 'attributes', '_modified_timestamp', 'value']) === 'object' ? '' :
+                                            get(viewMeta, [d.view_id, 'attributes', '_modified_timestamp', 'value'])
+                                        }
+                                    </Link>
+                                </dd>
+
+                                <dd key={i} className="mt-1 text-sm text-red-400 sm:mt-0">
+                                    <sspan className={'float-right italic'}> outdated </sspan>
+                                </dd>
+                            </div>
+
+                        )
+                    )
+            }
+        </dl>
+
+    </div>
+)
 
 export default function Dama() {
-    const {views,source,meta, falcorCache, data} = useLoaderData()
-    const {sourceId, page, viewId} = useParams()
-    const [ pages, setPages ] = useState(Pages)
-    const { user } = useOutletContext()
+    const {dependencies, srcMeta, viewMeta} = useLoaderData();
+    const {sourceId, page, viewId} = useParams();
 
-    console.log('view params?', sourceId, page, viewId)
-    React.useEffect(() => {
-
-      if(DataTypes[source.type] ){
-        let typePages = Object.keys(DataTypes[source.type]).reduce((a,c)=>{
-          if(DataTypes[source.type][c].path) {
-            a[c] = DataTypes[source.type][c]
-          }
-          return a
-        },{})
-
-        let allPages = {...Pages,...typePages}
-          setPages(allPages)  
-      } 
-      /*else {
-        setPages(Pages) 
-      }*/
-    }, [source.type])
-
-    const Page = useMemo(() => {
-      return page ? get(pages,`[${page}].component`,Pages['overview'].component) : Pages['overview'].component
-    },[page,pages])
-    
     return (
-      <div>
-        <div className='text-xl font-medium overflow-hidden p-2 border-b '>
-          {source.display_name || source.name}
+        <div>
+            <div className='text-xl font-medium overflow-hidden p-2 border-b '>
+                {viewId}
+            </div>
+
+            <TopNav
+                menuItems={
+                    [{
+                        name: 'Source',
+                        path: `/source/${sourceId}`
+                    },
+                        {
+                            name: 'View',
+                            path: `/source/${sourceId}/views/${viewId}`
+                        }]
+                }
+                themeOptions={{size: 'inline'}}
+            />
+
+            <RenderDeps viewId={viewId} dependencies={dependencies} srcMeta={srcMeta} viewMeta={viewMeta}/>
         </div>
-        <TopNav 
-          menuItems={Object.values(pages)
-            .map(d => {
-              return {
-                name:d.name,
-                path: `/source/${sourceId}${d.path}`
-              }
-            })}
-          themeOptions={{size:'inline'}}
-        />
-        <div className='w-full p-4 bg-white shadow mb-4'>
-          View details
-        </div>
-      </div>  
     )
 }

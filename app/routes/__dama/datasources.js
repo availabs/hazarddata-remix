@@ -43,6 +43,7 @@ export default function Dama() {
                         let searchTerm = (source.name + ' ' + get(source, 'categories[0]', []).join(' '))
                         return !layerSearch.length > 2 || searchTerm.toLowerCase().includes(layerSearch.toLowerCase())
                     })
+                    // .filter(s => s.name.includes('nri'))
                     .map((s, i) => <SourceThumb key={i} source={s}/>)
             }
         </div>
@@ -50,6 +51,7 @@ export default function Dama() {
 }
 
 const SourceThumb = ({source}) => {
+    console.log(source)
     return (
         <div className='w-full p-4 bg-white my-1 hover:bg-blue-50 block border shadow flex'>
             <Link to={`/source/${source.source_id}`} className='text-xl font-medium w-full block'>

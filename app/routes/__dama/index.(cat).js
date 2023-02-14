@@ -23,8 +23,6 @@ const getViews = (sourceId, falcorCache) => Object.values(
 
 export async function loader({request}) {
 
-    // get latest view of hlr, nri, and enhanced_ncei
-    // fetch meta for each view, show which views it depends upon, provide links to those views.
     const hlrSourceId = 218,
         enhancedNCEIhlrSourceId = 198;
     const lengthPath = ["dama", pgEnv, "sources", "byId", [hlrSourceId, enhancedNCEIhlrSourceId], "views", "length"];
@@ -209,11 +207,7 @@ export default function SourceThumb({source}) {
     const {avail, nri, enhancedNCEILoss, dama, availLTSViewId, enhancedNCEILTSViewId, srcMeta} = useLoaderData();
     const reformattedNRI = reformatNRI(nri);
     const {formattedData: reformattedEnhancedNCEI, nri_categories} = reformatEnhancedNCEI(enhancedNCEILoss);
-    const range = [...new Set(reformattedEnhancedNCEI.map(d => d.year))].sort((a, b) => a - b);
-    const [from, setFrom] = React.useState(range[0]);
-    const [to, setTo] = React.useState(range[range.length - 1]);
     const blockClasses = `w-full p-4 my-1 block border flex flex-col`
-    // legend, colors
 
     return (
         <>

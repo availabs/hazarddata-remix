@@ -17,6 +17,10 @@ const MakeAuthoritativeButton = ({text, viewId}) => {
     const navigate = useNavigate();
     const fetcher = useFetcher();
 
+    // make a falcor call to update view meta?
+    // get response, invalidate views data
+    // refresh page
+
     return (
         <button
             className={'bg-red-50 hover:bg-red-400 hover:text-white p-2'}
