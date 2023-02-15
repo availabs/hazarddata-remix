@@ -10,7 +10,7 @@ import get from 'lodash.get'
 export async function loader ({ params, request }) {
   const { sourceId } = params
   
-  const lengthPath = ["dama", pgEnv, "sources","byId",sourceId,"views","length"]
+  const lengthPath = ["dama", pgEnv, "sources","byId",sourceId,"views","length"];
   const resp = await falcor.get(lengthPath);
   let data =  await falcor.get(
     [
@@ -69,15 +69,16 @@ export const action = async ({ request, params }) => {
   console.log('gonna invalidate sources length');
   const fd = await request.formData();
   // console.log('fd', fd, params, request.target)
-  // await falcor.invalidate(["dama", pgEnv, "sources", "length"]);
-  // await falcor.invalidate(["dama", pgEnv,'sources','byId', sourceId],);
+  await falcor.invalidate(["dama", pgEnv, "sources", "length"]);
+  await falcor.invalidate(["dama", pgEnv,'sources','byId', sourceId]);
+  await falcor.invalidate(["dama", pgEnv,'views','byId']);
   const res = await falcor.call(["dama", pgEnv, "sources","byId",sourceId,"views","invalidate"]);
   // console.log('res?', res)
   // const data = await request.json();
   // let jsonData = json({ data });
     const falcorCache = falcor.getCache();
 
-  // console.log('I am gonna action',data, 'params', params);
+  console.log('I am gonna action', 'params', params);
   return {falcorCache};
 }
 
@@ -88,7 +89,7 @@ export default function Dama() {
     const [ pages, setPages ] = useState(Pages)
     const { user } = useOutletContext()
 
-    console.log('index params?', sourceId, page)
+    console.log('index params?', sourceId, page, falcorCache, data)
     React.useEffect(() => {
 
       if(DataTypes[source.type] ){

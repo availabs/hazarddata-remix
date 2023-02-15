@@ -20,6 +20,7 @@ export default function Index() {
         <div className='flex p-1 text-gray-800 border-b w-full'>
           <NavLink to='/' className='p-4'>HAZARDS.ORG</NavLink>
           <NavLink to='/datasources' className='p-4'>Data Sources</NavLink>
+          <NavLink to='/eal' className='p-4'>EAL</NavLink>
           <div className='flex flex-1 justify-end '>
             <div>
               <AuthMenu 

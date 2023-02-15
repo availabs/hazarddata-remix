@@ -12,6 +12,7 @@ import sba_disaster_loan_data_new from "./sba";
 import nri from "./nri";
 import per_basis from "./per_basis_swd";
 import hlr from "./hlr";
+import eal from "./eal"
 
 const DataTypes = {
   freight_atlas_shapefile,
@@ -26,7 +27,8 @@ const DataTypes = {
   sba_disaster_loan_data_new,
   nri,
   per_basis,
-  hlr
+  hlr,
+  eal
 };
 
 export { DataTypes, Pages };

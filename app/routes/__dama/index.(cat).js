@@ -24,8 +24,9 @@ const getViews = (sourceId, falcorCache) => Object.values(
 export async function loader({request}) {
 
     const hlrSourceId = 218,
-        enhancedNCEIhlrSourceId = 198;
-    const lengthPath = ["dama", pgEnv, "sources", "byId", [hlrSourceId, enhancedNCEIhlrSourceId], "views", "length"];
+        enhancedNCEIhlrSourceId = 198,
+        ealSourceId = 229;
+    const lengthPath = ["dama", pgEnv, "sources", "byId", [hlrSourceId, enhancedNCEIhlrSourceId, ealSourceId], "views", "length"];
 
     const resp = await falcor.get(lengthPath);
 
@@ -39,21 +40,30 @@ export async function loader({request}) {
             "dama", pgEnv, "sources", "byId", enhancedNCEIhlrSourceId, "views", "byIndex",
             {from: 0, to: get(resp.json, ["dama", pgEnv, "sources", "byId", enhancedNCEIhlrSourceId, "views", "length"], 0) - 1},
             "attributes", Object.values(ViewAttributes)
+        ],
+        [
+            "dama", pgEnv, "sources", "byId", ealSourceId, "views", "byIndex",
+            {from: 0, to: get(resp.json, ["dama", pgEnv, "sources", "byId", ealSourceId, "views", "length"], 0) - 1},
+            "attributes", Object.values(ViewAttributes)
         ]
     );
 
     const falcorCache = falcor.getCache();
 
     const hlrViews = getViews(hlrSourceId, falcorCache);
+    const ealViews = getViews(ealSourceId, falcorCache);
     const enhancedNCEIViews = getViews(enhancedNCEIhlrSourceId, falcorCache);
 
     const ltsHlrView = hlrViews[0].view_id;
+    const ltsEalView = ealViews[0].view_id;
     const ltsEnhancedNCEIView = enhancedNCEIViews[0].view_id;
+
     const sourceData = await falcor.get(
         ['hlr', pgEnv, 'source', hlrSourceId, 'view', ltsHlrView, 'eal'],
+        ['eal', pgEnv, 'source', ealSourceId, 'view', ltsEalView, 'data'],
         ['nri', 'totals', 'detailed', 'all'],
         ['ncei_storm_events_enhanced', pgEnv, 'source', enhancedNCEIhlrSourceId, 'view', ltsEnhancedNCEIView, 'lossByYearByType'],
-        ['dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', [ltsHlrView, ltsEnhancedNCEIView]]
+        ['dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', [ltsHlrView, ltsEalView, ltsEnhancedNCEIView]]
     );
 
     const tmpSrcIds = [];
@@ -73,6 +83,9 @@ export async function loader({request}) {
         avail: get(sourceData, ['json', 'hlr', pgEnv, 'source', hlrSourceId, 'view', ltsHlrView, 'eal'], [])
             .filter(d => !['Heavy Rain', 'Freezing Fog'].includes(d.nri_category)),
         availLTSViewId: ltsHlrView,
+        ealAvail: get(sourceData, ['json', 'eal', pgEnv, 'source', ealSourceId, 'view', ltsEalView, 'data'], [])
+            .filter(d => !['Heavy Rain', 'Freezing Fog'].includes(d.nri_category)),
+        ealAvailLTSViewId: ltsEalView,
         enhancedNCEILTSViewId: ltsEnhancedNCEIView,
         nri: get(sourceData, ['json', 'nri', 'totals', 'detailed', 'all', 0], []),
         enhancedNCEILoss: get(sourceData, ['json', 'ncei_storm_events_enhanced', pgEnv, 'source', enhancedNCEIhlrSourceId, 'view', ltsEnhancedNCEIView, 'lossByYearByType'], []),
@@ -204,7 +217,7 @@ const RenderLegend = () =>
     )
 
 export default function SourceThumb({source}) {
-    const {avail, nri, enhancedNCEILoss, dama, availLTSViewId, enhancedNCEILTSViewId, srcMeta} = useLoaderData();
+    const {avail, ealAvail, nri, enhancedNCEILoss, dama, availLTSViewId, enhancedNCEILTSViewId, ealAvailLTSViewId, srcMeta} = useLoaderData();
     const reformattedNRI = reformatNRI(nri);
     const {formattedData: reformattedEnhancedNCEI, nri_categories} = reformatEnhancedNCEI(enhancedNCEILoss);
     const blockClasses = `w-full p-4 my-1 block border flex flex-col`
@@ -231,12 +244,13 @@ export default function SourceThumb({source}) {
                     }}
                 />
             </div>
+
             <div className={blockClasses} style={{height: '500px'}}>
                 <label key={'ealsAvailTitle'} className={'text-lg'}>EALs (AVAIL) </label>
-                <label key={'ealsAvailDeps'} className={'text-sm'}>using: <RenderViewDependencies dama={dama} srcMeta={srcMeta} viewId={availLTSViewId}/></label>
+                <label key={'ealsAvailDeps'} className={'text-sm'}>using: <RenderViewDependencies dama={dama} srcMeta={srcMeta} viewId={ealAvailLTSViewId}/></label>
                 <BarGraph
-                    key={'ealsAvail'}
-                    data={avail}
+                    key={'ealsFromEalAvail'}
+                    data={ealAvail}
                     keys={['swd_buildings', 'swd_crop', 'swd_population']}
                     indexBy={'nri_category'}
                     axisBottom={d => d}
@@ -249,6 +263,7 @@ export default function SourceThumb({source}) {
                     }}
                 />
             </div>
+
             <div className={blockClasses} style={{height: '500px'}}>
                 <label key={'ealsNriTitle'} className={'text-lg'}>EALs (NRI) </label>
                 <BarGraph

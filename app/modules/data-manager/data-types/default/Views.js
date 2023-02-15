@@ -1,10 +1,10 @@
-import {deleteView} from "~/modules/data-manager/data-types/utils/utils";
-import {DAMA_HOST} from "~/config";
-import {pgEnv} from "~/modules/data-manager/attributes";
 import {Link, useFetcher} from "@remix-run/react";
-//import { useRevalidator } from "@remix-run/react";
-import React, {useEffect} from "react";
+import React from "react";
 import {useNavigate} from "react-router-dom";
+import { makeAuthoritative } from "../utils/utils";
+import {DAMA_HOST} from "~/config";
+import {pgEnv} from '~/modules/data-manager/attributes'
+import get from 'lodash.get';
 
 const DeleteButton = ({text, viewId}) => (
     <Link className={'bg-red-50 hover:bg-red-400 hover:text-white p-2'} to={`/view/delete/${viewId}`}
@@ -13,7 +13,7 @@ const DeleteButton = ({text, viewId}) => (
     </Link>
 )
 
-const MakeAuthoritativeButton = ({text, viewId}) => {
+const MakeAuthoritativeButton = ({viewId, source, meta}) => {
     const navigate = useNavigate();
     const fetcher = useFetcher();
 
@@ -23,13 +23,23 @@ const MakeAuthoritativeButton = ({text, viewId}) => {
 
     return (
         <button
-            className={'bg-red-50 hover:bg-red-400 hover:text-white p-2'}
+            className={`bg-blue-50 ${get(meta, 'authoritative') === 'true' ? `cursor-not-allowed` : `hover:bg-blue-400 hover:text-white`} p-2`}
+            disabled={get(meta, 'authoritative') === 'true'}
             onClick={async () => {
-
+                await makeAuthoritative(`${DAMA_HOST}/dama-admin/${pgEnv}`, viewId)
+                await fetcher.submit(
+                    {},
+                    {
+                        method: "post",
+                        action: `/source/${source.source_id}?index`,
+                        formData: 'this is fd'
+                    }
+                );
+                return navigate(`/source/${source.source_id}/views`, { replace: true })
             }
             } >
 
-            Make Authoritative
+            {get(meta, 'authoritative') === 'true' ? 'Authoritative' : 'Make Authoritative'}
         </button>
     )
 }
@@ -77,7 +87,7 @@ const Views = ({source, views, user, falcor}) => {
                                                 ))
                                         }
                                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 flex justify-end">
-                                            <MakeAuthoritativeButton viewId={view.view_id}/>
+                                            <MakeAuthoritativeButton viewId={view.view_id} source={source} meta={view.metadata}/>
                                         </dd>
                                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 flex justify-end">
                                             <DeleteButton text={'delete'} viewId={view.view_id}/>

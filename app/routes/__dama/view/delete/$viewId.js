@@ -34,7 +34,7 @@ const DeleteButton = ({text, viewId, sourceId}) => {
                     {},
                     {
                         method: "post",
-                        action: `/source/${sourceId}`,
+                        action: `/source/${sourceId}?index`,
                         formData: 'this is fd'
                     }
                 );
