@@ -2985,6 +2985,10 @@ video {
     gap: 1rem;
   }
 
+  .sm\:gap-20 {
+    gap: 5rem;
+  }
+
   .sm\:gap-8 {
     gap: 2rem;
   }

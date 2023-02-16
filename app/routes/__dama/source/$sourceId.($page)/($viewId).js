@@ -10,49 +10,64 @@ import get from 'lodash.get'
 export async function loader({params, request}) {
     const {viewId} = params;
 
-    const depData = await falcor.get(['dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', viewId]);
+    const dependenciesData = await falcor.get(['dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', viewId]);
+    const dependentsData = await falcor.get(['dama', pgEnv, 'views', "byId", viewId, 'dependents']);
+
 
     // collect all dependency sources, fetch meta for them.
     const tmpSrcIds = [];
     const tmpViewIds = [];
-    Object.keys(get(depData, ['json', 'dama', pgEnv, 'viewDependencySubgraphs', 'byViewId'], {}))
-        .forEach(viewId => {
+    get(dependenciesData, ['json', 'dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', viewId, 'dependencies'])
+        .forEach(d => {
             tmpSrcIds.push(
-                ...get(depData, ['json', 'dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', viewId, 'dependencies'], [])
-                    .map(d => d.source_id)
-                    .filter(d => d)
+                d.source_id
             );
             tmpViewIds.push(
-                ...get(depData, ['json', 'dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', viewId, 'dependencies'], [])
-                    .map(d => d.view_id)
-                    .filter(d => d)
+                d.view_id
+            );
+        });
+
+    get(dependentsData, ['json', 'dama', pgEnv, 'views', "byId", viewId, 'dependents'])
+        .forEach(d => {
+            tmpSrcIds.push(
+                d.source_id
+            );
+            tmpViewIds.push(
+                d.view_id
             );
         });
 
     await falcor.get(['dama', pgEnv, 'sources', 'byId', tmpSrcIds, 'attributes', ['type', 'name']]);
 
-    await falcor.get(['dama', pgEnv, 'views', 'byId', tmpViewIds, 'attributes', ['version', '_modified_timestamp', 'last_updated']]);
+    await falcor.get(['dama', pgEnv, 'views', 'byId', tmpViewIds, 'attributes', ['version', 'metadata', '_modified_timestamp', 'last_updated']]);
 
     // fin
     const falcorCache = falcor.getCache();
 
     return {
         dependencies: get(falcorCache, ['dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', viewId, 'value'], {}),
-        srcMeta: get(falcorCache, ['dama', pgEnv, 'sources', 'byId']),
-        viewMeta: get(falcorCache, ['dama', pgEnv, 'views', 'byId']),
+        dependents: get(falcorCache, ['dama', pgEnv, 'views', "byId", viewId, 'dependents', 'value'], []),
+        srcMeta: get(falcorCache, ['dama', pgEnv, 'sources', 'byId'], {}),
+        viewMeta: get(falcorCache, ['dama', pgEnv, 'views', 'byId'], {}),
     }
 }
 
 // authoritative routes(copies) for viewIds on home page
 // changelog.md for changes, and versionId goes in meta. start with ncei enhanced. nri cat mapping. coastal maps to hurricanes too.
-// make authoritative button
+
 
 // authoritative version auto selected in version dropdown.
 // authoritative version always bold? or has an identifier.
 
 // create EAL source
+// make authoritative button
+
+
 // create a page that pulls from a falcor route that takes in EAL viewId, and pulls all the dependencies, and rns a complex sql using them.
+
+
 // make EALs come close to old data; compare ncei raw with mars raw.
+    // compare current ncei with old version
 
 
 const RenderDeps = ({dependencies, viewId, srcMeta, viewMeta}) => {
@@ -104,7 +119,72 @@ const RenderDeps = ({dependencies, viewId, srcMeta, viewMeta}) => {
                                     </dd>
 
                                     <dd key={`${i}_5`} className="mt-1 text-sm text-red-400 sm:mt-0">
-                                        <sspan className={'float-right italic'}> outdated</sspan>
+                                        <span className={'float-right italic'}> {
+                                            get(viewMeta, [d.view_id, 'attributes', 'metadata', 'value', 'authoritative']) === 'true' ? ''
+                                                : 'outdated'
+                                        }</span>
+                                    </dd>
+                                </div>
+
+                            )
+                        )
+                }
+            </dl>
+
+        </div>
+    )
+}
+
+const RenderDependents = ({dependents, viewId, srcMeta, viewMeta}) => {
+    return (
+        <div className='w-full p-4 bg-white shadow mb-4'>
+            <label className={'text-lg'}>Dependents</label>
+            <div className="py-4 sm:py-2 mt-2 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6 border-b-2">
+                {
+                    ['Source Name', 'Type', 'Version', 'Last Updated']
+                        .map(key => (
+                            <dt key={key} className="text-sm font-medium text-gray-600">
+                                {key}
+                            </dt>
+                        ))
+                }
+            </div>
+            <dl className="sm:divide-y sm:divide-gray-200">
+                {
+                    dependents
+                        .map((d, i) => (
+                                <div key={`${i}_0`} className="py-4 sm:py-5 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6">
+                                    <dd key={`${i}_1`} className="mt-1 text-sm text-gray-900 sm:mt-0 align-middle">
+                                        <Link to={`/source/${d.source_id}/overview`}>
+                                            {get(srcMeta, [d.source_id, 'attributes', 'name'])}
+                                        </Link>
+                                    </dd>
+
+                                    <dd key={`${i}_2`} className="mt-1 text-sm text-gray-900 sm:mt-0 align-middle">
+                                        <Link to={`/source/${d.source_id}/overview`}>
+                                            {get(srcMeta, [d.source_id, 'attributes', 'type'])}
+                                        </Link>
+                                    </dd>
+
+                                    <dd key={`${i}_3`} className="mt-1 text-sm text-gray-900 sm:mt-0 align-middle">
+                                        <Link to={`/source/${d.source_id}/views/${d.view_id}`}>
+                                            {get(viewMeta, [d.view_id, 'attributes', 'version'])}
+                                        </Link>
+                                    </dd>
+
+                                    <dd key={`${i}_4`} className="mt-1 text-sm text-gray-900 sm:mt-0 align-middle">
+                                        <Link to={`/source/${d.source_id}/views/${d.view_id}`}>
+                                            {typeof get(viewMeta, [d.view_id, 'attributes', '_modified_timestamp', 'value']) === 'object' ? '' :
+                                                get(viewMeta, [d.view_id, 'attributes', '_modified_timestamp', 'value'])
+                                            }
+                                        </Link>
+                                    </dd>
+
+                                    <dd key={`${i}_5`} className="mt-1 text-sm text-red-400 sm:mt-0">
+                                        <span className={'float-right italic'}> {
+                                            get(viewMeta, [d.view_id, 'attributes', 'metadata', 'value', 'authoritative']) === 'true' ? ''
+                                                : 'outdated'
+                                        }</span>
                                     </dd>
                                 </div>
 
@@ -118,9 +198,9 @@ const RenderDeps = ({dependencies, viewId, srcMeta, viewMeta}) => {
 }
 
 export default function Dama() {
-    const {dependencies, srcMeta, viewMeta} = useLoaderData();
+    const {dependencies, dependents, srcMeta, viewMeta} = useLoaderData();
     const {sourceId, page, viewId} = useParams();
-
+    // render dependents as well.
     return (
         <div>
             <div className='text-xl font-medium overflow-hidden p-2 border-b '>
@@ -142,6 +222,7 @@ export default function Dama() {
             />
 
             <RenderDeps viewId={viewId} dependencies={dependencies} srcMeta={srcMeta} viewMeta={viewMeta}/>
+            <RenderDependents viewId={viewId} dependents={dependents} srcMeta={srcMeta} viewMeta={viewMeta}/>
         </div>
     )
 }

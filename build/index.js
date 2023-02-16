@@ -3734,7 +3734,7 @@ var import_jsx_dev_runtime30 = require("react/jsx-dev-runtime"), FalcorContext =
 };
 
 // app/styles/app.css
-var app_default = "/build/_assets/app-DVNY7QHI.css";
+var app_default = "/build/_assets/app-QUVGQZK3.css";
 
 // app/theme.js
 var ppdaf = () => {
@@ -4928,16 +4928,16 @@ var import_jsx_dev_runtime36 = require("react/jsx-dev-runtime"), Edit = ({ start
     lineNumber: 53,
     columnNumber: 5
   }, this);
-}, OverviewEdit = ({ source, views, user }) => {
+}, OverviewEdit = ({ source: source2, views, user }) => {
   let [editing, setEditing] = import_react41.default.useState(null);
   return /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("div", { className: "overflow-hidden", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("div", { className: "pl-4 py-6 hover:py-6 sm:pl-6 flex justify-between group", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("div", { className: "flex-1 mt-1 max-w-2xl text-sm text-gray-500", children: editing === "description" ? /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)(
         Edit,
         {
-          startValue: (0, import_lodash10.default)(source, "description", ""),
+          startValue: (0, import_lodash10.default)(source2, "description", ""),
           attr: "description",
-          sourceId: source.source_id,
+          sourceId: source2.source_id,
           cancel: () => setEditing(null)
         },
         void 0,
@@ -4948,7 +4948,7 @@ var import_jsx_dev_runtime36 = require("react/jsx-dev-runtime"), Edit = ({ start
           columnNumber: 13
         },
         this
-      ) : (0, import_lodash10.default)(source, "description", !1) || "No Description" }, void 0, !1, {
+      ) : (0, import_lodash10.default)(source2, "description", !1) || "No Description" }, void 0, !1, {
         fileName: "app/modules/data-manager/data-types/default/Overview.js",
         lineNumber: 67,
         columnNumber: 9
@@ -4969,7 +4969,7 @@ var import_jsx_dev_runtime36 = require("react/jsx-dev-runtime"), Edit = ({ start
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("div", { className: "border-t border-gray-200 px-4 py-5 sm:p-0", children: /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: [
       Object.keys(SourceAttributes).filter((d) => !["source_id", "metadata", "description", "statistics", "category"].includes(d)).map((attr, i) => {
-        let val = typeof source[attr] == "object" ? JSON.stringify(source[attr]) : source[attr];
+        let val = typeof source2[attr] == "object" ? JSON.stringify(source2[attr]) : source2[attr];
         return /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("div", { className: "flex justify-between group", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("div", { className: "flex-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime36.jsxDEV)("dt", { className: "text-sm font-medium text-gray-500 py-5", children: attr }, void 0, !1, {
@@ -4982,7 +4982,7 @@ var import_jsx_dev_runtime36 = require("react/jsx-dev-runtime"), Edit = ({ start
               {
                 startValue: val,
                 attr,
-                sourceId: source.source_id,
+                sourceId: source2.source_id,
                 cancel: () => setEditing(null)
               },
               void 0,
@@ -5071,7 +5071,7 @@ var import_jsx_dev_runtime36 = require("react/jsx-dev-runtime"), Edit = ({ start
 }, Overview_default = OverviewEdit;
 
 // app/modules/data-manager/data-types/default/Metadata.js
-var import_react43 = require("react"), import_lodash11 = require("lodash.get"), import_jsx_dev_runtime37 = require("react/jsx-dev-runtime"), Metadata = ({ source, meta: meta2 }) => (console.log("meta", meta2), !meta2 || Object.keys(meta2).length === 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime37.jsxDEV)("div", { children: " Metadata Not Available " }, void 0, !1, {
+var import_react43 = require("react"), import_lodash11 = require("lodash.get"), import_jsx_dev_runtime37 = require("react/jsx-dev-runtime"), Metadata = ({ source: source2, meta: meta2 }) => (console.log("meta", meta2), !meta2 || Object.keys(meta2).length === 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime37.jsxDEV)("div", { children: " Metadata Not Available " }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/default/Metadata.js",
   lineNumber: 8,
   columnNumber: 55
@@ -5128,16 +5128,16 @@ var import_react43 = require("react"), import_lodash11 = require("lodash.get"), 
 
 // app/modules/data-manager/data-types/default/AddView.js
 var import_react44 = __toESM(require("react")), import_lodash12 = __toESM(require("lodash.get"));
-var import_jsx_dev_runtime38 = require("react/jsx-dev-runtime"), AddView = ({ source, views, user }) => {
-  let newVersion = Math.max(...views.map((v) => parseInt(v.version))) + 1, [versionName, setVersionName] = (0, import_react44.useState)(newVersion), sourceTypeToFileNameMapping = source.type.substring(0, 3) === "tl_" ? "tiger_2017" : source.type, CreateComp = import_react44.default.useMemo(
+var import_jsx_dev_runtime38 = require("react/jsx-dev-runtime"), AddView = ({ source: source2, views, user }) => {
+  let newVersion = Math.max(...views.map((v) => parseInt(v.version))) + 1, [versionName, setVersionName] = (0, import_react44.useState)(newVersion), sourceTypeToFileNameMapping = source2.type.substring(0, 3) === "tl_" ? "tiger_2017" : source2.type, CreateComp = import_react44.default.useMemo(
     () => (0, import_lodash12.default)(DataTypes, `[${sourceTypeToFileNameMapping}].sourceCreate.component`, () => /* @__PURE__ */ (0, import_jsx_dev_runtime38.jsxDEV)("div", {}, void 0, !1, {
       fileName: "app/modules/data-manager/data-types/default/AddView.js",
       lineNumber: 10,
       columnNumber: 93
     }, this)),
-    [DataTypes, source, views, user]
+    [DataTypes, source2, views, user]
   );
-  return console.log("??", newVersion, source), /* @__PURE__ */ (0, import_jsx_dev_runtime38.jsxDEV)(import_jsx_dev_runtime38.Fragment, { children: [
+  return console.log("??", newVersion, source2), /* @__PURE__ */ (0, import_jsx_dev_runtime38.jsxDEV)(import_jsx_dev_runtime38.Fragment, { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime38.jsxDEV)("div", { className: "flex-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 text-sm font-medium text-gray-500 ", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime38.jsxDEV)("label", { children: "Version Name:" }, void 0, !1, {
         fileName: "app/modules/data-manager/data-types/default/AddView.js",
@@ -5165,7 +5165,7 @@ var import_jsx_dev_runtime38 = require("react/jsx-dev-runtime"), AddView = ({ so
       lineNumber: 15,
       columnNumber: 9
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime38.jsxDEV)(CreateComp, { source, existingSource: source, user, newVersion: versionName }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime38.jsxDEV)(CreateComp, { source: source2, existingSource: source2, user, newVersion: versionName }, void 0, !1, {
       fileName: "app/modules/data-manager/data-types/default/AddView.js",
       lineNumber: 23,
       columnNumber: 9
@@ -5195,8 +5195,8 @@ var checkApiResponse = async (res) => {
 }, formatDate = (dateString) => {
   let options = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: !1 };
   return new Date(dateString).toLocaleDateString(void 0, options);
-}, createNewDataSource = async (rtPfx, source, type) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source, res = await fetch(`${rtPfx}/createNewDamaSource`, {
+}, createNewDataSource = async (rtPfx, source2, type) => {
+  let { name: sourceName, display_name: sourceDisplayName } = source2, res = await fetch(`${rtPfx}/createNewDamaSource`, {
     method: "POST",
     body: JSON.stringify({
       name: sourceName,
@@ -5273,22 +5273,26 @@ var checkApiResponse = async (res) => {
 };
 
 // app/modules/data-manager/data-types/default/Views.js
-var import_lodash13 = __toESM(require("lodash.get")), import_jsx_dev_runtime39 = require("react/jsx-dev-runtime"), DeleteButton = ({ text, viewId }) => /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(
-  import_react45.Link,
-  {
-    className: "bg-red-50 hover:bg-red-400 hover:text-white p-2",
-    to: `/view/delete/${viewId}`,
-    children: text
-  },
-  void 0,
-  !1,
-  {
-    fileName: "app/modules/data-manager/data-types/default/Views.js",
-    lineNumber: 10,
-    columnNumber: 5
-  },
-  this
-), MakeAuthoritativeButton = ({ viewId, source, meta: meta2 }) => {
+var import_lodash13 = __toESM(require("lodash.get")), import_jsx_dev_runtime39 = require("react/jsx-dev-runtime"), DeleteButton = ({ text, viewId, meta: meta2 }) => {
+  let navigate = (0, import_react_router_dom5.useNavigate)();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(
+    "button",
+    {
+      disabled: (0, import_lodash13.default)(meta2, "authoritative") === "true",
+      className: `bg-red-50 p-2 ${(0, import_lodash13.default)(meta2, "authoritative") === "true" ? "cursor-not-allowed" : "hover:bg-red-400 hover:text-white"}`,
+      onClick: () => navigate(`/view/delete/${viewId}`),
+      children: text
+    },
+    void 0,
+    !1,
+    {
+      fileName: "app/modules/data-manager/data-types/default/Views.js",
+      lineNumber: 12,
+      columnNumber: 9
+    },
+    this
+  );
+}, MakeAuthoritativeButton = ({ viewId, source: source2, meta: meta2 }) => {
   let navigate = (0, import_react_router_dom5.useNavigate)(), fetcher = (0, import_react45.useFetcher)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(
     "button",
@@ -5299,17 +5303,17 @@ var import_lodash13 = __toESM(require("lodash.get")), import_jsx_dev_runtime39 =
         {},
         {
           method: "post",
-          action: `/source/${source.source_id}?index`,
+          action: `/source/${source2.source_id}?index`,
           formData: "this is fd"
         }
-      ), navigate(`/source/${source.source_id}/views`, { replace: !0 })),
+      ), navigate(`/source/${source2.source_id}/views`, { replace: !0 })),
       children: (0, import_lodash13.default)(meta2, "authoritative") === "true" ? "Authoritative" : "Make Authoritative"
     },
     void 0,
     !1,
     {
       fileName: "app/modules/data-manager/data-types/default/Views.js",
-      lineNumber: 25,
+      lineNumber: 27,
       columnNumber: 9
     },
     this
@@ -5322,17 +5326,17 @@ var import_lodash13 = __toESM(require("lodash.get")), import_jsx_dev_runtime39 =
     " "
   ] }, void 0, !0, {
     fileName: "app/modules/data-manager/data-types/default/Views.js",
-    lineNumber: 50,
+    lineNumber: 52,
     columnNumber: 21
   }, this) : processedValue;
-}, Views = ({ source, views, user, falcor: falcor3 }) => (console.log(source), /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("div", { children: [
+}, Views = ({ source: source2, views, user, falcor: falcor3 }) => (console.log(source2), /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("div", { children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("div", { className: "py-4 sm:py-2 sm:grid sm:grid-cols-6 sm:gap-4 sm:px-6 border-b-2", children: ["view_id", "version", "last_updated", "_modified_timestamp"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("dt", { className: "text-sm font-medium text-gray-600", children: key }, key, !1, {
     fileName: "app/modules/data-manager/data-types/default/Views.js",
-    lineNumber: 66,
+    lineNumber: 68,
     columnNumber: 29
   }, this)) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/default/Views.js",
-    lineNumber: 62,
+    lineNumber: 64,
     columnNumber: 13
   }, this),
   /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("div", { className: "border-t border-gray-200 px-4 py-5 sm:p-0 overflow-auto h-[700px]", children: /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: views.map(
@@ -5341,9 +5345,9 @@ var import_lodash13 = __toESM(require("lodash.get")), import_jsx_dev_runtime39 =
         "dd",
         {
           className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle",
-          children: /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(RenderValue, { value: view[key], isLink: key === "view_id", source_id: source.source_id }, void 0, !1, {
+          children: /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(RenderValue, { value: view[key], isLink: key === "view_id", source_id: source2.source_id }, void 0, !1, {
             fileName: "app/modules/data-manager/data-types/default/Views.js",
-            lineNumber: 85,
+            lineNumber: 87,
             columnNumber: 57
           }, this)
         },
@@ -5351,46 +5355,46 @@ var import_lodash13 = __toESM(require("lodash.get")), import_jsx_dev_runtime39 =
         !1,
         {
           fileName: "app/modules/data-manager/data-types/default/Views.js",
-          lineNumber: 83,
+          lineNumber: 85,
           columnNumber: 53
         },
         this
       )),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 flex justify-end", children: /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(MakeAuthoritativeButton, { viewId: view.view_id, source, meta: view.metadata }, void 0, !1, {
-        fileName: "app/modules/data-manager/data-types/default/Views.js",
-        lineNumber: 90,
-        columnNumber: 45
-      }, this) }, void 0, !1, {
-        fileName: "app/modules/data-manager/data-types/default/Views.js",
-        lineNumber: 89,
-        columnNumber: 41
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 flex justify-end", children: /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(DeleteButton, { text: "delete", viewId: view.view_id }, void 0, !1, {
-        fileName: "app/modules/data-manager/data-types/default/Views.js",
-        lineNumber: 93,
-        columnNumber: 45
-      }, this) }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 flex justify-end", children: /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(MakeAuthoritativeButton, { viewId: view.view_id, source: source2, meta: view.metadata }, void 0, !1, {
         fileName: "app/modules/data-manager/data-types/default/Views.js",
         lineNumber: 92,
+        columnNumber: 45
+      }, this) }, void 0, !1, {
+        fileName: "app/modules/data-manager/data-types/default/Views.js",
+        lineNumber: 91,
+        columnNumber: 41
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 flex justify-end", children: /* @__PURE__ */ (0, import_jsx_dev_runtime39.jsxDEV)(DeleteButton, { text: "delete", viewId: view.view_id, meta: view.metadata }, void 0, !1, {
+        fileName: "app/modules/data-manager/data-types/default/Views.js",
+        lineNumber: 95,
+        columnNumber: 45
+      }, this) }, void 0, !1, {
+        fileName: "app/modules/data-manager/data-types/default/Views.js",
+        lineNumber: 94,
         columnNumber: 41
       }, this)
     ] }, i, !0, {
       fileName: "app/modules/data-manager/data-types/default/Views.js",
-      lineNumber: 79,
+      lineNumber: 81,
       columnNumber: 37
     }, this)
   ) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/default/Views.js",
-    lineNumber: 73,
+    lineNumber: 75,
     columnNumber: 17
   }, this) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/default/Views.js",
-    lineNumber: 72,
+    lineNumber: 74,
     columnNumber: 13
   }, this)
 ] }, void 0, !0, {
   fileName: "app/modules/data-manager/data-types/default/Views.js",
-  lineNumber: 61,
+  lineNumber: 63,
   columnNumber: 9
 }, this)), Views_default = Views;
 
@@ -6448,8 +6452,8 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
     typeof newState == "function" ? this.state = newState(this.state) : this.state = { ...this.state, ...newState }, this.dispatchStateUpdate(this, this.state);
   }
   _onAdd(mapboxMap, falcor3, updateHover) {
-    return this.sources.forEach(({ id: id3, source }) => {
-      mapboxMap.getSource(id3) || mapboxMap.addSource(id3, source);
+    return this.sources.forEach(({ id: id3, source: source2 }) => {
+      mapboxMap.getSource(id3) || mapboxMap.addSource(id3, source2);
     }), this.layers.forEach((layer) => {
       mapboxMap.getLayer(layer.id) || (layer.beneath && mapboxMap.getLayer(layer.beneath) ? mapboxMap.addLayer(layer, layer.beneath) : mapboxMap.addLayer(layer), this.isVisible || this._setVisibilityNone(mapboxMap, layer.id), this.layerVisibility[layer.id] = mapboxMap.getLayoutProperty(layer.id, "visibility"));
     }), this.onHover && this.addHover(mapboxMap, updateHover), this.onClick && this.addClick(mapboxMap), this.onBoxSelect && (this.state = {
@@ -6491,12 +6495,12 @@ var id = -1, getLayerId = () => `avl-layer-${++id}`, DefaultCallback = () => nul
       let hoveredFeatures = this.hoveredFeatures.get(layerId) || /* @__PURE__ */ new Map();
       this.hoveredFeatures.set(layerId, /* @__PURE__ */ new Map());
       let hoverFeatures = (features2) => {
-        features2.forEach(({ id: id3, source, sourceLayer }) => {
+        features2.forEach(({ id: id3, source: source2, sourceLayer }) => {
           if (id3 != null)
             if (hoveredFeatures.has(id3))
               this.hoveredFeatures.get(layerId).set(id3, hoveredFeatures.get(id3)), hoveredFeatures.delete(id3);
             else {
-              let value = { id: id3, source, sourceLayer };
+              let value = { id: id3, source: source2, sourceLayer };
               this.hoveredFeatures.get(layerId).set(id3, value), mapboxMap.setFeatureState(value, { hover: !0 });
             }
         });
@@ -7243,16 +7247,16 @@ var import_jsx_dev_runtime47 = require("react/jsx-dev-runtime"), Map2 = ({ layer
     lineNumber: 105,
     columnNumber: 5
   }, this);
-}, MapPage = ({ source, views, user }) => {
+}, MapPage = ({ source: source2, views, user }) => {
   let { falcor: falcor3 } = useFalcor(), [activeView] = (0, import_react56.useState)(0), [mapData] = (0, import_react56.useState)((0, import_lodash19.default)(views, `[${activeView}].metadata.tiles`, {})), [editing, setEditing] = import_react56.default.useState(null), viewId = import_react56.default.useMemo(() => (0, import_lodash19.default)(views, `[${activeView}].id`, null), [views, activeView]), layer = import_react56.default.useMemo(() => ({
-    name: source.name,
-    source,
+    name: source2.name,
+    source: source2,
     views,
     activeView,
     sources: (0, import_lodash19.default)(mapData, "sources", []),
     layers: (0, import_lodash19.default)(mapData, "layers", []),
     symbology: (0, import_lodash19.default)(mapData, "symbology", [])
-  }), [source, views, mapData, activeView]), save = async (attr, value) => {
+  }), [source2, views, mapData, activeView]), save = async (attr, value) => {
     if (viewId)
       try {
         let update = value, val = (0, import_lodash19.default)(views, `[${activeView}].metadata`, {});
@@ -7379,7 +7383,7 @@ var import_jsx_dev_runtime47 = require("react/jsx-dev-runtime"), Map2 = ({ layer
     lineNumber: 177,
     columnNumber: 5
   }, this);
-}, Table = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime47.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
+}, Table = ({ source: source2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime47.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/freight_atlas_shapefile/index.js",
   lineNumber: 231,
   columnNumber: 10
@@ -7411,8 +7415,8 @@ var import_jsx_dev_runtime48 = require("react/jsx-dev-runtime"), availableStats 
   "min_pct_epochs_reporting",
   "var_pct_epochs_reporting",
   "stddev_pct_epochs_reporting"
-], Stats = ({ source }) => {
-  let [state, setState] = (0, import_react57.useState)("ny"), [stat, setStat] = (0, import_react57.useState)("total_tmcs"), availableStates = Object.keys(source.statistics).sort(), selectedStats = source.statistics[state], lineData = (0, import_react57.useMemo)(() => {
+], Stats = ({ source: source2 }) => {
+  let [state, setState] = (0, import_react57.useState)("ny"), [stat, setStat] = (0, import_react57.useState)("total_tmcs"), availableStates = Object.keys(source2.statistics).sort(), selectedStats = source2.statistics[state], lineData = (0, import_react57.useMemo)(() => {
     let d = {}, yrmos = Object.keys(selectedStats).sort();
     for (let yrmo of yrmos) {
       let frcs = Object.keys(selectedStats[yrmo]);
@@ -7496,8 +7500,8 @@ var import_react59 = require("react");
 
 // app/modules/data-manager/data-types/ncei_storm_events/create.js
 var import_react58 = __toESM(require("react"));
-var import_react_router_dom6 = require("react-router-dom"), import_jsx_dev_runtime49 = require("react/jsx-dev-runtime"), CallServer = async ({ rtPfx, source, etlContextId, userId, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "ncei_storm_events");
+var import_react_router_dom6 = require("react-router-dom"), import_jsx_dev_runtime49 = require("react/jsx-dev-runtime"), CallServer = async ({ rtPfx, source: source2, etlContextId, userId, newVersion, navigate }) => {
+  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, "ncei_storm_events");
   console.log("calling server?", etlContextId);
   let view = await submitViewMeta(
     {
@@ -7514,9 +7518,9 @@ var import_react_router_dom6 = require("react-router-dom"), import_jsx_dev_runti
   url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table_name", "details"), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id);
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), console.log("res", await stgLyrDataRes.json()), navigate(`/source/${src.source_id}/views`);
-}, Create2 = ({ source, user, newVersion }) => {
+}, Create2 = ({ source: source2, user, newVersion }) => {
   let navigate = (0, import_react_router_dom6.useNavigate)(), [etlContextId, setEtlContextId] = import_react58.default.useState();
-  console.log("src", source);
+  console.log("src", source2);
   let rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react58.default.useEffect(() => {
     async function fetchData() {
@@ -7528,7 +7532,7 @@ var import_react_router_dom6 = require("react-router-dom"), import_jsx_dev_runti
     "button",
     {
       className: "align-right",
-      onClick: () => CallServer({ rtPfx, source, etlContextId, userId: user.id, newVersion, navigate }),
+      onClick: () => CallServer({ rtPfx, source: source2, etlContextId, userId: user.id, newVersion, navigate }),
       children: "Add New Source"
     },
     void 0,
@@ -7548,7 +7552,7 @@ var import_react_router_dom6 = require("react-router-dom"), import_jsx_dev_runti
 
 // app/modules/data-manager/data-types/ncei_storm_events/index.js
 var import_lodash20 = __toESM(require("lodash.get"));
-var import_jsx_dev_runtime50 = require("react/jsx-dev-runtime"), Table2 = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime50.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
+var import_jsx_dev_runtime50 = require("react/jsx-dev-runtime"), Table2 = ({ source: source2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime50.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/ncei_storm_events/index.js",
   lineNumber: 11,
   columnNumber: 12
@@ -7572,12 +7576,12 @@ var import_jsx_dev_runtime50 = require("react/jsx-dev-runtime"), Table2 = ({ sou
     columnNumber: 5
   },
   this
-), Stats2 = ({ source, views }) => {
+), Stats2 = ({ source: source2, views }) => {
   let { falcor: falcor3, falcorCache } = useFalcor(), [activeView, setActiveView] = (0, import_react59.useState)(views[0].view_id), [compareView, setCompareView] = (0, import_react59.useState)(views[0].view_id), [compareMode, setCompareMode] = (0, import_react59.useState)(void 0);
   (0, import_react59.useEffect)(() => {
-    falcor3.get(["ncei_storm_events", pgEnv, "source", source.source_id, "view", [activeView, compareView], ["numRows", "eventsByYear", "eventsByType"]]);
+    falcor3.get(["ncei_storm_events", pgEnv, "source", source2.source_id, "view", [activeView, compareView], ["numRows", "eventsByYear", "eventsByType"]]);
   }, [activeView, compareView]);
-  let metadataActiveView = (0, import_lodash20.default)(falcorCache, ["ncei_storm_events", pgEnv, "source", source.source_id, "view", activeView]), metadataCompareView = (0, import_lodash20.default)(falcorCache, ["ncei_storm_events", pgEnv, "source", source.source_id, "view", compareView]);
+  let metadataActiveView = (0, import_lodash20.default)(falcorCache, ["ncei_storm_events", pgEnv, "source", source2.source_id, "view", activeView]), metadataCompareView = (0, import_lodash20.default)(falcorCache, ["ncei_storm_events", pgEnv, "source", source2.source_id, "view", compareView]);
   return !metadataActiveView || metadataActiveView.length === 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime50.jsxDEV)("div", { children: " Stats Not Available " }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/ncei_storm_events/index.js",
     lineNumber: 38,
@@ -7821,8 +7825,8 @@ var import_react61 = require("react");
 
 // app/modules/data-manager/data-types/ncei_storm_events_enhanced/create.js
 var import_react60 = __toESM(require("react")), import_lodash21 = __toESM(require("lodash.get"));
-var import_react_router_dom7 = require("react-router-dom"), import_jsx_dev_runtime51 = require("react/jsx-dev-runtime"), CallServer2 = async ({ rtPfx, source, etlContextId, userId, viewNCEI = {}, viewZTC = {}, viewCousubs = {}, viewTract = {} }, newVersion, navigate) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "ncei_storm_events_enhanced");
+var import_react_router_dom7 = require("react-router-dom"), import_jsx_dev_runtime51 = require("react/jsx-dev-runtime"), CallServer2 = async ({ rtPfx, source: source2, etlContextId, userId, viewNCEI = {}, viewZTC = {}, viewCousubs = {}, viewTract = {} }, newVersion, navigate) => {
+  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, "ncei_storm_events_enhanced");
   console.log("calling server?", etlContextId, src);
   let view = await submitViewMeta({
     rtPfx,
@@ -7913,7 +7917,7 @@ var import_react_router_dom7 = require("react-router-dom"), import_jsx_dev_runti
   fileName: "app/modules/data-manager/data-types/ncei_storm_events_enhanced/create.js",
   lineNumber: 50,
   columnNumber: 9
-}, this), Create3 = ({ source, user, newVersion }) => {
+}, this), Create3 = ({ source: source2, user, newVersion }) => {
   let navigate = (0, import_react_router_dom7.useNavigate)(), [etlContextId, setEtlContextId] = import_react60.default.useState(), [viewZTC, setViewZTC] = import_react60.default.useState(), [viewCousubs, setViewCousubs] = import_react60.default.useState(), [viewTract, setViewTract] = import_react60.default.useState(), [viewNCEI, setViewNCEI] = import_react60.default.useState(), [versionsZTC, setVersionsZTC] = import_react60.default.useState({ sources: [], views: [] }), [versionsCousubs, setVersionsCousubs] = import_react60.default.useState({ sources: [], views: [] }), [versionsTract, setVersionsTract] = import_react60.default.useState({ sources: [], views: [] }), [versionsNCEI, setVersionsNCEI] = import_react60.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react60.default.useEffect(() => {
     async function fetchData() {
@@ -7933,7 +7937,7 @@ var import_react_router_dom7 = require("react-router-dom"), import_jsx_dev_runti
         onClick: () => CallServer2(
           {
             rtPfx,
-            source,
+            source: source2,
             etlContextId,
             userId: user.id,
             viewNCEI: versionsNCEI.views.find((v) => v.view_id == viewNCEI),
@@ -7983,15 +7987,15 @@ var import_lodash22 = __toESM(require("lodash.get")), import_jsx_dev_runtime52 =
     columnNumber: 5
   },
   this
-), Stats3 = ({ source, views }) => {
+), Stats3 = ({ source: source2, views }) => {
   let { falcor: falcor3, falcorCache } = useFalcor(), [activeView, setActiveView] = (0, import_react61.useState)(views[0].view_id), [compareView, setCompareView] = (0, import_react61.useState)(views[0].view_id), [compareMode, setCompareMode] = (0, import_react61.useState)(void 0);
   (0, import_react61.useEffect)(() => {
     falcor3.get(
-      ["dama", pgEnv, "sources", "byId", source.source_id, "views", "invalidate"],
-      ["ncei_storm_events_enhanced", pgEnv, "source", source.source_id, "view", [activeView, compareView], ["numRows", "eventsByYear", "eventsByType"]]
+      ["dama", pgEnv, "sources", "byId", source2.source_id, "views", "invalidate"],
+      ["ncei_storm_events_enhanced", pgEnv, "source", source2.source_id, "view", [activeView, compareView], ["numRows", "eventsByYear", "eventsByType"]]
     );
   }, [activeView, compareView]);
-  let metadataActiveView = (0, import_lodash22.default)(falcorCache, ["ncei_storm_events_enhanced", pgEnv, "source", source.source_id, "view", activeView]), metadataCompareView = (0, import_lodash22.default)(falcorCache, ["ncei_storm_events_enhanced", pgEnv, "source", source.source_id, "view", compareView]);
+  let metadataActiveView = (0, import_lodash22.default)(falcorCache, ["ncei_storm_events_enhanced", pgEnv, "source", source2.source_id, "view", activeView]), metadataCompareView = (0, import_lodash22.default)(falcorCache, ["ncei_storm_events_enhanced", pgEnv, "source", source2.source_id, "view", compareView]);
   return !metadataActiveView || metadataActiveView.length === 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime52.jsxDEV)("div", { children: " Stats Not Available " }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/ncei_storm_events_enhanced/index.js",
     lineNumber: 34,
@@ -8253,7 +8257,7 @@ var import_lodash22 = __toESM(require("lodash.get")), import_jsx_dev_runtime52 =
     lineNumber: 39,
     columnNumber: 9
   }, this);
-}, Table3 = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime52.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
+}, Table3 = ({ source: source2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime52.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/ncei_storm_events_enhanced/index.js",
   lineNumber: 182,
   columnNumber: 12
@@ -8279,8 +8283,8 @@ var import_react63 = require("react");
 
 // app/modules/data-manager/data-types/zone_to_county/create.js
 var import_react62 = __toESM(require("react"));
-var import_react_router_dom8 = require("react-router-dom"), import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), CallServer3 = async ({ rtPfx, source, etlContextId, userId, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "zone_to_county");
+var import_react_router_dom8 = require("react-router-dom"), import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), CallServer3 = async ({ rtPfx, source: source2, etlContextId, userId, newVersion, navigate }) => {
+  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, "zone_to_county");
   console.log("src?", src);
   let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
     `${rtPfx}/hazard_mitigation/csvUploadAction`
@@ -8288,7 +8292,7 @@ var import_react_router_dom8 = require("react-router-dom"), import_jsx_dev_runti
   url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table_name", "zone_to_county"), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id);
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), navigate(`/source/${src.source_id}/views`);
-}, Create4 = ({ source, user, newVersion }) => {
+}, Create4 = ({ source: source2, user, newVersion }) => {
   let navigate = (0, import_react_router_dom8.useNavigate)(), [etlContextId, setEtlContextId] = import_react62.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react62.default.useEffect(() => {
     async function fetchData() {
@@ -8298,7 +8302,7 @@ var import_react_router_dom8 = require("react-router-dom"), import_jsx_dev_runti
     fetchData();
   }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)("button", { onClick: () => CallServer3({
     rtPfx,
-    source,
+    source: source2,
     etlContextId,
     userId: user.id,
     newVersion,
@@ -8315,7 +8319,7 @@ var import_react_router_dom8 = require("react-router-dom"), import_jsx_dev_runti
 }, create_default4 = Create4;
 
 // app/modules/data-manager/data-types/zone_to_county/index.js
-var import_jsx_dev_runtime54 = require("react/jsx-dev-runtime"), Table4 = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime54.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
+var import_jsx_dev_runtime54 = require("react/jsx-dev-runtime"), Table4 = ({ source: source2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime54.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/zone_to_county/index.js",
   lineNumber: 4,
   columnNumber: 10
@@ -8345,8 +8349,8 @@ var import_react65 = require("react"), import_lodash23 = require("lodash.get");
 
 // app/modules/data-manager/data-types/tiger_2017/create.js
 var import_react64 = __toESM(require("react"));
-var import_react_router_dom9 = require("react-router-dom"), import_jsx_dev_runtime55 = require("react/jsx-dev-runtime"), CallServer4 = async ({ rtPfx, source, etlContextId, userId, tigerTable, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, `tl_${tigerTable.toLowerCase()}`);
+var import_react_router_dom9 = require("react-router-dom"), import_jsx_dev_runtime55 = require("react/jsx-dev-runtime"), CallServer4 = async ({ rtPfx, source: source2, etlContextId, userId, tigerTable, newVersion, navigate }) => {
+  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, `tl_${tigerTable.toLowerCase()}`);
   console.log("src?", src);
   let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
     `${rtPfx}/hazard_mitigation/tigerDownloadAction`
@@ -8417,7 +8421,7 @@ var import_react_router_dom9 = require("react-router-dom"), import_jsx_dev_runti
   fileName: "app/modules/data-manager/data-types/tiger_2017/create.js",
   lineNumber: 33,
   columnNumber: 9
-}, this), Create5 = ({ source, user, newVersion }) => {
+}, this), Create5 = ({ source: source2, user, newVersion }) => {
   console.log(user);
   let navigate = (0, import_react_router_dom9.useNavigate)(), [etlContextId, setEtlContextId] = import_react64.default.useState(), [tigerTable, setTigerTable] = import_react64.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return console.log("comes here"), import_react64.default.useEffect(() => {
@@ -8433,7 +8437,7 @@ var import_react_router_dom9 = require("react-router-dom"), import_jsx_dev_runti
       {
         onClick: () => CallServer4({
           rtPfx,
-          source,
+          source: source2,
           etlContextId,
           userId: user.id,
           tigerTable,
@@ -8460,7 +8464,7 @@ var import_react_router_dom9 = require("react-router-dom"), import_jsx_dev_runti
 }, create_default5 = Create5;
 
 // app/modules/data-manager/data-types/tiger_2017/index.js
-var import_jsx_dev_runtime56 = require("react/jsx-dev-runtime"), Table5 = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime56.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
+var import_jsx_dev_runtime56 = require("react/jsx-dev-runtime"), Table5 = ({ source: source2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime56.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/tiger_2017/index.js",
   lineNumber: 6,
   columnNumber: 10
@@ -8567,8 +8571,8 @@ var import_react_router_dom10 = require("react-router-dom"), import_jsx_dev_runt
   fileName: "app/modules/data-manager/data-types/open_fema_data/create.js",
   lineNumber: 47,
   columnNumber: 9
-}, this), CallServer5 = async ({ rtPfx, source, etlContextId, userId, table, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, table);
+}, this), CallServer5 = async ({ rtPfx, source: source2, etlContextId, userId, table, newVersion, navigate }) => {
+  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, table);
   console.log("src?", src);
   let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
     `${rtPfx}/hazard_mitigation/openFemaDataLoader`
@@ -8576,7 +8580,7 @@ var import_react_router_dom10 = require("react-router-dom"), import_jsx_dev_runt
   url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table_name", table), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id);
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), navigate(`/source/${src.source_id}/views`);
-}, Create6 = ({ source, user, newVersion }) => {
+}, Create6 = ({ source: source2, user, newVersion }) => {
   let navigate = (0, import_react_router_dom10.useNavigate)(), [etlContextId, setEtlContextId] = import_react66.default.useState(), [table, setTable] = import_react66.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react66.default.useEffect(() => {
     async function fetchData() {
@@ -8588,7 +8592,7 @@ var import_react_router_dom10 = require("react-router-dom"), import_jsx_dev_runt
     RenderDatasets({ value: table, setValue: setTable, datasets }),
     /* @__PURE__ */ (0, import_jsx_dev_runtime57.jsxDEV)("button", { onClick: () => CallServer5({
       rtPfx,
-      source,
+      source: source2,
       etlContextId,
       userId: user.id,
       table,
@@ -8607,7 +8611,7 @@ var import_react_router_dom10 = require("react-router-dom"), import_jsx_dev_runt
 }, create_default6 = Create6;
 
 // app/modules/data-manager/data-types/open_fema_data/index.js
-var import_jsx_dev_runtime58 = require("react/jsx-dev-runtime"), Table6 = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime58.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
+var import_jsx_dev_runtime58 = require("react/jsx-dev-runtime"), Table6 = ({ source: source2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime58.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/open_fema_data/index.js",
   lineNumber: 6,
   columnNumber: 10
@@ -8637,8 +8641,8 @@ var import_react69 = require("react");
 
 // app/modules/data-manager/data-types/usda/create.js
 var import_react68 = __toESM(require("react"));
-var import_react_router_dom11 = require("react-router-dom"), import_jsx_dev_runtime59 = require("react/jsx-dev-runtime"), CallServer6 = async ({ rtPfx, source, etlContextId, userId, table, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, table);
+var import_react_router_dom11 = require("react-router-dom"), import_jsx_dev_runtime59 = require("react/jsx-dev-runtime"), CallServer6 = async ({ rtPfx, source: source2, etlContextId, userId, table, newVersion, navigate }) => {
+  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, table);
   console.log("src?", src);
   let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
     `${rtPfx}/hazard_mitigation/usdaLoader`
@@ -8646,7 +8650,7 @@ var import_react_router_dom11 = require("react-router-dom"), import_jsx_dev_runt
   url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table_name", table), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id);
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), navigate(`/source/${src.source_id}/views`);
-}, Create7 = ({ source, user, newVersion }) => {
+}, Create7 = ({ source: source2, user, newVersion }) => {
   let navigate = (0, import_react_router_dom11.useNavigate)(), [etlContextId, setEtlContextId] = import_react68.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react68.default.useEffect(() => {
     async function fetchData() {
@@ -8656,7 +8660,7 @@ var import_react_router_dom11 = require("react-router-dom"), import_jsx_dev_runt
     fetchData();
   }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime59.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime59.jsxDEV)("button", { onClick: () => CallServer6({
     rtPfx,
-    source,
+    source: source2,
     etlContextId,
     userId: user.id,
     table: "usda_crop_insurance_cause_of_loss",
@@ -8674,7 +8678,7 @@ var import_react_router_dom11 = require("react-router-dom"), import_jsx_dev_runt
 }, create_default7 = Create7;
 
 // app/modules/data-manager/data-types/usda/index.js
-var import_jsx_dev_runtime60 = require("react/jsx-dev-runtime"), Table7 = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime60.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
+var import_jsx_dev_runtime60 = require("react/jsx-dev-runtime"), Table7 = ({ source: source2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime60.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/usda/index.js",
   lineNumber: 5,
   columnNumber: 10
@@ -8704,8 +8708,8 @@ var import_react71 = require("react");
 
 // app/modules/data-manager/data-types/sba/create.js
 var import_react70 = __toESM(require("react"));
-var import_react_router_dom12 = require("react-router-dom"), import_jsx_dev_runtime61 = require("react/jsx-dev-runtime"), CallServer7 = async ({ rtPfx, source, etlContextId, userId, table, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, table);
+var import_react_router_dom12 = require("react-router-dom"), import_jsx_dev_runtime61 = require("react/jsx-dev-runtime"), CallServer7 = async ({ rtPfx, source: source2, etlContextId, userId, table, newVersion, navigate }) => {
+  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, table);
   console.log("src?", src);
   let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
     `${rtPfx}/hazard_mitigation/sbaLoader`
@@ -8713,7 +8717,7 @@ var import_react_router_dom12 = require("react-router-dom"), import_jsx_dev_runt
   url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table", table), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id);
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), navigate(`/source/${src.source_id}/views`);
-}, Create8 = ({ source, user, newVersion }) => {
+}, Create8 = ({ source: source2, user, newVersion }) => {
   let navigate = (0, import_react_router_dom12.useNavigate)(), [etlContextId, setEtlContextId] = import_react70.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react70.default.useEffect(() => {
     async function fetchData() {
@@ -8723,7 +8727,7 @@ var import_react_router_dom12 = require("react-router-dom"), import_jsx_dev_runt
     fetchData();
   }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime61.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime61.jsxDEV)("button", { onClick: () => CallServer7({
     rtPfx,
-    source,
+    source: source2,
     etlContextId,
     userId: user.id,
     table: "sba_disaster_loan_data_new",
@@ -8741,7 +8745,7 @@ var import_react_router_dom12 = require("react-router-dom"), import_jsx_dev_runt
 }, create_default8 = Create8;
 
 // app/modules/data-manager/data-types/sba/index.js
-var import_jsx_dev_runtime62 = require("react/jsx-dev-runtime"), Table8 = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime62.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
+var import_jsx_dev_runtime62 = require("react/jsx-dev-runtime"), Table8 = ({ source: source2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime62.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/sba/index.js",
   lineNumber: 5,
   columnNumber: 10
@@ -8771,8 +8775,8 @@ var import_react73 = require("react");
 
 // app/modules/data-manager/data-types/nri/create.js
 var import_react72 = __toESM(require("react"));
-var import_react_router_dom13 = require("react-router-dom"), import_jsx_dev_runtime63 = require("react/jsx-dev-runtime"), CallServer8 = async ({ rtPfx, source, etlContextId, userId, table, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, table);
+var import_react_router_dom13 = require("react-router-dom"), import_jsx_dev_runtime63 = require("react/jsx-dev-runtime"), CallServer8 = async ({ rtPfx, source: source2, etlContextId, userId, table, newVersion, navigate }) => {
+  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, table);
   console.log("src?", src);
   let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
     `${rtPfx}/hazard_mitigation/nriLoader`
@@ -8780,7 +8784,7 @@ var import_react_router_dom13 = require("react-router-dom"), import_jsx_dev_runt
   url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table_name", table), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id);
   let stgLyrDataRes = await fetch(url);
   await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), navigate(`/source/${src.source_id}/views`);
-}, Create9 = ({ source, user, newVersion }) => {
+}, Create9 = ({ source: source2, user, newVersion }) => {
   let navigate = (0, import_react_router_dom13.useNavigate)(), [etlContextId, setEtlContextId] = import_react72.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react72.default.useEffect(() => {
     async function fetchData() {
@@ -8790,7 +8794,7 @@ var import_react_router_dom13 = require("react-router-dom"), import_jsx_dev_runt
     fetchData();
   }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime63.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime63.jsxDEV)("button", { onClick: () => CallServer8({
     rtPfx,
-    source,
+    source: source2,
     etlContextId,
     userId: user.id,
     table: "nri",
@@ -8808,7 +8812,7 @@ var import_react_router_dom13 = require("react-router-dom"), import_jsx_dev_runt
 }, create_default9 = Create9;
 
 // app/modules/data-manager/data-types/nri/index.js
-var import_jsx_dev_runtime64 = require("react/jsx-dev-runtime"), Table9 = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime64.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
+var import_jsx_dev_runtime64 = require("react/jsx-dev-runtime"), Table9 = ({ source: source2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime64.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/nri/index.js",
   lineNumber: 4,
   columnNumber: 10
@@ -8838,8 +8842,8 @@ var import_react75 = require("react");
 
 // app/modules/data-manager/data-types/per_basis_swd/create.js
 var import_react74 = __toESM(require("react")), import_lodash24 = __toESM(require("lodash.get"));
-var import_react_router_dom14 = require("react-router-dom"), import_jsx_dev_runtime65 = require("react/jsx-dev-runtime"), CallServer9 = async ({ rtPfx, source, etlContextId, userId, viewNCEI = {}, viewNRI = {}, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "per_basis");
+var import_react_router_dom14 = require("react-router-dom"), import_jsx_dev_runtime65 = require("react/jsx-dev-runtime"), CallServer9 = async ({ rtPfx, source: source2, etlContextId, userId, viewNCEI = {}, viewNRI = {}, newVersion, navigate }) => {
+  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, "per_basis");
   console.log("calling server?", etlContextId, src);
   let view = await submitViewMeta({
     rtPfx,
@@ -8928,7 +8932,7 @@ var import_react_router_dom14 = require("react-router-dom"), import_jsx_dev_runt
   fileName: "app/modules/data-manager/data-types/per_basis_swd/create.js",
   lineNumber: 43,
   columnNumber: 9
-}, this), Create10 = ({ source, user, newVersion }) => {
+}, this), Create10 = ({ source: source2, user, newVersion }) => {
   let navigate = (0, import_react_router_dom14.useNavigate)(), [etlContextId, setEtlContextId] = import_react74.default.useState();
   console.log("this loads", newVersion);
   let [viewNCEI, setViewNCEI] = import_react74.default.useState(), [viewNRI, setViewNRI] = import_react74.default.useState(), [versionsNCEI, setVersionsNCEI] = import_react74.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react74.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
@@ -8948,7 +8952,7 @@ var import_react_router_dom14 = require("react-router-dom"), import_jsx_dev_runt
         onClick: () => CallServer9(
           {
             rtPfx,
-            source,
+            source: source2,
             etlContextId,
             userId: user.id,
             viewNCEI: versionsNCEI.views.find((v) => v.view_id == viewNCEI),
@@ -8976,7 +8980,7 @@ var import_react_router_dom14 = require("react-router-dom"), import_jsx_dev_runt
 }, create_default10 = Create10;
 
 // app/modules/data-manager/data-types/per_basis_swd/index.js
-var import_lodash25 = __toESM(require("lodash.get")), import_jsx_dev_runtime66 = require("react/jsx-dev-runtime"), Table10 = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime66.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
+var import_lodash25 = __toESM(require("lodash.get")), import_jsx_dev_runtime66 = require("react/jsx-dev-runtime"), Table10 = ({ source: source2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime66.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/per_basis_swd/index.js",
   lineNumber: 7,
   columnNumber: 10
@@ -9000,14 +9004,14 @@ var import_lodash25 = __toESM(require("lodash.get")), import_jsx_dev_runtime66 =
     columnNumber: 5
   },
   this
-), fnum = (number4) => parseInt(number4).toLocaleString(), Stats4 = ({ source, views }) => {
+), fnum = (number4) => parseInt(number4).toLocaleString(), Stats4 = ({ source: source2, views }) => {
   let { falcor: falcor3, falcorCache } = useFalcor(), [activeView, setActiveView] = (0, import_react75.useState)(views[0].view_id), [compareView, setCompareView] = (0, import_react75.useState)(views[0].view_id), [compareMode, setCompareMode] = (0, import_react75.useState)(void 0);
   (0, import_react75.useEffect)(() => {
     falcor3.get(
-      ["per_basis", pgEnv, "source", source.source_id, "view", [activeView, compareView], "stats"]
+      ["per_basis", pgEnv, "source", source2.source_id, "view", [activeView, compareView], "stats"]
     );
   }, [activeView, compareView]);
-  let metadataActiveView = (0, import_lodash25.default)(falcorCache, ["per_basis", pgEnv, "source", source.source_id, "view", activeView, "stats", "value"], []), metadataCompareView = (0, import_lodash25.default)(falcorCache, ["per_basis", pgEnv, "source", source.source_id, "view", compareView, "stats", "value"], []);
+  let metadataActiveView = (0, import_lodash25.default)(falcorCache, ["per_basis", pgEnv, "source", source2.source_id, "view", activeView, "stats", "value"], []), metadataCompareView = (0, import_lodash25.default)(falcorCache, ["per_basis", pgEnv, "source", source2.source_id, "view", compareView, "stats", "value"], []);
   return console.log("??", compareMode), !metadataActiveView || metadataActiveView.length === 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime66.jsxDEV)("div", { children: " Stats Not Available " }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/per_basis_swd/index.js",
     lineNumber: 42,
@@ -9336,8 +9340,8 @@ var import_react77 = require("react");
 // app/modules/data-manager/data-types/hlr/create.js
 var import_react76 = __toESM(require("react")), import_react_router_dom15 = require("react-router-dom");
 var import_lodash26 = __toESM(require("lodash.get"));
-var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = async ({ rtPfx, source, etlContextId, userId, newVersion, navigate, viewPB = {}, viewNRI = {}, viewState = {}, viewCounty = {}, viewNCEI = {} }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "hlr");
+var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = async ({ rtPfx, source: source2, etlContextId, userId, newVersion, navigate, viewPB = {}, viewNRI = {}, viewState = {}, viewCounty = {}, viewNCEI = {} }) => {
+  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, "hlr");
   console.log("calling server?", etlContextId, src);
   let view = await submitViewMeta({
     rtPfx,
@@ -9429,7 +9433,7 @@ var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = 
   fileName: "app/modules/data-manager/data-types/hlr/create.js",
   lineNumber: 53,
   columnNumber: 9
-}, this), Create11 = ({ source, user, newVersion }) => {
+}, this), Create11 = ({ source: source2, user, newVersion }) => {
   let navigate = (0, import_react_router_dom15.useNavigate)(), [etlContextId, setEtlContextId] = import_react76.default.useState(), [viewPB, setViewPB] = import_react76.default.useState(), [viewNRI, setViewNRI] = import_react76.default.useState(), [viewState, setViewState] = import_react76.default.useState(), [viewCounty, setViewCounty] = import_react76.default.useState(), [viewNCEI, setViewNCEI] = import_react76.default.useState(), [versionsPB, setVersionsPB] = import_react76.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react76.default.useState({ sources: [], views: [] }), [versionsState, setVersionsState] = import_react76.default.useState({ sources: [], views: [] }), [versionsCounty, setVersionsCounty] = import_react76.default.useState({ sources: [], views: [] }), [versionsNCEI, setVersionsNCEI] = import_react76.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react76.default.useEffect(() => {
     async function fetchData() {
@@ -9450,7 +9454,7 @@ var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = 
         onClick: () => CallServer10(
           {
             rtPfx,
-            source,
+            source: source2,
             etlContextId,
             userId: user.id,
             newVersion,
@@ -9481,7 +9485,7 @@ var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = 
 }, create_default11 = Create11;
 
 // app/modules/data-manager/data-types/hlr/index.js
-var import_lodash27 = __toESM(require("lodash.get")), import_jsx_dev_runtime68 = require("react/jsx-dev-runtime"), Table11 = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime68.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
+var import_lodash27 = __toESM(require("lodash.get")), import_jsx_dev_runtime68 = require("react/jsx-dev-runtime"), Table11 = ({ source: source2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime68.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/hlr/index.js",
   lineNumber: 8,
   columnNumber: 12
@@ -9505,15 +9509,15 @@ var import_lodash27 = __toESM(require("lodash.get")), import_jsx_dev_runtime68 =
     columnNumber: 5
   },
   this
-), fnum2 = (number4) => parseInt(number4).toLocaleString(), Stats5 = ({ source, views }) => {
+), fnum2 = (number4) => parseInt(number4).toLocaleString(), Stats5 = ({ source: source2, views }) => {
   let { falcor: falcor3, falcorCache } = useFalcor(), [activeView, setActiveView] = (0, import_react77.useState)(views[0].view_id), [compareView, setCompareView] = (0, import_react77.useState)(views[0].view_id), [compareMode, setCompareMode] = (0, import_react77.useState)(void 0);
   (0, import_react77.useEffect)(() => {
     falcor3.get(
-      ["dama", pgEnv, "sources", "byId", source.source_id, "views", "invalidate"],
-      ["hlr", pgEnv, "source", source.source_id, "view", [activeView, compareView], "eal"]
+      ["dama", pgEnv, "sources", "byId", source2.source_id, "views", "invalidate"],
+      ["hlr", pgEnv, "source", source2.source_id, "view", [activeView, compareView], "eal"]
     );
   }, [activeView, compareView]), console.log("fc?", falcorCache);
-  let metadataActiveView = (0, import_lodash27.default)(falcorCache, ["hlr", pgEnv, "source", source.source_id, "view", activeView, "eal", "value"], []), metadataCompareView = (0, import_lodash27.default)(falcorCache, ["hlr", pgEnv, "source", source.source_id, "view", compareView, "eal", "value"], []);
+  let metadataActiveView = (0, import_lodash27.default)(falcorCache, ["hlr", pgEnv, "source", source2.source_id, "view", activeView, "eal", "value"], []), metadataCompareView = (0, import_lodash27.default)(falcorCache, ["hlr", pgEnv, "source", source2.source_id, "view", compareView, "eal", "value"], []);
   return console.log("md", metadataCompareView), !metadataActiveView || metadataActiveView.length === 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime68.jsxDEV)("div", { children: " Stats Not Available " }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/hlr/index.js",
     lineNumber: 44,
@@ -9747,8 +9751,8 @@ var import_react79 = require("react");
 // app/modules/data-manager/data-types/eal/create.js
 var import_react78 = __toESM(require("react")), import_react_router_dom16 = require("react-router-dom");
 var import_lodash28 = __toESM(require("lodash.get"));
-var import_jsx_dev_runtime69 = require("react/jsx-dev-runtime"), CallServer11 = async ({ rtPfx, source, etlContextId, userId, newVersion, navigate, viewHlr = {}, viewNRI = {} }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source, src = source.source_id ? source : await createNewDataSource(rtPfx, source, "eal");
+var import_jsx_dev_runtime69 = require("react/jsx-dev-runtime"), CallServer11 = async ({ rtPfx, source: source2, etlContextId, userId, newVersion, navigate, viewHlr = {}, viewNRI = {} }) => {
+  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, "eal");
   console.log("calling server?", etlContextId, src);
   let view = await submitViewMeta({
     rtPfx,
@@ -9837,7 +9841,7 @@ var import_jsx_dev_runtime69 = require("react/jsx-dev-runtime"), CallServer11 = 
   fileName: "app/modules/data-manager/data-types/eal/create.js",
   lineNumber: 44,
   columnNumber: 9
-}, this), Create12 = ({ source, user, newVersion }) => {
+}, this), Create12 = ({ source: source2, user, newVersion }) => {
   let navigate = (0, import_react_router_dom16.useNavigate)(), [etlContextId, setEtlContextId] = import_react78.default.useState(), [viewHlr, setViewHlr] = import_react78.default.useState(), [viewNRI, setViewNRI] = import_react78.default.useState(), [versionsHlr, setVersionsHlr] = import_react78.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react78.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react78.default.useEffect(() => {
     async function fetchData() {
@@ -9855,7 +9859,7 @@ var import_jsx_dev_runtime69 = require("react/jsx-dev-runtime"), CallServer11 = 
         onClick: () => CallServer11(
           {
             rtPfx,
-            source,
+            source: source2,
             etlContextId,
             userId: user.id,
             newVersion,
@@ -9883,7 +9887,7 @@ var import_jsx_dev_runtime69 = require("react/jsx-dev-runtime"), CallServer11 = 
 }, create_default12 = Create12;
 
 // app/modules/data-manager/data-types/eal/index.js
-var import_lodash29 = __toESM(require("lodash.get")), import_jsx_dev_runtime70 = require("react/jsx-dev-runtime"), Table12 = ({ source }) => /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
+var import_lodash29 = __toESM(require("lodash.get")), import_jsx_dev_runtime70 = require("react/jsx-dev-runtime"), Table12 = ({ source: source2 }) => /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)("div", { children: " Table View " }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/eal/index.js",
   lineNumber: 8,
   columnNumber: 12
@@ -9907,14 +9911,14 @@ var import_lodash29 = __toESM(require("lodash.get")), import_jsx_dev_runtime70 =
     columnNumber: 5
   },
   this
-), fnum3 = (number4) => parseInt(number4).toLocaleString(), Stats6 = ({ source, views }) => {
+), fnum3 = (number4) => parseInt(number4).toLocaleString(), Stats6 = ({ source: source2, views }) => {
   let { falcor: falcor3, falcorCache } = useFalcor(), [activeView, setActiveView] = (0, import_react79.useState)(views[0].view_id), [compareView, setCompareView] = (0, import_react79.useState)(views[0].view_id), [compareMode, setCompareMode] = (0, import_react79.useState)(void 0);
   (0, import_react79.useEffect)(() => {
     falcor3.get(
-      ["eal", pgEnv, "source", source.source_id, "view", [activeView, compareView], "data"]
+      ["eal", pgEnv, "source", source2.source_id, "view", [activeView, compareView], "data"]
     );
   }, [activeView, compareView]), console.log("fc?", falcorCache);
-  let metadataActiveView = (0, import_lodash29.default)(falcorCache, ["eal", pgEnv, "source", source.source_id, "view", activeView, "data", "value"], []), metadataCompareView = (0, import_lodash29.default)(falcorCache, ["eal", pgEnv, "source", source.source_id, "view", compareView, "data", "value"], []);
+  let metadataActiveView = (0, import_lodash29.default)(falcorCache, ["eal", pgEnv, "source", source2.source_id, "view", activeView, "data", "value"], []), metadataCompareView = (0, import_lodash29.default)(falcorCache, ["eal", pgEnv, "source", source2.source_id, "view", compareView, "data", "value"], []);
   return console.log("md", metadataCompareView), !metadataActiveView || metadataActiveView.length === 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)("div", { children: " Stats Not Available " }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/eal/index.js",
     lineNumber: 43,
@@ -10162,19 +10166,26 @@ var DataTypes = {
 // app/routes/__dama/source/$sourceId.($page)/($viewId).js
 var import_react81 = require("@remix-run/react"), import_lodash30 = __toESM(require("lodash.get")), import_jsx_dev_runtime71 = require("react/jsx-dev-runtime");
 async function loader3({ params, request }) {
-  let { viewId } = params, depData = await falcor2.get(["dama", pgEnv, "viewDependencySubgraphs", "byViewId", viewId]), tmpSrcIds = [], tmpViewIds = [];
-  Object.keys((0, import_lodash30.default)(depData, ["json", "dama", pgEnv, "viewDependencySubgraphs", "byViewId"], {})).forEach((viewId2) => {
+  let { viewId } = params, dependenciesData = await falcor2.get(["dama", pgEnv, "viewDependencySubgraphs", "byViewId", viewId]), dependentsData = await falcor2.get(["dama", pgEnv, "views", "byId", viewId, "dependents"]), tmpSrcIds = [], tmpViewIds = [];
+  (0, import_lodash30.default)(dependenciesData, ["json", "dama", pgEnv, "viewDependencySubgraphs", "byViewId", viewId, "dependencies"]).forEach((d) => {
     tmpSrcIds.push(
-      ...(0, import_lodash30.default)(depData, ["json", "dama", pgEnv, "viewDependencySubgraphs", "byViewId", viewId2, "dependencies"], []).map((d) => d.source_id).filter((d) => d)
+      d.source_id
     ), tmpViewIds.push(
-      ...(0, import_lodash30.default)(depData, ["json", "dama", pgEnv, "viewDependencySubgraphs", "byViewId", viewId2, "dependencies"], []).map((d) => d.view_id).filter((d) => d)
+      d.view_id
     );
-  }), await falcor2.get(["dama", pgEnv, "sources", "byId", tmpSrcIds, "attributes", ["type", "name"]]), await falcor2.get(["dama", pgEnv, "views", "byId", tmpViewIds, "attributes", ["version", "_modified_timestamp", "last_updated"]]);
+  }), (0, import_lodash30.default)(dependentsData, ["json", "dama", pgEnv, "views", "byId", viewId, "dependents"]).forEach((d) => {
+    tmpSrcIds.push(
+      d.source_id
+    ), tmpViewIds.push(
+      d.view_id
+    );
+  }), await falcor2.get(["dama", pgEnv, "sources", "byId", tmpSrcIds, "attributes", ["type", "name"]]), await falcor2.get(["dama", pgEnv, "views", "byId", tmpViewIds, "attributes", ["version", "metadata", "_modified_timestamp", "last_updated"]]);
   let falcorCache = falcor2.getCache();
   return {
     dependencies: (0, import_lodash30.default)(falcorCache, ["dama", pgEnv, "viewDependencySubgraphs", "byViewId", viewId, "value"], {}),
-    srcMeta: (0, import_lodash30.default)(falcorCache, ["dama", pgEnv, "sources", "byId"]),
-    viewMeta: (0, import_lodash30.default)(falcorCache, ["dama", pgEnv, "views", "byId"])
+    dependents: (0, import_lodash30.default)(falcorCache, ["dama", pgEnv, "views", "byId", viewId, "dependents", "value"], []),
+    srcMeta: (0, import_lodash30.default)(falcorCache, ["dama", pgEnv, "sources", "byId"], {}),
+    viewMeta: (0, import_lodash30.default)(falcorCache, ["dama", pgEnv, "views", "byId"], {})
   };
 }
 var RenderDeps = ({ dependencies, viewId, srcMeta, viewMeta }) => {
@@ -10182,87 +10193,169 @@ var RenderDeps = ({ dependencies, viewId, srcMeta, viewMeta }) => {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "w-full p-4 bg-white shadow mb-4", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("label", { className: "text-lg", children: "Dependencies" }, void 0, !1, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-      lineNumber: 63,
+      lineNumber: 78,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "py-4 sm:py-2 mt-2 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6 border-b-2", children: ["Source Name", "Type", "Version", "Last Updated"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dt", { className: "text-sm font-medium text-gray-600", children: key }, key, !1, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-      lineNumber: 68,
+      lineNumber: 83,
       columnNumber: 29
     }, this)) }, void 0, !1, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-      lineNumber: 64,
+      lineNumber: 79,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: dependencies.dependencies.filter((d) => depViews.includes(d.view_id)).map(
       (d, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "py-4 sm:py-5 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/overview`, children: (0, import_lodash30.default)(srcMeta, [d.source_id, "attributes", "name"]) }, void 0, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 81,
+          lineNumber: 96,
           columnNumber: 41
         }, this) }, `${i}_1`, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 80,
+          lineNumber: 95,
           columnNumber: 37
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/overview`, children: (0, import_lodash30.default)(srcMeta, [d.source_id, "attributes", "type"]) }, void 0, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 87,
+          lineNumber: 102,
           columnNumber: 41
         }, this) }, `${i}_2`, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 86,
+          lineNumber: 101,
           columnNumber: 37
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/views/${d.view_id}`, children: (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "version"]) }, void 0, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 93,
+          lineNumber: 108,
           columnNumber: 41
         }, this) }, `${i}_3`, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 92,
+          lineNumber: 107,
           columnNumber: 37
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/views/${d.view_id}`, children: typeof (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "_modified_timestamp", "value"]) == "object" ? "" : (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "_modified_timestamp", "value"]) }, void 0, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 99,
+          lineNumber: 114,
           columnNumber: 41
         }, this) }, `${i}_4`, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 98,
+          lineNumber: 113,
           columnNumber: 37
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-red-400 sm:mt-0", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("sspan", { className: "float-right italic", children: " outdated" }, void 0, !1, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-red-400 sm:mt-0", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("span", { className: "float-right italic", children: [
+          " ",
+          (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "metadata", "value", "authoritative"]) === "true" ? "" : "outdated"
+        ] }, void 0, !0, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 107,
+          lineNumber: 122,
           columnNumber: 41
         }, this) }, `${i}_5`, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 106,
+          lineNumber: 121,
           columnNumber: 37
         }, this)
       ] }, `${i}_0`, !0, {
         fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-        lineNumber: 79,
+        lineNumber: 94,
         columnNumber: 33
       }, this)
     ) }, void 0, !1, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-      lineNumber: 74,
+      lineNumber: 89,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-    lineNumber: 62,
+    lineNumber: 77,
     columnNumber: 9
   }, this);
-};
+}, RenderDependents = ({ dependents, viewId, srcMeta, viewMeta }) => /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "w-full p-4 bg-white shadow mb-4", children: [
+  /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("label", { className: "text-lg", children: "Dependents" }, void 0, !1, {
+    fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+    lineNumber: 141,
+    columnNumber: 13
+  }, this),
+  /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "py-4 sm:py-2 mt-2 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6 border-b-2", children: ["Source Name", "Type", "Version", "Last Updated"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dt", { className: "text-sm font-medium text-gray-600", children: key }, key, !1, {
+    fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+    lineNumber: 146,
+    columnNumber: 29
+  }, this)) }, void 0, !1, {
+    fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+    lineNumber: 142,
+    columnNumber: 13
+  }, this),
+  /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: dependents.map(
+    (d, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "py-4 sm:py-5 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/overview`, children: (0, import_lodash30.default)(srcMeta, [d.source_id, "attributes", "name"]) }, void 0, !1, {
+        fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+        lineNumber: 158,
+        columnNumber: 41
+      }, this) }, `${i}_1`, !1, {
+        fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+        lineNumber: 157,
+        columnNumber: 37
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/overview`, children: (0, import_lodash30.default)(srcMeta, [d.source_id, "attributes", "type"]) }, void 0, !1, {
+        fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+        lineNumber: 164,
+        columnNumber: 41
+      }, this) }, `${i}_2`, !1, {
+        fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+        lineNumber: 163,
+        columnNumber: 37
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/views/${d.view_id}`, children: (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "version"]) }, void 0, !1, {
+        fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+        lineNumber: 170,
+        columnNumber: 41
+      }, this) }, `${i}_3`, !1, {
+        fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+        lineNumber: 169,
+        columnNumber: 37
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/views/${d.view_id}`, children: typeof (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "_modified_timestamp", "value"]) == "object" ? "" : (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "_modified_timestamp", "value"]) }, void 0, !1, {
+        fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+        lineNumber: 176,
+        columnNumber: 41
+      }, this) }, `${i}_4`, !1, {
+        fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+        lineNumber: 175,
+        columnNumber: 37
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-red-400 sm:mt-0", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("span", { className: "float-right italic", children: [
+        " ",
+        (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "metadata", "value", "authoritative"]) === "true" ? "" : "outdated"
+      ] }, void 0, !0, {
+        fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+        lineNumber: 184,
+        columnNumber: 41
+      }, this) }, `${i}_5`, !1, {
+        fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+        lineNumber: 183,
+        columnNumber: 37
+      }, this)
+    ] }, `${i}_0`, !0, {
+      fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+      lineNumber: 156,
+      columnNumber: 33
+    }, this)
+  ) }, void 0, !1, {
+    fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+    lineNumber: 152,
+    columnNumber: 13
+  }, this)
+] }, void 0, !0, {
+  fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+  lineNumber: 140,
+  columnNumber: 9
+}, this);
 function Dama() {
-  let { dependencies, srcMeta, viewMeta } = (0, import_react81.useLoaderData)(), { sourceId, page: page2, viewId } = (0, import_react81.useParams)();
+  let { dependencies, dependents, srcMeta, viewMeta } = (0, import_react81.useLoaderData)(), { sourceId, page: page2, viewId } = (0, import_react81.useParams)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "text-xl font-medium overflow-hidden p-2 border-b ", children: viewId }, void 0, !1, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-      lineNumber: 126,
+      lineNumber: 206,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(
@@ -10284,19 +10377,24 @@ function Dama() {
       !1,
       {
         fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-        lineNumber: 130,
+        lineNumber: 210,
         columnNumber: 13
       },
       this
     ),
     /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(RenderDeps, { viewId, dependencies, srcMeta, viewMeta }, void 0, !1, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-      lineNumber: 144,
+      lineNumber: 224,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(RenderDependents, { viewId, dependents, srcMeta, viewMeta }, void 0, !1, {
+      fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
+      lineNumber: 225,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-    lineNumber: 125,
+    lineNumber: 205,
     columnNumber: 9
   }, this);
 }
@@ -10383,16 +10481,16 @@ var action3 = async ({ request, params }) => {
   return console.log("I am gonna action", "params", params), { falcorCache };
 };
 function Dama2() {
-  let { views, source, meta: meta2, falcorCache, data } = (0, import_react83.useLoaderData)(), { sourceId, page: page2, viewId } = (0, import_react83.useParams)(), [pages, setPages] = (0, import_react82.useState)(default_default), { user } = (0, import_react83.useOutletContext)();
+  let { views, source: source2, meta: meta2, falcorCache, data } = (0, import_react83.useLoaderData)(), { sourceId, page: page2, viewId } = (0, import_react83.useParams)(), [pages, setPages] = (0, import_react82.useState)(default_default), { user } = (0, import_react83.useOutletContext)();
   console.log("index params?", sourceId, page2, falcorCache, data), import_react82.default.useEffect(() => {
-    if (DataTypes[source.type]) {
-      let typePages = Object.keys(DataTypes[source.type]).reduce((a, c) => (DataTypes[source.type][c].path && (a[c] = DataTypes[source.type][c]), a), {}), allPages = { ...default_default, ...typePages };
+    if (DataTypes[source2.type]) {
+      let typePages = Object.keys(DataTypes[source2.type]).reduce((a, c) => (DataTypes[source2.type][c].path && (a[c] = DataTypes[source2.type][c]), a), {}), allPages = { ...default_default, ...typePages };
       setPages(allPages);
     }
-  }, [source.type]);
+  }, [source2.type]);
   let Page = (0, import_react82.useMemo)(() => page2 ? (0, import_lodash31.default)(pages, `[${page2}].component`, default_default.overview.component) : default_default.overview.component, [page2, pages]);
   return /* @__PURE__ */ (0, import_jsx_dev_runtime72.jsxDEV)("div", { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime72.jsxDEV)("div", { className: "text-xl font-medium overflow-hidden p-2 border-b ", children: source.display_name || source.name }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime72.jsxDEV)("div", { className: "text-xl font-medium overflow-hidden p-2 border-b ", children: source2.display_name || source2.name }, void 0, !1, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/index.js",
       lineNumber: 117,
       columnNumber: 9
@@ -10415,7 +10513,7 @@ function Dama2() {
       },
       this
     ),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime72.jsxDEV)("div", { className: "w-full p-4 bg-white shadow mb-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime72.jsxDEV)(Page, { source, views, user, meta: meta2 }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime72.jsxDEV)("div", { className: "w-full p-4 bg-white shadow mb-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime72.jsxDEV)(Page, { source: source2, views, user, meta: meta2 }, void 0, !1, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/index.js",
       lineNumber: 131,
       columnNumber: 11
@@ -10441,124 +10539,194 @@ var import_react84 = require("react");
 var import_react85 = require("@remix-run/react"), import_lodash32 = __toESM(require("lodash.get"));
 var import_react_router_dom17 = require("react-router-dom"), import_jsx_dev_runtime73 = require("react/jsx-dev-runtime");
 async function loader5({ params, request }) {
-  let { sourceId } = params, data = await falcor2.get(
-    ["dama", pgEnv, "sources", "byId", sourceId, "dependents"],
-    ["dama", pgEnv, "sources", "byId", sourceId, "attributes", ["display_name"]]
-  );
+  let { sourceId } = params, data = await falcor2.get(["dama", pgEnv, "sources", "byId", sourceId, "dependents"]), tmpSrcIds = [], tmpViewIds = [];
+  (0, import_lodash32.default)(data, ["json", "dama", pgEnv, "sources", "byId", sourceId, "dependents"]).forEach((d) => {
+    tmpSrcIds.push(
+      d.source_id
+    ), tmpViewIds.push(
+      d.view_id
+    );
+  }), await falcor2.get(["dama", pgEnv, "sources", "byId", [...tmpSrcIds, sourceId], "attributes", ["type", "name", "display_name"]]), await falcor2.get(["dama", pgEnv, "views", "byId", tmpViewIds, "attributes", ["version", "metadata", "_modified_timestamp", "last_updated"]]);
+  let falcorCache = falcor2.getCache();
   return {
     sourceId,
-    dependents: (0, import_lodash32.default)(data, ["json", "dama", pgEnv, "sources", "byId", sourceId, "dependents"], []),
-    display_name: (0, import_lodash32.default)(data, ["json", "dama", pgEnv, "sources", "byId", sourceId, "attributes", "display_name"], "")
+    dependents: (0, import_lodash32.default)(falcorCache, ["dama", pgEnv, "sources", "byId", sourceId, "dependents", "value"], []),
+    display_name: (0, import_lodash32.default)(falcorCache, ["dama", pgEnv, "sources", "byId", sourceId, "attributes", "display_name"], ""),
+    srcMeta: (0, import_lodash32.default)(falcorCache, ["dama", pgEnv, "sources", "byId"], {}),
+    viewMeta: (0, import_lodash32.default)(falcorCache, ["dama", pgEnv, "views", "byId"], {})
   };
 }
 var DeleteButton2 = ({ text, sourceId }) => {
-  let navigate = (0, import_react_router_dom17.useNavigate)();
+  let navigate = (0, import_react_router_dom17.useNavigate)(), fetcher = (0, import_react85.useFetcher)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(
     "button",
     {
       className: "bg-red-50 hover:bg-red-400 hover:text-white p-2",
-      onClick: () => deleteSource(`${DAMA_HOST}/dama-admin/${pgEnv}`, sourceId) && navigate(-1),
+      onClick: async () => {
+        await deleteSource(`${DAMA_HOST}/dama-admin/${pgEnv}`, sourceId), await fetcher.submit(
+          {},
+          {
+            method: "post",
+            action: `/source/${source.source_id}?index`,
+            formData: "this is fd"
+          }
+        ), navigate(-1);
+      },
       children: text
     },
     void 0,
     !1,
     {
       fileName: "app/routes/__dama/source/delete/$sourceId.js",
-      lineNumber: 27,
+      lineNumber: 50,
       columnNumber: 9
     },
     this
   );
-}, LoadDependentViews = (data, sourceId) => /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(import_jsx_dev_runtime73.Fragment, { children: [
+}, RenderDependents2 = ({ dependents, srcMeta, viewMeta }) => /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { className: "w-full p-4 shadow mb-4", children: [
+  /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("label", { className: "text-lg", children: "Dependents" }, void 0, !1, {
+    fileName: "app/routes/__dama/source/delete/$sourceId.js",
+    lineNumber: 75,
+    columnNumber: 13
+  }, this),
+  /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { className: "py-4 sm:py-2 mt-2 sm:grid sm:grid-cols-5 sm:gap-20 sm:px-6 border-b-2", children: ["Source Name", "Type", "Version", "Last Updated"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("dt", { className: "text-sm font-medium text-gray-600", children: key }, key, !1, {
+    fileName: "app/routes/__dama/source/delete/$sourceId.js",
+    lineNumber: 80,
+    columnNumber: 29
+  }, this)) }, void 0, !1, {
+    fileName: "app/routes/__dama/source/delete/$sourceId.js",
+    lineNumber: 76,
+    columnNumber: 13
+  }, this),
+  /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: dependents.map(
+    (d, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { className: "py-4 sm:py-5 sm:grid sm:grid-cols-5 sm:gap-20 sm:px-6", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(import_react85.Link, { to: `/source/${d.source_id}/overview`, children: (0, import_lodash32.default)(srcMeta, [d.source_id, "attributes", "name"]) }, void 0, !1, {
+        fileName: "app/routes/__dama/source/delete/$sourceId.js",
+        lineNumber: 92,
+        columnNumber: 41
+      }, this) }, `${i}_1`, !1, {
+        fileName: "app/routes/__dama/source/delete/$sourceId.js",
+        lineNumber: 91,
+        columnNumber: 37
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(import_react85.Link, { to: `/source/${d.source_id}/overview`, children: (0, import_lodash32.default)(srcMeta, [d.source_id, "attributes", "type"]) }, void 0, !1, {
+        fileName: "app/routes/__dama/source/delete/$sourceId.js",
+        lineNumber: 98,
+        columnNumber: 41
+      }, this) }, `${i}_2`, !1, {
+        fileName: "app/routes/__dama/source/delete/$sourceId.js",
+        lineNumber: 97,
+        columnNumber: 37
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(import_react85.Link, { to: `/source/${d.source_id}/views/${d.view_id}`, children: (0, import_lodash32.default)(viewMeta, [d.view_id, "attributes", "version"]) }, void 0, !1, {
+        fileName: "app/routes/__dama/source/delete/$sourceId.js",
+        lineNumber: 104,
+        columnNumber: 41
+      }, this) }, `${i}_3`, !1, {
+        fileName: "app/routes/__dama/source/delete/$sourceId.js",
+        lineNumber: 103,
+        columnNumber: 37
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(import_react85.Link, { to: `/source/${d.source_id}/views/${d.view_id}`, children: typeof (0, import_lodash32.default)(viewMeta, [d.view_id, "attributes", "_modified_timestamp", "value"]) == "object" ? "" : (0, import_lodash32.default)(viewMeta, [d.view_id, "attributes", "_modified_timestamp", "value"]) }, void 0, !1, {
+        fileName: "app/routes/__dama/source/delete/$sourceId.js",
+        lineNumber: 110,
+        columnNumber: 41
+      }, this) }, `${i}_4`, !1, {
+        fileName: "app/routes/__dama/source/delete/$sourceId.js",
+        lineNumber: 109,
+        columnNumber: 37
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("dd", { className: "mt-1 text-sm text-red-400 sm:mt-0", children: /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("span", { className: "float-right italic", children: [
+        " ",
+        (0, import_lodash32.default)(viewMeta, [d.view_id, "attributes", "metadata", "value", "authoritative"]) === "true" ? "" : "outdated"
+      ] }, void 0, !0, {
+        fileName: "app/routes/__dama/source/delete/$sourceId.js",
+        lineNumber: 118,
+        columnNumber: 41
+      }, this) }, `${i}_5`, !1, {
+        fileName: "app/routes/__dama/source/delete/$sourceId.js",
+        lineNumber: 117,
+        columnNumber: 37
+      }, this)
+    ] }, `${i}_0`, !0, {
+      fileName: "app/routes/__dama/source/delete/$sourceId.js",
+      lineNumber: 90,
+      columnNumber: 33
+    }, this)
+  ) }, void 0, !1, {
+    fileName: "app/routes/__dama/source/delete/$sourceId.js",
+    lineNumber: 86,
+    columnNumber: 13
+  }, this)
+] }, void 0, !0, {
+  fileName: "app/routes/__dama/source/delete/$sourceId.js",
+  lineNumber: 74,
+  columnNumber: 9
+}, this), LoadDependentViews = (dependents, srcMeta, viewMeta, sourceId) => /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(import_jsx_dev_runtime73.Fragment, { children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { className: "pb-4 flex justify-between", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("label", { children: "The Source has following dependents:" }, void 0, !1, {
       fileName: "app/routes/__dama/source/delete/$sourceId.js",
-      lineNumber: 38,
+      lineNumber: 137,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(DeleteButton2, { text: "Delete anyway", sourceId }, void 0, !1, {
       fileName: "app/routes/__dama/source/delete/$sourceId.js",
-      lineNumber: 40,
+      lineNumber: 139,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/__dama/source/delete/$sourceId.js",
-    lineNumber: 37,
+    lineNumber: 136,
     columnNumber: 9
   }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { className: "p-4 bg-red-50", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { className: "p-4 sm:py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 border-b-2", children: ["view_id", "created", "updated"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("dt", { className: "text-sm font-medium text-gray-600", children: key }, key, !1, {
-      fileName: "app/routes/__dama/source/delete/$sourceId.js",
-      lineNumber: 48,
-      columnNumber: 29
-    }, this)) }, void 0, !1, {
-      fileName: "app/routes/__dama/source/delete/$sourceId.js",
-      lineNumber: 44,
-      columnNumber: 13
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { className: "border-t border-gray-200 px-4 py-5 sm:p-0 overflow-auto h-[700px]", children: /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: data.map(
-      (view, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { className: "py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6", children: ["view_id", "_created_timestamp", "_modified_timestamp"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 ", children: view[key] }, void 0, !1, {
-        fileName: "app/routes/__dama/source/delete/$sourceId.js",
-        lineNumber: 65,
-        columnNumber: 53
-      }, this)) }, i, !1, {
-        fileName: "app/routes/__dama/source/delete/$sourceId.js",
-        lineNumber: 61,
-        columnNumber: 37
-      }, this)
-    ) }, void 0, !1, {
-      fileName: "app/routes/__dama/source/delete/$sourceId.js",
-      lineNumber: 55,
-      columnNumber: 17
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/__dama/source/delete/$sourceId.js",
-      lineNumber: 54,
-      columnNumber: 13
-    }, this)
-  ] }, void 0, !0, {
+  /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { className: "bg-red-50", children: /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(RenderDependents2, { dependents, srcMeta, viewMeta }, void 0, !1, {
     fileName: "app/routes/__dama/source/delete/$sourceId.js",
-    lineNumber: 43,
+    lineNumber: 143,
+    columnNumber: 13
+  }, this) }, void 0, !1, {
+    fileName: "app/routes/__dama/source/delete/$sourceId.js",
+    lineNumber: 142,
     columnNumber: 9
   }, this)
 ] }, void 0, !0, {
   fileName: "app/routes/__dama/source/delete/$sourceId.js",
-  lineNumber: 36,
+  lineNumber: 135,
   columnNumber: 5
 }, this), LoadConfirmDelete = (sourceId) => /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { className: "pb-4 flex justify-between", children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("label", { children: "No dependents found." }, void 0, !1, {
     fileName: "app/routes/__dama/source/delete/$sourceId.js",
-    lineNumber: 82,
+    lineNumber: 149,
     columnNumber: 13
   }, this),
   /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)(DeleteButton2, { text: "Confirm Delete", sourceId }, void 0, !1, {
     fileName: "app/routes/__dama/source/delete/$sourceId.js",
-    lineNumber: 84,
+    lineNumber: 151,
     columnNumber: 13
   }, this)
 ] }, void 0, !0, {
   fileName: "app/routes/__dama/source/delete/$sourceId.js",
-  lineNumber: 81,
+  lineNumber: 148,
   columnNumber: 9
 }, this);
 function Popup() {
-  let { sourceId, dependents, display_name } = (0, import_react85.useLoaderData)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { className: "w-full p-4 bg-white my-1 block border shadow", children: [
+  let { sourceId, dependents, display_name, srcMeta, viewMeta } = (0, import_react85.useLoaderData)();
+  return console.log("??", dependents), /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { className: "w-full p-4 bg-white my-1 block border shadow", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("div", { className: "pb-4 font-bold", children: [
       "Delete ",
       /* @__PURE__ */ (0, import_jsx_dev_runtime73.jsxDEV)("i", { children: display_name }, void 0, !1, {
         fileName: "app/routes/__dama/source/delete/$sourceId.js",
-        lineNumber: 92,
+        lineNumber: 160,
         columnNumber: 54
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/__dama/source/delete/$sourceId.js",
-      lineNumber: 92,
+      lineNumber: 160,
       columnNumber: 13
     }, this),
-    dependents.length ? LoadDependentViews(dependents, sourceId) : LoadConfirmDelete(sourceId)
+    dependents.length ? LoadDependentViews(dependents, srcMeta, viewMeta, sourceId) : LoadConfirmDelete(sourceId)
   ] }, void 0, !0, {
     fileName: "app/routes/__dama/source/delete/$sourceId.js",
-    lineNumber: 91,
+    lineNumber: 159,
     columnNumber: 9
   }, this);
 }
@@ -10576,11 +10744,21 @@ async function loader6({ params, request }) {
   let { viewId } = params, data = await falcor2.get(
     ["dama", pgEnv, "views", "byId", viewId, "dependents"],
     ["dama", pgEnv, "views", "byId", viewId, "attributes", "source_id"]
-  );
+  ), tmpSrcIds = [], tmpViewIds = [];
+  (0, import_lodash33.default)(data, ["json", "dama", pgEnv, "views", "byId", viewId, "dependents"]).forEach((d) => {
+    tmpSrcIds.push(
+      d.source_id
+    ), tmpViewIds.push(
+      d.view_id
+    );
+  }), await falcor2.get(["dama", pgEnv, "sources", "byId", tmpSrcIds, "attributes", ["type", "name"]]), await falcor2.get(["dama", pgEnv, "views", "byId", tmpViewIds, "attributes", ["version", "metadata", "_modified_timestamp", "last_updated"]]);
+  let falcorCache = falcor2.getCache();
   return {
     viewId,
-    dependents: (0, import_lodash33.default)(data, ["json", "dama", pgEnv, "views", "byId", viewId, "dependents"], []),
-    sourceId: (0, import_lodash33.default)(data, ["json", "dama", pgEnv, "views", "byId", viewId, "attributes", "source_id"], [])
+    dependents: (0, import_lodash33.default)(falcorCache, ["dama", pgEnv, "views", "byId", viewId, "dependents", "value"], []),
+    sourceId: (0, import_lodash33.default)(data, ["json", "dama", pgEnv, "views", "byId", viewId, "attributes", "source_id"], []),
+    srcMeta: (0, import_lodash33.default)(falcorCache, ["dama", pgEnv, "sources", "byId"], {}),
+    viewMeta: (0, import_lodash33.default)(falcorCache, ["dama", pgEnv, "views", "byId"], {})
   };
 }
 var DeleteButton3 = ({ text, viewId, sourceId }) => {
@@ -10603,101 +10781,155 @@ var DeleteButton3 = ({ text, viewId, sourceId }) => {
     !1,
     {
       fileName: "app/routes/__dama/view/delete/$viewId.js",
-      lineNumber: 29,
+      lineNumber: 52,
       columnNumber: 9
     },
     this
   );
-}, LoadDependentViews2 = (data, viewId, sourceId) => /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(import_jsx_dev_runtime74.Fragment, { children: [
+}, RenderDependents3 = ({ dependents, viewId, srcMeta, viewMeta }) => /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "w-full p-4 shadow mb-4", children: [
+  /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("label", { className: "text-lg", children: "Dependents" }, void 0, !1, {
+    fileName: "app/routes/__dama/view/delete/$viewId.js",
+    lineNumber: 76,
+    columnNumber: 13
+  }, this),
+  /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "py-4 sm:py-2 mt-2 sm:grid sm:grid-cols-5 sm:gap-20 sm:px-6 border-b-2", children: ["Source Name", "Type", "Version", "Last Updated"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("dt", { className: "text-sm font-medium text-gray-600", children: key }, key, !1, {
+    fileName: "app/routes/__dama/view/delete/$viewId.js",
+    lineNumber: 81,
+    columnNumber: 29
+  }, this)) }, void 0, !1, {
+    fileName: "app/routes/__dama/view/delete/$viewId.js",
+    lineNumber: 77,
+    columnNumber: 13
+  }, this),
+  /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: dependents.map(
+    (d, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "py-4 sm:py-5 sm:grid sm:grid-cols-5 sm:gap-20 sm:px-6", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(import_react87.Link, { to: `/source/${d.source_id}/overview`, children: (0, import_lodash33.default)(srcMeta, [d.source_id, "attributes", "name"]) }, void 0, !1, {
+        fileName: "app/routes/__dama/view/delete/$viewId.js",
+        lineNumber: 93,
+        columnNumber: 41
+      }, this) }, `${i}_1`, !1, {
+        fileName: "app/routes/__dama/view/delete/$viewId.js",
+        lineNumber: 92,
+        columnNumber: 37
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(import_react87.Link, { to: `/source/${d.source_id}/overview`, children: (0, import_lodash33.default)(srcMeta, [d.source_id, "attributes", "type"]) }, void 0, !1, {
+        fileName: "app/routes/__dama/view/delete/$viewId.js",
+        lineNumber: 99,
+        columnNumber: 41
+      }, this) }, `${i}_2`, !1, {
+        fileName: "app/routes/__dama/view/delete/$viewId.js",
+        lineNumber: 98,
+        columnNumber: 37
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(import_react87.Link, { to: `/source/${d.source_id}/views/${d.view_id}`, children: (0, import_lodash33.default)(viewMeta, [d.view_id, "attributes", "version"]) }, void 0, !1, {
+        fileName: "app/routes/__dama/view/delete/$viewId.js",
+        lineNumber: 105,
+        columnNumber: 41
+      }, this) }, `${i}_3`, !1, {
+        fileName: "app/routes/__dama/view/delete/$viewId.js",
+        lineNumber: 104,
+        columnNumber: 37
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(import_react87.Link, { to: `/source/${d.source_id}/views/${d.view_id}`, children: typeof (0, import_lodash33.default)(viewMeta, [d.view_id, "attributes", "_modified_timestamp", "value"]) == "object" ? "" : (0, import_lodash33.default)(viewMeta, [d.view_id, "attributes", "_modified_timestamp", "value"]) }, void 0, !1, {
+        fileName: "app/routes/__dama/view/delete/$viewId.js",
+        lineNumber: 111,
+        columnNumber: 41
+      }, this) }, `${i}_4`, !1, {
+        fileName: "app/routes/__dama/view/delete/$viewId.js",
+        lineNumber: 110,
+        columnNumber: 37
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("dd", { className: "mt-1 text-sm text-red-400 sm:mt-0", children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("span", { className: "float-right italic", children: [
+        " ",
+        (0, import_lodash33.default)(viewMeta, [d.view_id, "attributes", "metadata", "value", "authoritative"]) === "true" ? "" : "outdated"
+      ] }, void 0, !0, {
+        fileName: "app/routes/__dama/view/delete/$viewId.js",
+        lineNumber: 119,
+        columnNumber: 41
+      }, this) }, `${i}_5`, !1, {
+        fileName: "app/routes/__dama/view/delete/$viewId.js",
+        lineNumber: 118,
+        columnNumber: 37
+      }, this)
+    ] }, `${i}_0`, !0, {
+      fileName: "app/routes/__dama/view/delete/$viewId.js",
+      lineNumber: 91,
+      columnNumber: 33
+    }, this)
+  ) }, void 0, !1, {
+    fileName: "app/routes/__dama/view/delete/$viewId.js",
+    lineNumber: 87,
+    columnNumber: 13
+  }, this)
+] }, void 0, !0, {
+  fileName: "app/routes/__dama/view/delete/$viewId.js",
+  lineNumber: 75,
+  columnNumber: 9
+}, this), LoadDependentViews2 = (dependents, sourceId, viewId, srcMeta, viewMeta) => /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(import_jsx_dev_runtime74.Fragment, { children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "pb-4 flex justify-between", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("label", { children: "The View has following dependents:" }, void 0, !1, {
       fileName: "app/routes/__dama/view/delete/$viewId.js",
-      lineNumber: 52,
+      lineNumber: 138,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(DeleteButton3, { text: "Delete anyway", viewId, sourceId }, void 0, !1, {
       fileName: "app/routes/__dama/view/delete/$viewId.js",
-      lineNumber: 54,
+      lineNumber: 140,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/__dama/view/delete/$viewId.js",
-    lineNumber: 51,
+    lineNumber: 137,
     columnNumber: 9
   }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "p-4 bg-red-50", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "p-4 sm:py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 border-b-2", children: ["view_id", "created", "updated"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("dt", { className: "text-sm font-medium text-gray-600", children: key }, key, !1, {
-      fileName: "app/routes/__dama/view/delete/$viewId.js",
-      lineNumber: 62,
-      columnNumber: 29
-    }, this)) }, void 0, !1, {
-      fileName: "app/routes/__dama/view/delete/$viewId.js",
-      lineNumber: 58,
-      columnNumber: 13
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "border-t border-gray-200 px-4 py-5 sm:p-0 overflow-auto h-[700px]", children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: data.map(
-      (view, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6", children: ["view_id", "_created_timestamp", "_modified_timestamp"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 ", children: view[key] }, void 0, !1, {
-        fileName: "app/routes/__dama/view/delete/$viewId.js",
-        lineNumber: 79,
-        columnNumber: 53
-      }, this)) }, i, !1, {
-        fileName: "app/routes/__dama/view/delete/$viewId.js",
-        lineNumber: 75,
-        columnNumber: 37
-      }, this)
-    ) }, void 0, !1, {
-      fileName: "app/routes/__dama/view/delete/$viewId.js",
-      lineNumber: 69,
-      columnNumber: 17
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/__dama/view/delete/$viewId.js",
-      lineNumber: 68,
-      columnNumber: 13
-    }, this)
-  ] }, void 0, !0, {
+  /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "bg-red-50", children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(RenderDependents3, { viewId, srcMeta, viewMeta, dependents }, void 0, !1, {
     fileName: "app/routes/__dama/view/delete/$viewId.js",
-    lineNumber: 57,
+    lineNumber: 144,
+    columnNumber: 13
+  }, this) }, void 0, !1, {
+    fileName: "app/routes/__dama/view/delete/$viewId.js",
+    lineNumber: 143,
     columnNumber: 9
   }, this)
 ] }, void 0, !0, {
   fileName: "app/routes/__dama/view/delete/$viewId.js",
-  lineNumber: 50,
+  lineNumber: 136,
   columnNumber: 5
 }, this), LoadConfirmDelete2 = (viewId, sourceId) => /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "pb-4 flex justify-between", children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("label", { children: "No dependents found." }, void 0, !1, {
     fileName: "app/routes/__dama/view/delete/$viewId.js",
-    lineNumber: 96,
+    lineNumber: 150,
     columnNumber: 13
   }, this),
   /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(DeleteButton3, { text: "Confirm Delete", viewId, sourceId }, void 0, !1, {
     fileName: "app/routes/__dama/view/delete/$viewId.js",
-    lineNumber: 98,
+    lineNumber: 152,
     columnNumber: 13
   }, this)
 ] }, void 0, !0, {
   fileName: "app/routes/__dama/view/delete/$viewId.js",
-  lineNumber: 95,
+  lineNumber: 149,
   columnNumber: 9
 }, this);
 function Popup2() {
-  let { viewId, sourceId, dependents } = (0, import_react87.useLoaderData)();
+  let { dependents, viewId, srcMeta, viewMeta, sourceId } = (0, import_react87.useLoaderData)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "w-full p-4 bg-white my-1 block border shadow", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "pb-4 font-bold", children: [
       "Delete ",
       /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("i", { children: viewId }, void 0, !1, {
         fileName: "app/routes/__dama/view/delete/$viewId.js",
-        lineNumber: 107,
+        lineNumber: 161,
         columnNumber: 54
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/__dama/view/delete/$viewId.js",
-      lineNumber: 107,
+      lineNumber: 161,
       columnNumber: 13
     }, this),
-    dependents.length ? LoadDependentViews2(dependents, viewId, sourceId) : LoadConfirmDelete2(viewId, sourceId)
+    dependents.length ? LoadDependentViews2(dependents, sourceId, viewId, srcMeta, viewMeta) : LoadConfirmDelete2(viewId, sourceId)
   ] }, void 0, !0, {
     fileName: "app/routes/__dama/view/delete/$viewId.js",
-    lineNumber: 106,
+    lineNumber: 160,
     columnNumber: 9
   }, this);
 }
@@ -10711,18 +10943,18 @@ var import_react88 = require("react");
 var import_lodash34 = __toESM(require("lodash.get"));
 var import_react89 = require("@remix-run/react"), import_jsx_dev_runtime75 = require("react/jsx-dev-runtime");
 function sourceCreate() {
-  let { user } = (0, import_react89.useOutletContext)(), [source, setSource] = (0, import_react88.useState)(
+  let { user } = (0, import_react89.useOutletContext)(), [source2, setSource] = (0, import_react88.useState)(
     Object.keys(SourceAttributes).filter((d) => !["source_id", "metadata", "statistics"].includes(d)).reduce((out, current) => (out[current] = "", out), {})
   ), CreateComp = (0, import_react88.useMemo)(
-    () => (0, import_lodash34.default)(DataTypes, `[${source.type}].sourceCreate.component`, () => /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("div", {}, void 0, !1, {
+    () => (0, import_lodash34.default)(DataTypes, `[${source2.type}].sourceCreate.component`, () => /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("div", {}, void 0, !1, {
       fileName: "app/routes/__dama/source/create.js",
       lineNumber: 29,
       columnNumber: 69
     }, this)),
-    [DataTypes, source.type]
+    [DataTypes, source2.type]
   );
   return /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("div", { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("div", { className: "fixed right-0 top-[170px] w-64 ", children: /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("pre", { children: JSON.stringify(source, null, 3) }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("div", { className: "fixed right-0 top-[170px] w-64 ", children: /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("pre", { children: JSON.stringify(source2, null, 3) }, void 0, !1, {
       fileName: "app/routes/__dama/source/create.js",
       lineNumber: 37,
       columnNumber: 11
@@ -10748,9 +10980,9 @@ function sourceCreate() {
             input_default,
             {
               className: "w-full p-2 flex-1 px-2 shadow bg-grey-50 focus:bg-blue-100  border-gray-300 ",
-              value: (0, import_lodash34.default)(source, attr, ""),
+              value: (0, import_lodash34.default)(source2, attr, ""),
               onChange: (e) => {
-                setSource({ ...source, [attr]: e });
+                setSource({ ...source2, [attr]: e });
               }
             },
             void 0,
@@ -10789,9 +11021,9 @@ function sourceCreate() {
             "select",
             {
               className: "w-full bg-white p-3 flex-1 shadow bg-grey-50 focus:bg-blue-100  border-gray-300",
-              value: (0, import_lodash34.default)(source, "type", ""),
+              value: (0, import_lodash34.default)(source2, "type", ""),
               onChange: (e) => {
-                setSource({ ...source, type: e.target.value });
+                setSource({ ...source2, type: e.target.value });
               },
               children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)("option", { value: "", disabled: !0, children: "Select your option" }, void 0, !1, {
@@ -10837,7 +11069,7 @@ function sourceCreate() {
         lineNumber: 44,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)(CreateComp, { source, user }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime75.jsxDEV)(CreateComp, { source: source2, user }, void 0, !1, {
         fileName: "app/routes/__dama/source/create.js",
         lineNumber: 99,
         columnNumber: 9
@@ -10903,8 +11135,8 @@ function Dama3() {
       lineNumber: 30,
       columnNumber: 13
     }, this),
-    sources.filter((source) => {
-      let searchTerm = source.name + " " + (0, import_lodash35.default)(source, "categories[0]", []).join(" ");
+    sources.filter((source2) => {
+      let searchTerm = source2.name + " " + (0, import_lodash35.default)(source2, "categories[0]", []).join(" ");
       return !layerSearch.length > 2 || searchTerm.toLowerCase().includes(layerSearch.toLowerCase());
     }).map((s, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(SourceThumb, { source: s }, i, !1, {
       fileName: "app/routes/__dama/datasources.js",
@@ -10917,8 +11149,8 @@ function Dama3() {
     columnNumber: 9
   }, this);
 }
-var SourceThumb = ({ source }) => (console.log(source), /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("div", { className: "w-full p-4 bg-white my-1 hover:bg-blue-50 block border shadow flex", children: [
-  /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(import_react91.Link, { to: `/source/${source.source_id}`, className: "text-xl font-medium w-full block", children: /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("span", { children: source.name }, void 0, !1, {
+var SourceThumb = ({ source: source2 }) => (console.log(source2), /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("div", { className: "w-full p-4 bg-white my-1 hover:bg-blue-50 block border shadow flex", children: [
+  /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(import_react91.Link, { to: `/source/${source2.source_id}`, className: "text-xl font-medium w-full block", children: /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("span", { children: source2.name }, void 0, !1, {
     fileName: "app/routes/__dama/datasources.js",
     lineNumber: 58,
     columnNumber: 17
@@ -10927,7 +11159,7 @@ var SourceThumb = ({ source }) => (console.log(source), /* @__PURE__ */ (0, impo
     lineNumber: 57,
     columnNumber: 13
   }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("div", { children: ((0, import_lodash35.default)(source, "categories", []) || []).map((cat) => cat.map((s, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(
+  /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)("div", { children: ((0, import_lodash35.default)(source2, "categories", []) || []).map((cat) => cat.map((s, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(
     import_react91.Link,
     {
       to: `/cat/${i > 0 ? cat[i - 1] + "/" : ""}${s}`,
@@ -10947,12 +11179,12 @@ var SourceThumb = ({ source }) => (console.log(source), /* @__PURE__ */ (0, impo
     lineNumber: 60,
     columnNumber: 13
   }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(import_react91.Link, { to: `/source/${source.source_id}`, className: "py-2 block", children: source.description }, void 0, !1, {
+  /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(import_react91.Link, { to: `/source/${source2.source_id}`, className: "py-2 block", children: source2.description }, void 0, !1, {
     fileName: "app/routes/__dama/datasources.js",
     lineNumber: 68,
     columnNumber: 13
   }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(import_react91.Link, { to: `/source/${source.source_id}`, className: "py-2 block", children: source._created_timestamp }, void 0, !1, {
+  /* @__PURE__ */ (0, import_jsx_dev_runtime76.jsxDEV)(import_react91.Link, { to: `/source/${source2.source_id}`, className: "py-2 block", children: source2._created_timestamp }, void 0, !1, {
     fileName: "app/routes/__dama/datasources.js",
     lineNumber: 71,
     columnNumber: 13
@@ -10961,7 +11193,7 @@ var SourceThumb = ({ source }) => (console.log(source), /* @__PURE__ */ (0, impo
     import_react91.Link,
     {
       className: "bg-red-50 hover:bg-red-400 hover:text-white p-2",
-      to: `/source/delete/${source.source_id}`,
+      to: `/source/delete/${source2.source_id}`,
       children: " delete "
     },
     void 0,
@@ -11815,8 +12047,8 @@ function polymap(domain, range2, interpolate) {
     return r[i2](d[i2](x));
   };
 }
-function copy(source, target) {
-  return target.domain(source.domain()).range(source.range()).interpolate(source.interpolate()).clamp(source.clamp()).unknown(source.unknown());
+function copy(source2, target) {
+  return target.domain(source2.domain()).range(source2.range()).interpolate(source2.interpolate()).clamp(source2.clamp()).unknown(source2.unknown());
 }
 function transformer() {
   var domain = unit, range2 = unit, interpolate = value_default, transform, untransform, unknown, clamp = identity2, piecewise, output, input2;
@@ -14675,7 +14907,7 @@ var HoverComp2 = ({ data, keys, indexFormat, keyFormat, valueFormat }) => /* @__
   lineNumber: 202,
   columnNumber: 9
 }, this);
-function SourceThumb2({ source }) {
+function SourceThumb2({ source: source2 }) {
   let { avail, ealAvail, nri, enhancedNCEILoss, dama, availLTSViewId, enhancedNCEILTSViewId, ealAvailLTSViewId, srcMeta } = (0, import_react99.useLoaderData)(), reformattedNRI = reformatNRI(nri), { formattedData: reformattedEnhancedNCEI, nri_categories } = reformatEnhancedNCEI(enhancedNCEILoss), blockClasses = "w-full p-4 my-1 block border flex flex-col";
   return /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)(import_jsx_dev_runtime82.Fragment, { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: blockClasses, style: { height: "600px" }, children: [
@@ -17873,7 +18105,7 @@ function JokesRoute() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "680adf29", entry: { module: "/build/entry.client-LL5P4IA6.js", imports: ["/build/_shared/chunk-65PE4ZTO.js", "/build/_shared/chunk-WK6CTODT.js", "/build/_shared/chunk-JE7OEZ56.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-DEZMFNVL.js", imports: ["/build/_shared/chunk-DBZAHZU3.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-HZ2ZCPLX.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth": { id: "routes/__auth", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__auth-W5M6DOQ6.js", imports: ["/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/login": { id: "routes/__auth/login", parentId: "routes/__auth", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/login-CXQDPLZY.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/logout": { id: "routes/__auth/logout", parentId: "routes/__auth", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/logout-LADMCKIU.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama": { id: "routes/__dama", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dama-AM7AYQTI.js", imports: ["/build/_shared/chunk-C6EZKSNB.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/datasources": { id: "routes/__dama/datasources", parentId: "routes/__dama", path: "datasources", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/datasources-G62LIPME.js", imports: ["/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dama/eal": { id: "routes/__dama/eal", parentId: "routes/__dama", path: "eal", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/eal-2POKQ5US.js", imports: ["/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/index.(cat)": { id: "routes/__dama/index.(cat)", parentId: "routes/__dama", path: "cat?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/index.(cat)-ZHOBPOOP.js", imports: ["/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-HZ2ZCPLX.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/($viewId)": { id: "routes/__dama/source/$sourceId.($page)/($viewId)", parentId: "routes/__dama", path: "source/:sourceId/:page?/:viewId?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/($viewId)-DY2DM7U7.js", imports: ["/build/_shared/chunk-TWECVGTA.js", "/build/_shared/chunk-DH6YVORR.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-DBZAHZU3.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-HZ2ZCPLX.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/index": { id: "routes/__dama/source/$sourceId.($page)/index", parentId: "routes/__dama", path: "source/:sourceId/:page?", index: !0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/index-JVQ6CMIE.js", imports: ["/build/_shared/chunk-TWECVGTA.js", "/build/_shared/chunk-DH6YVORR.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-DBZAHZU3.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-HZ2ZCPLX.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/create": { id: "routes/__dama/source/create", parentId: "routes/__dama", path: "source/create", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/create-J6KIQQCB.js", imports: ["/build/_shared/chunk-TWECVGTA.js", "/build/_shared/chunk-DH6YVORR.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-DBZAHZU3.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-HZ2ZCPLX.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/delete/$sourceId": { id: "routes/__dama/source/delete/$sourceId", parentId: "routes/__dama", path: "source/delete/:sourceId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/delete/$sourceId-XDLV7QNC.js", imports: ["/build/_shared/chunk-DH6YVORR.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/view/delete/$viewId": { id: "routes/__dama/view/delete/$viewId", parentId: "routes/__dama", path: "view/delete/:viewId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/view/delete/$viewId-XMAANCW2.js", imports: ["/build/_shared/chunk-DH6YVORR.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms": { id: "routes/__dms", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dms-N222UYB5.js", imports: ["/build/_shared/chunk-C6EZKSNB.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/blog/$": { id: "routes/__dms/blog/$", parentId: "routes/__dms", path: "blog/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/$-D4QCZE6A.js", imports: ["/build/_shared/chunk-JOTMUBKF.js", "/build/_shared/chunk-6CEUE3D7.js", "/build/_shared/chunk-UQKGVIVL.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-HZ2ZCPLX.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/blog/blog.config": { id: "routes/__dms/blog/blog.config", parentId: "routes/__dms", path: "blog/blog/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/blog.config-XTV72JLK.js", imports: ["/build/_shared/chunk-6CEUE3D7.js", "/build/_shared/chunk-UQKGVIVL.js", "/build/_shared/chunk-HZ2ZCPLX.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/site/$": { id: "routes/__dms/site/$", parentId: "routes/__dms", path: "site/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/$-W72ZVJAO.js", imports: ["/build/_shared/chunk-JOTMUBKF.js", "/build/_shared/chunk-UQKGVIVL.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-HZ2ZCPLX.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/site/site.config": { id: "routes/__dms/site/site.config", parentId: "routes/__dms", path: "site/site/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/site.config-OG7I4IWH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jokes": { id: "routes/jokes", parentId: "root", path: "jokes", index: void 0, caseSensitive: void 0, module: "/build/routes/jokes-EW73WCUD.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-680ADF29.js" };
+var assets_manifest_default = { version: "909a4388", entry: { module: "/build/entry.client-N6PZ3EUG.js", imports: ["/build/_shared/chunk-Q7NO2MHN.js", "/build/_shared/chunk-ZWQJTO5Q.js", "/build/_shared/chunk-JE7OEZ56.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-3VSUJJPQ.js", imports: ["/build/_shared/chunk-OQBCWBNN.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-YYSCEMJM.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth": { id: "routes/__auth", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__auth-BFF4Y4C4.js", imports: ["/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/login": { id: "routes/__auth/login", parentId: "routes/__auth", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/login-CZ5S3UXF.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/logout": { id: "routes/__auth/logout", parentId: "routes/__auth", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/logout-LADMCKIU.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama": { id: "routes/__dama", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dama-ILHCZGFL.js", imports: ["/build/_shared/chunk-GCLJDHFI.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/datasources": { id: "routes/__dama/datasources", parentId: "routes/__dama", path: "datasources", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/datasources-QEFRIMXY.js", imports: ["/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dama/eal": { id: "routes/__dama/eal", parentId: "routes/__dama", path: "eal", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/eal-2NS6IVTG.js", imports: ["/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/index.(cat)": { id: "routes/__dama/index.(cat)", parentId: "routes/__dama", path: "cat?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/index.(cat)-YHKCQ5YM.js", imports: ["/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-YYSCEMJM.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/($viewId)": { id: "routes/__dama/source/$sourceId.($page)/($viewId)", parentId: "routes/__dama", path: "source/:sourceId/:page?/:viewId?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/($viewId)-4GUQCCIO.js", imports: ["/build/_shared/chunk-S2UZZGKX.js", "/build/_shared/chunk-DH6YVORR.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-OQBCWBNN.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-YYSCEMJM.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/index": { id: "routes/__dama/source/$sourceId.($page)/index", parentId: "routes/__dama", path: "source/:sourceId/:page?", index: !0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/index-T2DCTGZ7.js", imports: ["/build/_shared/chunk-S2UZZGKX.js", "/build/_shared/chunk-DH6YVORR.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-OQBCWBNN.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-YYSCEMJM.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/create": { id: "routes/__dama/source/create", parentId: "routes/__dama", path: "source/create", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/create-TYCZT45L.js", imports: ["/build/_shared/chunk-S2UZZGKX.js", "/build/_shared/chunk-DH6YVORR.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-OQBCWBNN.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-YYSCEMJM.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/delete/$sourceId": { id: "routes/__dama/source/delete/$sourceId", parentId: "routes/__dama", path: "source/delete/:sourceId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/delete/$sourceId-AGFSUHLX.js", imports: ["/build/_shared/chunk-DH6YVORR.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/view/delete/$viewId": { id: "routes/__dama/view/delete/$viewId", parentId: "routes/__dama", path: "view/delete/:viewId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/view/delete/$viewId-P2CHVALA.js", imports: ["/build/_shared/chunk-DH6YVORR.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms": { id: "routes/__dms", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dms-6B6Q6M3G.js", imports: ["/build/_shared/chunk-GCLJDHFI.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/blog/$": { id: "routes/__dms/blog/$", parentId: "routes/__dms", path: "blog/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/$-DUJDJKSQ.js", imports: ["/build/_shared/chunk-QSHQTVLF.js", "/build/_shared/chunk-ONTXZUP2.js", "/build/_shared/chunk-RGC5LZGM.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-YYSCEMJM.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/blog/blog.config": { id: "routes/__dms/blog/blog.config", parentId: "routes/__dms", path: "blog/blog/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/blog.config-SERPTXM4.js", imports: ["/build/_shared/chunk-ONTXZUP2.js", "/build/_shared/chunk-RGC5LZGM.js", "/build/_shared/chunk-YYSCEMJM.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/site/$": { id: "routes/__dms/site/$", parentId: "routes/__dms", path: "site/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/$-7AGVDKK3.js", imports: ["/build/_shared/chunk-QSHQTVLF.js", "/build/_shared/chunk-RGC5LZGM.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-YYSCEMJM.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/site/site.config": { id: "routes/__dms/site/site.config", parentId: "routes/__dms", path: "site/site/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/site.config-OG7I4IWH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jokes": { id: "routes/jokes", parentId: "root", path: "jokes", index: void 0, caseSensitive: void 0, module: "/build/routes/jokes-JRZWY247.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-909A4388.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { v2_meta: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

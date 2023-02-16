@@ -6,20 +6,22 @@ import {DAMA_HOST} from "~/config";
 import {pgEnv} from '~/modules/data-manager/attributes'
 import get from 'lodash.get';
 
-const DeleteButton = ({text, viewId}) => (
-    <Link className={'bg-red-50 hover:bg-red-400 hover:text-white p-2'} to={`/view/delete/${viewId}`}
-    >
-        {text}
-    </Link>
-)
+const DeleteButton = ({text, viewId, meta}) => {
+    const navigate = useNavigate();
+    return (
+        <button
+            disabled={get(meta, 'authoritative') === 'true'}
+            className={`bg-red-50 p-2 ${get(meta, 'authoritative') === 'true' ? `cursor-not-allowed` : `hover:bg-red-400 hover:text-white`}`}
+            onClick={() => navigate(`/view/delete/${viewId}`)}
+        >
+            {text}
+        </button>
+    )
+}
 
 const MakeAuthoritativeButton = ({viewId, source, meta}) => {
     const navigate = useNavigate();
     const fetcher = useFetcher();
-
-    // make a falcor call to update view meta?
-    // get response, invalidate views data
-    // refresh page
 
     return (
         <button
@@ -90,7 +92,7 @@ const Views = ({source, views, user, falcor}) => {
                                             <MakeAuthoritativeButton viewId={view.view_id} source={source} meta={view.metadata}/>
                                         </dd>
                                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 flex justify-end">
-                                            <DeleteButton text={'delete'} viewId={view.view_id}/>
+                                            <DeleteButton text={'delete'} viewId={view.view_id} meta={view.metadata}/>
                                         </dd>
                                     </div>
 
