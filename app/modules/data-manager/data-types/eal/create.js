@@ -3,28 +3,21 @@ import { useNavigate } from "react-router-dom";
 import {DAMA_HOST} from "~/config";
 import { pgEnv} from '~/modules/data-manager/attributes'
 import get from "lodash.get";
-import {checkApiResponse, formatDate, newETL, getSrcViews, createNewDataSource, submitViewMeta} from "../utils/utils";
+import {checkApiResponse, formatDate, getSrcViews} from "../utils/utils";
 
-const CallServer = async ({rtPfx, source, etlContextId, userId, newVersion, navigate, viewHlr={}, viewNRI={}}) => {
-    const { name: sourceName, display_name: sourceDisplayName } = source;
-
-    const src = source.source_id ? source : await createNewDataSource(rtPfx, source, "eal");
-    console.log('calling server?', etlContextId, src)
-    const view = await submitViewMeta({
-        rtPfx, etlContextId, userId, sourceName, src, newVersion,
-        metadata: {
-            hlr_version: viewHlr.view_id,
-            nri_version: viewNRI.view_id,
-        }
-    })
+const CallServer = async ({rtPfx, source, newVersion, navigate, viewHlr={}, viewNRI={}}) => {
+    const viewMetadata = [viewHlr.view_id, viewNRI.view_id];
 
     const url = new URL(
         `${rtPfx}/hazard_mitigation/ealLoader`
     );
-    url.searchParams.append("etl_context_id", etlContextId);
+
     url.searchParams.append("table_name", 'eal');
-    url.searchParams.append("src_id", src.source_id);
-    url.searchParams.append("view_id", view.view_id);
+    url.searchParams.append("source_name", source.name);
+    url.searchParams.append("existing_source_id", source.id);
+    url.searchParams.append("view_dependencies", JSON.stringify(viewMetadata));
+    url.searchParams.append("version", newVersion);
+
     url.searchParams.append("hlr_schema", viewHlr.table_schema);
     url.searchParams.append("hlr_table", viewHlr.table_name);
     url.searchParams.append("nri_schema", viewNRI.table_schema);
@@ -34,9 +27,11 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, newVersion, navi
 
     await checkApiResponse(stgLyrDataRes);
 
-    console.log('res', await stgLyrDataRes.json());
+    const resJson = await stgLyrDataRes.json();
 
-    navigate(`/source/${src.source_id}/views`);
+    console.log('res', resJson);
+
+    navigate(`/source/${resJson.payload.source_id}/views`);
 }
 
 const RenderVersions = ({value, setValue, versions, type}) => {
@@ -74,7 +69,6 @@ const RenderVersions = ({value, setValue, versions, type}) => {
 
 const Create = ({ source, user, newVersion }) => {
     const navigate = useNavigate();
-    const [etlContextId, setEtlContextId] = React.useState();
 
     // selected views/versions
     const [viewHlr, setViewHlr] = React.useState();
@@ -87,10 +81,8 @@ const Create = ({ source, user, newVersion }) => {
 
     React.useEffect(() => {
         async function fetchData() {
-            const etl = await newETL({rtPfx, setEtlContextId});
-            setEtlContextId(etl);
-            await getSrcViews({rtPfx, setVersions: setVersionsHlr, etlContextId: etl, type: 'hlr'});
-            await getSrcViews({rtPfx, setVersions: setVersionsNRI, etlContextId: etl, type: 'nri'});
+            await getSrcViews({rtPfx, setVersions: setVersionsHlr, type: 'hlr'});
+            await getSrcViews({rtPfx, setVersions: setVersionsNRI, type: 'nri'});
         }
         fetchData();
     }, [])
@@ -103,7 +95,7 @@ const Create = ({ source, user, newVersion }) => {
                 className={`align-right`}
                 onClick={() =>
                     CallServer(
-                        {rtPfx, source, etlContextId, userId: user.id, newVersion,
+                        {rtPfx, source, userId: user.id, newVersion,
                             viewHlr: versionsHlr.views.find(v => v.view_id == viewHlr),
                             viewNRI: versionsNRI.views.find(v => v.view_id == viewNRI),
                             navigate

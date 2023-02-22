@@ -1,31 +1,27 @@
 import React from 'react'
-// import { redirect } from '@remix-run/node';
 import {DAMA_HOST} from "~/config";
 import { pgEnv} from '~/modules/data-manager/attributes'
-import {checkApiResponse, formatDate, newETL, getSrcViews, createNewDataSource, submitViewMeta} from "../utils/utils";
+import {checkApiResponse} from "../utils/utils";
 import {useNavigate} from "react-router-dom";
-const CallServer = async ({rtPfx, source, etlContextId, userId, tigerTable, newVersion, navigate}) => {
-    const { name: sourceName, display_name: sourceDisplayName } = source;
-
-    const src =  source.source_id ? source : await createNewDataSource(rtPfx, source, `tl_${tigerTable.toLowerCase()}`);
-    console.log('src?', src)
-    const view = await submitViewMeta({rtPfx, etlContextId, userId, sourceName, src, newVersion})
-
+const CallServer = async ({rtPfx, source, tigerTable, newVersion, navigate}) => {
     const url = new URL(
         `${rtPfx}/hazard_mitigation/tigerDownloadAction`
     );
-    url.searchParams.append("etl_context_id", etlContextId);
-    url.searchParams.append("table", tigerTable);
-    // url.searchParams.append("table_name", 'tl_cousubs');
-    url.searchParams.append("src_id", src.source_id);
-    url.searchParams.append("view_id", view.view_id);
+
+    url.searchParams.append("table_name", tigerTable);
+    url.searchParams.append("source_name", source.name);
+    url.searchParams.append("existing_source_id", source.id);
+    url.searchParams.append("version", newVersion);
 
     const stgLyrDataRes = await fetch(url);
 
     await checkApiResponse(stgLyrDataRes);
 
-    console.log('res', stgLyrDataRes.body)
-    navigate(`/source/${src.source_id}/views`);
+    const resJson = await stgLyrDataRes.json();
+
+    console.log('res', resJson);
+
+    navigate(`/source/${resJson.payload.source_id}/views`);
 }
 
 const RenderTigerTables= ({value, setValue, domain}) => {
@@ -63,18 +59,9 @@ const RenderTigerTables= ({value, setValue, domain}) => {
 const Create = ({ source, user, newVersion }) => {
     console.log(user)
     const navigate = useNavigate();
-    const [etlContextId, setEtlContextId] = React.useState();
     const [tigerTable, setTigerTable] = React.useState();
 
     const rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-    console.log('comes here')
-    React.useEffect(() => {
-        async function fetchData() {
-            const etl = await newETL({rtPfx, setEtlContextId});
-            setEtlContextId(etl);
-        }
-        fetchData();
-    }, [])
 
     return (
         <div className='w-full'>
@@ -82,7 +69,7 @@ const Create = ({ source, user, newVersion }) => {
             <button
                 onClick={() =>
                     CallServer({
-                        rtPfx, source, etlContextId, userId:user.id, tigerTable, newVersion, navigate})}
+                        rtPfx, source, tigerTable, newVersion, navigate})}
                 disabled={!tigerTable}
             >
                 Add New Source

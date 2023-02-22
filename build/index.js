@@ -5195,19 +5195,6 @@ var checkApiResponse = async (res) => {
 }, formatDate = (dateString) => {
   let options = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: !1 };
   return new Date(dateString).toLocaleDateString(void 0, options);
-}, createNewDataSource = async (rtPfx, source2, type) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source2, res = await fetch(`${rtPfx}/createNewDamaSource`, {
-    method: "POST",
-    body: JSON.stringify({
-      name: sourceName,
-      display_name: sourceDisplayName,
-      type
-    }),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
-  return await checkApiResponse(res), await res.json();
 }, deleteView = async (rtPfx, viewId) => {
   let url = new URL(`${rtPfx}/deleteDamaView`), res = await fetch(url, {
     method: "POST",
@@ -5235,34 +5222,11 @@ var checkApiResponse = async (res) => {
     }
   });
   return await checkApiResponse(res), await res.json();
-}, submitViewMeta = async ({ rtPfx, etlContextId, userId, sourceName, src, metadata = {}, newVersion = 1 }) => {
-  let url = new URL(`${rtPfx}/createNewDamaView`);
-  url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("user_id", userId);
-  let viewMetadata = {
-    source_id: src.source_id,
-    data_source_name: sourceName,
-    version: newVersion,
-    view_dependencies: Object.values(metadata)
-  }, res = await fetch(url, {
-    method: "POST",
-    body: JSON.stringify(viewMetadata),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
-  return await checkApiResponse(res), await res.json();
-}, newETL = async ({ rtPfx, setEtlContextId }) => {
-  let newEtlCtxRes = await fetch(`${rtPfx}/etl/new-context-id`);
-  await checkApiResponse(newEtlCtxRes);
-  let _etlCtxId = +await newEtlCtxRes.text();
-  return setEtlContextId(_etlCtxId), _etlCtxId;
-}, getSrcViews = async ({ rtPfx, setVersions, etlContextId, type }) => {
-  if (!etlContextId)
-    return {};
+}, getSrcViews = async ({ rtPfx, setVersions, type }) => {
   let url = new URL(
     `${rtPfx}/hazard_mitigation/versionSelectorUtils`
   );
-  url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("type", type);
+  url.searchParams.append("type", type);
   let list2 = await fetch(url);
   await checkApiResponse(list2);
   let {
@@ -7499,53 +7463,36 @@ var import_jsx_dev_runtime48 = require("react/jsx-dev-runtime"), availableStats 
 var import_react59 = require("react");
 
 // app/modules/data-manager/data-types/ncei_storm_events/create.js
-var import_react58 = __toESM(require("react"));
-var import_react_router_dom6 = require("react-router-dom"), import_jsx_dev_runtime49 = require("react/jsx-dev-runtime"), CallServer = async ({ rtPfx, source: source2, etlContextId, userId, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, "ncei_storm_events");
-  console.log("calling server?", etlContextId);
-  let view = await submitViewMeta(
-    {
-      rtPfx,
-      etlContextId,
-      userId,
-      sourceName,
-      src,
-      newVersion
-    }
-  ), url = new URL(
+var import_react58 = require("react");
+var import_react_router_dom6 = require("react-router-dom"), import_jsx_dev_runtime49 = require("react/jsx-dev-runtime"), CallServer = async ({ rtPfx, source: source2, newVersion, navigate }) => {
+  let url = new URL(
     `${rtPfx}/hazard_mitigation/loadNCEI`
   );
-  url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table_name", "details"), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id);
+  url.searchParams.append("table_name", "details"), url.searchParams.append("source_name", source2.name), url.searchParams.append("existing_source_id", source2.id), url.searchParams.append("version", newVersion);
   let stgLyrDataRes = await fetch(url);
-  await checkApiResponse(stgLyrDataRes), console.log("res", await stgLyrDataRes.json()), navigate(`/source/${src.source_id}/views`);
+  await checkApiResponse(stgLyrDataRes);
+  let resJson = await stgLyrDataRes.json();
+  console.log("res", resJson), navigate(`/source/${resJson.payload.source_id}/views`);
 }, Create2 = ({ source: source2, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom6.useNavigate)(), [etlContextId, setEtlContextId] = import_react58.default.useState();
-  console.log("src", source2);
-  let rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return import_react58.default.useEffect(() => {
-    async function fetchData() {
-      let etl = await newETL({ rtPfx, setEtlContextId });
-      setEtlContextId(etl);
-    }
-    fetchData();
-  }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(
+  let navigate = (0, import_react_router_dom6.useNavigate)(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(
     "button",
     {
       className: "align-right",
-      onClick: () => CallServer({ rtPfx, source: source2, etlContextId, userId: user.id, newVersion, navigate }),
+      onClick: () => CallServer({ rtPfx, source: source2, newVersion, navigate }),
       children: "Add New Source"
     },
     void 0,
     !1,
     {
       fileName: "app/modules/data-manager/data-types/ncei_storm_events/create.js",
-      lineNumber: 52,
+      lineNumber: 37,
       columnNumber: 13
     },
     this
   ) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/ncei_storm_events/create.js",
-    lineNumber: 51,
+    lineNumber: 36,
     columnNumber: 9
   }, this);
 }, create_default2 = Create2;
@@ -7825,28 +7772,24 @@ var import_react61 = require("react");
 
 // app/modules/data-manager/data-types/ncei_storm_events_enhanced/create.js
 var import_react60 = __toESM(require("react")), import_lodash21 = __toESM(require("lodash.get"));
-var import_react_router_dom7 = require("react-router-dom"), import_jsx_dev_runtime51 = require("react/jsx-dev-runtime"), CallServer2 = async ({ rtPfx, source: source2, etlContextId, userId, viewNCEI = {}, viewZTC = {}, viewCousubs = {}, viewTract = {} }, newVersion, navigate) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, "ncei_storm_events_enhanced");
-  console.log("calling server?", etlContextId, src);
-  let view = await submitViewMeta({
-    rtPfx,
-    etlContextId,
-    userId,
-    sourceName,
-    src,
-    newVersion,
-    metadata: {
-      zone_to_county_version: viewZTC.view_id,
-      cousubs_version: viewCousubs.view_id,
-      tract_version: viewTract.view_id,
-      ncei_version: viewNCEI.view_id
-    }
-  }), url = new URL(
+var import_react_router_dom7 = require("react-router-dom"), import_jsx_dev_runtime51 = require("react/jsx-dev-runtime"), CallServer2 = async ({
+  rtPfx,
+  source: source2,
+  newVersion,
+  navigate,
+  viewNCEI = {},
+  viewZTC = {},
+  viewCousubs = {},
+  viewTract = {}
+}) => {
+  let viewMetadata = [viewZTC.view_id, viewCousubs.view_id, viewTract.view_id, viewNCEI.view_id], url = new URL(
     `${rtPfx}/hazard_mitigation/enhanceNCEI`
   );
-  url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table_name", "details_enhanced"), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id), url.searchParams.append("ncei_schema", viewNCEI.table_schema), url.searchParams.append("ncei_table", viewNCEI.table_name), url.searchParams.append("tract_schema", viewTract.table_schema), url.searchParams.append("tract_table", viewTract.table_name), url.searchParams.append("ztc_schema", viewZTC.table_schema), url.searchParams.append("ztc_table", viewZTC.table_name), url.searchParams.append("cousub_schema", viewCousubs.table_schema), url.searchParams.append("cousub_table", viewCousubs.table_name);
+  url.searchParams.append("table_name", "details_enhanced"), url.searchParams.append("source_name", source2.name), url.searchParams.append("existing_source_id", source2.id), url.searchParams.append("view_dependencies", JSON.stringify(viewMetadata)), url.searchParams.append("version", newVersion), url.searchParams.append("ncei_schema", viewNCEI.table_schema), url.searchParams.append("ncei_table", viewNCEI.table_name), url.searchParams.append("tract_schema", viewTract.table_schema), url.searchParams.append("tract_table", viewTract.table_name), url.searchParams.append("ztc_schema", viewZTC.table_schema), url.searchParams.append("ztc_table", viewZTC.table_name), url.searchParams.append("cousub_schema", viewCousubs.table_schema), url.searchParams.append("cousub_table", viewCousubs.table_name);
   let stgLyrDataRes = await fetch(url);
-  await checkApiResponse(stgLyrDataRes), console.log("res", await stgLyrDataRes.json()), navigate(`/source/${src.source_id}/views`);
+  await checkApiResponse(stgLyrDataRes);
+  let resJson = await stgLyrDataRes.json();
+  console.log("res", resJson), navigate(`/source/${resJson.payload.source_id}/views`);
 }, RenderVersions2 = ({ value, setValue, versions, type }) => /* @__PURE__ */ (0, import_jsx_dev_runtime51.jsxDEV)("div", { className: "flex justify-between group", children: /* @__PURE__ */ (0, import_jsx_dev_runtime51.jsxDEV)("div", { className: "flex-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6", children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime51.jsxDEV)("dt", { className: "text-sm font-medium text-gray-500 py-5", children: [
     "Select ",
@@ -7854,7 +7797,7 @@ var import_react_router_dom7 = require("react-router-dom"), import_jsx_dev_runti
     " version: "
   ] }, void 0, !0, {
     fileName: "app/modules/data-manager/data-types/ncei_storm_events_enhanced/create.js",
-    lineNumber: 52,
+    lineNumber: 47,
     columnNumber: 17
   }, this),
   /* @__PURE__ */ (0, import_jsx_dev_runtime51.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime51.jsxDEV)("div", { className: "pt-3 pr-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime51.jsxDEV)(
@@ -7868,7 +7811,7 @@ var import_react_router_dom7 = require("react-router-dom"), import_jsx_dev_runti
       children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime51.jsxDEV)("option", { value: "", disabled: !0, children: "Select your option" }, void 0, !1, {
           fileName: "app/modules/data-manager/data-types/ncei_storm_events_enhanced/create.js",
-          lineNumber: 61,
+          lineNumber: 56,
           columnNumber: 29
         }, this),
         versions.views.map((v) => /* @__PURE__ */ (0, import_jsx_dev_runtime51.jsxDEV)(
@@ -7885,7 +7828,7 @@ var import_react_router_dom7 = require("react-router-dom"), import_jsx_dev_runti
           !0,
           {
             fileName: "app/modules/data-manager/data-types/ncei_storm_events_enhanced/create.js",
-            lineNumber: 64,
+            lineNumber: 59,
             columnNumber: 37
           },
           this
@@ -7896,33 +7839,32 @@ var import_react_router_dom7 = require("react-router-dom"), import_jsx_dev_runti
     !0,
     {
       fileName: "app/modules/data-manager/data-types/ncei_storm_events_enhanced/create.js",
-      lineNumber: 55,
+      lineNumber: 50,
       columnNumber: 25
     },
     this
   ) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/ncei_storm_events_enhanced/create.js",
-    lineNumber: 54,
+    lineNumber: 49,
     columnNumber: 21
   }, this) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/ncei_storm_events_enhanced/create.js",
-    lineNumber: 53,
+    lineNumber: 48,
     columnNumber: 17
   }, this)
 ] }, void 0, !0, {
   fileName: "app/modules/data-manager/data-types/ncei_storm_events_enhanced/create.js",
-  lineNumber: 51,
+  lineNumber: 46,
   columnNumber: 13
 }, this) }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/ncei_storm_events_enhanced/create.js",
-  lineNumber: 50,
+  lineNumber: 45,
   columnNumber: 9
 }, this), Create3 = ({ source: source2, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom7.useNavigate)(), [etlContextId, setEtlContextId] = import_react60.default.useState(), [viewZTC, setViewZTC] = import_react60.default.useState(), [viewCousubs, setViewCousubs] = import_react60.default.useState(), [viewTract, setViewTract] = import_react60.default.useState(), [viewNCEI, setViewNCEI] = import_react60.default.useState(), [versionsZTC, setVersionsZTC] = import_react60.default.useState({ sources: [], views: [] }), [versionsCousubs, setVersionsCousubs] = import_react60.default.useState({ sources: [], views: [] }), [versionsTract, setVersionsTract] = import_react60.default.useState({ sources: [], views: [] }), [versionsNCEI, setVersionsNCEI] = import_react60.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  let navigate = (0, import_react_router_dom7.useNavigate)(), [viewZTC, setViewZTC] = import_react60.default.useState(), [viewCousubs, setViewCousubs] = import_react60.default.useState(), [viewTract, setViewTract] = import_react60.default.useState(), [viewNCEI, setViewNCEI] = import_react60.default.useState(), [versionsZTC, setVersionsZTC] = import_react60.default.useState({ sources: [], views: [] }), [versionsCousubs, setVersionsCousubs] = import_react60.default.useState({ sources: [], views: [] }), [versionsTract, setVersionsTract] = import_react60.default.useState({ sources: [], views: [] }), [versionsNCEI, setVersionsNCEI] = import_react60.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react60.default.useEffect(() => {
     async function fetchData() {
-      let etl = await newETL({ rtPfx, setEtlContextId });
-      setEtlContextId(etl), await getSrcViews({ rtPfx, setVersions: setVersionsZTC, etlContextId: etl, type: "zone_to_county" }), await getSrcViews({ rtPfx, setVersions: setVersionsCousubs, etlContextId: etl, type: "tl_cousub" }), await getSrcViews({ rtPfx, setVersions: setVersionsTract, etlContextId: etl, type: "tl_tract" }), await getSrcViews({ rtPfx, setVersions: setVersionsNCEI, etlContextId: etl, type: "ncei_storm_events" });
+      await getSrcViews({ rtPfx, setVersions: setVersionsZTC, type: "zone_to_county" }), await getSrcViews({ rtPfx, setVersions: setVersionsCousubs, type: "tl_cousub" }), await getSrcViews({ rtPfx, setVersions: setVersionsTract, type: "tl_tract" }), await getSrcViews({ rtPfx, setVersions: setVersionsNCEI, type: "ncei_storm_events" });
     }
     fetchData();
   }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime51.jsxDEV)("div", { className: "w-full", children: [
@@ -7938,8 +7880,6 @@ var import_react_router_dom7 = require("react-router-dom"), import_jsx_dev_runti
           {
             rtPfx,
             source: source2,
-            etlContextId,
-            userId: user.id,
             viewNCEI: versionsNCEI.views.find((v) => v.view_id == viewNCEI),
             viewZTC: versionsZTC.views.find((v) => v.view_id == viewZTC),
             viewCousubs: versionsCousubs.views.find((v) => v.view_id == viewCousubs),
@@ -7954,14 +7894,14 @@ var import_react_router_dom7 = require("react-router-dom"), import_jsx_dev_runti
       !1,
       {
         fileName: "app/modules/data-manager/data-types/ncei_storm_events_enhanced/create.js",
-        lineNumber: 116,
+        lineNumber: 108,
         columnNumber: 13
       },
       this
     )
   ] }, void 0, !0, {
     fileName: "app/modules/data-manager/data-types/ncei_storm_events_enhanced/create.js",
-    lineNumber: 111,
+    lineNumber: 103,
     columnNumber: 9
   }, this);
 }, create_default3 = Create3;
@@ -8282,38 +8222,30 @@ var import_lodash22 = __toESM(require("lodash.get")), import_jsx_dev_runtime52 =
 var import_react63 = require("react");
 
 // app/modules/data-manager/data-types/zone_to_county/create.js
-var import_react62 = __toESM(require("react"));
-var import_react_router_dom8 = require("react-router-dom"), import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), CallServer3 = async ({ rtPfx, source: source2, etlContextId, userId, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, "zone_to_county");
-  console.log("src?", src);
-  let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
+var import_react62 = require("react");
+var import_react_router_dom8 = require("react-router-dom"), import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), CallServer3 = async ({ rtPfx, source: source2, newVersion, navigate }) => {
+  let url = new URL(
     `${rtPfx}/hazard_mitigation/csvUploadAction`
   );
-  url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table_name", "zone_to_county"), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id);
+  url.searchParams.append("table_name", "zone_to_county"), url.searchParams.append("source_name", source2.name), url.searchParams.append("existing_source_id", source2.id), url.searchParams.append("version", newVersion);
   let stgLyrDataRes = await fetch(url);
-  await checkApiResponse(stgLyrDataRes), navigate(`/source/${src.source_id}/views`);
+  await checkApiResponse(stgLyrDataRes);
+  let resJson = await stgLyrDataRes.json();
+  console.log("res", resJson), navigate(`/source/${resJson.payload.source_id}/views`);
 }, Create4 = ({ source: source2, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom8.useNavigate)(), [etlContextId, setEtlContextId] = import_react62.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return import_react62.default.useEffect(() => {
-    async function fetchData() {
-      let etl = await newETL({ rtPfx, setEtlContextId });
-      setEtlContextId(etl);
-    }
-    fetchData();
-  }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)("button", { onClick: () => CallServer3({
+  let navigate = (0, import_react_router_dom8.useNavigate)(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)("button", { onClick: () => CallServer3({
     rtPfx,
     source: source2,
-    etlContextId,
-    userId: user.id,
     newVersion,
     navigate
   }), children: " Add New Source" }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/zone_to_county/create.js",
-    lineNumber: 46,
+    lineNumber: 35,
     columnNumber: 13
   }, this) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/zone_to_county/create.js",
-    lineNumber: 45,
+    lineNumber: 34,
     columnNumber: 9
   }, this);
 }, create_default4 = Create4;
@@ -8349,19 +8281,19 @@ var import_react65 = require("react"), import_lodash23 = require("lodash.get");
 
 // app/modules/data-manager/data-types/tiger_2017/create.js
 var import_react64 = __toESM(require("react"));
-var import_react_router_dom9 = require("react-router-dom"), import_jsx_dev_runtime55 = require("react/jsx-dev-runtime"), CallServer4 = async ({ rtPfx, source: source2, etlContextId, userId, tigerTable, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, `tl_${tigerTable.toLowerCase()}`);
-  console.log("src?", src);
-  let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
+var import_react_router_dom9 = require("react-router-dom"), import_jsx_dev_runtime55 = require("react/jsx-dev-runtime"), CallServer4 = async ({ rtPfx, source: source2, tigerTable, newVersion, navigate }) => {
+  let url = new URL(
     `${rtPfx}/hazard_mitigation/tigerDownloadAction`
   );
-  url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table", tigerTable), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id);
+  url.searchParams.append("table_name", tigerTable), url.searchParams.append("source_name", source2.name), url.searchParams.append("existing_source_id", source2.id), url.searchParams.append("version", newVersion);
   let stgLyrDataRes = await fetch(url);
-  await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), navigate(`/source/${src.source_id}/views`);
+  await checkApiResponse(stgLyrDataRes);
+  let resJson = await stgLyrDataRes.json();
+  console.log("res", resJson), navigate(`/source/${resJson.payload.source_id}/views`);
 }, RenderTigerTables = ({ value, setValue, domain }) => /* @__PURE__ */ (0, import_jsx_dev_runtime55.jsxDEV)("div", { className: "flex justify-between group", children: /* @__PURE__ */ (0, import_jsx_dev_runtime55.jsxDEV)("div", { className: "flex-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6", children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime55.jsxDEV)("dt", { className: "text-sm font-medium text-gray-500 py-5", children: "Select Type: " }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/tiger_2017/create.js",
-    lineNumber: 35,
+    lineNumber: 31,
     columnNumber: 17
   }, this),
   /* @__PURE__ */ (0, import_jsx_dev_runtime55.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime55.jsxDEV)("div", { className: "pt-3 pr-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime55.jsxDEV)(
@@ -8375,7 +8307,7 @@ var import_react_router_dom9 = require("react-router-dom"), import_jsx_dev_runti
       children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime55.jsxDEV)("option", { value: "", disabled: !0, children: "Select your option" }, void 0, !1, {
           fileName: "app/modules/data-manager/data-types/tiger_2017/create.js",
-          lineNumber: 44,
+          lineNumber: 40,
           columnNumber: 29
         }, this),
         domain.map((v) => /* @__PURE__ */ (0, import_jsx_dev_runtime55.jsxDEV)(
@@ -8389,7 +8321,7 @@ var import_react_router_dom9 = require("react-router-dom"), import_jsx_dev_runti
           !1,
           {
             fileName: "app/modules/data-manager/data-types/tiger_2017/create.js",
-            lineNumber: 47,
+            lineNumber: 43,
             columnNumber: 37
           },
           this
@@ -8400,37 +8332,31 @@ var import_react_router_dom9 = require("react-router-dom"), import_jsx_dev_runti
     !0,
     {
       fileName: "app/modules/data-manager/data-types/tiger_2017/create.js",
-      lineNumber: 38,
+      lineNumber: 34,
       columnNumber: 25
     },
     this
   ) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/tiger_2017/create.js",
-    lineNumber: 37,
+    lineNumber: 33,
     columnNumber: 21
   }, this) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/tiger_2017/create.js",
-    lineNumber: 36,
+    lineNumber: 32,
     columnNumber: 17
   }, this)
 ] }, void 0, !0, {
   fileName: "app/modules/data-manager/data-types/tiger_2017/create.js",
-  lineNumber: 34,
+  lineNumber: 30,
   columnNumber: 13
 }, this) }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/tiger_2017/create.js",
-  lineNumber: 33,
+  lineNumber: 29,
   columnNumber: 9
 }, this), Create5 = ({ source: source2, user, newVersion }) => {
   console.log(user);
-  let navigate = (0, import_react_router_dom9.useNavigate)(), [etlContextId, setEtlContextId] = import_react64.default.useState(), [tigerTable, setTigerTable] = import_react64.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return console.log("comes here"), import_react64.default.useEffect(() => {
-    async function fetchData() {
-      let etl = await newETL({ rtPfx, setEtlContextId });
-      setEtlContextId(etl);
-    }
-    fetchData();
-  }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime55.jsxDEV)("div", { className: "w-full", children: [
+  let navigate = (0, import_react_router_dom9.useNavigate)(), [tigerTable, setTigerTable] = import_react64.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime55.jsxDEV)("div", { className: "w-full", children: [
     RenderTigerTables({ value: tigerTable, setValue: setTigerTable, domain: ["STATE", "COUNTY", "COUSUB", "TRACT"] }),
     /* @__PURE__ */ (0, import_jsx_dev_runtime55.jsxDEV)(
       "button",
@@ -8438,8 +8364,6 @@ var import_react_router_dom9 = require("react-router-dom"), import_jsx_dev_runti
         onClick: () => CallServer4({
           rtPfx,
           source: source2,
-          etlContextId,
-          userId: user.id,
           tigerTable,
           newVersion,
           navigate
@@ -8451,14 +8375,14 @@ var import_react_router_dom9 = require("react-router-dom"), import_jsx_dev_runti
       !1,
       {
         fileName: "app/modules/data-manager/data-types/tiger_2017/create.js",
-        lineNumber: 82,
+        lineNumber: 69,
         columnNumber: 13
       },
       this
     )
   ] }, void 0, !0, {
     fileName: "app/modules/data-manager/data-types/tiger_2017/create.js",
-    lineNumber: 80,
+    lineNumber: 67,
     columnNumber: 9
   }, this);
 }, create_default5 = Create5;
@@ -8571,41 +8495,33 @@ var import_react_router_dom10 = require("react-router-dom"), import_jsx_dev_runt
   fileName: "app/modules/data-manager/data-types/open_fema_data/create.js",
   lineNumber: 47,
   columnNumber: 9
-}, this), CallServer5 = async ({ rtPfx, source: source2, etlContextId, userId, table, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, table);
-  console.log("src?", src);
-  let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
+}, this), CallServer5 = async ({ rtPfx, source: source2, table, newVersion, navigate }) => {
+  let url = new URL(
     `${rtPfx}/hazard_mitigation/openFemaDataLoader`
   );
-  url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table_name", table), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id);
+  url.searchParams.append("table_name", table), url.searchParams.append("source_name", source2.name), url.searchParams.append("existing_source_id", source2.id), url.searchParams.append("version", newVersion);
   let stgLyrDataRes = await fetch(url);
-  await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), navigate(`/source/${src.source_id}/views`);
+  await checkApiResponse(stgLyrDataRes);
+  let resJson = await stgLyrDataRes.json();
+  console.log("res", resJson), navigate(`/source/${resJson.payload.source_id}/views`);
 }, Create6 = ({ source: source2, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom10.useNavigate)(), [etlContextId, setEtlContextId] = import_react66.default.useState(), [table, setTable] = import_react66.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return import_react66.default.useEffect(() => {
-    async function fetchData() {
-      let etl = await newETL({ rtPfx, setEtlContextId });
-      setEtlContextId(etl);
-    }
-    fetchData();
-  }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime57.jsxDEV)("div", { className: "w-full", children: [
+  let navigate = (0, import_react_router_dom10.useNavigate)(), [table, setTable] = import_react66.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime57.jsxDEV)("div", { className: "w-full", children: [
     RenderDatasets({ value: table, setValue: setTable, datasets }),
     /* @__PURE__ */ (0, import_jsx_dev_runtime57.jsxDEV)("button", { onClick: () => CallServer5({
       rtPfx,
       source: source2,
-      etlContextId,
-      userId: user.id,
       table,
       newVersion,
       navigate
     }), children: " Add New Source" }, void 0, !1, {
       fileName: "app/modules/data-manager/data-types/open_fema_data/create.js",
-      lineNumber: 117,
+      lineNumber: 106,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/modules/data-manager/data-types/open_fema_data/create.js",
-    lineNumber: 115,
+    lineNumber: 104,
     columnNumber: 9
   }, this);
 }, create_default6 = Create6;
@@ -8640,39 +8556,31 @@ var import_jsx_dev_runtime58 = require("react/jsx-dev-runtime"), Table6 = ({ sou
 var import_react69 = require("react");
 
 // app/modules/data-manager/data-types/usda/create.js
-var import_react68 = __toESM(require("react"));
-var import_react_router_dom11 = require("react-router-dom"), import_jsx_dev_runtime59 = require("react/jsx-dev-runtime"), CallServer6 = async ({ rtPfx, source: source2, etlContextId, userId, table, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, table);
-  console.log("src?", src);
-  let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
+var import_react68 = require("react");
+var import_react_router_dom11 = require("react-router-dom"), import_jsx_dev_runtime59 = require("react/jsx-dev-runtime"), CallServer6 = async ({ rtPfx, source: source2, table, newVersion, navigate }) => {
+  let url = new URL(
     `${rtPfx}/hazard_mitigation/usdaLoader`
   );
-  url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table_name", table), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id);
+  url.searchParams.append("table_name", table), url.searchParams.append("source_name", source2.name), url.searchParams.append("existing_source_id", source2.id), url.searchParams.append("version", newVersion);
   let stgLyrDataRes = await fetch(url);
-  await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), navigate(`/source/${src.source_id}/views`);
+  await checkApiResponse(stgLyrDataRes);
+  let resJson = await stgLyrDataRes.json();
+  console.log("res", resJson), navigate(`/source/${resJson.payload.source_id}/views`);
 }, Create7 = ({ source: source2, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom11.useNavigate)(), [etlContextId, setEtlContextId] = import_react68.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return import_react68.default.useEffect(() => {
-    async function fetchData() {
-      let etl = await newETL({ rtPfx, setEtlContextId });
-      setEtlContextId(etl);
-    }
-    fetchData();
-  }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime59.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime59.jsxDEV)("button", { onClick: () => CallServer6({
+  let navigate = (0, import_react_router_dom11.useNavigate)(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime59.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime59.jsxDEV)("button", { onClick: () => CallServer6({
     rtPfx,
     source: source2,
-    etlContextId,
-    userId: user.id,
     table: "usda_crop_insurance_cause_of_loss",
     newVersion,
     navigate
   }), children: " Add New Source" }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/usda/create.js",
-    lineNumber: 46,
+    lineNumber: 35,
     columnNumber: 13
   }, this) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/usda/create.js",
-    lineNumber: 45,
+    lineNumber: 34,
     columnNumber: 9
   }, this);
 }, create_default7 = Create7;
@@ -8707,25 +8615,19 @@ var import_jsx_dev_runtime60 = require("react/jsx-dev-runtime"), Table7 = ({ sou
 var import_react71 = require("react");
 
 // app/modules/data-manager/data-types/sba/create.js
-var import_react70 = __toESM(require("react"));
-var import_react_router_dom12 = require("react-router-dom"), import_jsx_dev_runtime61 = require("react/jsx-dev-runtime"), CallServer7 = async ({ rtPfx, source: source2, etlContextId, userId, table, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, table);
-  console.log("src?", src);
-  let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
+var import_react70 = require("react");
+var import_react_router_dom12 = require("react-router-dom"), import_jsx_dev_runtime61 = require("react/jsx-dev-runtime"), CallServer7 = async ({ rtPfx, source: source2, table, newVersion, navigate }) => {
+  let url = new URL(
     `${rtPfx}/hazard_mitigation/sbaLoader`
   );
-  url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table", table), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id);
+  url.searchParams.append("table_name", table), url.searchParams.append("source_name", source2.name), url.searchParams.append("existing_source_id", source2.id), url.searchParams.append("version", newVersion);
   let stgLyrDataRes = await fetch(url);
-  await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), navigate(`/source/${src.source_id}/views`);
+  await checkApiResponse(stgLyrDataRes);
+  let resJson = await stgLyrDataRes.json();
+  console.log("res", resJson), navigate(`/source/${resJson.payload.source_id}/views`);
 }, Create8 = ({ source: source2, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom12.useNavigate)(), [etlContextId, setEtlContextId] = import_react70.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return import_react70.default.useEffect(() => {
-    async function fetchData() {
-      let etl = await newETL({ rtPfx, setEtlContextId });
-      setEtlContextId(etl);
-    }
-    fetchData();
-  }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime61.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime61.jsxDEV)("button", { onClick: () => CallServer7({
+  let navigate = (0, import_react_router_dom12.useNavigate)(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime61.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime61.jsxDEV)("button", { onClick: () => CallServer7({
     rtPfx,
     source: source2,
     etlContextId,
@@ -8735,11 +8637,11 @@ var import_react_router_dom12 = require("react-router-dom"), import_jsx_dev_runt
     navigate
   }), children: " Add New Source" }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/sba/create.js",
-    lineNumber: 46,
+    lineNumber: 34,
     columnNumber: 13
   }, this) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/sba/create.js",
-    lineNumber: 45,
+    lineNumber: 33,
     columnNumber: 9
   }, this);
 }, create_default8 = Create8;
@@ -8774,39 +8676,30 @@ var import_jsx_dev_runtime62 = require("react/jsx-dev-runtime"), Table8 = ({ sou
 var import_react73 = require("react");
 
 // app/modules/data-manager/data-types/nri/create.js
-var import_react72 = __toESM(require("react"));
-var import_react_router_dom13 = require("react-router-dom"), import_jsx_dev_runtime63 = require("react/jsx-dev-runtime"), CallServer8 = async ({ rtPfx, source: source2, etlContextId, userId, table, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, table);
-  console.log("src?", src);
-  let view = await submitViewMeta({ rtPfx, etlContextId, userId, sourceName, src, newVersion }), url = new URL(
+var import_react72 = require("react");
+var import_react_router_dom13 = require("react-router-dom"), import_jsx_dev_runtime63 = require("react/jsx-dev-runtime"), CallServer8 = async ({ rtPfx, source: source2, newVersion, navigate }) => {
+  let url = new URL(
     `${rtPfx}/hazard_mitigation/nriLoader`
   );
-  url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table_name", table), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id);
+  url.searchParams.append("table_name", "nri"), url.searchParams.append("source_name", source2.name), url.searchParams.append("existing_source_id", source2.id), url.searchParams.append("version", newVersion);
   let stgLyrDataRes = await fetch(url);
-  await checkApiResponse(stgLyrDataRes), console.log("res", stgLyrDataRes.body), navigate(`/source/${src.source_id}/views`);
+  await checkApiResponse(stgLyrDataRes);
+  let resJson = await stgLyrDataRes.json();
+  console.log("res", resJson), navigate(`/source/${resJson.payload.source_id}/views`);
 }, Create9 = ({ source: source2, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom13.useNavigate)(), [etlContextId, setEtlContextId] = import_react72.default.useState(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
-  return import_react72.default.useEffect(() => {
-    async function fetchData() {
-      let etl = await newETL({ rtPfx, setEtlContextId });
-      setEtlContextId(etl);
-    }
-    fetchData();
-  }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime63.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime63.jsxDEV)("button", { onClick: () => CallServer8({
+  let navigate = (0, import_react_router_dom13.useNavigate)(), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime63.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime63.jsxDEV)("button", { onClick: () => CallServer8({
     rtPfx,
     source: source2,
-    etlContextId,
-    userId: user.id,
-    table: "nri",
     newVersion,
     navigate
   }), children: " Add New Source" }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/nri/create.js",
-    lineNumber: 45,
+    lineNumber: 34,
     columnNumber: 13
   }, this) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/nri/create.js",
-    lineNumber: 44,
+    lineNumber: 33,
     columnNumber: 9
   }, this);
 }, create_default9 = Create9;
@@ -8842,26 +8735,22 @@ var import_react75 = require("react");
 
 // app/modules/data-manager/data-types/per_basis_swd/create.js
 var import_react74 = __toESM(require("react")), import_lodash24 = __toESM(require("lodash.get"));
-var import_react_router_dom14 = require("react-router-dom"), import_jsx_dev_runtime65 = require("react/jsx-dev-runtime"), CallServer9 = async ({ rtPfx, source: source2, etlContextId, userId, viewNCEI = {}, viewNRI = {}, newVersion, navigate }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, "per_basis");
-  console.log("calling server?", etlContextId, src);
-  let view = await submitViewMeta({
-    rtPfx,
-    etlContextId,
-    userId,
-    sourceName,
-    src,
-    newVersion,
-    metadata: {
-      ncei_version: viewNCEI.view_id,
-      nri_version: viewNRI.view_id
-    }
-  }), url = new URL(
+var import_react_router_dom14 = require("react-router-dom"), import_jsx_dev_runtime65 = require("react/jsx-dev-runtime"), CallServer9 = async ({
+  rtPfx,
+  source: source2,
+  newVersion,
+  navigate,
+  viewNCEI = {},
+  viewNRI = {}
+}) => {
+  let viewMetadata = [viewNCEI.view_id, viewNRI.view_id], url = new URL(
     `${rtPfx}/hazard_mitigation/pbSWDLoader`
   );
-  url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table_name", "per_basis_swd"), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id), url.searchParams.append("ncei_schema", viewNCEI.table_schema), url.searchParams.append("ncei_table", viewNCEI.table_name), url.searchParams.append("nri_schema", viewNRI.table_schema), url.searchParams.append("nri_table", viewNRI.table_name);
+  url.searchParams.append("table_name", "per_basis_swd"), url.searchParams.append("source_name", source2.name), url.searchParams.append("existing_source_id", source2.id), url.searchParams.append("view_dependencies", JSON.stringify(viewMetadata)), url.searchParams.append("version", newVersion), url.searchParams.append("ncei_schema", viewNCEI.table_schema), url.searchParams.append("ncei_table", viewNCEI.table_name), url.searchParams.append("nri_schema", viewNRI.table_schema), url.searchParams.append("nri_table", viewNRI.table_name);
   let stgLyrDataRes = await fetch(url);
-  await checkApiResponse(stgLyrDataRes), console.log("res", await stgLyrDataRes.json()), navigate(`/source/${src.source_id}/views`);
+  await checkApiResponse(stgLyrDataRes);
+  let resJson = await stgLyrDataRes.json();
+  console.log("res", resJson), navigate(`/source/${resJson.payload.source_id}/views`);
 }, RenderVersions4 = ({ value, setValue, versions, type }) => /* @__PURE__ */ (0, import_jsx_dev_runtime65.jsxDEV)("div", { className: "flex justify-between group", children: /* @__PURE__ */ (0, import_jsx_dev_runtime65.jsxDEV)("div", { className: "flex-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6", children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime65.jsxDEV)("dt", { className: "text-sm font-medium text-gray-500 py-5", children: [
     "Select ",
@@ -8869,7 +8758,7 @@ var import_react_router_dom14 = require("react-router-dom"), import_jsx_dev_runt
     " version: "
   ] }, void 0, !0, {
     fileName: "app/modules/data-manager/data-types/per_basis_swd/create.js",
-    lineNumber: 45,
+    lineNumber: 42,
     columnNumber: 17
   }, this),
   /* @__PURE__ */ (0, import_jsx_dev_runtime65.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime65.jsxDEV)("div", { className: "pt-3 pr-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime65.jsxDEV)(
@@ -8883,7 +8772,7 @@ var import_react_router_dom14 = require("react-router-dom"), import_jsx_dev_runt
       children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime65.jsxDEV)("option", { value: "", disabled: !0, children: "Select your option" }, void 0, !1, {
           fileName: "app/modules/data-manager/data-types/per_basis_swd/create.js",
-          lineNumber: 54,
+          lineNumber: 51,
           columnNumber: 29
         }, this),
         versions.views.map((v) => /* @__PURE__ */ (0, import_jsx_dev_runtime65.jsxDEV)(
@@ -8900,7 +8789,7 @@ var import_react_router_dom14 = require("react-router-dom"), import_jsx_dev_runt
           !0,
           {
             fileName: "app/modules/data-manager/data-types/per_basis_swd/create.js",
-            lineNumber: 57,
+            lineNumber: 54,
             columnNumber: 37
           },
           this
@@ -8911,35 +8800,32 @@ var import_react_router_dom14 = require("react-router-dom"), import_jsx_dev_runt
     !0,
     {
       fileName: "app/modules/data-manager/data-types/per_basis_swd/create.js",
-      lineNumber: 48,
+      lineNumber: 45,
       columnNumber: 25
     },
     this
   ) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/per_basis_swd/create.js",
-    lineNumber: 47,
+    lineNumber: 44,
     columnNumber: 21
   }, this) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/per_basis_swd/create.js",
-    lineNumber: 46,
+    lineNumber: 43,
     columnNumber: 17
   }, this)
 ] }, void 0, !0, {
   fileName: "app/modules/data-manager/data-types/per_basis_swd/create.js",
-  lineNumber: 44,
+  lineNumber: 41,
   columnNumber: 13
 }, this) }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/per_basis_swd/create.js",
-  lineNumber: 43,
+  lineNumber: 40,
   columnNumber: 9
 }, this), Create10 = ({ source: source2, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom14.useNavigate)(), [etlContextId, setEtlContextId] = import_react74.default.useState();
-  console.log("this loads", newVersion);
-  let [viewNCEI, setViewNCEI] = import_react74.default.useState(), [viewNRI, setViewNRI] = import_react74.default.useState(), [versionsNCEI, setVersionsNCEI] = import_react74.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react74.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  let navigate = (0, import_react_router_dom14.useNavigate)(), [viewNCEI, setViewNCEI] = import_react74.default.useState(), [viewNRI, setViewNRI] = import_react74.default.useState(), [versionsNCEI, setVersionsNCEI] = import_react74.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react74.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react74.default.useEffect(() => {
     async function fetchData() {
-      let etl = await newETL({ rtPfx, setEtlContextId });
-      setEtlContextId(etl), await getSrcViews({ rtPfx, setVersions: setVersionsNCEI, etlContextId: etl, type: "ncei_storm_events_enhanced" }), await getSrcViews({ rtPfx, setVersions: setVersionsNRI, etlContextId: etl, type: "nri" });
+      await getSrcViews({ rtPfx, setVersions: setVersionsNCEI, type: "ncei_storm_events_enhanced" }), await getSrcViews({ rtPfx, setVersions: setVersionsNRI, type: "nri" });
     }
     fetchData();
   }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime65.jsxDEV)("div", { className: "w-full", children: [
@@ -8953,8 +8839,6 @@ var import_react_router_dom14 = require("react-router-dom"), import_jsx_dev_runt
           {
             rtPfx,
             source: source2,
-            etlContextId,
-            userId: user.id,
             viewNCEI: versionsNCEI.views.find((v) => v.view_id == viewNCEI),
             viewNRI: versionsNRI.views.find((v) => v.view_id == viewNRI),
             newVersion,
@@ -8967,14 +8851,14 @@ var import_react_router_dom14 = require("react-router-dom"), import_jsx_dev_runt
       !1,
       {
         fileName: "app/modules/data-manager/data-types/per_basis_swd/create.js",
-        lineNumber: 101,
+        lineNumber: 96,
         columnNumber: 13
       },
       this
     )
   ] }, void 0, !0, {
     fileName: "app/modules/data-manager/data-types/per_basis_swd/create.js",
-    lineNumber: 98,
+    lineNumber: 93,
     columnNumber: 9
   }, this);
 }, create_default10 = Create10;
@@ -9340,29 +9224,25 @@ var import_react77 = require("react");
 // app/modules/data-manager/data-types/hlr/create.js
 var import_react76 = __toESM(require("react")), import_react_router_dom15 = require("react-router-dom");
 var import_lodash26 = __toESM(require("lodash.get"));
-var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = async ({ rtPfx, source: source2, etlContextId, userId, newVersion, navigate, viewPB = {}, viewNRI = {}, viewState = {}, viewCounty = {}, viewNCEI = {} }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, "hlr");
-  console.log("calling server?", etlContextId, src);
-  let view = await submitViewMeta({
-    rtPfx,
-    etlContextId,
-    userId,
-    sourceName,
-    src,
-    newVersion,
-    metadata: {
-      pb_version: viewPB.view_id,
-      nri_version: viewNRI.view_id,
-      state_version: viewState.view_id,
-      county_version: viewCounty.view_id,
-      ncei_version: viewNCEI.view_id
-    }
-  }), url = new URL(
+var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = async ({
+  rtPfx,
+  source: source2,
+  newVersion,
+  navigate,
+  viewPB = {},
+  viewNRI = {},
+  viewState = {},
+  viewCounty = {},
+  viewNCEI = {}
+}) => {
+  let viewMetadata = [viewPB.view_id, viewNRI.view_id, viewState.view_id, viewCounty.view_id, viewNCEI.view_id], url = new URL(
     `${rtPfx}/hazard_mitigation/hlrLoader`
   );
-  url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table_name", "hlr"), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id), url.searchParams.append("pb_schema", viewPB.table_schema), url.searchParams.append("pb_table", viewPB.table_name), url.searchParams.append("nri_schema", viewNRI.table_schema), url.searchParams.append("nri_table", viewNRI.table_name), url.searchParams.append("state_schema", viewState.table_schema), url.searchParams.append("state_table", viewState.table_name), url.searchParams.append("county_schema", viewCounty.table_schema), url.searchParams.append("county_table", viewCounty.table_name), url.searchParams.append("ncei_schema", viewNCEI.table_schema), url.searchParams.append("ncei_table", viewNCEI.table_name);
+  url.searchParams.append("source_name", source2.name), url.searchParams.append("existing_source_id", source2.id), url.searchParams.append("view_dependencies", JSON.stringify(viewMetadata)), url.searchParams.append("version", newVersion), url.searchParams.append("table_name", "hlr"), url.searchParams.append("pb_schema", viewPB.table_schema), url.searchParams.append("pb_table", viewPB.table_name), url.searchParams.append("nri_schema", viewNRI.table_schema), url.searchParams.append("nri_table", viewNRI.table_name), url.searchParams.append("state_schema", viewState.table_schema), url.searchParams.append("state_table", viewState.table_name), url.searchParams.append("county_schema", viewCounty.table_schema), url.searchParams.append("county_table", viewCounty.table_name), url.searchParams.append("ncei_schema", viewNCEI.table_schema), url.searchParams.append("ncei_table", viewNCEI.table_name);
   let stgLyrDataRes = await fetch(url);
-  await checkApiResponse(stgLyrDataRes), console.log("res", await stgLyrDataRes.json()), navigate(`/source/${src.source_id}/views`);
+  await checkApiResponse(stgLyrDataRes);
+  let resJson = await stgLyrDataRes.json();
+  console.log("res", resJson), navigate(`/source/${resJson.payload.source_id}/views`);
 }, RenderVersions6 = ({ value, setValue, versions, type }) => /* @__PURE__ */ (0, import_jsx_dev_runtime67.jsxDEV)("div", { className: "flex justify-between group", children: /* @__PURE__ */ (0, import_jsx_dev_runtime67.jsxDEV)("div", { className: "flex-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6", children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime67.jsxDEV)("dt", { className: "text-sm font-medium text-gray-500 py-5", children: [
     "Select ",
@@ -9370,7 +9250,7 @@ var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = 
     " version: "
   ] }, void 0, !0, {
     fileName: "app/modules/data-manager/data-types/hlr/create.js",
-    lineNumber: 55,
+    lineNumber: 48,
     columnNumber: 17
   }, this),
   /* @__PURE__ */ (0, import_jsx_dev_runtime67.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime67.jsxDEV)("div", { className: "pt-3 pr-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime67.jsxDEV)(
@@ -9384,7 +9264,7 @@ var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = 
       children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime67.jsxDEV)("option", { value: "", disabled: !0, children: "Select your option" }, void 0, !1, {
           fileName: "app/modules/data-manager/data-types/hlr/create.js",
-          lineNumber: 64,
+          lineNumber: 57,
           columnNumber: 29
         }, this),
         versions.views.map((v) => /* @__PURE__ */ (0, import_jsx_dev_runtime67.jsxDEV)(
@@ -9401,7 +9281,7 @@ var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = 
           !0,
           {
             fileName: "app/modules/data-manager/data-types/hlr/create.js",
-            lineNumber: 67,
+            lineNumber: 60,
             columnNumber: 37
           },
           this
@@ -9412,33 +9292,32 @@ var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = 
     !0,
     {
       fileName: "app/modules/data-manager/data-types/hlr/create.js",
-      lineNumber: 58,
+      lineNumber: 51,
       columnNumber: 25
     },
     this
   ) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/hlr/create.js",
-    lineNumber: 57,
+    lineNumber: 50,
     columnNumber: 21
   }, this) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/hlr/create.js",
-    lineNumber: 56,
+    lineNumber: 49,
     columnNumber: 17
   }, this)
 ] }, void 0, !0, {
   fileName: "app/modules/data-manager/data-types/hlr/create.js",
-  lineNumber: 54,
+  lineNumber: 47,
   columnNumber: 13
 }, this) }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/hlr/create.js",
-  lineNumber: 53,
+  lineNumber: 46,
   columnNumber: 9
-}, this), Create11 = ({ source: source2, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom15.useNavigate)(), [etlContextId, setEtlContextId] = import_react76.default.useState(), [viewPB, setViewPB] = import_react76.default.useState(), [viewNRI, setViewNRI] = import_react76.default.useState(), [viewState, setViewState] = import_react76.default.useState(), [viewCounty, setViewCounty] = import_react76.default.useState(), [viewNCEI, setViewNCEI] = import_react76.default.useState(), [versionsPB, setVersionsPB] = import_react76.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react76.default.useState({ sources: [], views: [] }), [versionsState, setVersionsState] = import_react76.default.useState({ sources: [], views: [] }), [versionsCounty, setVersionsCounty] = import_react76.default.useState({ sources: [], views: [] }), [versionsNCEI, setVersionsNCEI] = import_react76.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+}, this), Create11 = ({ source: source2, user, newVersion = 1 }) => {
+  let navigate = (0, import_react_router_dom15.useNavigate)(), [viewPB, setViewPB] = import_react76.default.useState(), [viewNRI, setViewNRI] = import_react76.default.useState(), [viewState, setViewState] = import_react76.default.useState(), [viewCounty, setViewCounty] = import_react76.default.useState(), [viewNCEI, setViewNCEI] = import_react76.default.useState(), [versionsPB, setVersionsPB] = import_react76.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react76.default.useState({ sources: [], views: [] }), [versionsState, setVersionsState] = import_react76.default.useState({ sources: [], views: [] }), [versionsCounty, setVersionsCounty] = import_react76.default.useState({ sources: [], views: [] }), [versionsNCEI, setVersionsNCEI] = import_react76.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react76.default.useEffect(() => {
     async function fetchData() {
-      let etl = await newETL({ rtPfx, setEtlContextId });
-      setEtlContextId(etl), await getSrcViews({ rtPfx, setVersions: setVersionsPB, etlContextId: etl, type: "per_basis" }), await getSrcViews({ rtPfx, setVersions: setVersionsNRI, etlContextId: etl, type: "nri" }), await getSrcViews({ rtPfx, setVersions: setVersionsState, etlContextId: etl, type: "tl_state" }), await getSrcViews({ rtPfx, setVersions: setVersionsCounty, etlContextId: etl, type: "tl_county" }), await getSrcViews({ rtPfx, setVersions: setVersionsNCEI, etlContextId: etl, type: "ncei_storm_events_enhanced" });
+      await getSrcViews({ rtPfx, setVersions: setVersionsPB, type: "per_basis" }), await getSrcViews({ rtPfx, setVersions: setVersionsNRI, type: "nri" }), await getSrcViews({ rtPfx, setVersions: setVersionsState, type: "tl_state" }), await getSrcViews({ rtPfx, setVersions: setVersionsCounty, type: "tl_county" }), await getSrcViews({ rtPfx, setVersions: setVersionsNCEI, type: "ncei_storm_events_enhanced" });
     }
     fetchData();
   }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime67.jsxDEV)("div", { className: "w-full", children: [
@@ -9455,7 +9334,6 @@ var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = 
           {
             rtPfx,
             source: source2,
-            etlContextId,
             userId: user.id,
             newVersion,
             viewPB: versionsPB.views.find((v) => v.view_id == viewPB),
@@ -9472,14 +9350,14 @@ var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), CallServer10 = 
       !1,
       {
         fileName: "app/modules/data-manager/data-types/hlr/create.js",
-        lineNumber: 123,
+        lineNumber: 113,
         columnNumber: 13
       },
       this
     )
   ] }, void 0, !0, {
     fileName: "app/modules/data-manager/data-types/hlr/create.js",
-    lineNumber: 117,
+    lineNumber: 107,
     columnNumber: 9
   }, this);
 }, create_default11 = Create11;
@@ -9751,26 +9629,15 @@ var import_react79 = require("react");
 // app/modules/data-manager/data-types/eal/create.js
 var import_react78 = __toESM(require("react")), import_react_router_dom16 = require("react-router-dom");
 var import_lodash28 = __toESM(require("lodash.get"));
-var import_jsx_dev_runtime69 = require("react/jsx-dev-runtime"), CallServer11 = async ({ rtPfx, source: source2, etlContextId, userId, newVersion, navigate, viewHlr = {}, viewNRI = {} }) => {
-  let { name: sourceName, display_name: sourceDisplayName } = source2, src = source2.source_id ? source2 : await createNewDataSource(rtPfx, source2, "eal");
-  console.log("calling server?", etlContextId, src);
-  let view = await submitViewMeta({
-    rtPfx,
-    etlContextId,
-    userId,
-    sourceName,
-    src,
-    newVersion,
-    metadata: {
-      hlr_version: viewHlr.view_id,
-      nri_version: viewNRI.view_id
-    }
-  }), url = new URL(
+var import_jsx_dev_runtime69 = require("react/jsx-dev-runtime"), CallServer11 = async ({ rtPfx, source: source2, newVersion, navigate, viewHlr = {}, viewNRI = {} }) => {
+  let viewMetadata = [viewHlr.view_id, viewNRI.view_id], url = new URL(
     `${rtPfx}/hazard_mitigation/ealLoader`
   );
-  url.searchParams.append("etl_context_id", etlContextId), url.searchParams.append("table_name", "eal"), url.searchParams.append("src_id", src.source_id), url.searchParams.append("view_id", view.view_id), url.searchParams.append("hlr_schema", viewHlr.table_schema), url.searchParams.append("hlr_table", viewHlr.table_name), url.searchParams.append("nri_schema", viewNRI.table_schema), url.searchParams.append("nri_table", viewNRI.table_name);
+  url.searchParams.append("table_name", "eal"), url.searchParams.append("source_name", source2.name), url.searchParams.append("existing_source_id", source2.id), url.searchParams.append("view_dependencies", JSON.stringify(viewMetadata)), url.searchParams.append("version", newVersion), url.searchParams.append("hlr_schema", viewHlr.table_schema), url.searchParams.append("hlr_table", viewHlr.table_name), url.searchParams.append("nri_schema", viewNRI.table_schema), url.searchParams.append("nri_table", viewNRI.table_name);
   let stgLyrDataRes = await fetch(url);
-  await checkApiResponse(stgLyrDataRes), console.log("res", await stgLyrDataRes.json()), navigate(`/source/${src.source_id}/views`);
+  await checkApiResponse(stgLyrDataRes);
+  let resJson = await stgLyrDataRes.json();
+  console.log("res", resJson), navigate(`/source/${resJson.payload.source_id}/views`);
 }, RenderVersions8 = ({ value, setValue, versions, type }) => /* @__PURE__ */ (0, import_jsx_dev_runtime69.jsxDEV)("div", { className: "flex justify-between group", children: /* @__PURE__ */ (0, import_jsx_dev_runtime69.jsxDEV)("div", { className: "flex-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6", children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime69.jsxDEV)("dt", { className: "text-sm font-medium text-gray-500 py-5", children: [
     "Select ",
@@ -9778,7 +9645,7 @@ var import_jsx_dev_runtime69 = require("react/jsx-dev-runtime"), CallServer11 = 
     " version: "
   ] }, void 0, !0, {
     fileName: "app/modules/data-manager/data-types/eal/create.js",
-    lineNumber: 46,
+    lineNumber: 41,
     columnNumber: 17
   }, this),
   /* @__PURE__ */ (0, import_jsx_dev_runtime69.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime69.jsxDEV)("div", { className: "pt-3 pr-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime69.jsxDEV)(
@@ -9792,7 +9659,7 @@ var import_jsx_dev_runtime69 = require("react/jsx-dev-runtime"), CallServer11 = 
       children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime69.jsxDEV)("option", { value: "", disabled: !0, children: "Select your option" }, void 0, !1, {
           fileName: "app/modules/data-manager/data-types/eal/create.js",
-          lineNumber: 55,
+          lineNumber: 50,
           columnNumber: 29
         }, this),
         versions.views.map((v) => /* @__PURE__ */ (0, import_jsx_dev_runtime69.jsxDEV)(
@@ -9809,7 +9676,7 @@ var import_jsx_dev_runtime69 = require("react/jsx-dev-runtime"), CallServer11 = 
           !0,
           {
             fileName: "app/modules/data-manager/data-types/eal/create.js",
-            lineNumber: 58,
+            lineNumber: 53,
             columnNumber: 37
           },
           this
@@ -9820,33 +9687,32 @@ var import_jsx_dev_runtime69 = require("react/jsx-dev-runtime"), CallServer11 = 
     !0,
     {
       fileName: "app/modules/data-manager/data-types/eal/create.js",
-      lineNumber: 49,
+      lineNumber: 44,
       columnNumber: 25
     },
     this
   ) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/eal/create.js",
-    lineNumber: 48,
+    lineNumber: 43,
     columnNumber: 21
   }, this) }, void 0, !1, {
     fileName: "app/modules/data-manager/data-types/eal/create.js",
-    lineNumber: 47,
+    lineNumber: 42,
     columnNumber: 17
   }, this)
 ] }, void 0, !0, {
   fileName: "app/modules/data-manager/data-types/eal/create.js",
-  lineNumber: 45,
+  lineNumber: 40,
   columnNumber: 13
 }, this) }, void 0, !1, {
   fileName: "app/modules/data-manager/data-types/eal/create.js",
-  lineNumber: 44,
+  lineNumber: 39,
   columnNumber: 9
 }, this), Create12 = ({ source: source2, user, newVersion }) => {
-  let navigate = (0, import_react_router_dom16.useNavigate)(), [etlContextId, setEtlContextId] = import_react78.default.useState(), [viewHlr, setViewHlr] = import_react78.default.useState(), [viewNRI, setViewNRI] = import_react78.default.useState(), [versionsHlr, setVersionsHlr] = import_react78.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react78.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
+  let navigate = (0, import_react_router_dom16.useNavigate)(), [viewHlr, setViewHlr] = import_react78.default.useState(), [viewNRI, setViewNRI] = import_react78.default.useState(), [versionsHlr, setVersionsHlr] = import_react78.default.useState({ sources: [], views: [] }), [versionsNRI, setVersionsNRI] = import_react78.default.useState({ sources: [], views: [] }), rtPfx = `${DAMA_HOST}/dama-admin/${pgEnv}`;
   return import_react78.default.useEffect(() => {
     async function fetchData() {
-      let etl = await newETL({ rtPfx, setEtlContextId });
-      setEtlContextId(etl), await getSrcViews({ rtPfx, setVersions: setVersionsHlr, etlContextId: etl, type: "hlr" }), await getSrcViews({ rtPfx, setVersions: setVersionsNRI, etlContextId: etl, type: "nri" });
+      await getSrcViews({ rtPfx, setVersions: setVersionsHlr, type: "hlr" }), await getSrcViews({ rtPfx, setVersions: setVersionsNRI, type: "nri" });
     }
     fetchData();
   }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime69.jsxDEV)("div", { className: "w-full", children: [
@@ -9860,7 +9726,6 @@ var import_jsx_dev_runtime69 = require("react/jsx-dev-runtime"), CallServer11 = 
           {
             rtPfx,
             source: source2,
-            etlContextId,
             userId: user.id,
             newVersion,
             viewHlr: versionsHlr.views.find((v) => v.view_id == viewHlr),
@@ -9874,14 +9739,14 @@ var import_jsx_dev_runtime69 = require("react/jsx-dev-runtime"), CallServer11 = 
       !1,
       {
         fileName: "app/modules/data-manager/data-types/eal/create.js",
-        lineNumber: 102,
+        lineNumber: 94,
         columnNumber: 13
       },
       this
     )
   ] }, void 0, !0, {
     fileName: "app/modules/data-manager/data-types/eal/create.js",
-    lineNumber: 99,
+    lineNumber: 91,
     columnNumber: 9
   }, this);
 }, create_default12 = Create12;
@@ -10193,54 +10058,54 @@ var RenderDeps = ({ dependencies, viewId, srcMeta, viewMeta }) => {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "w-full p-4 bg-white shadow mb-4", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("label", { className: "text-lg", children: "Dependencies" }, void 0, !1, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-      lineNumber: 78,
+      lineNumber: 60,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "py-4 sm:py-2 mt-2 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6 border-b-2", children: ["Source Name", "Type", "Version", "Last Updated"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dt", { className: "text-sm font-medium text-gray-600", children: key }, key, !1, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-      lineNumber: 83,
+      lineNumber: 65,
       columnNumber: 29
     }, this)) }, void 0, !1, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-      lineNumber: 79,
+      lineNumber: 61,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: dependencies.dependencies.filter((d) => depViews.includes(d.view_id)).map(
       (d, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "py-4 sm:py-5 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/overview`, children: (0, import_lodash30.default)(srcMeta, [d.source_id, "attributes", "name"]) }, void 0, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 96,
+          lineNumber: 78,
           columnNumber: 41
         }, this) }, `${i}_1`, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 95,
+          lineNumber: 77,
           columnNumber: 37
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/overview`, children: (0, import_lodash30.default)(srcMeta, [d.source_id, "attributes", "type"]) }, void 0, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 102,
+          lineNumber: 84,
           columnNumber: 41
         }, this) }, `${i}_2`, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 101,
+          lineNumber: 83,
           columnNumber: 37
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/views/${d.view_id}`, children: (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "version"]) }, void 0, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 108,
+          lineNumber: 90,
           columnNumber: 41
         }, this) }, `${i}_3`, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 107,
+          lineNumber: 89,
           columnNumber: 37
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/views/${d.view_id}`, children: typeof (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "_modified_timestamp", "value"]) == "object" ? "" : (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "_modified_timestamp", "value"]) }, void 0, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 114,
+          lineNumber: 96,
           columnNumber: 41
         }, this) }, `${i}_4`, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 113,
+          lineNumber: 95,
           columnNumber: 37
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-red-400 sm:mt-0", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("span", { className: "float-right italic", children: [
@@ -10248,79 +10113,79 @@ var RenderDeps = ({ dependencies, viewId, srcMeta, viewMeta }) => {
           (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "metadata", "value", "authoritative"]) === "true" ? "" : "outdated"
         ] }, void 0, !0, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 122,
+          lineNumber: 104,
           columnNumber: 41
         }, this) }, `${i}_5`, !1, {
           fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-          lineNumber: 121,
+          lineNumber: 103,
           columnNumber: 37
         }, this)
       ] }, `${i}_0`, !0, {
         fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-        lineNumber: 94,
+        lineNumber: 76,
         columnNumber: 33
       }, this)
     ) }, void 0, !1, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-      lineNumber: 89,
+      lineNumber: 71,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-    lineNumber: 77,
+    lineNumber: 59,
     columnNumber: 9
   }, this);
 }, RenderDependents = ({ dependents, viewId, srcMeta, viewMeta }) => /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "w-full p-4 bg-white shadow mb-4", children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("label", { className: "text-lg", children: "Dependents" }, void 0, !1, {
     fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-    lineNumber: 141,
+    lineNumber: 123,
     columnNumber: 13
   }, this),
   /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "py-4 sm:py-2 mt-2 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6 border-b-2", children: ["Source Name", "Type", "Version", "Last Updated"].map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dt", { className: "text-sm font-medium text-gray-600", children: key }, key, !1, {
     fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-    lineNumber: 146,
+    lineNumber: 128,
     columnNumber: 29
   }, this)) }, void 0, !1, {
     fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-    lineNumber: 142,
+    lineNumber: 124,
     columnNumber: 13
   }, this),
   /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dl", { className: "sm:divide-y sm:divide-gray-200", children: dependents.map(
     (d, i) => /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "py-4 sm:py-5 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/overview`, children: (0, import_lodash30.default)(srcMeta, [d.source_id, "attributes", "name"]) }, void 0, !1, {
         fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-        lineNumber: 158,
+        lineNumber: 140,
         columnNumber: 41
       }, this) }, `${i}_1`, !1, {
         fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-        lineNumber: 157,
+        lineNumber: 139,
         columnNumber: 37
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/overview`, children: (0, import_lodash30.default)(srcMeta, [d.source_id, "attributes", "type"]) }, void 0, !1, {
         fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-        lineNumber: 164,
+        lineNumber: 146,
         columnNumber: 41
       }, this) }, `${i}_2`, !1, {
         fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-        lineNumber: 163,
+        lineNumber: 145,
         columnNumber: 37
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/views/${d.view_id}`, children: (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "version"]) }, void 0, !1, {
         fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-        lineNumber: 170,
+        lineNumber: 152,
         columnNumber: 41
       }, this) }, `${i}_3`, !1, {
         fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-        lineNumber: 169,
+        lineNumber: 151,
         columnNumber: 37
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-gray-900 sm:mt-0 align-middle", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(import_react81.Link, { to: `/source/${d.source_id}/views/${d.view_id}`, children: typeof (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "_modified_timestamp", "value"]) == "object" ? "" : (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "_modified_timestamp", "value"]) }, void 0, !1, {
         fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-        lineNumber: 176,
+        lineNumber: 158,
         columnNumber: 41
       }, this) }, `${i}_4`, !1, {
         fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-        lineNumber: 175,
+        lineNumber: 157,
         columnNumber: 37
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("dd", { className: "mt-1 text-sm text-red-400 sm:mt-0", children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("span", { className: "float-right italic", children: [
@@ -10328,26 +10193,26 @@ var RenderDeps = ({ dependencies, viewId, srcMeta, viewMeta }) => {
         (0, import_lodash30.default)(viewMeta, [d.view_id, "attributes", "metadata", "value", "authoritative"]) === "true" ? "" : "outdated"
       ] }, void 0, !0, {
         fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-        lineNumber: 184,
+        lineNumber: 166,
         columnNumber: 41
       }, this) }, `${i}_5`, !1, {
         fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-        lineNumber: 183,
+        lineNumber: 165,
         columnNumber: 37
       }, this)
     ] }, `${i}_0`, !0, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-      lineNumber: 156,
+      lineNumber: 138,
       columnNumber: 33
     }, this)
   ) }, void 0, !1, {
     fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-    lineNumber: 152,
+    lineNumber: 134,
     columnNumber: 13
   }, this)
 ] }, void 0, !0, {
   fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-  lineNumber: 140,
+  lineNumber: 122,
   columnNumber: 9
 }, this);
 function Dama() {
@@ -10355,7 +10220,7 @@ function Dama() {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { className: "text-xl font-medium overflow-hidden p-2 border-b ", children: viewId }, void 0, !1, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-      lineNumber: 206,
+      lineNumber: 188,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(
@@ -10377,24 +10242,24 @@ function Dama() {
       !1,
       {
         fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-        lineNumber: 210,
+        lineNumber: 192,
         columnNumber: 13
       },
       this
     ),
     /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(RenderDeps, { viewId, dependencies, srcMeta, viewMeta }, void 0, !1, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-      lineNumber: 224,
+      lineNumber: 206,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(RenderDependents, { viewId, dependents, srcMeta, viewMeta }, void 0, !1, {
       fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-      lineNumber: 225,
+      lineNumber: 207,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/__dama/source/$sourceId.($page)/($viewId).js",
-    lineNumber: 205,
+    lineNumber: 187,
     columnNumber: 9
   }, this);
 }
@@ -14785,7 +14650,7 @@ var HoverComp2 = ({ data, keys, indexFormat, keyFormat, valueFormat }) => /* @__
       ${keys.length <= 1 ? "pb-2" : "pb-1"}`, children: [
   /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: "font-bold text-lg leading-6 border-b-2 mb-1 pl-2", children: indexFormat((0, import_lodash39.default)(data, "index", null)) }, void 0, !1, {
     fileName: "app/routes/__dama/index.(cat).js",
-    lineNumber: 103,
+    lineNumber: 105,
     columnNumber: 13
   }, this),
   keys.slice().filter((key) => data.key === key).reverse().map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: `
@@ -14805,7 +14670,7 @@ var HoverComp2 = ({ data, keys, indexFormat, keyFormat, valueFormat }) => /* @__
       !1,
       {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 114,
+        lineNumber: 116,
         columnNumber: 25
       },
       this
@@ -14815,43 +14680,43 @@ var HoverComp2 = ({ data, keys, indexFormat, keyFormat, valueFormat }) => /* @__
       ":"
     ] }, void 0, !0, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 119,
+      lineNumber: 121,
       columnNumber: 25
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: "text-right flex-1", children: valueFormat((0, import_lodash39.default)(data, ["data", key], 0)) }, void 0, !1, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 122,
+      lineNumber: 124,
       columnNumber: 25
     }, this)
   ] }, key, !0, {
     fileName: "app/routes/__dama/index.(cat).js",
-    lineNumber: 110,
+    lineNumber: 112,
     columnNumber: 21
   }, this)),
   keys.length <= 1 ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: "flex pr-2", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: "w-5 mr-2" }, void 0, !1, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 130,
+      lineNumber: 132,
       columnNumber: 21
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: "mr-4 pl-2", children: "Total:" }, void 0, !1, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 131,
+      lineNumber: 133,
       columnNumber: 21
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: "flex-1 text-right", children: valueFormat(keys.reduce((a, c) => a + (0, import_lodash39.default)(data, ["data", c], 0), 0)) }, void 0, !1, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 134,
+      lineNumber: 136,
       columnNumber: 21
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/__dama/index.(cat).js",
-    lineNumber: 129,
+    lineNumber: 131,
     columnNumber: 17
   }, this)
 ] }, void 0, !0, {
   fileName: "app/routes/__dama/index.(cat).js",
-  lineNumber: 100,
+  lineNumber: 102,
   columnNumber: 9
 }, this), fnumIndex = (d) => d >= 1e9 ? `${parseInt(d / 1e9)} B` : d >= 1e6 ? `${parseInt(d / 1e6)} M` : d >= 1e3 ? `${parseInt(d / 1e3)} K` : `${d}`, reformatNRI = (data = {}) => import_react98.default.useMemo(() => {
   let formattedData = [];
@@ -14870,7 +14735,7 @@ var HoverComp2 = ({ data, keys, indexFormat, keyFormat, valueFormat }) => /* @__
   let tmpSrcId = (0, import_lodash39.default)((0, import_lodash39.default)(dama, [viewId, "dependencies"], []).find((d) => d.view_id === id3), "source_id");
   return /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)(import_react99.Link, { to: `/source/${tmpSrcId}/views/${id3}`, className: "p-2", children: (0, import_lodash39.default)(srcMeta, [tmpSrcId, "attributes", "type"], id3) }, id3, !1, {
     fileName: "app/routes/__dama/index.(cat).js",
-    lineNumber: 196,
+    lineNumber: 198,
     columnNumber: 20
   }, this);
 }), RenderLegend = () => /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: "flex grid grid-cols-6", children: Object.keys(hazardsMeta).map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: "mb-1 pb-1 pl-1 flex", children: [
@@ -14888,23 +14753,23 @@ var HoverComp2 = ({ data, keys, indexFormat, keyFormat, valueFormat }) => /* @__
     !1,
     {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 207,
+      lineNumber: 209,
       columnNumber: 29
     },
     this
   ),
   /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("span", { className: "pl-2", children: hazardsMeta[key].name }, void 0, !1, {
     fileName: "app/routes/__dama/index.(cat).js",
-    lineNumber: 213,
+    lineNumber: 215,
     columnNumber: 29
   }, this)
 ] }, key, !0, {
   fileName: "app/routes/__dama/index.(cat).js",
-  lineNumber: 206,
+  lineNumber: 208,
   columnNumber: 25
 }, this)) }, void 0, !1, {
   fileName: "app/routes/__dama/index.(cat).js",
-  lineNumber: 202,
+  lineNumber: 204,
   columnNumber: 9
 }, this);
 function SourceThumb2({ source: source2 }) {
@@ -14913,24 +14778,24 @@ function SourceThumb2({ source: source2 }) {
     /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: blockClasses, style: { height: "600px" }, children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("label", { className: "text-lg", children: " NCEI Losses " }, "nceiLossesTitle", !1, {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 228,
+        lineNumber: 230,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("label", { className: "text-sm mb-2", children: [
         "using: ",
         /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)(RenderViewDependencies, { dama, srcMeta, viewId: enhancedNCEILTSViewId }, void 0, !1, {
           fileName: "app/routes/__dama/index.(cat).js",
-          lineNumber: 229,
+          lineNumber: 231,
           columnNumber: 81
         }, this)
       ] }, "nceiLossesDeps", !0, {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 229,
+        lineNumber: 231,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)(RenderLegend, {}, void 0, !1, {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 230,
+        lineNumber: 232,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)(
@@ -14953,32 +14818,32 @@ function SourceThumb2({ source: source2 }) {
         !1,
         {
           fileName: "app/routes/__dama/index.(cat).js",
-          lineNumber: 231,
+          lineNumber: 233,
           columnNumber: 17
         },
         this
       )
     ] }, void 0, !0, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 227,
+      lineNumber: 229,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: blockClasses, style: { height: "500px" }, children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("label", { className: "text-lg", children: "EALs (AVAIL) " }, "ealsAvailTitle", !1, {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 249,
+        lineNumber: 251,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("label", { className: "text-sm", children: [
         "using: ",
         /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)(RenderViewDependencies, { dama, srcMeta, viewId: ealAvailLTSViewId }, void 0, !1, {
           fileName: "app/routes/__dama/index.(cat).js",
-          lineNumber: 250,
+          lineNumber: 252,
           columnNumber: 75
         }, this)
       ] }, "ealsAvailDeps", !0, {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 250,
+        lineNumber: 252,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)(
@@ -15000,20 +14865,20 @@ function SourceThumb2({ source: source2 }) {
         !1,
         {
           fileName: "app/routes/__dama/index.(cat).js",
-          lineNumber: 251,
+          lineNumber: 253,
           columnNumber: 17
         },
         this
       )
     ] }, void 0, !0, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 248,
+      lineNumber: 250,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("div", { className: blockClasses, style: { height: "500px" }, children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)("label", { className: "text-lg", children: "EALs (NRI) " }, "ealsNriTitle", !1, {
         fileName: "app/routes/__dama/index.(cat).js",
-        lineNumber: 268,
+        lineNumber: 270,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime82.jsxDEV)(
@@ -15035,19 +14900,19 @@ function SourceThumb2({ source: source2 }) {
         !1,
         {
           fileName: "app/routes/__dama/index.(cat).js",
-          lineNumber: 269,
+          lineNumber: 271,
           columnNumber: 17
         },
         this
       )
     ] }, void 0, !0, {
       fileName: "app/routes/__dama/index.(cat).js",
-      lineNumber: 267,
+      lineNumber: 269,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/__dama/index.(cat).js",
-    lineNumber: 226,
+    lineNumber: 228,
     columnNumber: 9
   }, this);
 }
@@ -18105,7 +17970,7 @@ function JokesRoute() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "2a0e9f42", entry: { module: "/build/entry.client-X6NY7RBW.js", imports: ["/build/_shared/chunk-555WWVTX.js", "/build/_shared/chunk-NZDF7D52.js", "/build/_shared/chunk-JE7OEZ56.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-SHLGC5FD.js", imports: ["/build/_shared/chunk-R7YPTJHG.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth": { id: "routes/__auth", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__auth-RRPVQYYS.js", imports: ["/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/login": { id: "routes/__auth/login", parentId: "routes/__auth", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/login-ZDLJTCF4.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/logout": { id: "routes/__auth/logout", parentId: "routes/__auth", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/logout-LADMCKIU.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama": { id: "routes/__dama", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dama-I2RQRK2P.js", imports: ["/build/_shared/chunk-KISOOUVA.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/datasources": { id: "routes/__dama/datasources", parentId: "routes/__dama", path: "datasources", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/datasources-CC7BUKNT.js", imports: ["/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dama/eal": { id: "routes/__dama/eal", parentId: "routes/__dama", path: "eal", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/eal-HTGFPDZE.js", imports: ["/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/index.(cat)": { id: "routes/__dama/index.(cat)", parentId: "routes/__dama", path: "cat?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/index.(cat)-ZNMD3R25.js", imports: ["/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/($viewId)": { id: "routes/__dama/source/$sourceId.($page)/($viewId)", parentId: "routes/__dama", path: "source/:sourceId/:page?/:viewId?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/($viewId)-M2ROO4D3.js", imports: ["/build/_shared/chunk-3HTSLSVG.js", "/build/_shared/chunk-DH6YVORR.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-R7YPTJHG.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/index": { id: "routes/__dama/source/$sourceId.($page)/index", parentId: "routes/__dama", path: "source/:sourceId/:page?", index: !0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/index-DIBBFCRW.js", imports: ["/build/_shared/chunk-3HTSLSVG.js", "/build/_shared/chunk-DH6YVORR.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-R7YPTJHG.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/create": { id: "routes/__dama/source/create", parentId: "routes/__dama", path: "source/create", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/create-WLQKXVEI.js", imports: ["/build/_shared/chunk-3HTSLSVG.js", "/build/_shared/chunk-DH6YVORR.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-R7YPTJHG.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/delete/$sourceId": { id: "routes/__dama/source/delete/$sourceId", parentId: "routes/__dama", path: "source/delete/:sourceId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/delete/$sourceId-2MAXI5Y7.js", imports: ["/build/_shared/chunk-DH6YVORR.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/view/delete/$viewId": { id: "routes/__dama/view/delete/$viewId", parentId: "routes/__dama", path: "view/delete/:viewId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/view/delete/$viewId-W5DR4E4W.js", imports: ["/build/_shared/chunk-DH6YVORR.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms": { id: "routes/__dms", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dms-PLNDSPHL.js", imports: ["/build/_shared/chunk-KISOOUVA.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/blog/$": { id: "routes/__dms/blog/$", parentId: "routes/__dms", path: "blog/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/$-HBLHB2ZL.js", imports: ["/build/_shared/chunk-INBUFZ2H.js", "/build/_shared/chunk-ZC2QHC63.js", "/build/_shared/chunk-BS6M6LC6.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/blog/blog.config": { id: "routes/__dms/blog/blog.config", parentId: "routes/__dms", path: "blog/blog/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/blog.config-JMRFPUVE.js", imports: ["/build/_shared/chunk-ZC2QHC63.js", "/build/_shared/chunk-BS6M6LC6.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/site/$": { id: "routes/__dms/site/$", parentId: "routes/__dms", path: "site/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/$-T7VAH2FI.js", imports: ["/build/_shared/chunk-INBUFZ2H.js", "/build/_shared/chunk-BS6M6LC6.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/site/site.config": { id: "routes/__dms/site/site.config", parentId: "routes/__dms", path: "site/site/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/site.config-OG7I4IWH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jokes": { id: "routes/jokes", parentId: "root", path: "jokes", index: void 0, caseSensitive: void 0, module: "/build/routes/jokes-TWKY32QH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-2A0E9F42.js" };
+var assets_manifest_default = { version: "c0022d57", entry: { module: "/build/entry.client-X6NY7RBW.js", imports: ["/build/_shared/chunk-555WWVTX.js", "/build/_shared/chunk-NZDF7D52.js", "/build/_shared/chunk-JE7OEZ56.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-SHLGC5FD.js", imports: ["/build/_shared/chunk-R7YPTJHG.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth": { id: "routes/__auth", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__auth-RRPVQYYS.js", imports: ["/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/login": { id: "routes/__auth/login", parentId: "routes/__auth", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/login-ZDLJTCF4.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__auth/logout": { id: "routes/__auth/logout", parentId: "routes/__auth", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/__auth/logout-LADMCKIU.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama": { id: "routes/__dama", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dama-I2RQRK2P.js", imports: ["/build/_shared/chunk-KISOOUVA.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/datasources": { id: "routes/__dama/datasources", parentId: "routes/__dama", path: "datasources", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/datasources-CC7BUKNT.js", imports: ["/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dama/eal": { id: "routes/__dama/eal", parentId: "routes/__dama", path: "eal", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/eal-HTGFPDZE.js", imports: ["/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/index.(cat)": { id: "routes/__dama/index.(cat)", parentId: "routes/__dama", path: "cat?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/index.(cat)-G57NVHLU.js", imports: ["/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/($viewId)": { id: "routes/__dama/source/$sourceId.($page)/($viewId)", parentId: "routes/__dama", path: "source/:sourceId/:page?/:viewId?", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/($viewId)-HQTE7SMO.js", imports: ["/build/_shared/chunk-TP6QSOYC.js", "/build/_shared/chunk-APV3YYPN.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-R7YPTJHG.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/$sourceId.($page)/index": { id: "routes/__dama/source/$sourceId.($page)/index", parentId: "routes/__dama", path: "source/:sourceId/:page?", index: !0, caseSensitive: void 0, module: "/build/routes/__dama/source/$sourceId.($page)/index-OBM5CLD6.js", imports: ["/build/_shared/chunk-TP6QSOYC.js", "/build/_shared/chunk-APV3YYPN.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-R7YPTJHG.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/create": { id: "routes/__dama/source/create", parentId: "routes/__dama", path: "source/create", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/create-R7QKSQMQ.js", imports: ["/build/_shared/chunk-TP6QSOYC.js", "/build/_shared/chunk-APV3YYPN.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-R7YPTJHG.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/source/delete/$sourceId": { id: "routes/__dama/source/delete/$sourceId", parentId: "routes/__dama", path: "source/delete/:sourceId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/source/delete/$sourceId-ILBKCJEW.js", imports: ["/build/_shared/chunk-APV3YYPN.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dama/view/delete/$viewId": { id: "routes/__dama/view/delete/$viewId", parentId: "routes/__dama", path: "view/delete/:viewId", index: void 0, caseSensitive: void 0, module: "/build/routes/__dama/view/delete/$viewId-B27B2CXW.js", imports: ["/build/_shared/chunk-APV3YYPN.js", "/build/_shared/chunk-NCSQQ6IA.js", "/build/_shared/chunk-A25TSZXK.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms": { id: "routes/__dms", parentId: "root", path: void 0, index: void 0, caseSensitive: void 0, module: "/build/routes/__dms-PLNDSPHL.js", imports: ["/build/_shared/chunk-KISOOUVA.js", "/build/_shared/chunk-OQ2FZUN7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/blog/$": { id: "routes/__dms/blog/$", parentId: "routes/__dms", path: "blog/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/$-HBLHB2ZL.js", imports: ["/build/_shared/chunk-INBUFZ2H.js", "/build/_shared/chunk-ZC2QHC63.js", "/build/_shared/chunk-BS6M6LC6.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/blog/blog.config": { id: "routes/__dms/blog/blog.config", parentId: "routes/__dms", path: "blog/blog/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/blog/blog.config-JMRFPUVE.js", imports: ["/build/_shared/chunk-ZC2QHC63.js", "/build/_shared/chunk-BS6M6LC6.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/__dms/site/$": { id: "routes/__dms/site/$", parentId: "routes/__dms", path: "site/*", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/$-T7VAH2FI.js", imports: ["/build/_shared/chunk-INBUFZ2H.js", "/build/_shared/chunk-BS6M6LC6.js", "/build/_shared/chunk-V7BYGTPR.js", "/build/_shared/chunk-DBJBHUDT.js", "/build/_shared/chunk-E4ZT35EY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/__dms/site/site.config": { id: "routes/__dms/site/site.config", parentId: "routes/__dms", path: "site/site/config", index: void 0, caseSensitive: void 0, module: "/build/routes/__dms/site/site.config-OG7I4IWH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jokes": { id: "routes/jokes", parentId: "root", path: "jokes", index: void 0, caseSensitive: void 0, module: "/build/routes/jokes-TWKY32QH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-C0022D57.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { v2_meta: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

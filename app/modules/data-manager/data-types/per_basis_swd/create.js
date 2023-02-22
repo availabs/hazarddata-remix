@@ -2,29 +2,23 @@ import React from 'react'
 import get from 'lodash.get'
 import {DAMA_HOST} from "~/config";
 import { pgEnv} from '~/modules/data-manager/attributes'
-import {checkApiResponse, formatDate, newETL, getSrcViews, createNewDataSource, submitViewMeta} from "../utils/utils";
+import {checkApiResponse, formatDate, getSrcViews} from "../utils/utils";
 import {useNavigate} from "react-router-dom";
 
-const CallServer = async ({rtPfx, source, etlContextId, userId, viewNCEI={}, viewNRI={}, newVersion, navigate}) => {
-    const { name: sourceName, display_name: sourceDisplayName } = source;
-
-    const src = source.source_id ? source : await createNewDataSource(rtPfx, source, "per_basis");
-    console.log('calling server?', etlContextId, src)
-    const view = await submitViewMeta({
-        rtPfx, etlContextId, userId, sourceName, src, newVersion,
-        metadata: {
-            ncei_version: viewNCEI.view_id,
-            nri_version: viewNRI.view_id,
-        }
-    })
+const CallServer = async ({rtPfx, source, newVersion, navigate,
+                              viewNCEI={}, viewNRI={}}) => {
+    const viewMetadata = [viewNCEI.view_id, viewNRI.view_id];
 
     const url = new URL(
         `${rtPfx}/hazard_mitigation/pbSWDLoader`
     );
-    url.searchParams.append("etl_context_id", etlContextId);
+    
     url.searchParams.append("table_name", 'per_basis_swd');
-    url.searchParams.append("src_id", src.source_id);
-    url.searchParams.append("view_id", view.view_id);
+    url.searchParams.append("source_name", source.name);
+    url.searchParams.append("existing_source_id", source.id);
+    url.searchParams.append("view_dependencies", JSON.stringify(viewMetadata));
+    url.searchParams.append("version", newVersion);
+    
     url.searchParams.append("ncei_schema", viewNCEI.table_schema);
     url.searchParams.append("ncei_table", viewNCEI.table_name);
     url.searchParams.append("nri_schema", viewNRI.table_schema);
@@ -34,8 +28,11 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, viewNCEI={}, vie
 
     await checkApiResponse(stgLyrDataRes);
 
-    console.log('res', await stgLyrDataRes.json())
-    navigate(`/source/${src.source_id}/views`);
+    const resJson = await stgLyrDataRes.json();
+
+    console.log('res', resJson);
+
+    navigate(`/source/${resJson.payload.source_id}/views`);
 }
 
 const RenderVersions = ({value, setValue, versions, type}) => {
@@ -73,8 +70,7 @@ const RenderVersions = ({value, setValue, versions, type}) => {
 
 const Create = ({ source, user, newVersion }) => {
     const navigate = useNavigate();
-    const [etlContextId, setEtlContextId] = React.useState();
-    console.log('this loads', newVersion)
+   
     // selected views/versions
     const [viewNCEI, setViewNCEI] = React.useState();
     const [viewNRI, setViewNRI] = React.useState();
@@ -86,10 +82,9 @@ const Create = ({ source, user, newVersion }) => {
 
     React.useEffect(() => {
         async function fetchData() {
-            const etl = await newETL({rtPfx, setEtlContextId});
-            setEtlContextId(etl);
-            await getSrcViews({rtPfx, setVersions: setVersionsNCEI, etlContextId: etl, type: 'ncei_storm_events_enhanced'});
-            await getSrcViews({rtPfx, setVersions: setVersionsNRI, etlContextId: etl, type: 'nri'});
+           
+            await getSrcViews({rtPfx, setVersions: setVersionsNCEI,  type: 'ncei_storm_events_enhanced'});
+            await getSrcViews({rtPfx, setVersions: setVersionsNRI,  type: 'nri'});
         }
         fetchData();
     }, [])
@@ -102,7 +97,7 @@ const Create = ({ source, user, newVersion }) => {
                 className={`align-right`}
                 onClick={() =>
                     CallServer(
-                        {rtPfx, source, etlContextId, userId: user.id,
+                        {rtPfx, source,
                             viewNCEI: versionsNCEI.views.find(v => v.view_id == viewNCEI),
                             viewNRI: versionsNRI.views.find(v => v.view_id == viewNRI),
                             newVersion, navigate

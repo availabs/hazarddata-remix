@@ -52,24 +52,6 @@ export async function loader({params, request}) {
     }
 }
 
-// authoritative routes(copies) for viewIds on home page
-// changelog.md for changes, and versionId goes in meta. start with ncei enhanced. nri cat mapping. coastal maps to hurricanes too.
-
-
-// authoritative version auto selected in version dropdown.
-// authoritative version always bold? or has an identifier.
-
-// create EAL source
-// make authoritative button
-
-
-// create a page that pulls from a falcor route that takes in EAL viewId, and pulls all the dependencies, and rns a complex sql using them.
-
-
-// make EALs come close to old data; compare ncei raw with mars raw.
-    // compare current ncei with old version
-
-
 const RenderDeps = ({dependencies, viewId, srcMeta, viewMeta}) => {
     const depViews = dependencies.dependencies.find(d => d.view_id.toString() === viewId.toString()).view_dependencies || [];
 

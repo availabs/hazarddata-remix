@@ -60,9 +60,11 @@ export async function loader({request}) {
 
     const sourceData = await falcor.get(
         ['hlr', pgEnv, 'source', hlrSourceId, 'view', ltsHlrView, 'eal'],
-        ['eal', pgEnv, 'source', ealSourceId, 'view', ltsEalView, 'data'],
-        ['nri', 'totals', 'detailed', 'all'],
-        ['ncei_storm_events_enhanced', pgEnv, 'source', enhancedNCEIhlrSourceId, 'view', ltsEnhancedNCEIView, 'lossByYearByType'],
+
+        ['eal', pgEnv, 'source', ealSourceId, 'view', ltsEalView, 'data'], // *
+        ['nri', 'totals', 'detailed', 'all'], // *
+        ['ncei_storm_events_enhanced', pgEnv, 'source', enhancedNCEIhlrSourceId, 'view', ltsEnhancedNCEIView, 'lossByYearByType'], // *
+
         ['dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', [ltsHlrView, ltsEalView, ltsEnhancedNCEIView]]
     );
 

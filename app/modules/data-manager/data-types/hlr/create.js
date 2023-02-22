@@ -3,31 +3,22 @@ import { useNavigate } from "react-router-dom";
 import {DAMA_HOST} from "~/config";
 import { pgEnv} from '~/modules/data-manager/attributes'
 import get from "lodash.get";
-import {checkApiResponse, formatDate, newETL, getSrcViews, createNewDataSource, submitViewMeta} from "../utils/utils";
+import {checkApiResponse, formatDate, getSrcViews} from "../utils/utils";
 
-const CallServer = async ({rtPfx, source, etlContextId, userId, newVersion, navigate, viewPB={}, viewNRI={}, viewState={}, viewCounty={}, viewNCEI={}}) => {
-    const { name: sourceName, display_name: sourceDisplayName } = source;
-
-    const src = source.source_id ? source : await createNewDataSource(rtPfx, source, "hlr");
-    console.log('calling server?', etlContextId, src)
-    const view = await submitViewMeta({
-        rtPfx, etlContextId, userId, sourceName, src, newVersion,
-        metadata: {
-            pb_version: viewPB.view_id,
-            nri_version: viewNRI.view_id,
-            state_version: viewState.view_id,
-            county_version: viewCounty.view_id,
-            ncei_version: viewNCEI.view_id,
-        }
-    })
+const CallServer = async ({rtPfx, source, newVersion, navigate,
+                              viewPB={}, viewNRI={}, viewState={}, viewCounty={}, viewNCEI={}}) => {
+    const viewMetadata = [viewPB.view_id, viewNRI.view_id, viewState.view_id, viewCounty.view_id, viewNCEI.view_id];
 
     const url = new URL(
         `${rtPfx}/hazard_mitigation/hlrLoader`
     );
-    url.searchParams.append("etl_context_id", etlContextId);
+    url.searchParams.append("source_name", source.name);
+    url.searchParams.append("existing_source_id", source.id);
+    url.searchParams.append("view_dependencies", JSON.stringify(viewMetadata));
+    url.searchParams.append("version", newVersion);
     url.searchParams.append("table_name", 'hlr');
-    url.searchParams.append("src_id", src.source_id);
-    url.searchParams.append("view_id", view.view_id);
+
+
     url.searchParams.append("pb_schema", viewPB.table_schema);
     url.searchParams.append("pb_table", viewPB.table_name);
     url.searchParams.append("nri_schema", viewNRI.table_schema);
@@ -43,9 +34,11 @@ const CallServer = async ({rtPfx, source, etlContextId, userId, newVersion, navi
 
     await checkApiResponse(stgLyrDataRes);
 
-    console.log('res', await stgLyrDataRes.json());
+    const resJson = await stgLyrDataRes.json();
 
-    navigate(`/source/${src.source_id}/views`);
+    console.log('res', resJson);
+
+    navigate(`/source/${resJson.payload.source_id}/views`);
 }
 
 const RenderVersions = ({value, setValue, versions, type}) => {
@@ -81,9 +74,8 @@ const RenderVersions = ({value, setValue, versions, type}) => {
     )
 }
 
-const Create = ({ source, user, newVersion }) => {
+const Create = ({ source, user, newVersion = 1 }) => {
     const navigate = useNavigate();
-    const [etlContextId, setEtlContextId] = React.useState();
 
     // selected views/versions
     const [viewPB, setViewPB] = React.useState();
@@ -102,13 +94,11 @@ const Create = ({ source, user, newVersion }) => {
 
     React.useEffect(() => {
         async function fetchData() {
-            const etl = await newETL({rtPfx, setEtlContextId});
-            setEtlContextId(etl);
-            await getSrcViews({rtPfx, setVersions: setVersionsPB, etlContextId: etl, type: 'per_basis'});
-            await getSrcViews({rtPfx, setVersions: setVersionsNRI, etlContextId: etl, type: 'nri'});
-            await getSrcViews({rtPfx, setVersions: setVersionsState, etlContextId: etl, type: `tl_state`});
-            await getSrcViews({rtPfx, setVersions: setVersionsCounty, etlContextId: etl, type: 'tl_county'});
-            await getSrcViews({rtPfx, setVersions: setVersionsNCEI, etlContextId: etl, type: 'ncei_storm_events_enhanced'});
+            await getSrcViews({rtPfx, setVersions: setVersionsPB, type: 'per_basis'});
+            await getSrcViews({rtPfx, setVersions: setVersionsNRI, type: 'nri'});
+            await getSrcViews({rtPfx, setVersions: setVersionsState, type: `tl_state`});
+            await getSrcViews({rtPfx, setVersions: setVersionsCounty, type: 'tl_county'});
+            await getSrcViews({rtPfx, setVersions: setVersionsNCEI, type: 'ncei_storm_events_enhanced'});
         }
         fetchData();
     }, [])
@@ -124,7 +114,7 @@ const Create = ({ source, user, newVersion }) => {
                 className={`align-right`}
                 onClick={() =>
                     CallServer(
-                        {rtPfx, source, etlContextId, userId: user.id, newVersion,
+                        {rtPfx, source, userId: user.id, newVersion,
                             viewPB: versionsPB.views.find(v => v.view_id == viewPB),
                             viewNRI: versionsNRI.views.find(v => v.view_id == viewNRI),
                             viewState: versionsState.views.find(v => v.view_id == viewState),

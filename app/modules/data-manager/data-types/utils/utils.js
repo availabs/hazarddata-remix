@@ -20,26 +20,6 @@ export const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString(undefined, options)
 }
 
-export const createNewDataSource = async (rtPfx, source, type) => {
-    const { name: sourceName, display_name: sourceDisplayName } = source;
-    const res = await fetch(`${rtPfx}/createNewDamaSource`, {
-        method: "POST",
-        body: JSON.stringify({
-            name: sourceName,
-            display_name: sourceDisplayName,
-            type,
-        }),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
-
-    await checkApiResponse(res);
-
-    const newSrcMeta = await res.json();
-
-    return newSrcMeta;
-};
 
 export const deleteView = async (rtPfx, viewId) => {
     const url = new URL(`${rtPfx}/deleteDamaView`);
@@ -95,49 +75,10 @@ export const deleteSource = async (rtPfx, sourceId) => {
     return sourceDelRes;
 }
 
-export const submitViewMeta = async({rtPfx, etlContextId, userId, sourceName, src, metadata = {}, newVersion = 1}) => {
-    // falcor.invalidate(["dama", pgEnv, "sources","byId",src.source_id,"views","length"]);
-    const url = new URL(`${rtPfx}/createNewDamaView`);
-    url.searchParams.append("etl_context_id", etlContextId);
-    url.searchParams.append("user_id", userId);
-
-    const viewMetadata = {
-        source_id: src.source_id,
-        data_source_name: sourceName,
-        version: newVersion,
-        view_dependencies: Object.values(metadata)
-    };
-
-    const res = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify(viewMetadata),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
-
-    await checkApiResponse(res);
-
-    const viewMetaRes = await res.json();
-
-    return viewMetaRes;
-}
-
-export const newETL = async ({rtPfx, setEtlContextId}) => {
-    const newEtlCtxRes = await fetch(`${rtPfx}/etl/new-context-id`);
-    await checkApiResponse(newEtlCtxRes);
-
-    const _etlCtxId = +(await newEtlCtxRes.text());
-    setEtlContextId(_etlCtxId);
-    return _etlCtxId
-}
-
-export const getSrcViews = async ({rtPfx, setVersions, etlContextId, type}) => {
-    if(!etlContextId) return {}
+export const getSrcViews = async ({rtPfx, setVersions, type}) => {
     const url = new URL(
         `${rtPfx}/hazard_mitigation/versionSelectorUtils`
     );
-    url.searchParams.append("etl_context_id", etlContextId);
     url.searchParams.append("type", type);
 
     const list = await fetch(url);
