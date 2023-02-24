@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {DAMA_HOST} from "~/config";
 import { pgEnv} from '~/modules/data-manager/attributes'
 import get from "lodash.get";
-import {checkApiResponse, formatDate, getSrcViews} from "../utils/utils";
+import {checkApiResponse, getSrcViews, RenderVersions} from "../utils/utils";
 
 const CallServer = async ({rtPfx, source, newVersion, navigate, viewHlr={}, viewNRI={}}) => {
     const viewMetadata = [viewHlr.view_id, viewNRI.view_id];
@@ -14,7 +14,7 @@ const CallServer = async ({rtPfx, source, newVersion, navigate, viewHlr={}, view
 
     url.searchParams.append("table_name", 'eal');
     url.searchParams.append("source_name", source.name);
-    url.searchParams.append("existing_source_id", source.id);
+    url.searchParams.append("existing_source_id", source.source_id);
     url.searchParams.append("view_dependencies", JSON.stringify(viewMetadata));
     url.searchParams.append("version", newVersion);
 
@@ -32,39 +32,6 @@ const CallServer = async ({rtPfx, source, newVersion, navigate, viewHlr={}, view
     console.log('res', resJson);
 
     navigate(`/source/${resJson.payload.source_id}/views`);
-}
-
-const RenderVersions = ({value, setValue, versions, type}) => {
-    return (
-        <div  className='flex justify-between group'>
-            <div  className="flex-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500 py-5">Select {type} version: </dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <div className='pt-3 pr-8'>
-                        <select
-                            className='w-full bg-white p-3 flex-1 shadow bg-grey-50 focus:bg-blue-100  border-gray-300'
-                            value={value || ''}
-                            onChange={e => {
-                                setValue(e.target.value)
-                            }}>
-                            <option value="" disabled >Select your option</option>
-                            {versions.views
-                                .map(v =>
-                                    <option
-                                        key={v.view_id}
-                                        value={v.view_id} className='p-2'>
-                                        {get(versions.sources.find(s => s.source_id === v.source_id), 'display_name')}
-                                        {` (${v.view_id} ${formatDate(v.last_updated)})`}
-                                    </option>)
-                            }
-                        </select>
-                    </div>
-
-
-                </dd>
-            </div>
-        </div>
-    )
 }
 
 const Create = ({ source, user, newVersion }) => {
@@ -92,7 +59,7 @@ const Create = ({ source, user, newVersion }) => {
             {RenderVersions({value: viewHlr, setValue: setViewHlr, versions: versionsHlr, type: 'hlr'})}
             {RenderVersions({value: viewNRI, setValue: setViewNRI, versions: versionsNRI, type: 'NRI'})}
             <button
-                className={`align-right`}
+                className={`align-right p-2 border-2 border-gray-200`}
                 onClick={() =>
                     CallServer(
                         {rtPfx, source, userId: user.id, newVersion,

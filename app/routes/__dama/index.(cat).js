@@ -5,65 +5,27 @@ import {useLoaderData, Link} from "@remix-run/react";
 import get from 'lodash.get'
 import {BarGraph, generateTestBarData} from "~/modules/avl-graph-modified/src/BarGraph";
 
-const getViews = (sourceId, falcorCache) => Object.values(
-    get(
-        falcorCache,
-        ["dama", pgEnv, "sources", "byId", sourceId, "views", "byIndex",],
-        {}
-    )
-)
-    .map(v => getAttributes(
-            get(
-                falcorCache,
-                v.value,
-                {'attributes': {}}
-            )['attributes']
-        )
-    );
-
 export async function loader({request}) {
 
     const hlrSourceId = 218,
         enhancedNCEIhlrSourceId = 198,
+        nriSourceId = 159,
         ealSourceId = 229;
-    const lengthPath = ["dama", pgEnv, "sources", "byId", [hlrSourceId, enhancedNCEIhlrSourceId, ealSourceId], "views", "length"];
 
-    const resp = await falcor.get(lengthPath);
-
-    await falcor.get(
-        [
-            "dama", pgEnv, "sources", "byId", hlrSourceId, "views", "byIndex",
-            {from: 0, to: get(resp.json, ["dama", pgEnv, "sources", "byId", hlrSourceId, "views", "length"], 0) - 1},
-            "attributes", Object.values(ViewAttributes)
-        ],
-        [
-            "dama", pgEnv, "sources", "byId", enhancedNCEIhlrSourceId, "views", "byIndex",
-            {from: 0, to: get(resp.json, ["dama", pgEnv, "sources", "byId", enhancedNCEIhlrSourceId, "views", "length"], 0) - 1},
-            "attributes", Object.values(ViewAttributes)
-        ],
-        [
-            "dama", pgEnv, "sources", "byId", ealSourceId, "views", "byIndex",
-            {from: 0, to: get(resp.json, ["dama", pgEnv, "sources", "byId", ealSourceId, "views", "length"], 0) - 1},
-            "attributes", Object.values(ViewAttributes)
-        ]
-    );
+    const ltsViews = ["dama", pgEnv, "sources", "byId", [hlrSourceId, enhancedNCEIhlrSourceId, ealSourceId, nriSourceId], "views", "lts"];
+    await falcor.get(ltsViews);
 
     const falcorCache = falcor.getCache();
 
-    const hlrViews = getViews(hlrSourceId, falcorCache);
-    const ealViews = getViews(ealSourceId, falcorCache);
-    const enhancedNCEIViews = getViews(enhancedNCEIhlrSourceId, falcorCache);
+    const ltsHlrView = get(falcorCache, ['dama', pgEnv, 'sources', 'byId', hlrSourceId, 'views', 'lts', 'value']);
+    const ltsEalView = get(falcorCache, ['dama', pgEnv, 'sources', 'byId', ealSourceId, 'views', 'lts', 'value']);
+    const ltsEnhancedNCEIView = get(falcorCache, ['dama', pgEnv, 'sources', 'byId', enhancedNCEIhlrSourceId, 'views', 'lts', 'value']);
 
-    const ltsHlrView = hlrViews[0].view_id;
-    const ltsEalView = ealViews[0].view_id;
-    const ltsEnhancedNCEIView = enhancedNCEIViews[0].view_id;
 
     const sourceData = await falcor.get(
-        ['hlr', pgEnv, 'source', hlrSourceId, 'view', ltsHlrView, 'eal'],
-
-        ['eal', pgEnv, 'source', ealSourceId, 'view', ltsEalView, 'data'], // *
-        ['nri', 'totals', 'detailed', 'all'], // *
-        ['ncei_storm_events_enhanced', pgEnv, 'source', enhancedNCEIhlrSourceId, 'view', ltsEnhancedNCEIView, 'lossByYearByType'], // *
+        ['eal', pgEnv, 'source', ealSourceId, 'view', 'lts', 'data'],
+        ['nri', pgEnv, 'source', nriSourceId, 'view', 'lts', 'totals'],
+        ['ncei_storm_events_enhanced', pgEnv, 'source', enhancedNCEIhlrSourceId, 'view', 'lts', 'lossByYearByType'],
 
         ['dama', pgEnv, 'viewDependencySubgraphs', 'byViewId', [ltsHlrView, ltsEalView, ltsEnhancedNCEIView]]
     );
@@ -81,18 +43,19 @@ export async function loader({request}) {
     const srcMeta = await falcor.get(['dama', pgEnv, 'sources', 'byId', tmpSrcIds, 'attributes', 'type']);
 
     return {
+        falcorCache,
         dama: get(sourceData, ['json', 'dama', pgEnv, 'viewDependencySubgraphs', 'byViewId']),
-        avail: get(sourceData, ['json', 'hlr', pgEnv, 'source', hlrSourceId, 'view', ltsHlrView, 'eal'], [])
+
+        enhancedNCEILossLts: get(sourceData, ['json', 'ncei_storm_events_enhanced', pgEnv, 'source', enhancedNCEIhlrSourceId, 'view', 'lts', 'lossByYearByType'], []),
+        ealAvailLts: get(sourceData, ['json', 'eal', pgEnv, 'source', ealSourceId, 'view', 'lts', 'data'], [])
             .filter(d => !['Heavy Rain', 'Freezing Fog'].includes(d.nri_category)),
-        availLTSViewId: ltsHlrView,
-        ealAvail: get(sourceData, ['json', 'eal', pgEnv, 'source', ealSourceId, 'view', ltsEalView, 'data'], [])
-            .filter(d => !['Heavy Rain', 'Freezing Fog'].includes(d.nri_category)),
+        nriLts: get(sourceData, ['json', 'nri', pgEnv, 'source', nriSourceId, 'view', 'lts', 'totals', 0], []),
+
+
         ealAvailLTSViewId: ltsEalView,
         enhancedNCEILTSViewId: ltsEnhancedNCEIView,
-        nri: get(sourceData, ['json', 'nri', 'totals', 'detailed', 'all', 0], []),
-        enhancedNCEILoss: get(sourceData, ['json', 'ncei_storm_events_enhanced', pgEnv, 'source', enhancedNCEIhlrSourceId, 'view', ltsEnhancedNCEIView, 'lossByYearByType'], []),
-        srcMeta: get(srcMeta, ['json', 'dama', pgEnv, 'sources', 'byId'])
 
+        srcMeta: get(srcMeta, ['json', 'dama', pgEnv, 'sources', 'byId'])
     };
 
 }
@@ -219,11 +182,18 @@ const RenderLegend = () =>
     )
 
 export default function SourceThumb({source}) {
-    const {avail, ealAvail, nri, enhancedNCEILoss, dama, availLTSViewId, enhancedNCEILTSViewId, ealAvailLTSViewId, srcMeta} = useLoaderData();
-    const reformattedNRI = reformatNRI(nri);
-    const {formattedData: reformattedEnhancedNCEI, nri_categories} = reformatEnhancedNCEI(enhancedNCEILoss);
-    const blockClasses = `w-full p-4 my-1 block border flex flex-col`
+    const {
+        // data
+        ealAvailLts, nriLts, enhancedNCEILossLts, dama, srcMeta,
+        // lts views
+        enhancedNCEILTSViewId, ealAvailLTSViewId,
 
+        falcorCache
+    } = useLoaderData();
+    const reformattedNRILts = reformatNRI(nriLts);
+    const {formattedData: reformattedEnhancedNCEILts, nri_categories} = reformatEnhancedNCEI(enhancedNCEILossLts);
+    const blockClasses = `w-full p-4 my-1 block border flex flex-col`
+    console.log('fc?', falcorCache)
     return (
         <>
             <div className={blockClasses} style={{height: '600px'}}>
@@ -231,8 +201,8 @@ export default function SourceThumb({source}) {
                 <label key={'nceiLossesDeps'} className={'text-sm mb-2'}>using: <RenderViewDependencies dama={dama} srcMeta={srcMeta} viewId={enhancedNCEILTSViewId}/></label>
                 <RenderLegend />
                 <BarGraph
-                    key={'nceiLosses'}
-                    data={reformattedEnhancedNCEI}
+                    key={'nceiLosses1'}
+                    data={reformattedEnhancedNCEILts}
                     keys={nri_categories}
                     indexBy={'year'}
                     axisBottom={d => d}
@@ -252,7 +222,7 @@ export default function SourceThumb({source}) {
                 <label key={'ealsAvailDeps'} className={'text-sm'}>using: <RenderViewDependencies dama={dama} srcMeta={srcMeta} viewId={ealAvailLTSViewId}/></label>
                 <BarGraph
                     key={'ealsFromEalAvail'}
-                    data={ealAvail}
+                    data={ealAvailLts}
                     keys={['swd_buildings', 'swd_crop', 'swd_population']}
                     indexBy={'nri_category'}
                     axisBottom={d => d}
@@ -270,7 +240,7 @@ export default function SourceThumb({source}) {
                 <label key={'ealsNriTitle'} className={'text-lg'}>EALs (NRI) </label>
                 <BarGraph
                     key={'ealsNri'}
-                    data={reformattedNRI}
+                    data={reformattedNRILts}
                     keys={['buildings', 'crop', 'population']}
                     indexBy={'nri_category'}
                     axisBottom={d => d}

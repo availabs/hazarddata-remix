@@ -10,7 +10,7 @@ const CallServer = async ({rtPfx, source, tigerTable, newVersion, navigate}) => 
 
     url.searchParams.append("table_name", tigerTable);
     url.searchParams.append("source_name", source.name);
-    url.searchParams.append("existing_source_id", source.id);
+    url.searchParams.append("existing_source_id", source.source_id);
     url.searchParams.append("version", newVersion);
 
     const stgLyrDataRes = await fetch(url);
@@ -67,6 +67,7 @@ const Create = ({ source, user, newVersion }) => {
         <div className='w-full'>
             {RenderTigerTables({value: tigerTable, setValue: setTigerTable, domain: ['STATE', 'COUNTY', 'COUSUB', 'TRACT']})}
             <button
+                className={`align-right p-2 border-2 border-gray-200`}
                 onClick={() =>
                     CallServer({
                         rtPfx, source, tigerTable, newVersion, navigate})}

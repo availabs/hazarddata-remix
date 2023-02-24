@@ -36,7 +36,7 @@ export async function loader({params, request}) {
     return {
         sourceId: sourceId,
         dependents: get(falcorCache, ['dama', pgEnv, 'sources', "byId", sourceId, 'dependents', 'value'], []),
-        display_name: get(falcorCache, ['dama', pgEnv, 'sources', 'byId', sourceId, 'attributes', 'display_name'], ''),
+        display_name: get(falcorCache, ['dama', pgEnv, 'sources', 'byId', sourceId, 'attributes', 'name'], ''),
         srcMeta: get(falcorCache, ['dama', pgEnv, 'sources', 'byId'], {}),
         viewMeta: get(falcorCache, ['dama', pgEnv, 'views', 'byId'], {}),
     };
@@ -56,12 +56,12 @@ const DeleteButton = ({text, sourceId}) => {
                     {},
                     {
                         method: "post",
-                        action: `/source/${source.source_id}?index`,
+                        action: `/source/${sourceId}?index`,
                         formData: 'this is fd'
                     }
                 );
 
-                navigate(-1)
+                navigate(`/datasources`, { replace: true })
             }}
         >
             {text}

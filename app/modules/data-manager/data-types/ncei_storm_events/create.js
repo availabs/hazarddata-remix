@@ -13,7 +13,7 @@ const CallServer = async ({rtPfx, source, newVersion, navigate}) => {
 
     url.searchParams.append("table_name", 'details');
     url.searchParams.append("source_name", source.name);
-    url.searchParams.append("existing_source_id", source.id);
+    url.searchParams.append("existing_source_id", source.source_id);
     url.searchParams.append("version", newVersion);
 
     const stgLyrDataRes = await fetch(url);
@@ -35,7 +35,7 @@ const Create = ({ source, user, newVersion }) => {
     return (
         <div className='w-full'>
             <button
-                className={`align-right`}
+                className={`align-right p-2 border-2 border-gray-200`}
                 onClick={() =>
                     CallServer({rtPfx, source, newVersion, navigate})}>
                 Add New Source
