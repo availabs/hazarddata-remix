@@ -6,24 +6,27 @@ import get from 'lodash.get'
 
 export async function loader({request}) {
 
-    const lengthPath = ["dama", pgEnv, "sources", "length"];
-    const resp = await falcor.get(lengthPath);
-    const sourceData = await falcor.get([
-        "dama", pgEnv, "sources", "byIndex",
-        {from: 0, to: get(resp.json, lengthPath, 0) - 1},
-        "attributes", Object.values(SourceAttributes),
-    ]);
+    const ealSourceId = 229;
 
-    const falcorCache = falcor.getCache()
+    const ltsViews = ["dama", pgEnv, "sources", "byId", ealSourceId, "views", "lts"];
 
-    return Object.values(get(falcorCache, ["dama", pgEnv, 'sources', 'byIndex'], {}))
-        .map(v => getAttributes(get(falcorCache, v.value, {'attributes': {}})['attributes']))
+    const ltsViewData = await falcor.get(ltsViews);
 
+    const ltsEalView = get(ltsViewData, ['json', 'dama', pgEnv, 'sources', 'byId', ealSourceId, 'views', 'lts']);
+
+    await falcor.get(['comparative_stats', pgEnv, 'byEalIds', 'source', ealSourceId, 'view', ltsEalView]);
+
+    const falcorCache = falcor.getCache();
+
+    return {
+        data: get(falcorCache, ['comparative_stats', pgEnv, 'byEalIds', 'source', ealSourceId, 'view', ltsEalView, 'value'], [])
+    }
 
 }
 
 export default function Dama() {
-    const data = useLoaderData();
+    const {data} = useLoaderData();
+    console.log('data', JSON.stringify(data, null, 5));
     return (
         <div>
             {
