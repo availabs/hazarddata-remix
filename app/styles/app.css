@@ -908,6 +908,10 @@ video {
   height: 1rem;
 }
 
+.h-\[700px\] {
+  height: 700px;
+}
+
 .h-5 {
   height: 1.25rem;
 }
@@ -922,10 +926,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-\[700px\] {
-  height: 700px;
 }
 
 .h-7 {
@@ -2957,16 +2957,16 @@ video {
     grid-auto-flow: row dense;
   }
 
+  .sm\:grid-cols-7 {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
   .sm\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .sm\:grid-cols-6 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
-  }
-
-  .sm\:grid-cols-7 {
-    grid-template-columns: repeat(7, minmax(0, 1fr));
   }
 
   .sm\:grid-cols-5 {
