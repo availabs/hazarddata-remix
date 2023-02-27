@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 
 const CallServer = async ({rtPfx, source, newVersion, navigate}) => {
     const url = new URL(
-        `${rtPfx}/hazard_mitigation/csvUploadAction`
+        `${rtPfx}/hazard_mitigation/zoneToCountyLoader`
     );
 
     url.searchParams.append("table_name", 'zone_to_county');

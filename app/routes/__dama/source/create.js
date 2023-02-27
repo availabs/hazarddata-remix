@@ -96,7 +96,7 @@ export default function sourceCreate () {
             </div>
           </div>
         </dl>
-        <CreateComp source={source} user={user}/>
+        <CreateComp source={source} user={user} newVersion={1}/>
       </div>
    
   

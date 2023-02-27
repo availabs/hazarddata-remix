@@ -34,7 +34,7 @@ const Create = ({ source, user, newVersion }) => {
             <button
                 className={`align-right p-2 border-2 border-gray-200`}
                 onClick={() => CallServer({
-                rtPfx, source, etlContextId, userId: user.id, table: 'sba_disaster_loan_data_new', newVersion, navigate
+                rtPfx, source, userId: user.id, table: 'sba_disaster_loan_data_new', newVersion, navigate
             })}> Add New Source</button>
         </div>
     )
