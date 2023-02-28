@@ -35,9 +35,9 @@ const RenderValue = ({value, isLink, isTimeStamp, source_id}) => {
     return isLink ? <Link to={`/source/${source_id}/views/${value}`}> {processedValue} </Link> : processedValue;
 }
 
-const RenderTable = ({data, keys}) => (
+const RenderTable = ({data, keys = []}) => (
     <div>
-        <div className="py-4 sm:py-2 sm:grid sm:grid-cols-7 sm:gap-4 sm:px-6 border-b-2">
+        <div className={`py-4 sm:py-2 sm:grid sm:grid-cols-${keys.length} sm:gap-4 sm:px-6 border-b-2`}>
             {
                 keys
                     .map(key => (
@@ -52,7 +52,7 @@ const RenderTable = ({data, keys}) => (
                 {
                     data
                         .map((row, i) => (
-                                <div key={i} className="py-4 sm:py-5 sm:grid sm:grid-cols-7 sm:gap-4 sm:px-6">
+                                <div key={i} className={`py-4 sm:py-5 sm:grid sm:grid-cols-${keys.length} sm:gap-4 sm:px-6`}>
                                     {
                                         Object.keys(row)
                                             .filter(key => keys.includes(key))
@@ -132,29 +132,11 @@ const fnumIndex = (d) => {
 
 export default function Dama() {
     const {data} = useLoaderData();
-    const blockClasses = `w-full p-4 my-1 block border flex flex-col`
+    const blockClasses = `w-full my-2 block flex flex-col`
     console.log(data)
     return (
         <>
-            <div className={blockClasses} style={{height: '500px'}}>
-                <label key={'nceiLossesTitle'} className={'text-lg'}> Num events (SWD and Per Basis) </label>
-                <BarGraph
-                    key={'numEvents'}
-                    data={data}
-                    keys={Object.keys(data[0]).filter(key => key.includes('num') && !key.includes('total'))}
-                    indexBy={'nri_category'}
-                    axisBottom={d => d}
-                    axisLeft={{format: fnumIndex, gridLineOpacity: 1, gridLineColor: '#9d9c9c'}}
-                    paddingInner={0.05}
-                    // colors={(value, ii, d, key) => ctypeColors[key]}
-                    hoverComp={{
-                        HoverComp: HoverComp,
-                        valueFormat: fnumIndex
-                    }}
-                />
-            </div>
-
-            <div className={blockClasses} style={{height: '500px'}}>
+            <div className={blockClasses + ` mt-5`} style={{height: '500px'}}>
                 <label key={'nceiLossesTitle'} className={'text-lg'}> EAL (SWD, NRI and AVAIL) </label>
                 <BarGraph
                     key={'numEvents'}
@@ -170,6 +152,15 @@ export default function Dama() {
                         valueFormat: fnumIndex
                     }}
                     groupMode={'grouped'}
+                />
+            </div>
+
+            <div>
+                <label key={'nceiLossesTitle'} className={'text-lg'}> Num events (SWD and Per Basis) </label>
+                <RenderTable
+                    key={'numEvents'}
+                    data={data}
+                    keys={Object.keys(data[0]).filter(key => (key.includes('num') && !key.includes('total')) || key.includes('nri_category'))}
                 />
             </div>
         </>

@@ -3,6 +3,7 @@ import Create from './create'
 import {useFalcor} from "~/modules/avl-falcor";
 import {pgEnv} from "~/modules/data-manager/attributes";
 import get from "lodash.get";
+import {BarGraph} from "~/modules/avl-graph-modified/src";
 
 const Table = ({source}) => {
     return <div> Table View </div>
@@ -23,6 +24,64 @@ const RenderVersions = (domain, value, onchange) => (
 
 const fnum = (number) => parseInt(number).toLocaleString();
 
+
+const HoverComp = ({data, keys, indexFormat, keyFormat, valueFormat}) => {
+    return (
+        <div className={`
+      flex flex-col px-2 pt-1 rounded bg-white
+      ${keys.length <= 1 ? "pb-2" : "pb-1"}`}>
+            <div className="font-bold text-lg leading-6 border-b-2 mb-1 pl-2">
+                {indexFormat(get(data, "index", null))}
+            </div>
+            {keys.slice()
+                // .filter(k => get(data, ["data", k], 0) > 0)
+                .filter(key => data.key === key)
+                .reverse().map(key => (
+                    <div key={key} className={`
+            flex items-center px-2 border-2 rounded transition
+            ${data.key === key ? "border-current" : "border-transparent"}
+          `}>
+                        <div className="mr-2 rounded-sm color-square w-5 h-5"
+                             style={{
+                                 backgroundColor: get(data, ["barValues", key, "color"], null),
+                                 opacity: data.key === key ? 1 : 0.2
+                             }}/>
+                        <div className="mr-4">
+                            {keyFormat(key)}:
+                        </div>
+                        <div className="text-right flex-1">
+                            {valueFormat(get(data, ["data", key], 0))}
+                        </div>
+                    </div>
+                ))
+            }
+            {keys.length <= 1 ? null :
+                <div className="flex pr-2">
+                    <div className="w-5 mr-2"/>
+                    <div className="mr-4 pl-2">
+                        Total:
+                    </div>
+                    <div className="flex-1 text-right">
+                        {valueFormat(keys.reduce((a, c) => a + get(data, ["data", c], 0), 0))}
+                    </div>
+                </div>
+            }
+        </div>
+    )
+}
+
+const fnumIndex = (d) => {
+    if (d >= 1000000000) {
+        return `${parseInt(d / 1000000000)} B`
+    } else if (d >= 1000000) {
+        return `${parseInt(d / 1000000)} M`
+    } else if (d >= 1000) {
+        return `${parseInt(d / 1000)} K`
+    } else {
+        return `${d}`
+    }
+}
+
 const Stats = ({source, views}) => {
     const {falcor, falcorCache} = useFalcor();
     const [activeView, setActiveView] = useState(views[0].view_id);
@@ -31,15 +90,15 @@ const Stats = ({source, views}) => {
 
     useEffect(() => {
         falcor.get(
-            ['eal', pgEnv, 'source', source.source_id, 'view', [activeView, compareView], 'data']
+            ['eal', pgEnv, 'source', source.source_id, 'view', [activeView, compareView], 'data'],
+            ['comparative_stats', pgEnv, 'byEalIds', 'source', source.source_id, 'view', activeView]
         )
     }, [activeView, compareView])
 
-    console.log('fc?', falcorCache)
+    const chartComparativeStatsData = get(falcorCache, ['comparative_stats', pgEnv, 'byEalIds', 'source', source.source_id, 'view', activeView, 'value'], []);
     const metadataActiveView = get(falcorCache, ['eal', pgEnv, 'source', source.source_id, 'view', activeView, 'data', 'value'], []);
     const metadataCompareView = get(falcorCache, ['eal', pgEnv, 'source', source.source_id, 'view', compareView, 'data', 'value'], []);
 
-    console.log('md', metadataCompareView)
     if (!metadataActiveView || metadataActiveView.length === 0) return <div> Stats Not Available </div>
 
     return (
@@ -61,6 +120,25 @@ const Stats = ({source, views}) => {
                  className={'flex flex-row items-center py-4 sm:py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'}>
                 {compareMode ? <label>Compare with Version: </label> : null}
                 {compareMode ? RenderVersions(views, compareView, setCompareView) : null}
+            </div>
+
+            <div className={`w-full p-4 my-1 block flex flex-col`} style={{height: '500px'}}>
+                <label key={'nceiLossesTitle'} className={'text-lg'}> EAL (SWD, NRI and AVAIL) </label>
+                <BarGraph
+                    key={'numEvents'}
+                    data={chartComparativeStatsData}
+                    keys={Object.keys(chartComparativeStatsData[0]).filter(key => key.includes('eal') || key.includes('annualized'))}
+                    indexBy={'nri_category'}
+                    axisBottom={d => d}
+                    axisLeft={{format: fnumIndex, gridLineOpacity: 1, gridLineColor: '#9d9c9c'}}
+                    paddingInner={0.1}
+                    // colors={(value, ii, d, key) => ctypeColors[key]}
+                    hoverComp={{
+                        HoverComp: HoverComp,
+                        valueFormat: fnumIndex
+                    }}
+                    groupMode={'grouped'}
+                />
             </div>
 
             <div
