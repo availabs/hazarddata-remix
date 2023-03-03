@@ -3,7 +3,7 @@ import get from "lodash.get";
 import {DataTypes} from "~/modules/data-manager/data-types";
 
 const AddView = ({source, views, user}) => {
-    const newVersion = Math.max(...views.map(v => parseInt(v.version))) + 1;
+    const newVersion = Math.max(...views.map(v => parseInt(v.version) || 0)) + 1;
     const [versionName, setVersionName] = useState(newVersion);
     const sourceTypeToFileNameMapping = source.type.substring(0,3) === 'tl_' ? 'tiger_2017' : source.type;
     const CreateComp = React.useMemo(() =>
