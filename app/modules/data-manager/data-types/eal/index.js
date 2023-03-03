@@ -127,7 +127,7 @@ const Stats = ({source, views}) => {
                 <BarGraph
                     key={'numEvents'}
                     data={chartComparativeStatsData}
-                    keys={Object.keys(chartComparativeStatsData[0]).filter(key => key.includes('eal') || key.includes('annualized'))}
+                    keys={Object.keys(chartComparativeStatsData[0] || {}).filter(key => key.includes('eal') || key.includes('annualized'))}
                     indexBy={'nri_category'}
                     axisBottom={d => d}
                     axisLeft={{format: fnumIndex, gridLineOpacity: 1, gridLineColor: '#9d9c9c'}}

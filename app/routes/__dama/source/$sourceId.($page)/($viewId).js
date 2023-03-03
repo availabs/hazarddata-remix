@@ -52,8 +52,8 @@ export async function loader({params, request}) {
     }
 }
 
-const RenderDeps = ({dependencies, viewId, srcMeta, viewMeta}) => {
-    const depViews = dependencies.dependencies.find(d => d.view_id.toString() === viewId.toString()).view_dependencies || [];
+const RenderDeps = ({dependencies = {}, viewId, srcMeta, viewMeta}) => {
+    const depViews = get(dependencies.dependencies.find(d => d.view_id.toString() === viewId.toString()), 'view_dependencies') || [];
 
     return (
         <div className='w-full p-4 bg-white shadow mb-4'>
@@ -117,7 +117,7 @@ const RenderDeps = ({dependencies, viewId, srcMeta, viewMeta}) => {
     )
 }
 
-const RenderDependents = ({dependents, viewId, srcMeta, viewMeta}) => {
+const RenderDependents = ({dependents = [], viewId, srcMeta, viewMeta}) => {
     return (
         <div className='w-full p-4 bg-white shadow mb-4'>
             <label className={'text-lg'}>Dependents</label>

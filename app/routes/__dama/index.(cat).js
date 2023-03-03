@@ -7,10 +7,10 @@ import {BarGraph, generateTestBarData} from "~/modules/avl-graph-modified/src/Ba
 
 export async function loader({request}) {
 
-    const hlrSourceId = 218,
-        enhancedNCEIhlrSourceId = 198,
-        nriSourceId = 159,
-        ealSourceId = 229;
+    const hlrSourceId = 271,
+        enhancedNCEIhlrSourceId = 276,
+        nriSourceId = 266,
+        ealSourceId = 273;
 
     const ltsViews = ["dama", pgEnv, "sources", "byId", [hlrSourceId, enhancedNCEIhlrSourceId, ealSourceId, nriSourceId], "views", "lts"];
     await falcor.get(ltsViews);
